@@ -7,6 +7,7 @@ import { env } from "./config/env";
 import { logger } from "./config/logger";
 import { errorHandler } from "./middleware/error-handler";
 import { notFoundHandler } from "./middleware/not-found";
+import apiRoutes from "./modules";
 
 const app: Express = express();
 
@@ -27,6 +28,8 @@ app.use("/api/", limiter);
 app.get("/api/v1/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
+
+app.use("/api/v1", apiRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
