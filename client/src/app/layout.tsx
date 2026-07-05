@@ -4,10 +4,7 @@ import { Providers } from "@/providers";
 import { SmoothScrollProvider } from "@/providers/smooth-scroll-provider";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { CustomCursor } from "@/components/animations/custom-cursor";
-import { ParticleBackground } from "@/components/animations/particle-background";
-import { LoadingIntro } from "@/components/animations/loading-intro";
-import { ScrollProgress } from "@/components/animations/scroll-progress";
+import { ClientAnimations } from "@/components/animations/client-animations";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
@@ -111,10 +108,7 @@ export default function RootLayout({
         />
       </head>
       <body className="flex min-h-full flex-col">
-        <LoadingIntro />
-        <CustomCursor />
-        <ParticleBackground />
-        <ScrollProgress />
+        <ClientAnimations />
         <Providers>
           <SmoothScrollProvider>
             <Navbar />
