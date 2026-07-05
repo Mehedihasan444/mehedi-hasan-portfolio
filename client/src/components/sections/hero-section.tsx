@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
+import { Hero3DWrapper } from "@/components/3d/hero-3d-wrapper";
 
 export function HeroSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -21,8 +22,10 @@ export function HeroSection() {
       id="hero"
       className="relative flex min-h-screen items-center justify-center overflow-hidden px-6"
     >
-      <div className="absolute inset-0 z-0">
-        <div className="to-background absolute inset-0 bg-gradient-to-b from-transparent via-transparent" />
+      <Hero3DWrapper />
+
+      <div className="pointer-events-none absolute inset-0 z-[1]">
+        <div className="via-background/20 to-background absolute inset-0 bg-gradient-to-b from-transparent" />
       </div>
 
       <motion.div

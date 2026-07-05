@@ -1,0 +1,73 @@
+"use client";
+
+import { motion, useScroll, useSpring } from "framer-motion";
+import { useEffect, useState } from "react";
+
+const sections = [
+  { id: "hero", label: "Home" },
+  { id: "about", label: "About" },
+  { id: "skills", label: "Skills" },
+  { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
+  { id: "contact", label: "Contact" },
+];
+
+export function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleY = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
+  const [activeSection, setActiveSection] = useState("hero");
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        }
+      },
+      { threshold: 0.3 },
+    );
+
+    sections.forEach((s) => {
+      const el = document.getElementById(s.id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <>
+      <div className="fixed bottom-0 left-0 top-0 z-50 hidden w-px md:block">
+        <motion.div
+          className="from-cyan via-purple w-full origin-top bg-gradient-to-b to-transparent"
+          style={{ scaleY }}
+        />
+      </div>
+
+      <div className="fixed bottom-24 left-4 z-50 hidden flex-col items-center gap-3 md:flex">
+        {sections.map((s) => (
+          <a key={s.id} href={`#${s.id}`} className="group flex items-center gap-3">
+            <span
+              className={`block h-2 w-2 rounded-full transition-all duration-300 ${
+                activeSection === s.id
+                  ? "from-cyan to-purple bg-gradient-to-r shadow-lg shadow-purple-500/25"
+                  : "bg-white/20 group-hover:bg-white/40"
+              }`}
+            />
+            <span
+              className={`text-xs transition-all duration-300 ${
+                activeSection === s.id
+                  ? "text-white opacity-100"
+                  : "text-muted-foreground opacity-0 group-hover:opacity-100"
+              }`}
+            >
+              {s.label}
+            </span>
+          </a>
+        ))}
+      </div>
+    </>
+  );
+}
