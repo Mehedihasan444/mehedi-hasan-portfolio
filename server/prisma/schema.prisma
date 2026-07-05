@@ -1,0 +1,167 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String
+  content     String?
+  techStack   String   @default("[]")
+  liveUrl     String?
+  githubUrl   String?
+  image       String?
+  images      String   @default("[]")
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  status      String   @default("published")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Skill {
+  id         String   @id @default(cuid())
+  name       String
+  category   String
+  icon       String?
+  proficiency Int     @default(0)
+  order      Int      @default(0)
+  createdAt  DateTime @default(now())
+}
+
+model Experience {
+  id          String   @id @default(cuid())
+  company     String
+  role        String
+  description String?
+  startDate   DateTime
+  endDate     DateTime?
+  location    String?
+  type        String   @default("full-time")
+  current     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model Education {
+  id          String   @id @default(cuid())
+  institution String
+  degree      String
+  field       String
+  description String?
+  startDate   DateTime
+  endDate     DateTime?
+  gpa         String?
+  createdAt   DateTime @default(now())
+}
+
+model Certification {
+  id        String   @id @default(cuid())
+  title     String
+  issuer    String
+  url       String?
+  date      DateTime?
+  image     String?
+  createdAt DateTime @default(now())
+}
+
+model BlogPost {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  content   String
+  excerpt   String?
+  tags      String   @default("[]")
+  image     String?
+  published Boolean  @default(false)
+  featured  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  role      String?
+  company   String?
+  content   String
+  avatar    String?
+  rating    Int      @default(5)
+  featured  Boolean  @default(false)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model OpenSourceContribution {
+  id           String   @id @default(cuid())
+  repoName     String
+  repoUrl      String
+  description  String?
+  contributions Int     @default(0)
+  language     String?
+  stars        Int      @default(0)
+  createdAt    DateTime @default(now())
+}
+
+model Research {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  url         String?
+  date        DateTime?
+  publisher   String?
+  createdAt   DateTime @default(now())
+}
+
+model Achievement {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  date        DateTime?
+  icon        String?
+  createdAt   DateTime @default(now())
+}
+
+model SiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SeoMetadata {
+  id          String   @id @default(cuid())
+  page        String   @unique
+  title       String?
+  description String?
+  keywords    String?
+  ogImage     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
