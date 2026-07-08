@@ -5,7 +5,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { Briefcase, MapPin, CalendarDays } from "lucide-react";
-import { ElegantShape } from "@/components/ui/shape-landing-hero";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -110,52 +109,7 @@ export function ExperienceSection() {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      id="experience"
-      className="bg-background relative overflow-hidden px-6 py-32"
-    >
-      {/* Top gradient divider */}
-      <div
-        className="via-emerald/30 pointer-events-none absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent to-transparent"
-        aria-hidden
-      />
-
-      {/* Ambient glow */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-        <div className="from-emerald/5 absolute left-1/3 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full bg-gradient-to-r to-transparent blur-[120px]" />
-      </div>
-
-      {/* Floating shapes */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <ElegantShape
-          delay={0.2}
-          width={400}
-          height={100}
-          rotate={10}
-          gradient="from-emerald/[0.2]"
-          className="left-[-6%] top-[8%] -z-10"
-        />
-
-        <ElegantShape
-          delay={0.4}
-          width={300}
-          height={80}
-          rotate={-15}
-          gradient="from-teal/[0.15]"
-          className="right-[-4%] top-[60%]"
-        />
-
-        <ElegantShape
-          delay={0.3}
-          width={200}
-          height={55}
-          rotate={-8}
-          gradient="from-cyan/[0.15]"
-          className="bottom-[10%] left-[10%]"
-        />
-      </div>
-
+    <section ref={sectionRef} id="experience" className="relative overflow-hidden px-6 py-32">
       <div className="mx-auto max-w-7xl">
         <ScrollReveal>
           <div className="text-center">

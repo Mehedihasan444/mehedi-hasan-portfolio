@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/footer";
 import { ClientAnimations } from "@/components/animations/client-animations";
 import { PageTransition } from "@/providers/page-transition";
 import { LoadingScreen } from "@/components/layout/loading-screen";
+import { ScrollToTop } from "@/components/ui/scroll-to-top";
 
 export default function MainLayout({
   children,
@@ -20,6 +21,7 @@ export default function MainLayout({
           <PageTransition>{children}</PageTransition>
         </main>
         <Footer />
+        <ScrollToTop />
       </SmoothScrollProvider>
     </>
   );
