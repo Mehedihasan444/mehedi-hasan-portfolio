@@ -1,13 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { Providers } from "@/providers";
-import { SmoothScrollProvider } from "@/providers/smooth-scroll-provider";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
-import { ClientAnimations } from "@/components/animations/client-animations";
-import { PageTransition } from "@/providers/page-transition";
 import { Toaster } from "@/components/ui/sonner";
-import { LoadingScreen } from "@/components/layout/loading-screen";
 import "./globals.css";
 
 const inter = Inter({
@@ -191,17 +185,7 @@ export default function RootLayout({
         />
       </head>
       <body className="flex min-h-full flex-col">
-        <ClientAnimations />
-        <Providers>
-          <SmoothScrollProvider>
-            <LoadingScreen />
-            <Navbar />
-            <main className="flex-1">
-              <PageTransition>{children}</PageTransition>
-            </main>
-            <Footer />
-          </SmoothScrollProvider>
-        </Providers>
+        <Providers>{children}</Providers>
         <Toaster position="bottom-right" />
       </body>
     </html>
