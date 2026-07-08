@@ -58,6 +58,29 @@ async function main() {
     });
   }
 
+  const sectionKeys = [
+    "section_hero",
+    "section_about",
+    "section_skills",
+    "section_experience",
+    "section_projects",
+    "section_education",
+    "section_certifications",
+    "section_achievements",
+    "section_github",
+    "section_testimonials",
+    "section_blog",
+    "section_contact",
+  ];
+
+  for (const key of sectionKeys) {
+    await prisma.siteSetting.upsert({
+      where: { key },
+      update: { value: "true" },
+      create: { key, value: "true" },
+    });
+  }
+
   const skills = [
     { name: "React", category: "Frontend", proficiency: 90, order: 1 },
     { name: "Next.js", category: "Frontend", proficiency: 85, order: 2 },
