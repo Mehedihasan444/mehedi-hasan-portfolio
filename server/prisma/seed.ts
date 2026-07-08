@@ -1,9 +1,25 @@
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
 async function main() {
   console.log("Seeding database...");
+
+  const adminEmail = "admin@mehedi.dev";
+  const existingAdmin = await prisma.user.findUnique({ where: { email: adminEmail } });
+  if (!existingAdmin) {
+    const hashed = await bcrypt.hash("admin123", 12);
+    await prisma.user.create({
+      data: {
+        email: adminEmail,
+        password: hashed,
+        name: "Mehedi Hasan",
+        role: "admin",
+      },
+    });
+    console.log(`Admin user created: ${adminEmail}`);
+  }
 
   const settings = [
     { key: "site_name", value: "Mehedi Hasan" },
