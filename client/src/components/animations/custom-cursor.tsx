@@ -49,11 +49,11 @@ export function CustomCursor() {
     );
 
     const onEnter = () => {
-      ringRef.current?.classList.add("scale-150", "border-cyan/50", "bg-cyan/5");
+      ringRef.current?.classList.add("scale-150", "border-emerald/50", "bg-emerald/5");
       cursorRef.current?.classList.add("mix-blend-difference");
     };
     const onLeave = () => {
-      ringRef.current?.classList.remove("scale-150", "border-cyan/50", "bg-cyan/5");
+      ringRef.current?.classList.remove("scale-150", "border-emerald/50", "bg-emerald/5");
       cursorRef.current?.classList.remove("mix-blend-difference");
     };
 
@@ -116,7 +116,7 @@ export function CustomCursor() {
         {Array.from({ length: 8 }).map((_, i) => (
           <span
             key={i}
-            className="bg-cyan/20 absolute block h-1 w-1 rounded-full"
+            className="bg-emerald/20 absolute block h-1 w-1 rounded-full"
             style={{ transition: "opacity 0.1s" }}
           />
         ))}

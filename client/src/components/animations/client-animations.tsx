@@ -22,12 +22,24 @@ const ScrollProgress = dynamic(
   { ssr: false },
 );
 
+const PixelatedImageTrail = dynamic(
+  () => import("./pixelated-image-trail").then((m) => ({ default: m.PixelatedImageTrail })),
+  { ssr: false },
+);
+
+const FluidMorphBackground = dynamic(
+  () => import("./fluid-morph-background").then((m) => ({ default: m.FluidMorphBackground })),
+  { ssr: false },
+);
+
 export function ClientAnimations() {
   return (
     <>
       <LoadingIntro />
       <CustomCursor />
       <ParticleBackground />
+      <PixelatedImageTrail />
+      <FluidMorphBackground />
       <ScrollProgress />
     </>
   );

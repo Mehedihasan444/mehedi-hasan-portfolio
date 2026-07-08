@@ -49,7 +49,7 @@ export function LoadingIntro() {
 
             <div className="mx-auto h-1 w-48 overflow-hidden rounded-full bg-white/5">
               <motion.div
-                className="from-cyan to-purple h-full rounded-full bg-gradient-to-r"
+                className="from-emerald to-teal h-full rounded-full bg-gradient-to-r"
                 style={{ width: `${Math.min(progress, 100)}%` }}
                 transition={{ duration: 0.1 }}
               />

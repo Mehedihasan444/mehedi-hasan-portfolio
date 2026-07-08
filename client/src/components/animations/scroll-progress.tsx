@@ -9,6 +9,12 @@ const sections = [
   { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
+  { id: "education", label: "Education" },
+  { id: "certifications", label: "Certs" },
+  { id: "achievements", label: "Awards" },
+  { id: "github", label: "GitHub" },
+  { id: "testimonials", label: "Testimonials" },
+  { id: "blog", label: "Blog" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -41,18 +47,18 @@ export function ScrollProgress() {
     <>
       <div className="fixed bottom-0 left-0 top-0 z-50 hidden w-px md:block">
         <motion.div
-          className="from-cyan via-purple w-full origin-top bg-gradient-to-b to-transparent"
+          className="from-emerald via-teal w-full origin-top bg-gradient-to-b to-transparent"
           style={{ scaleY }}
         />
       </div>
 
-      <div className="fixed bottom-24 left-4 z-50 hidden flex-col items-center gap-3 md:flex">
+      <div className="fixed bottom-24 left-4 z-50 hidden flex-col items-center gap-2 md:flex">
         {sections.map((s) => (
           <a key={s.id} href={`#${s.id}`} className="group flex items-center gap-3">
             <span
-              className={`block h-2 w-2 rounded-full transition-all duration-300 ${
+              className={`block h-1.5 w-1.5 rounded-full transition-all duration-300 ${
                 activeSection === s.id
-                  ? "from-cyan to-purple bg-gradient-to-r shadow-lg shadow-purple-500/25"
+                  ? "from-emerald to-teal shadow-copper-500/25 bg-gradient-to-r shadow-lg"
                   : "bg-white/20 group-hover:bg-white/40"
               }`}
             />
