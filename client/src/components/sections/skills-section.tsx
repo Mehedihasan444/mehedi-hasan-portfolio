@@ -54,7 +54,7 @@ function TechPill({ name, color }: { name: string; color: string }) {
 
 function MarqueeRow({ items, reverse = false }: { items: typeof techRow1; reverse?: boolean }) {
   return (
-    <div className="overflow-hidden py-2">
+    <div className="marquee-container overflow-hidden py-2">
       <div
         className={`flex gap-3 ${reverse ? "marquee-track-reverse" : "marquee-track"}`}
         aria-hidden="true"
