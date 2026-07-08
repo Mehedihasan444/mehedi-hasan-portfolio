@@ -31,7 +31,7 @@ export default function AdminBlogPage() {
 
   const load = async () => {
     try {
-      const data = await api.get<any[]>("./blog");
+      const data = await api.get<any[]>("/blog");
       setItems(data);
     } catch {
       toast.error("Failed to load");
@@ -76,10 +76,10 @@ export default function AdminBlogPage() {
         ),
       };
       if (editing) {
-        await api.put(`./blog/${editing.id}`, payload);
+        await api.put(`/blog/${editing.id}`, payload);
         toast.success("Updated");
       } else {
-        await api.post("./blog", payload);
+        await api.post("/blog", payload);
         toast.success("Created");
       }
       setModalOpen(false);
@@ -92,7 +92,7 @@ export default function AdminBlogPage() {
   const handleDelete = async (item: any) => {
     if (!confirm("Delete?")) return;
     try {
-      await api.delete(`./blog/${item.id}`);
+      await api.delete(`/blog/${item.id}`);
       toast.success("Deleted");
       load();
     } catch {

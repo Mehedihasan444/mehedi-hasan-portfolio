@@ -42,7 +42,7 @@ export default function AdminProjectsPage() {
 
   const load = async () => {
     try {
-      const data = await api.get<any[]>("./projects");
+      const data = await api.get<any[]>("/projects");
       setProjects(data);
     } catch {
       toast.error("Failed to load projects");
@@ -123,10 +123,10 @@ export default function AdminProjectsPage() {
       };
 
       if (editing) {
-        await api.put(`./projects/${editing.id}`, payload);
+        await api.put(`/projects/${editing.id}`, payload);
         toast.success("Project updated");
       } else {
-        await api.post("./projects", payload);
+        await api.post("/projects", payload);
         toast.success("Project created");
       }
       setModalOpen(false);
@@ -139,7 +139,7 @@ export default function AdminProjectsPage() {
   const handleDelete = async (item: any) => {
     if (!confirm("Delete this project?")) return;
     try {
-      await api.delete(`./projects/${item.id}`);
+      await api.delete(`/projects/${item.id}`);
       toast.success("Project deleted");
       load();
     } catch {

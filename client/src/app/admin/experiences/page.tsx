@@ -34,7 +34,7 @@ export default function AdminExperiencesPage() {
 
   const load = async () => {
     try {
-      const data = await api.get<any[]>("./experiences");
+      const data = await api.get<any[]>("/experiences");
       setItems(data);
     } catch {
       toast.error("Failed to load");
@@ -86,10 +86,10 @@ export default function AdminExperiencesPage() {
         endDate: form.endDate ? new Date(form.endDate) : null,
       };
       if (editing) {
-        await api.put(`./experiences/${editing.id}`, payload);
+        await api.put(`/experiences/${editing.id}`, payload);
         toast.success("Updated");
       } else {
-        await api.post("./experiences", payload);
+        await api.post("/experiences", payload);
         toast.success("Created");
       }
       setModalOpen(false);
@@ -102,7 +102,7 @@ export default function AdminExperiencesPage() {
   const handleDelete = async (item: any) => {
     if (!confirm("Delete?")) return;
     try {
-      await api.delete(`./experiences/${item.id}`);
+      await api.delete(`/experiences/${item.id}`);
       toast.success("Deleted");
       load();
     } catch {

@@ -30,7 +30,7 @@ export default function AdminSkillsPage() {
 
   const load = async () => {
     try {
-      const data = await api.get<any[]>("./skills");
+      const data = await api.get<any[]>("/skills");
       setSkills(data);
     } catch {
       toast.error("Failed to load skills");
@@ -65,10 +65,10 @@ export default function AdminSkillsPage() {
     e.preventDefault();
     try {
       if (editing) {
-        await api.put(`./skills/${editing.id}`, form);
+        await api.put(`/skills/${editing.id}`, form);
         toast.success("Skill updated");
       } else {
-        await api.post("./skills", form);
+        await api.post("/skills", form);
         toast.success("Skill created");
       }
       setModalOpen(false);
@@ -81,7 +81,7 @@ export default function AdminSkillsPage() {
   const handleDelete = async (item: any) => {
     if (!confirm("Delete this skill?")) return;
     try {
-      await api.delete(`./skills/${item.id}`);
+      await api.delete(`/skills/${item.id}`);
       toast.success("Skill deleted");
       load();
     } catch {

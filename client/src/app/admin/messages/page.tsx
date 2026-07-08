@@ -24,7 +24,7 @@ export default function AdminMessagesPage() {
 
   const load = async () => {
     try {
-      const data = await api.get<any[]>("./contact");
+      const data = await api.get<any[]>("/contact");
       setMessages(data);
     } catch {
       toast.error("Failed to load");
@@ -40,7 +40,7 @@ export default function AdminMessagesPage() {
   const handleDelete = async (item: any) => {
     if (!confirm("Delete this message?")) return;
     try {
-      await api.delete(`./contact/${item.id}`);
+      await api.delete(`/contact/${item.id}`);
       toast.success("Deleted");
       load();
     } catch {
@@ -50,7 +50,7 @@ export default function AdminMessagesPage() {
 
   const handleMarkRead = async (item: any) => {
     try {
-      await api.put(`./contact/${item.id}`, { read: !item.read });
+      await api.put(`/contact/${item.id}`, { read: !item.read });
       load();
     } catch {
       toast.error("Failed");

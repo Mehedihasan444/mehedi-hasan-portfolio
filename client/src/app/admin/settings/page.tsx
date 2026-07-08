@@ -11,7 +11,7 @@ export default function AdminSettingsPage() {
 
   const load = async () => {
     try {
-      const data = await api.get<any[]>("./site-settings");
+      const data = await api.get<any[]>("/site-settings");
       const map: Record<string, string> = {};
       data.forEach((s: any) => {
         map[s.key] = s.value;
@@ -31,10 +31,10 @@ export default function AdminSettingsPage() {
   const handleSave = async () => {
     try {
       for (const [key, value] of Object.entries(settings)) {
-        const existing = await api.get<any[]>("./site-settings");
+        const existing = await api.get<any[]>("/site-settings");
         const found = existing.find((s: any) => s.key === key);
         if (found) {
-          await api.put(`./site-settings/${found.id}`, { value });
+          await api.put(`/site-settings/${found.id}`, { value });
         }
       }
       toast.success("Settings saved");

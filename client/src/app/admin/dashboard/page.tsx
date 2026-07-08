@@ -16,10 +16,10 @@ export default function AdminDashboardPage() {
     async function loadStats() {
       try {
         const [projects, skills, experiences, messages] = await Promise.all([
-          api.get<any[]>("./projects"),
-          api.get<any[]>("./skills"),
-          api.get<any[]>("./experiences"),
-          api.get<any[]>("./contact"),
+          api.get<any[]>("/projects"),
+          api.get<any[]>("/skills"),
+          api.get<any[]>("/experiences"),
+          api.get<any[]>("/contact"),
         ]);
         setStats({
           projects: projects.length,
