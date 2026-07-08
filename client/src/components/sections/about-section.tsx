@@ -8,6 +8,7 @@ import { ScrollReveal, StaggerReveal, RevealItem } from "@/components/animations
 import { AnimatedCounterGroup } from "@/components/animations/animated-counter";
 import { useParallax } from "@/hooks/use-parallax";
 import { Code2, Lightbulb, Microscope, Puzzle } from "lucide-react";
+import { ElegantShape } from "@/components/ui/shape-landing-hero";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -120,8 +121,56 @@ export function AboutSection() {
       style={{ marginTop: "clamp(-10rem, -15vh, -4rem)" }}
     >
       {/* Ambient glow */}
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
         <div className="from-emerald/5 via-teal/5 absolute left-0 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r to-transparent blur-[150px]" />
+      </div>
+
+      {/* Floating shapes */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <ElegantShape
+          delay={0.2}
+          width={520}
+          height={130}
+          rotate={10}
+          gradient="from-emerald/[0.25]"
+          className="left-[-8%] top-[12%] -z-10"
+        />
+
+        <ElegantShape
+          delay={0.4}
+          width={420}
+          height={110}
+          rotate={-12}
+          gradient="from-teal/[0.2]"
+          className="right-[-4%] top-[65%]"
+        />
+
+        <ElegantShape
+          delay={0.3}
+          width={280}
+          height={80}
+          rotate={-6}
+          gradient="from-cyan/[0.2]"
+          className="bottom-[8%] left-[8%]"
+        />
+
+        <ElegantShape
+          delay={0.5}
+          width={200}
+          height={55}
+          rotate={18}
+          gradient="from-emerald/[0.2]"
+          className="right-[10%] top-[8%]"
+        />
+
+        <ElegantShape
+          delay={0.6}
+          width={150}
+          height={40}
+          rotate={-22}
+          gradient="from-cyan/[0.18]"
+          className="left-[22%] top-[4%]"
+        />
       </div>
 
       <div className="mx-auto max-w-7xl">
