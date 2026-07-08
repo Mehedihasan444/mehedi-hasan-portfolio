@@ -75,7 +75,7 @@ export function DataTable<T extends Record<string, any>>({
                     {onEdit && (
                       <button
                         onClick={() => onEdit(item)}
-                        className="text-cyan hover:bg-cyan/10 rounded px-3 py-1 text-xs transition-colors"
+                        className="text-emerald hover:bg-emerald/10 rounded px-3 py-1 text-xs transition-colors"
                       >
                         Edit
                       </button>

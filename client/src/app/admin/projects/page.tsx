@@ -29,9 +29,13 @@ export default function AdminProjectsPage() {
     title: "",
     slug: "",
     description: "",
+    content: "",
     techStack: "",
     liveUrl: "",
     githubUrl: "",
+    image: "",
+    images: "",
+    order: 0,
     featured: false,
     status: "published",
   });
@@ -57,9 +61,13 @@ export default function AdminProjectsPage() {
       title: "",
       slug: "",
       description: "",
+      content: "",
       techStack: "",
       liveUrl: "",
       githubUrl: "",
+      image: "",
+      images: "",
+      order: 0,
       featured: false,
       status: "published",
     });
@@ -72,6 +80,7 @@ export default function AdminProjectsPage() {
       title: item.title,
       slug: item.slug,
       description: item.description || "",
+      content: item.content || "",
       techStack: item.techStack
         ? Array.isArray(item.techStack)
           ? item.techStack.join(", ")
@@ -79,6 +88,15 @@ export default function AdminProjectsPage() {
         : "",
       liveUrl: item.liveUrl || "",
       githubUrl: item.githubUrl || "",
+      image: item.image || "",
+      images: item.images
+        ? Array.isArray(item.images)
+          ? item.images.join(", ")
+          : typeof item.images === "string"
+            ? item.images
+            : ""
+        : "",
+      order: item.order ?? 0,
       featured: item.featured,
       status: item.status,
     });
@@ -92,6 +110,12 @@ export default function AdminProjectsPage() {
         ...form,
         techStack: JSON.stringify(
           form.techStack
+            .split(",")
+            .map((s: string) => s.trim())
+            .filter(Boolean),
+        ),
+        images: JSON.stringify(
+          form.images
             .split(",")
             .map((s: string) => s.trim())
             .filter(Boolean),
@@ -131,7 +155,7 @@ export default function AdminProjectsPage() {
         action={
           <button
             onClick={openCreate}
-            className="from-cyan to-purple rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white transition-all hover:shadow-lg hover:shadow-purple-500/25"
+            className="from-emerald to-teal rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white transition-all hover:shadow-lg hover:shadow-teal-500/25"
           >
             New Project
           </button>
@@ -157,40 +181,66 @@ export default function AdminProjectsPage() {
             placeholder="Title"
             value={form.title}
             onChange={(e) => setForm({ ...form, title: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-cyan/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
           />
           <input
             required
             placeholder="Slug"
             value={form.slug}
             onChange={(e) => setForm({ ...form, slug: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-cyan/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
           />
           <textarea
             required
             placeholder="Description"
             value={form.description}
             onChange={(e) => setForm({ ...form, description: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-cyan/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
             rows={3}
           />
           <input
             placeholder="Tech Stack (comma separated)"
             value={form.techStack}
             onChange={(e) => setForm({ ...form, techStack: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-cyan/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
           />
           <input
             placeholder="Live URL"
             value={form.liveUrl}
             onChange={(e) => setForm({ ...form, liveUrl: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-cyan/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
           />
           <input
             placeholder="GitHub URL"
             value={form.githubUrl}
             onChange={(e) => setForm({ ...form, githubUrl: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-cyan/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+          />
+          <input
+            placeholder="Thumbnail Image URL"
+            value={form.image}
+            onChange={(e) => setForm({ ...form, image: e.target.value })}
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+          />
+          <input
+            placeholder="Gallery Images (comma separated URLs)"
+            value={form.images}
+            onChange={(e) => setForm({ ...form, images: e.target.value })}
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+          />
+          <textarea
+            placeholder="Content (markdown supported)"
+            value={form.content}
+            onChange={(e) => setForm({ ...form, content: e.target.value })}
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+            rows={6}
+          />
+          <input
+            type="number"
+            placeholder="Order"
+            value={form.order}
+            onChange={(e) => setForm({ ...form, order: Number(e.target.value) })}
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
           />
           <label className="text-muted-foreground flex items-center gap-2 text-sm">
             <input
@@ -202,7 +252,7 @@ export default function AdminProjectsPage() {
           </label>
           <button
             type="submit"
-            className="from-cyan to-purple w-full rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white"
+            className="from-emerald to-teal w-full rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white"
           >
             {editing ? "Update" : "Create"}
           </button>

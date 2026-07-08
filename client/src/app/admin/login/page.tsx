@@ -46,7 +46,7 @@ export default function AdminLoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
-              className="placeholder:text-muted-foreground focus:border-cyan/50 focus:ring-cyan/20 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white focus:outline-none focus:ring-1"
+              className="placeholder:text-muted-foreground focus:border-emerald/50 focus:ring-emerald/20 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white focus:outline-none focus:ring-1"
             />
           </div>
           <div>
@@ -60,13 +60,13 @@ export default function AdminLoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
-              className="placeholder:text-muted-foreground focus:border-cyan/50 focus:ring-cyan/20 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white focus:outline-none focus:ring-1"
+              className="placeholder:text-muted-foreground focus:border-emerald/50 focus:ring-emerald/20 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white focus:outline-none focus:ring-1"
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="from-cyan to-purple w-full rounded-lg bg-gradient-to-r px-8 py-3 text-sm font-medium text-white transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 disabled:opacity-50"
+            className="from-emerald to-teal w-full rounded-lg bg-gradient-to-r px-8 py-3 text-sm font-medium text-white transition-all duration-300 hover:shadow-lg hover:shadow-teal-500/25 disabled:opacity-50"
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>

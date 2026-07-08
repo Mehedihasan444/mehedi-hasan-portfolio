@@ -78,7 +78,7 @@ export default function AdminMessagesPage() {
                   handleMarkRead(selected);
                   setSelected(null);
                 }}
-                className="from-cyan to-purple rounded-lg bg-gradient-to-r px-4 py-2 text-sm text-white"
+                className="from-emerald to-teal rounded-lg bg-gradient-to-r px-4 py-2 text-sm text-white"
               >
                 Mark as {selected.read ? "Unread" : "Read"}
               </button>

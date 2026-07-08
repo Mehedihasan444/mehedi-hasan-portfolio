@@ -92,6 +92,28 @@ async function main() {
       slug: "marketsphere",
       description:
         "A multivendor e-commerce platform with product management, cart system, payment integration, and vendor dashboards.",
+      content: `## Overview
+
+MarketSphere is a comprehensive multivendor e-commerce platform designed to connect buyers and sellers in a seamless digital marketplace. Built with modern web technologies, it provides a robust foundation for online commerce with features tailored for both vendors and customers.
+
+## Key Features
+
+- **Multi-vendor Architecture**: Independent vendor dashboards with individual product management
+- **Product Management**: Rich product catalog with categories, variants, and inventory tracking
+- **Shopping Cart**: Real-time cart management with persistent state across sessions
+- **Payment Integration**: Secure payment processing with Stripe integration
+- **Vendor Analytics**: Comprehensive sales analytics and reporting dashboards
+- **Search & Filtering**: Advanced search with faceted filtering and full-text search
+
+## Technical Highlights
+
+The application leverages Next.js for server-side rendering and static generation, ensuring optimal performance and SEO. PostgreSQL with Prisma provides a type-safe database layer, while Tailwind CSS delivers a responsive, modern UI. The architecture follows a modular pattern with clear separation of concerns.`,
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+      images: JSON.stringify([
+        "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
+        "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80",
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+      ]),
       techStack: JSON.stringify([
         "React",
         "Next.js",
@@ -104,12 +126,34 @@ async function main() {
       githubUrl: "https://github.com/Mehedihasan444/marketsphere-frontend",
       featured: true,
       order: 1,
+      status: "published",
     },
     {
       title: "Tech Tips & Tricks Hub",
       slug: "tech-tips-tricks-hub",
       description:
         "A content platform for sharing technical tutorials, tips, and tricks for developers. Features blog posts, code snippets, and community interaction.",
+      content: `## Overview
+
+Tech Tips & Tricks Hub is a community-driven content platform that enables developers to share knowledge through tutorials, code snippets, and technical articles. The platform fosters learning and collaboration within the developer community.
+
+## Key Features
+
+- **Rich Content Editor**: Full-featured markdown editor with syntax highlighting and preview
+- **Code Snippets**: Share executable code snippets with language detection and formatting
+- **Community Interaction**: Comments, likes, and bookmarking system for user engagement
+- **Content Categories**: Organized content with tags, categories, and search
+- **User Profiles**: Personalized profiles with contribution history and reputation
+
+## Technical Highlights
+
+Built with MongoDB for flexible content storage and Mongoose for elegant data modeling. The Next.js frontend provides fast page loads through static generation, while dynamic routes handle individual posts efficiently.`,
+      image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&q=80",
+      images: JSON.stringify([
+        "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&q=80",
+        "https://images.unsplash.com/photo-1432889821006-3149403d3b1a?w=800&q=80",
+        "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&q=80",
+      ]),
       techStack: JSON.stringify([
         "React",
         "Next.js",
@@ -121,12 +165,34 @@ async function main() {
       githubUrl: "https://github.com/Mehedihasan444/tech-tips-and-tricks-hub-frontend",
       featured: true,
       order: 2,
+      status: "published",
     },
     {
       title: "Car Rental Reservation System",
       slug: "car-rental-reservation-system",
       description:
         "A full-stack car rental platform with vehicle browsing, booking management, payment processing, and admin dashboard.",
+      content: `## Overview
+
+A complete car rental reservation system that handles the entire booking lifecycle — from vehicle browsing and reservation to payment processing and fleet management. Designed for both customers and rental agencies.
+
+## Key Features
+
+- **Vehicle Browsing**: Advanced filtering by make, model, year, price range, and availability
+- **Booking Management**: Real-time availability checking, reservation creation, and modification
+- **Payment Processing**: Secure Stripe integration with multiple payment methods
+- **Admin Dashboard**: Fleet management, booking oversight, revenue tracking, and customer management
+- **Email Notifications**: Automated booking confirmations, reminders, and receipts
+
+## Technical Highlights
+
+The backend uses Express.js with a clean MVC architecture. MongoDB provides flexible document storage for vehicle specifications and booking records. The frontend features responsive design with smooth transitions and real-time availability updates.`,
+      image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800&q=80",
+      images: JSON.stringify([
+        "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800&q=80",
+        "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80",
+        "https://images.unsplash.com/photo-1550355291-bedd04e1420a?w=800&q=80",
+      ]),
       techStack: JSON.stringify([
         "React",
         "TypeScript",
@@ -138,6 +204,7 @@ async function main() {
       githubUrl: "https://github.com/Mehedihasan444/Car-Rental-Reservation-System-Frontend",
       featured: true,
       order: 3,
+      status: "published",
     },
   ];
 

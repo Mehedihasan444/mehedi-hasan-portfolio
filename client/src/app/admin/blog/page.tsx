@@ -107,7 +107,7 @@ export default function AdminBlogPage() {
         action={
           <button
             onClick={openCreate}
-            className="from-cyan to-purple rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white"
+            className="from-emerald to-teal rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white"
           >
             New Post
           </button>
@@ -131,34 +131,34 @@ export default function AdminBlogPage() {
             placeholder="Title"
             value={form.title}
             onChange={(e) => setForm({ ...form, title: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-cyan/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
           />
           <input
             required
             placeholder="Slug"
             value={form.slug}
             onChange={(e) => setForm({ ...form, slug: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-cyan/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
           />
           <input
             placeholder="Excerpt"
             value={form.excerpt}
             onChange={(e) => setForm({ ...form, excerpt: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-cyan/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
           />
           <textarea
             required
             placeholder="Content (Markdown)"
             value={form.content}
             onChange={(e) => setForm({ ...form, content: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-cyan/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
             rows={8}
           />
           <input
             placeholder="Tags (comma separated)"
             value={form.tags}
             onChange={(e) => setForm({ ...form, tags: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-cyan/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
           />
           <label className="text-muted-foreground flex items-center gap-2 text-sm">
             <input
@@ -170,7 +170,7 @@ export default function AdminBlogPage() {
           </label>
           <button
             type="submit"
-            className="from-cyan to-purple w-full rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white"
+            className="from-emerald to-teal w-full rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white"
           >
             {editing ? "Update" : "Create"}
           </button>

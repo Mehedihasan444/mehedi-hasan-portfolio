@@ -97,7 +97,7 @@ export default function AdminSkillsPage() {
         action={
           <button
             onClick={openCreate}
-            className="from-cyan to-purple rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white"
+            className="from-emerald to-teal rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white"
           >
             New Skill
           </button>
@@ -122,12 +122,12 @@ export default function AdminSkillsPage() {
             placeholder="Name"
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-cyan/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
           />
           <select
             value={form.category}
             onChange={(e) => setForm({ ...form, category: e.target.value })}
-            className="focus:border-cyan/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+            className="focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
           >
             <option>Frontend</option>
             <option>Backend</option>
@@ -150,7 +150,7 @@ export default function AdminSkillsPage() {
           </div>
           <button
             type="submit"
-            className="from-cyan to-purple w-full rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white"
+            className="from-emerald to-teal w-full rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white"
           >
             {editing ? "Update" : "Create"}
           </button>

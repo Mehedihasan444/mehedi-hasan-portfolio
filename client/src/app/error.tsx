@@ -13,7 +13,7 @@ export default function Error({
       <p className="text-muted-foreground mt-4">{error.message}</p>
       <button
         onClick={reset}
-        className="from-cyan to-purple mt-8 rounded-full bg-gradient-to-r px-8 py-3 text-sm font-medium text-white transition-all hover:shadow-lg hover:shadow-purple-500/25"
+        className="from-emerald to-teal mt-8 rounded-full bg-gradient-to-r px-8 py-3 text-sm font-medium text-white transition-all hover:shadow-lg hover:shadow-teal-500/25"
       >
         Try Again
       </button>

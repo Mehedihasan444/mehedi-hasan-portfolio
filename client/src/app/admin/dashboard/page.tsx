@@ -46,7 +46,7 @@ export default function AdminDashboardPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="border-cyan h-8 w-8 animate-spin rounded-full border-2 border-t-transparent" />
+        <div className="border-emerald h-8 w-8 animate-spin rounded-full border-2 border-t-transparent" />
       </div>
     );
   }

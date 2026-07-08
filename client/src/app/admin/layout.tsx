@@ -35,7 +35,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (!mounted) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <div className="border-cyan h-8 w-8 animate-spin rounded-full border-2 border-t-transparent" />
+        <div className="border-emerald h-8 w-8 animate-spin rounded-full border-2 border-t-transparent" />
       </div>
     );
   }
@@ -64,7 +64,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 href={link.href}
                 className={`flex items-center gap-3 rounded-lg px-4 py-2.5 text-sm transition-all ${
                   active
-                    ? "from-cyan/10 to-purple/10 bg-gradient-to-r text-white"
+                    ? "from-emerald/10 to-teal/10 bg-gradient-to-r text-white"
                     : "text-muted-foreground hover:bg-white/5 hover:text-white"
                 }`}
               >

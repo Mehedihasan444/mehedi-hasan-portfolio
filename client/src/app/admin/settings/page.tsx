@@ -46,7 +46,7 @@ export default function AdminSettingsPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="border-cyan h-8 w-8 animate-spin rounded-full border-2 border-t-transparent" />
+        <div className="border-emerald h-8 w-8 animate-spin rounded-full border-2 border-t-transparent" />
       </div>
     );
   }
@@ -80,21 +80,21 @@ export default function AdminSettingsPage() {
               <textarea
                 value={settings[key] || ""}
                 onChange={(e) => setSettings({ ...settings, [key]: e.target.value })}
-                className="focus:border-cyan/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+                className="focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
                 rows={5}
               />
             ) : (
               <input
                 value={settings[key] || ""}
                 onChange={(e) => setSettings({ ...settings, [key]: e.target.value })}
-                className="focus:border-cyan/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+                className="focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
               />
             )}
           </div>
         ))}
         <button
           onClick={handleSave}
-          className="from-cyan to-purple rounded-lg bg-gradient-to-r px-6 py-2 text-sm font-medium text-white transition-all hover:shadow-lg hover:shadow-purple-500/25"
+          className="from-emerald to-teal rounded-lg bg-gradient-to-r px-6 py-2 text-sm font-medium text-white transition-all hover:shadow-lg hover:shadow-teal-500/25"
         >
           Save Settings
         </button>

@@ -65,7 +65,7 @@ class ApiClient {
   }
 
   async login(email: string, password: string) {
-    const data = await this.post<{ token: string; user: any }>("/auth/login", {
+    const data = await this.post<{ token: string; user: Record<string, unknown> }>("/auth/login", {
       email,
       password,
     });
