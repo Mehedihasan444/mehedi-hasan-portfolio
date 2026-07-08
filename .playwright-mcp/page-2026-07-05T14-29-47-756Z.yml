@@ -1,0 +1,556 @@
+- generic [active] [ref=f2e1]:
+  - banner [ref=f2e2]:
+    - generic [ref=f2e5]:
+      - link "Vengeance UI" [ref=f2e6] [cursor=pointer]:
+        - /url: /
+        - img [ref=f2e7]
+        - generic [ref=f2e12]: Vengeance UI
+      - generic [ref=f2e13]:
+        - button "Search documentation... ⌘ K" [ref=f2e14]:
+          - generic [ref=f2e15]:
+            - img [ref=f2e16]
+            - generic [ref=f2e19]: Search documentation...
+          - generic [ref=f2e20]: ⌘ K
+        - generic [ref=f2e21]:
+          - heading "Search documentation" [level=2] [ref=f2e22]
+          - paragraph [ref=f2e23]: Search pages, components, blocks, and snippets.
+        - generic [ref=f2e24]:
+          - link "Templates" [ref=f2e25] [cursor=pointer]:
+            - /url: /templates
+          - link "Docs" [ref=f2e26] [cursor=pointer]:
+            - /url: /docs
+        - generic [ref=f2e27]:
+          - 'link "Star Vengeance UI on GitHub. Current stars: ..." [ref=f2e28] [cursor=pointer]':
+            - /url: https://github.com/Ashutoshx7/VengenceUI
+            - img
+            - generic [ref=f2e29]:
+              - img
+              - text: ...
+          - button "toggle theme" [ref=f2e30] [cursor=pointer]:
+            - img
+  - generic [ref=f2e31]:
+    - complementary [ref=f2e32]:
+      - generic [ref=f2e33]:
+        - generic [ref=f2e34]:
+          - generic [ref=f2e35]:
+            - img [ref=f2e36]
+            - generic [ref=f2e39]: Follow for updates
+            - img [ref=f2e40]
+          - link "X @Ashutosh_7x7" [ref=f2e44] [cursor=pointer]:
+            - /url: https://x.com/Ashutosh_7x7
+            - generic [ref=f2e45]: X @Ashutosh_7x7
+        - generic [ref=f2e46]:
+          - generic [ref=f2e47]:
+            - img [ref=f2e48]
+            - generic [ref=f2e51]: Installation
+            - img [ref=f2e52]
+          - generic [ref=f2e54]:
+            - link "Install Next.js" [ref=f2e56] [cursor=pointer]:
+              - /url: /docs/install-nextjs
+              - generic [ref=f2e57]: Install Next.js
+            - link "Install Tailwind CSS" [ref=f2e59] [cursor=pointer]:
+              - /url: /docs/install-tailwind
+              - generic [ref=f2e60]: Install Tailwind CSS
+            - link "Add utilities" [ref=f2e62] [cursor=pointer]:
+              - /url: /docs/add-utilities
+              - generic [ref=f2e63]: Add utilities
+            - link "CLI" [ref=f2e65] [cursor=pointer]:
+              - /url: /docs/cli
+              - generic [ref=f2e66]: CLI
+        - generic [ref=f2e67]:
+          - button "Buttons" [ref=f2e68]:
+            - img [ref=f2e69]
+            - text: Buttons
+          - generic [ref=f2e71]:
+            - link "Animated Button" [ref=f2e73] [cursor=pointer]:
+              - /url: /components/my-animated-button
+              - generic [ref=f2e74]: Animated Button
+            - link "Candy Button New" [ref=f2e76] [cursor=pointer]:
+              - /url: /components/candy-button
+              - generic [ref=f2e77]: Candy Button
+              - generic [ref=f2e78]: New
+            - link "Pop Button New" [ref=f2e80] [cursor=pointer]:
+              - /url: /components/pop-button
+              - generic [ref=f2e81]: Pop Button
+              - generic [ref=f2e82]: New
+            - link "Generate Button New" [ref=f2e84] [cursor=pointer]:
+              - /url: /components/generate-button
+              - generic [ref=f2e85]: Generate Button
+              - generic [ref=f2e86]: New
+            - link "Radial Glow Button New" [ref=f2e88] [cursor=pointer]:
+              - /url: /components/radial-glow-button
+              - generic [ref=f2e89]: Radial Glow Button
+              - generic [ref=f2e90]: New
+            - link "Social Flip Button" [ref=f2e92] [cursor=pointer]:
+              - /url: /components/social-flip-button
+              - generic [ref=f2e93]: Social Flip Button
+            - link "Liquid Metal" [ref=f2e95] [cursor=pointer]:
+              - /url: /components/liquid-metal
+              - generic [ref=f2e96]: Liquid Metal
+            - link "Creepy Button" [ref=f2e98] [cursor=pointer]:
+              - /url: /components/creepy-button
+              - generic [ref=f2e99]: Creepy Button
+            - link "Corner Button New" [ref=f2e101] [cursor=pointer]:
+              - /url: /components/corner-button
+              - generic [ref=f2e102]: Corner Button
+              - generic [ref=f2e103]: New
+        - generic [ref=f2e104]:
+          - button "Text & Motion" [ref=f2e105]:
+            - img [ref=f2e106]
+            - text: Text & Motion
+          - generic [ref=f2e108]:
+            - link "Animated Number" [ref=f2e110] [cursor=pointer]:
+              - /url: /components/animated-number
+              - generic [ref=f2e111]: Animated Number
+            - link "Flip Text" [ref=f2e113] [cursor=pointer]:
+              - /url: /components/flip-text
+              - generic [ref=f2e114]: Flip Text
+            - link "Flip Fade Text" [ref=f2e116] [cursor=pointer]:
+              - /url: /components/flip-fade-text
+              - generic [ref=f2e117]: Flip Fade Text
+            - link "Liquid Text" [ref=f2e119] [cursor=pointer]:
+              - /url: /components/liquid-text
+              - generic [ref=f2e120]: Liquid Text
+            - link "Morph Text New" [ref=f2e122] [cursor=pointer]:
+              - /url: /components/morph-text
+              - generic [ref=f2e123]: Morph Text
+              - generic [ref=f2e124]: New
+            - link "ASCII Glitch Ripple New" [ref=f2e126] [cursor=pointer]:
+              - /url: /components/ascii-glitch-ripple
+              - generic [ref=f2e127]: ASCII Glitch Ripple
+              - generic [ref=f2e128]: New
+        - generic [ref=f2e129]:
+          - button "Interactive" [ref=f2e130]:
+            - img [ref=f2e131]
+            - text: Interactive
+          - generic [ref=f2e137]:
+            - link "Image Collage New" [ref=f2e139] [cursor=pointer]:
+              - /url: /components/image-collage
+              - generic [ref=f2e140]: Image Collage
+              - generic [ref=f2e141]: New
+            - link "Interactive Book" [ref=f2e143] [cursor=pointer]:
+              - /url: /components/interactive-book
+              - generic [ref=f2e144]: Interactive Book
+            - link "Image Trail New" [ref=f2e146] [cursor=pointer]:
+              - /url: /components/image-trail
+              - generic [ref=f2e147]: Image Trail
+              - generic [ref=f2e148]: New
+            - link "Perspective Carousel New" [ref=f2e150] [cursor=pointer]:
+              - /url: /components/perspective-carousel
+              - generic [ref=f2e151]: Perspective Carousel
+              - generic [ref=f2e152]: New
+            - link "Cylinder Carousel New" [ref=f2e154] [cursor=pointer]:
+              - /url: /components/cylinder-carousel
+              - generic [ref=f2e155]: Cylinder Carousel
+              - generic [ref=f2e156]: New
+            - link "Diagonal Carousel New" [ref=f2e158] [cursor=pointer]:
+              - /url: /components/diagonal-carousel
+              - generic [ref=f2e159]: Diagonal Carousel
+              - generic [ref=f2e160]: New
+            - link "Ripple Displacement Slider New" [ref=f2e162] [cursor=pointer]:
+              - /url: /components/ripple-displacement-slider
+              - generic [ref=f2e163]: Ripple Displacement Slider
+              - generic [ref=f2e164]: New
+            - link "Scroll Dissolve Reveal New" [ref=f2e166] [cursor=pointer]:
+              - /url: /components/scroll-dissolve-reveal
+              - generic [ref=f2e167]: Scroll Dissolve Reveal
+              - generic [ref=f2e168]: New
+            - link "Pixelated Image Trail" [ref=f2e171] [cursor=pointer]:
+              - /url: /components/pixelated-image-trail
+              - generic [ref=f2e172]: Pixelated Image Trail
+            - link "Interactive Keyboard New" [ref=f2e174] [cursor=pointer]:
+              - /url: /components/interactive-keyboard
+              - generic [ref=f2e175]: Interactive Keyboard
+              - generic [ref=f2e176]: New
+            - link "Typing Keyboard New" [ref=f2e178] [cursor=pointer]:
+              - /url: /components/typing-keyboard
+              - generic [ref=f2e179]: Typing Keyboard
+              - generic [ref=f2e180]: New
+        - generic [ref=f2e181]:
+          - button "Layout & Cards" [ref=f2e182]:
+            - img [ref=f2e183]
+            - text: Layout & Cards
+          - generic [ref=f2e188]:
+            - link "Agent Bento Grid New" [ref=f2e190] [cursor=pointer]:
+              - /url: /components/agent-bento-grid
+              - generic [ref=f2e191]: Agent Bento Grid
+              - generic [ref=f2e192]: New
+            - link "Expandable Bento Grid" [ref=f2e194] [cursor=pointer]:
+              - /url: /components/expandable-bento-grid
+              - generic [ref=f2e195]: Expandable Bento Grid
+            - link "Staggered Grid" [ref=f2e197] [cursor=pointer]:
+              - /url: /components/staggered-grid
+              - generic [ref=f2e198]: Staggered Grid
+            - link "Image Scatter New" [ref=f2e200] [cursor=pointer]:
+              - /url: /components/image-scatter
+              - generic [ref=f2e201]: Image Scatter
+              - generic [ref=f2e202]: New
+            - link "Glow Border Card" [ref=f2e204] [cursor=pointer]:
+              - /url: /components/glow-border-card
+              - generic [ref=f2e205]: Glow Border Card
+            - link "Testimonials Card" [ref=f2e207] [cursor=pointer]:
+              - /url: /components/testimonials-card
+              - generic [ref=f2e208]: Testimonials Card
+        - generic [ref=f2e209]:
+          - button "Tooltip & Marquee" [ref=f2e210]:
+            - img [ref=f2e211]
+            - text: Tooltip & Marquee
+          - generic [ref=f2e215]:
+            - link "Cursor Card New" [ref=f2e217] [cursor=pointer]:
+              - /url: /components/cursor-card
+              - generic [ref=f2e218]: Cursor Card
+              - generic [ref=f2e219]: New
+            - link "Elastic Stack New" [ref=f2e221] [cursor=pointer]:
+              - /url: /components/elastic-stack
+              - generic [ref=f2e222]: Elastic Stack
+              - generic [ref=f2e223]: New
+            - link "Logo Slider" [ref=f2e225] [cursor=pointer]:
+              - /url: /components/logo-slider
+              - generic [ref=f2e226]: Logo Slider
+            - link "Stacked Logos" [ref=f2e228] [cursor=pointer]:
+              - /url: /components/stacked-logos
+              - generic [ref=f2e229]: Stacked Logos
+            - link "Masked Avatars" [ref=f2e231] [cursor=pointer]:
+              - /url: /components/masked-avatars
+              - generic [ref=f2e232]: Masked Avatars
+            - link "Image Reveal List New" [ref=f2e234] [cursor=pointer]:
+              - /url: /components/image-reveal-list
+              - generic [ref=f2e235]: Image Reveal List
+              - generic [ref=f2e236]: New
+            - link "FAQ Accordion New" [ref=f2e238] [cursor=pointer]:
+              - /url: /components/faq-accordion
+              - generic [ref=f2e239]: FAQ Accordion
+              - generic [ref=f2e240]: New
+            - link "Shared Tooltip Avatars New" [ref=f2e242] [cursor=pointer]:
+              - /url: /components/shared-tooltip-avatars
+              - generic [ref=f2e243]: Shared Tooltip Avatars
+              - generic [ref=f2e244]: New
+            - link "Magnetic Spotlight Marquee New" [ref=f2e246] [cursor=pointer]:
+              - /url: /components/magnetic-spotlight-marquee
+              - generic [ref=f2e247]: Magnetic Spotlight Marquee
+              - generic [ref=f2e248]: New
+        - generic [ref=f2e249]:
+          - button "Loaders" [ref=f2e250]:
+            - img [ref=f2e251]
+            - text: Loaders
+          - link "Kinetic Text Loader New" [ref=f2e256] [cursor=pointer]:
+            - /url: /components/kinetic-text-loader
+            - generic [ref=f2e257]: Kinetic Text Loader
+            - generic [ref=f2e258]: New
+        - generic [ref=f2e259]:
+          - button "Navbar & Docs" [ref=f2e260]:
+            - img [ref=f2e261]
+            - text: Navbar & Docs
+          - generic [ref=f2e263]:
+            - link "Glass Dock" [ref=f2e265] [cursor=pointer]:
+              - /url: /components/glass-dock
+              - generic [ref=f2e266]: Glass Dock
+            - link "Spotlight Navbar" [ref=f2e268] [cursor=pointer]:
+              - /url: /components/spotlight-navbar
+              - generic [ref=f2e269]: Spotlight Navbar
+            - link "Notch Navbar New" [ref=f2e271] [cursor=pointer]:
+              - /url: /components/notch-navbar
+              - generic [ref=f2e272]: Notch Navbar
+              - generic [ref=f2e273]: New
+        - generic [ref=f2e274]:
+          - button "Collections" [ref=f2e275]:
+            - img [ref=f2e276]
+            - text: Collections
+          - generic [ref=f2e278]:
+            - link "Line Hover Link" [ref=f2e280] [cursor=pointer]:
+              - /url: /components/line-hover-link
+              - generic [ref=f2e281]: Line Hover Link
+            - link "Folder Preview" [ref=f2e283] [cursor=pointer]:
+              - /url: /components/folder-preview
+              - generic [ref=f2e284]: Folder Preview
+        - generic [ref=f2e285]:
+          - button "Backgrounds" [ref=f2e286]:
+            - img [ref=f2e287]
+            - text: Backgrounds
+          - generic [ref=f2e291]:
+            - link "Aurora Hero New" [ref=f2e293] [cursor=pointer]:
+              - /url: /components/aurora-hero
+              - generic [ref=f2e294]: Aurora Hero
+              - generic [ref=f2e295]: New
+            - link "Fluid Morph Background New" [ref=f2e297] [cursor=pointer]:
+              - /url: /components/fluid-morph-bg
+              - generic [ref=f2e298]: Fluid Morph Background
+              - generic [ref=f2e299]: New
+            - link "Twisting Ribbon New" [ref=f2e301] [cursor=pointer]:
+              - /url: /components/twisting-ribbon
+              - generic [ref=f2e302]: Twisting Ribbon
+              - generic [ref=f2e303]: New
+            - link "Animated Rays New" [ref=f2e305] [cursor=pointer]:
+              - /url: /components/animated-rays
+              - generic [ref=f2e306]: Animated Rays
+              - generic [ref=f2e307]: New
+            - link "Perspective Grid" [ref=f2e309] [cursor=pointer]:
+              - /url: /components/perspective-grid
+              - generic [ref=f2e310]: Perspective Grid
+            - link "Light Lines" [ref=f2e312] [cursor=pointer]:
+              - /url: /components/light-lines
+              - generic [ref=f2e313]: Light Lines
+            - link "Liquid Ocean" [ref=f2e315] [cursor=pointer]:
+              - /url: /components/liquid-ocean
+              - generic [ref=f2e316]: Liquid Ocean
+    - main [ref=f2e319]:
+      - generic [ref=f2e321]:
+        - generic [ref=f2e322]:
+          - paragraph [ref=f2e323]: Components /Pixelated Image Trail
+          - heading "Pixelated Image Trail" [level=1] [ref=f2e324]
+          - paragraph [ref=f2e325]: Cursor trail image reveal
+        - generic [ref=f2e326]:
+          - generic [ref=f2e327]:
+            - generic [ref=f2e328]:
+              - button "Preview" [ref=f2e329]:
+                - img [ref=f2e330]
+                - text: Preview
+              - button "Code" [ref=f2e333]:
+                - img [ref=f2e334]
+                - text: Code
+            - generic [ref=f2e337]:
+              - img [ref=f2e339]
+              - generic [ref=f2e341]: npx shadcn@latest add https://www.vengenceui.com/r/pixelated-image-trail.json
+              - button "Copy" [ref=f2e342]:
+                - generic [ref=f2e343]: Copy
+                - img [ref=f2e344]
+              - button "Expand to fullscreen" [ref=f2e347]:
+                - img [ref=f2e348]
+          - generic [ref=f2e361]: Loading preview…
+        - generic [ref=f2e362]:
+          - generic [ref=f2e363]:
+            - heading "Installation" [level=2] [ref=f2e364]
+            - generic [ref=f2e365]:
+              - button "CLI" [ref=f2e366]
+              - button "Manual" [ref=f2e367]
+            - generic [ref=f2e368]:
+              - paragraph [ref=f2e369]: Run the following command
+              - generic [ref=f2e370]:
+                - generic [ref=f2e371]:
+                  - generic [ref=f2e372]:
+                    - button "npm" [ref=f2e373]:
+                      - img [ref=f2e375]
+                      - generic [ref=f2e377]: npm
+                    - button "pnpm" [ref=f2e378]:
+                      - img [ref=f2e379]
+                      - generic [ref=f2e381]: pnpm
+                    - button "bun" [ref=f2e382]:
+                      - img [ref=f2e383]
+                      - generic [ref=f2e387]: bun
+                    - button "yarn" [ref=f2e388]:
+                      - img [ref=f2e389]
+                      - generic [ref=f2e391]: yarn
+                  - button "Copy command" [ref=f2e392]:
+                    - img [ref=f2e393]
+                - code [ref=f2e397]: npx shadcn@latest add https://www.vengenceui.com/r/pixelated-image-trail.json
+          - generic [ref=f2e398]:
+            - heading "Usage" [level=2] [ref=f2e399]
+            - generic [ref=f2e400]:
+              - button "Copy code" [ref=f2e402]:
+                - img [ref=f2e403]
+              - generic [ref=f2e407]:
+                - generic [ref=f2e408]:
+                  - generic [ref=f2e409]: "1"
+                  - generic [ref=f2e410]: import PixelatedImageTrail from "@/components/ui/pixelated-image-trail"
+                - generic [ref=f2e412]: "2"
+                - generic [ref=f2e414]:
+                  - generic [ref=f2e415]: "3"
+                  - generic [ref=f2e416]: "export function PixelatedImageTrailDemo() {"
+                - generic [ref=f2e417]:
+                  - generic [ref=f2e418]: "4"
+                  - generic [ref=f2e419]: return (
+                - generic [ref=f2e420]:
+                  - generic [ref=f2e421]: "5"
+                  - generic [ref=f2e422]: <div className="relative h-[500px] overflow-hidden rounded-xl bg-black">
+                - generic [ref=f2e423]:
+                  - generic [ref=f2e424]: "6"
+                  - generic [ref=f2e425]: <PixelatedImageTrail
+                - generic [ref=f2e426]:
+                  - generic [ref=f2e427]: "7"
+                  - generic [ref=f2e428]: "images={["
+                - generic [ref=f2e429]:
+                  - generic [ref=f2e430]: "8"
+                  - generic [ref=f2e431]: "\"/trail-images/image1.jpg\","
+                - generic [ref=f2e432]:
+                  - generic [ref=f2e433]: "9"
+                  - generic [ref=f2e434]: "\"/trail-images/image4.jpg\","
+                - generic [ref=f2e435]:
+                  - generic [ref=f2e436]: "10"
+                  - generic [ref=f2e437]: "\"/trail-images/image5.jpg\","
+                - generic [ref=f2e438]:
+                  - generic [ref=f2e439]: "11"
+                  - generic [ref=f2e440]: "]}"
+                - generic [ref=f2e441]:
+                  - generic [ref=f2e442]: "12"
+                  - generic [ref=f2e443]: "imageSize={220}"
+                - generic [ref=f2e444]:
+                  - generic [ref=f2e445]: "13"
+                  - generic [ref=f2e446]: "slices={5}"
+                - generic [ref=f2e447]:
+                  - generic [ref=f2e448]: "14"
+                  - generic [ref=f2e449]: "smoothing={0.32}"
+                - generic [ref=f2e450]:
+                  - generic [ref=f2e451]: "15"
+                  - generic [ref=f2e452]: "spawnThreshold={32}"
+                - generic [ref=f2e453]:
+                  - generic [ref=f2e454]: "16"
+                  - generic [ref=f2e455]: "config={{"
+                - generic [ref=f2e456]:
+                  - generic [ref=f2e457]: "17"
+                  - generic [ref=f2e458]: "imageLifespan: 1500,"
+                - generic [ref=f2e459]:
+                  - generic [ref=f2e460]: "18"
+                  - generic [ref=f2e461]: "inDuration: 280,"
+                - generic [ref=f2e462]:
+                  - generic [ref=f2e463]: "19"
+                  - generic [ref=f2e464]: "outDuration: 620,"
+                - generic [ref=f2e465]:
+                  - generic [ref=f2e466]: "20"
+                  - generic [ref=f2e467]: "staggerIn: 12,"
+                - generic [ref=f2e468]:
+                  - generic [ref=f2e469]: "21"
+                  - generic [ref=f2e470]: "staggerOut: 9,"
+                - generic [ref=f2e471]:
+                  - generic [ref=f2e472]: "22"
+                  - generic [ref=f2e473]: "slideDuration: 1300,"
+                - generic [ref=f2e474]:
+                  - generic [ref=f2e475]: "23"
+                  - generic [ref=f2e476]: "}}"
+                - generic [ref=f2e477]:
+                  - generic [ref=f2e478]: "24"
+                  - generic [ref=f2e479]: />
+                - generic [ref=f2e480]:
+                  - generic [ref=f2e481]: "25"
+                  - generic [ref=f2e482]: </div>
+                - generic [ref=f2e483]:
+                  - generic [ref=f2e484]: "26"
+                  - generic [ref=f2e485]: )
+                - generic [ref=f2e486]:
+                  - generic [ref=f2e487]: "27"
+                  - generic [ref=f2e488]: "}"
+          - generic [ref=f2e489]:
+            - heading "Props" [level=2] [ref=f2e490]
+            - table [ref=f2e493]:
+              - rowgroup [ref=f2e494]:
+                - row "Prop Name Type Default Description" [ref=f2e495]:
+                  - columnheader "Prop Name" [ref=f2e496]
+                  - columnheader "Type" [ref=f2e497]
+                  - columnheader "Default" [ref=f2e498]
+                  - columnheader "Description" [ref=f2e499]
+              - rowgroup [ref=f2e500]:
+                - row "images string[] - Array of image URLs for the trail effect." [ref=f2e501]:
+                  - cell "images" [ref=f2e502]
+                  - cell "string[]" [ref=f2e503]:
+                    - code [ref=f2e504]: string[]
+                  - cell "-" [ref=f2e505]:
+                    - code [ref=f2e506]: "-"
+                  - cell "Array of image URLs for the trail effect." [ref=f2e507]
+                - row "className string - Additional CSS classes." [ref=f2e508]:
+                  - cell "className" [ref=f2e509]
+                  - cell "string" [ref=f2e510]:
+                    - code [ref=f2e511]: string
+                  - cell "-" [ref=f2e512]:
+                    - code [ref=f2e513]: "-"
+                  - cell "Additional CSS classes." [ref=f2e514]
+                - row "config Partial<TrailConfig> - Override timing and easing values for the reveal, slide, and exit animations." [ref=f2e515]:
+                  - cell "config" [ref=f2e516]
+                  - cell "Partial<TrailConfig>" [ref=f2e517]:
+                    - code [ref=f2e518]: Partial<TrailConfig>
+                  - cell "-" [ref=f2e519]:
+                    - code [ref=f2e520]: "-"
+                  - cell "Override timing and easing values for the reveal, slide, and exit animations." [ref=f2e521]
+                - row "slices number 5 Number of horizontal mask slices used for the reveal." [ref=f2e522]:
+                  - cell "slices" [ref=f2e523]
+                  - cell "number" [ref=f2e524]:
+                    - code [ref=f2e525]: number
+                  - cell "5" [ref=f2e526]:
+                    - code [ref=f2e527]: "5"
+                  - cell "Number of horizontal mask slices used for the reveal." [ref=f2e528]
+                - row "spawnThreshold number 32 Pointer distance in pixels before a new trail image appears. Lower values create a denser trail." [ref=f2e529]:
+                  - cell "spawnThreshold" [ref=f2e530]
+                  - cell "number" [ref=f2e531]:
+                    - code [ref=f2e532]: number
+                  - cell "32" [ref=f2e533]:
+                    - code [ref=f2e534]: "32"
+                  - cell "Pointer distance in pixels before a new trail image appears. Lower values create a denser trail." [ref=f2e535]
+                - row "smoothing number 0.32 Interpolation factor used to smooth pointer movement. Values closer to 1 follow faster." [ref=f2e536]:
+                  - cell "smoothing" [ref=f2e537]
+                  - cell "number" [ref=f2e538]:
+                    - code [ref=f2e539]: number
+                  - cell "0.32" [ref=f2e540]:
+                    - code [ref=f2e541]: "0.32"
+                  - cell "Interpolation factor used to smooth pointer movement. Values closer to 1 follow faster." [ref=f2e542]
+                - row "imageSize number 220 Rendered trail image size in pixels." [ref=f2e543]:
+                  - cell "imageSize" [ref=f2e544]
+                  - cell "number" [ref=f2e545]:
+                    - code [ref=f2e546]: number
+                  - cell "220" [ref=f2e547]:
+                    - code [ref=f2e548]: "220"
+                  - cell "Rendered trail image size in pixels." [ref=f2e549]
+            - generic [ref=f2e550]:
+              - heading "TrailConfig" [level=3] [ref=f2e551]
+              - table [ref=f2e554]:
+                - rowgroup [ref=f2e555]:
+                  - row "Prop Name Type Default Description" [ref=f2e556]:
+                    - columnheader "Prop Name" [ref=f2e557]
+                    - columnheader "Type" [ref=f2e558]
+                    - columnheader "Default" [ref=f2e559]
+                    - columnheader "Description" [ref=f2e560]
+                - rowgroup [ref=f2e561]:
+                  - row "imageLifespan number 1500 Delay in milliseconds before a spawned image begins exiting." [ref=f2e562]:
+                    - cell "imageLifespan" [ref=f2e563]
+                    - cell "number" [ref=f2e564]:
+                      - code [ref=f2e565]: number
+                    - cell "1500" [ref=f2e566]:
+                      - code [ref=f2e567]: "1500"
+                    - cell "Delay in milliseconds before a spawned image begins exiting." [ref=f2e568]
+                  - row "inDuration number 280 Duration in milliseconds for each slice reveal." [ref=f2e569]:
+                    - cell "inDuration" [ref=f2e570]
+                    - cell "number" [ref=f2e571]:
+                      - code [ref=f2e572]: number
+                    - cell "280" [ref=f2e573]:
+                      - code [ref=f2e574]: "280"
+                    - cell "Duration in milliseconds for each slice reveal." [ref=f2e575]
+                  - row "outDuration number 620 Duration in milliseconds for fade and scale out." [ref=f2e576]:
+                    - cell "outDuration" [ref=f2e577]
+                    - cell "number" [ref=f2e578]:
+                      - code [ref=f2e579]: number
+                    - cell "620" [ref=f2e580]:
+                      - code [ref=f2e581]: "620"
+                    - cell "Duration in milliseconds for fade and scale out." [ref=f2e582]
+                  - row "staggerIn number 12 Delay in milliseconds between slice reveal steps." [ref=f2e583]:
+                    - cell "staggerIn" [ref=f2e584]
+                    - cell "number" [ref=f2e585]:
+                      - code [ref=f2e586]: number
+                    - cell "12" [ref=f2e587]:
+                      - code [ref=f2e588]: "12"
+                    - cell "Delay in milliseconds between slice reveal steps." [ref=f2e589]
+                  - row "staggerOut number 9 Delay in milliseconds between slice hide steps." [ref=f2e590]:
+                    - cell "staggerOut" [ref=f2e591]
+                    - cell "number" [ref=f2e592]:
+                      - code [ref=f2e593]: number
+                    - cell "9" [ref=f2e594]:
+                      - code [ref=f2e595]: "9"
+                    - cell "Delay in milliseconds between slice hide steps." [ref=f2e596]
+                  - row "slideDuration number 1300 Duration in milliseconds for the image drift after spawning." [ref=f2e597]:
+                    - cell "slideDuration" [ref=f2e598]
+                    - cell "number" [ref=f2e599]:
+                      - code [ref=f2e600]: number
+                    - cell "1300" [ref=f2e601]:
+                      - code [ref=f2e602]: "1300"
+                    - cell "Duration in milliseconds for the image drift after spawning." [ref=f2e603]
+                  - row "slideEasing string cubic-bezier(0.16, 1, 0.3, 1) CSS easing for image drift." [ref=f2e604]:
+                    - cell "slideEasing" [ref=f2e605]
+                    - cell "string" [ref=f2e606]:
+                      - code [ref=f2e607]: string
+                    - cell "cubic-bezier(0.16, 1, 0.3, 1)" [ref=f2e608]:
+                      - code [ref=f2e609]: cubic-bezier(0.16, 1, 0.3, 1)
+                    - cell "CSS easing for image drift." [ref=f2e610]
+                  - row "easing string cubic-bezier(0.16, 1, 0.3, 1) CSS easing for reveal and exit transitions." [ref=f2e611]:
+                    - cell "easing" [ref=f2e612]
+                    - cell "string" [ref=f2e613]:
+                      - code [ref=f2e614]: string
+                    - cell "cubic-bezier(0.16, 1, 0.3, 1)" [ref=f2e615]:
+                      - code [ref=f2e616]: cubic-bezier(0.16, 1, 0.3, 1)
+                    - cell "CSS easing for reveal and exit transitions." [ref=f2e617]
+  - alert [ref=f2e618]

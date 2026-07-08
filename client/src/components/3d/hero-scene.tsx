@@ -1,21 +1,25 @@
 "use client";
 
-import { useRef, useMemo, useEffect, useState, Suspense } from "react";
+import { useRef, useEffect, useState, Suspense } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Float, MeshDistortMaterial, MeshTransmissionMaterial } from "@react-three/drei";
 import * as THREE from "three";
+import { useScrollProgress } from "@/hooks/use-scroll-progress";
 
 function FloatingIcosahedron() {
   const meshRef = useRef<THREE.Mesh>(null);
   const { pointer } = useThree();
+  const { progress } = useScrollProgress();
 
   useFrame((state) => {
     if (!meshRef.current) return;
     const t = state.clock.getElapsedTime();
-    meshRef.current.rotation.x = Math.sin(t * 0.2) * 0.3;
-    meshRef.current.rotation.y = Math.sin(t * 0.3) * 0.3;
+    const scrollOffset = progress * 3;
+    meshRef.current.rotation.x = Math.sin(t * 0.2) * 0.3 + progress * 1.5;
+    meshRef.current.rotation.y = Math.sin(t * 0.3) * 0.3 + progress * 2;
     meshRef.current.position.x = pointer.x * 0.2;
-    meshRef.current.position.y = pointer.y * 0.2;
+    meshRef.current.position.y = pointer.y * 0.2 - scrollOffset * 0.3;
+    meshRef.current.scale.setScalar(1.2 - progress * 0.8);
   });
 
   return (
@@ -23,8 +27,8 @@ function FloatingIcosahedron() {
       <mesh ref={meshRef} scale={1.2}>
         <icosahedronGeometry args={[1, 0]} />
         <MeshDistortMaterial
-          color="#06b6d4"
-          emissive="#8b5cf6"
+          color="#10B981"
+          emissive="#059669"
           emissiveIntensity={0.2}
           distort={0.2}
           speed={2}
@@ -41,14 +45,17 @@ function FloatingIcosahedron() {
 function FloatingTorus() {
   const meshRef = useRef<THREE.Mesh>(null);
   const { pointer } = useThree();
+  const { progress } = useScrollProgress();
 
   useFrame((state) => {
     if (!meshRef.current) return;
     const t = state.clock.getElapsedTime();
-    meshRef.current.rotation.x = Math.sin(t * 0.15 + 1) * 0.5;
-    meshRef.current.rotation.y = Math.sin(t * 0.25 + 1) * 0.5;
+    const scrollOffset = progress * 3;
+    meshRef.current.rotation.x = Math.sin(t * 0.15 + 1) * 0.5 + progress;
+    meshRef.current.rotation.y = Math.sin(t * 0.25 + 1) * 0.5 + progress * 1.5;
     meshRef.current.position.x = pointer.x * 0.15 + 1.5;
-    meshRef.current.position.y = pointer.y * 0.15 - 0.5;
+    meshRef.current.position.y = pointer.y * 0.15 - 0.5 - scrollOffset * 0.2;
+    meshRef.current.scale.setScalar(0.8 - progress * 0.5);
   });
 
   return (
@@ -64,7 +71,7 @@ function FloatingTorus() {
           chromaticAberration={0.3}
           transparent
           opacity={0.8}
-          color="#8b5cf6"
+          color="#059669"
         />
       </mesh>
     </Float>
@@ -74,14 +81,17 @@ function FloatingTorus() {
 function FloatingOctahedron() {
   const meshRef = useRef<THREE.Mesh>(null);
   const { pointer } = useThree();
+  const { progress } = useScrollProgress();
 
   useFrame((state) => {
     if (!meshRef.current) return;
     const t = state.clock.getElapsedTime();
-    meshRef.current.rotation.x = Math.sin(t * 0.25 + 2) * 0.4;
-    meshRef.current.rotation.y = Math.sin(t * 0.35 + 2) * 0.4;
+    const scrollOffset = progress * 3;
+    meshRef.current.rotation.x = Math.sin(t * 0.25 + 2) * 0.4 + progress * 0.8;
+    meshRef.current.rotation.y = Math.sin(t * 0.35 + 2) * 0.4 + progress * 1.2;
     meshRef.current.position.x = pointer.x * 0.1 - 1.8;
-    meshRef.current.position.y = pointer.y * 0.1 + 1;
+    meshRef.current.position.y = pointer.y * 0.1 + 1 - scrollOffset * 0.25;
+    meshRef.current.scale.setScalar(0.6 - progress * 0.4);
   });
 
   return (
@@ -89,8 +99,8 @@ function FloatingOctahedron() {
       <mesh ref={meshRef} scale={0.6}>
         <octahedronGeometry args={[1, 0]} />
         <meshPhysicalMaterial
-          color="#f59e0b"
-          emissive="#f59e0b"
+          color="#34D399"
+          emissive="#34D399"
           emissiveIntensity={0.1}
           roughness={0.3}
           metalness={0.6}
@@ -104,7 +114,7 @@ function FloatingOctahedron() {
 
 function Particles3D() {
   const count = 200;
-  const positions = useMemo(() => {
+  const [positions] = useState(() => {
     const pos = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
       pos[i * 3] = (Math.random() - 0.5) * 20;
@@ -112,15 +122,18 @@ function Particles3D() {
       pos[i * 3 + 2] = (Math.random() - 0.5) * 20;
     }
     return pos;
-  }, [count]);
+  });
 
   const ref = useRef<THREE.Points>(null);
+  const { progress } = useScrollProgress();
 
   useFrame((state) => {
     if (!ref.current) return;
     const t = state.clock.getElapsedTime() * 0.05;
-    ref.current.rotation.y = t;
-    ref.current.rotation.x = Math.sin(t * 0.5) * 0.3;
+    ref.current.rotation.y = t + progress * 2;
+    ref.current.rotation.x = Math.sin(t * 0.5) * 0.3 + progress * 0.5;
+    const material = ref.current.material as THREE.PointsMaterial;
+    material.opacity = 0.4 - progress * 0.3;
   });
 
   return (
@@ -128,7 +141,7 @@ function Particles3D() {
       <bufferGeometry>
         <bufferAttribute args={[positions, 3]} attach="attributes-position" />
       </bufferGeometry>
-      <pointsMaterial size={0.03} color="#8b5cf6" transparent opacity={0.4} sizeAttenuation />
+      <pointsMaterial size={0.03} color="#059669" transparent opacity={0.4} sizeAttenuation />
     </points>
   );
 }
@@ -138,8 +151,8 @@ function SceneContent() {
     <>
       <ambientLight intensity={0.5} />
       <directionalLight position={[5, 5, 5]} intensity={0.8} />
-      <directionalLight position={[-5, -5, -5]} intensity={0.3} color="#8b5cf6" />
-      <pointLight position={[0, 0, 5]} intensity={0.5} color="#06b6d4" />
+      <directionalLight position={[-5, -5, -5]} intensity={0.3} color="#059669" />
+      <pointLight position={[0, 0, 5]} intensity={0.5} color="#10B981" />
       <FloatingIcosahedron />
       <FloatingTorus />
       <FloatingOctahedron />

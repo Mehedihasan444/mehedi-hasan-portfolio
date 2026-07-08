@@ -1,0 +1,993 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - main [ref=e4]:
+      - main [ref=e5]:
+        - generic [ref=e8]:
+          - generic [ref=e14]:
+            - generic [ref=e15]:
+              - generic [ref=e18]:
+                - button "21st logo" [ref=e20]:
+                  - generic [ref=e21]:
+                    - img "21st logo" [ref=e22]
+                    - img
+                - button "Close sidebar" [ref=e30] [cursor=pointer]:
+                  - img
+              - button "Components" [ref=e33] [cursor=pointer]:
+                - img [ref=e34]
+                - generic [ref=e36]: Components
+              - generic [ref=e39]:
+                - img
+                - textbox "Search components" [ref=e40] [cursor=pointer]
+                - generic:
+                  - generic: /
+            - generic [ref=e45]:
+              - generic [ref=e46]:
+                - link "Featured" [ref=e47] [cursor=pointer]:
+                  - /url: /community/components/featured
+                  - img [ref=e48]
+                  - generic [ref=e51]: Featured
+                - link "Newest" [ref=e52] [cursor=pointer]:
+                  - /url: /community/components/week/2026-W27
+                  - img [ref=e53]
+                  - generic [ref=e56]: Newest
+                - link "Top Authors" [ref=e57] [cursor=pointer]:
+                  - /url: /community/authors
+                  - img [ref=e58]
+                  - generic [ref=e63]: Top Authors
+              - generic [ref=e64]:
+                - heading "Marketing Blocks" [level=3] [ref=e66]
+                - generic [ref=e67]:
+                  - link "Announcements 10" [ref=e68] [cursor=pointer]:
+                    - /url: /community/components/s/announcement
+                    - generic [ref=e69]: Announcements
+                    - generic [ref=e70]: "10"
+                  - link "Backgrounds 33" [ref=e71] [cursor=pointer]:
+                    - /url: /community/components/s/background
+                    - generic [ref=e72]: Backgrounds
+                    - generic [ref=e73]: "33"
+                  - link "Borders 12" [ref=e74] [cursor=pointer]:
+                    - /url: /community/components/s/border
+                    - generic [ref=e75]: Borders
+                    - generic [ref=e76]: "12"
+                  - link "Calls to Action 34" [ref=e77] [cursor=pointer]:
+                    - /url: /community/components/s/call-to-action
+                    - generic [ref=e78]: Calls to Action
+                    - generic [ref=e79]: "34"
+                  - link "Clients 16" [ref=e80] [cursor=pointer]:
+                    - /url: /community/components/s/clients
+                    - generic [ref=e81]: Clients
+                    - generic [ref=e82]: "16"
+                  - link "Comparisons 6" [ref=e83] [cursor=pointer]:
+                    - /url: /community/components/s/comparison
+                    - generic [ref=e84]: Comparisons
+                    - generic [ref=e85]: "6"
+                  - link "Docks 6" [ref=e86] [cursor=pointer]:
+                    - /url: /community/components/s/dock
+                    - generic [ref=e87]: Docks
+                    - generic [ref=e88]: "6"
+                  - link "Features 36" [ref=e89] [cursor=pointer]:
+                    - /url: /community/components/s/features
+                    - generic [ref=e90]: Features
+                    - generic [ref=e91]: "36"
+                  - link "Footers 14" [ref=e92] [cursor=pointer]:
+                    - /url: /community/components/s/footer
+                    - generic [ref=e93]: Footers
+                    - generic [ref=e94]: "14"
+                  - link "Heroes 73" [ref=e95] [cursor=pointer]:
+                    - /url: /community/components/s/hero
+                    - generic [ref=e96]: Heroes
+                    - generic [ref=e97]: "73"
+                  - link "Hooks 31" [ref=e98] [cursor=pointer]:
+                    - /url: /community/components/s/hook
+                    - generic [ref=e99]: Hooks
+                    - generic [ref=e100]: "31"
+                  - link "Images 26" [ref=e101] [cursor=pointer]:
+                    - /url: /community/components/s/image
+                    - generic [ref=e102]: Images
+                    - generic [ref=e103]: "26"
+                  - link "Maps 2" [ref=e104] [cursor=pointer]:
+                    - /url: /community/components/s/map
+                    - generic [ref=e105]: Maps
+                    - generic [ref=e106]: "2"
+                  - link "Navigation Menus 11" [ref=e107] [cursor=pointer]:
+                    - /url: /community/components/s/navbar-navigation
+                    - generic [ref=e108]: Navigation Menus
+                    - generic [ref=e109]: "11"
+                  - link "Pricing Sections 17" [ref=e110] [cursor=pointer]:
+                    - /url: /community/components/s/pricing-section
+                    - generic [ref=e111]: Pricing Sections
+                    - generic [ref=e112]: "17"
+                  - link "Scroll Areas 24" [ref=e113] [cursor=pointer]:
+                    - /url: /community/components/s/scroll-area
+                    - generic [ref=e114]: Scroll Areas
+                    - generic [ref=e115]: "24"
+                  - link "Shaders 15" [ref=e116] [cursor=pointer]:
+                    - /url: /community/components/s/shader
+                    - generic [ref=e117]: Shaders
+                    - generic [ref=e118]: "15"
+                  - link "Testimonials 15" [ref=e119] [cursor=pointer]:
+                    - /url: /community/components/s/testimonials
+                    - generic [ref=e120]: Testimonials
+                    - generic [ref=e121]: "15"
+                  - link "Texts 58" [ref=e122] [cursor=pointer]:
+                    - /url: /community/components/s/text
+                    - generic [ref=e123]: Texts
+                    - generic [ref=e124]: "58"
+                  - link "Videos 9" [ref=e125] [cursor=pointer]:
+                    - /url: /community/components/s/video
+                    - generic [ref=e126]: Videos
+                    - generic [ref=e127]: "9"
+              - generic [ref=e128]:
+                - heading "UI Components" [level=3] [ref=e130]
+                - generic [ref=e131]:
+                  - link "Accordions 40" [ref=e132] [cursor=pointer]:
+                    - /url: /community/components/s/accordion
+                    - generic [ref=e133]: Accordions
+                    - generic [ref=e134]: "40"
+                  - link "AI Chats 30" [ref=e135] [cursor=pointer]:
+                    - /url: /community/components/s/ai-chat
+                    - generic [ref=e136]: AI Chats
+                    - generic [ref=e137]: "30"
+                  - link "Alerts 23" [ref=e138] [cursor=pointer]:
+                    - /url: /community/components/s/alert
+                    - generic [ref=e139]: Alerts
+                    - generic [ref=e140]: "23"
+                  - link "Avatars 17" [ref=e141] [cursor=pointer]:
+                    - /url: /community/components/s/avatar
+                    - generic [ref=e142]: Avatars
+                    - generic [ref=e143]: "17"
+                  - link "Badges 25" [ref=e144] [cursor=pointer]:
+                    - /url: /community/components/s/badge
+                    - generic [ref=e145]: Badges
+                    - generic [ref=e146]: "25"
+                  - link "Buttons 130" [ref=e147] [cursor=pointer]:
+                    - /url: /community/components/s/button
+                    - generic [ref=e148]: Buttons
+                    - generic [ref=e149]: "130"
+                  - link "Calendars 34" [ref=e150] [cursor=pointer]:
+                    - /url: /community/components/s/calendar
+                    - generic [ref=e151]: Calendars
+                    - generic [ref=e152]: "34"
+                  - link "Cards 79" [ref=e153] [cursor=pointer]:
+                    - /url: /community/components/s/card
+                    - generic [ref=e154]: Cards
+                    - generic [ref=e155]: "79"
+                  - link "Carousels 16" [ref=e156] [cursor=pointer]:
+                    - /url: /community/components/s/carousel
+                    - generic [ref=e157]: Carousels
+                    - generic [ref=e158]: "16"
+                  - link "Checkboxes 19" [ref=e159] [cursor=pointer]:
+                    - /url: /community/components/s/checkbox
+                    - generic [ref=e160]: Checkboxes
+                    - generic [ref=e161]: "19"
+                  - link "Date Pickers 12" [ref=e162] [cursor=pointer]:
+                    - /url: /community/components/s/date-picker
+                    - generic [ref=e163]: Date Pickers
+                    - generic [ref=e164]: "12"
+                  - link "Dialogs / Modals 37" [ref=e165] [cursor=pointer]:
+                    - /url: /community/components/s/modal-dialog
+                    - generic [ref=e166]: Dialogs / Modals
+                    - generic [ref=e167]: "37"
+                  - link "Dropdowns 25" [ref=e168] [cursor=pointer]:
+                    - /url: /community/components/s/dropdown
+                    - generic [ref=e169]: Dropdowns
+                    - generic [ref=e170]: "25"
+                  - link "Empty States 1" [ref=e171] [cursor=pointer]:
+                    - /url: /community/components/s/empty-state
+                    - generic [ref=e172]: Empty States
+                    - generic [ref=e173]: "1"
+                  - link "File Trees 2" [ref=e174] [cursor=pointer]:
+                    - /url: /community/components/s/file-tree
+                    - generic [ref=e175]: File Trees
+                    - generic [ref=e176]: "2"
+                  - link "File Uploads 7" [ref=e177] [cursor=pointer]:
+                    - /url: /community/components/s/upload-download
+                    - generic [ref=e178]: File Uploads
+                    - generic [ref=e179]: "7"
+                  - link "Forms 23" [ref=e180] [cursor=pointer]:
+                    - /url: /community/components/s/form
+                    - generic [ref=e181]: Forms
+                    - generic [ref=e182]: "23"
+                  - link "Icons 10" [ref=e183] [cursor=pointer]:
+                    - /url: /community/components/s/icons
+                    - generic [ref=e184]: Icons
+                    - generic [ref=e185]: "10"
+                  - link "Inputs 102" [ref=e186] [cursor=pointer]:
+                    - /url: /community/components/s/input
+                    - generic [ref=e187]: Inputs
+                    - generic [ref=e188]: "102"
+                  - link "Links 13" [ref=e189] [cursor=pointer]:
+                    - /url: /community/components/s/link
+                    - generic [ref=e190]: Links
+                    - generic [ref=e191]: "13"
+                  - link "Menus 18" [ref=e192] [cursor=pointer]:
+                    - /url: /community/components/s/menu
+                    - generic [ref=e193]: Menus
+                    - generic [ref=e194]: "18"
+                  - link "Notifications 5" [ref=e195] [cursor=pointer]:
+                    - /url: /community/components/s/notification
+                    - generic [ref=e196]: Notifications
+                    - generic [ref=e197]: "5"
+                  - link "Numbers 18" [ref=e198] [cursor=pointer]:
+                    - /url: /community/components/s/number
+                    - generic [ref=e199]: Numbers
+                    - generic [ref=e200]: "18"
+                  - link "Paginations 20" [ref=e201] [cursor=pointer]:
+                    - /url: /community/components/s/pagination
+                    - generic [ref=e202]: Paginations
+                    - generic [ref=e203]: "20"
+                  - link "Popovers 23" [ref=e204] [cursor=pointer]:
+                    - /url: /community/components/s/popover
+                    - generic [ref=e205]: Popovers
+                    - generic [ref=e206]: "23"
+                  - link "Radio Groups 22" [ref=e207] [cursor=pointer]:
+                    - /url: /community/components/s/radio-group
+                    - generic [ref=e208]: Radio Groups
+                    - generic [ref=e209]: "22"
+                  - link "Selects 62" [ref=e210] [cursor=pointer]:
+                    - /url: /community/components/s/select
+                    - generic [ref=e211]: Selects
+                    - generic [ref=e212]: "62"
+                  - link "Sidebars 10" [ref=e213] [cursor=pointer]:
+                    - /url: /community/components/s/sidebar
+                    - generic [ref=e214]: Sidebars
+                    - generic [ref=e215]: "10"
+                  - link "Sign Ins 4" [ref=e216] [cursor=pointer]:
+                    - /url: /community/components/s/sign-in
+                    - generic [ref=e217]: Sign Ins
+                    - generic [ref=e218]: "4"
+                  - link "Sign ups 4" [ref=e219] [cursor=pointer]:
+                    - /url: /community/components/s/registration-signup
+                    - generic [ref=e220]: Sign ups
+                    - generic [ref=e221]: "4"
+                  - link "Sliders 45" [ref=e222] [cursor=pointer]:
+                    - /url: /community/components/s/slider
+                    - generic [ref=e223]: Sliders
+                    - generic [ref=e224]: "45"
+                  - link "Spinner Loaders 21" [ref=e225] [cursor=pointer]:
+                    - /url: /community/components/s/spinner-loader
+                    - generic [ref=e226]: Spinner Loaders
+                    - generic [ref=e227]: "21"
+                  - link "Tables 30" [ref=e228] [cursor=pointer]:
+                    - /url: /community/components/s/table
+                    - generic [ref=e229]: Tables
+                    - generic [ref=e230]: "30"
+                  - link "Tabs 38" [ref=e231] [cursor=pointer]:
+                    - /url: /community/components/s/tabs
+                    - generic [ref=e232]: Tabs
+                    - generic [ref=e233]: "38"
+                  - link "Tags 6" [ref=e234] [cursor=pointer]:
+                    - /url: /community/components/s/chip-tag
+                    - generic [ref=e235]: Tags
+                    - generic [ref=e236]: "6"
+                  - link "Text Areas 22" [ref=e237] [cursor=pointer]:
+                    - /url: /community/components/s/textarea
+                    - generic [ref=e238]: Text Areas
+                    - generic [ref=e239]: "22"
+                  - link "Toasts 2" [ref=e240] [cursor=pointer]:
+                    - /url: /community/components/s/toast
+                    - generic [ref=e241]: Toasts
+                    - generic [ref=e242]: "2"
+                  - link "Toggles 12" [ref=e243] [cursor=pointer]:
+                    - /url: /community/components/s/toggle
+                    - generic [ref=e244]: Toggles
+                    - generic [ref=e245]: "12"
+                  - link "Tooltips 28" [ref=e246] [cursor=pointer]:
+                    - /url: /community/components/s/tooltip
+                    - generic [ref=e247]: Tooltips
+                    - generic [ref=e248]: "28"
+            - generic [ref=e250]:
+              - generic [ref=e251]:
+                - button "Toggle theme" [ref=e252] [cursor=pointer]:
+                  - img
+                - button "Settings" [ref=e253] [cursor=pointer]:
+                  - img
+              - button "Log in" [ref=e255] [cursor=pointer]:
+                - generic [ref=e256]: Log in
+          - generic [ref=e258]:
+            - heading "UI Components for React & Next.js" [level=1] [ref=e259]
+            - paragraph [ref=e260]: Explore 38 essential UI components for React and Tailwind CSS, covering all your Next.js design and layout needs.
+            - generic [ref=e262]:
+              - generic [ref=e264]:
+                - generic [ref=e266]:
+                  - button "Components" [ref=e267] [cursor=pointer]
+                  - generic [ref=e268]: /
+                  - generic [ref=e269]: ui
+                - generic [ref=e270]:
+                  - generic:
+                    - button "Search":
+                      - img
+                      - generic: Search
+                      - generic:
+                        - img
+                        - generic: K
+                  - combobox [ref=e271]:
+                    - generic: Recommended
+                    - img [ref=e272]
+              - generic [ref=e276]:
+                - listitem [ref=e278]:
+                  - generic [ref=e279]:
+                    - link "Radial Orbital Timeline" [ref=e280] [cursor=pointer]:
+                      - /url: /@jatin-yadav05/components/radial-orbital-timeline
+                      - img "Radial Orbital Timeline" [ref=e281]
+                    - generic [ref=e282]:
+                      - link "Jatin Yadav" [ref=e283] [cursor=pointer]:
+                        - /url: /@jatin-yadav05
+                        - img "Jatin Yadav" [ref=e285]
+                      - paragraph [ref=e286]: Radial Orbital Timeline
+                      - button "5.3k" [ref=e287]:
+                        - img [ref=e288]
+                        - generic [ref=e291]: 5.3k
+                - listitem [ref=e293]:
+                  - generic [ref=e294]:
+                    - link "Animated AI Chat" [ref=e295] [cursor=pointer]:
+                      - /url: /@jatin-yadav05/components/animated-ai-chat
+                      - img "Animated AI Chat" [ref=e296]
+                    - generic [ref=e297]:
+                      - link "Jatin Yadav" [ref=e298] [cursor=pointer]:
+                        - /url: /@jatin-yadav05
+                        - img "Jatin Yadav" [ref=e300]
+                      - paragraph [ref=e301]: Animated AI Chat
+                      - button "1.2k" [ref=e302]:
+                        - img [ref=e303]
+                        - generic [ref=e306]: 1.2k
+                - listitem [ref=e308]:
+                  - generic [ref=e309]:
+                    - link "SpiralAnimation" [ref=e310] [cursor=pointer]:
+                      - /url: /@Kain0127/components/spiral-animation
+                      - img "SpiralAnimation" [ref=e311]
+                    - generic [ref=e312]:
+                      - link "KainXu" [ref=e313] [cursor=pointer]:
+                        - /url: /@Kain0127
+                        - img "KainXu" [ref=e315]
+                      - paragraph [ref=e316]: SpiralAnimation
+                      - button "1.9k" [ref=e317]:
+                        - img [ref=e318]
+                        - generic [ref=e321]: 1.9k
+                - listitem [ref=e323]:
+                  - generic [ref=e324]:
+                    - link "FlowButton" [ref=e325] [cursor=pointer]:
+                      - /url: /@Kain0127/components/flow-button
+                      - img "FlowButton" [ref=e326]
+                    - generic [ref=e327]:
+                      - link "KainXu" [ref=e328] [cursor=pointer]:
+                        - /url: /@Kain0127
+                        - img "KainXu" [ref=e330]
+                      - paragraph [ref=e331]: FlowButton
+                      - button "426" [ref=e332]:
+                        - img [ref=e333]
+                        - generic [ref=e336]: "426"
+                - listitem [ref=e338]:
+                  - generic [ref=e339]:
+                    - link "Commits Grid" [ref=e340] [cursor=pointer]:
+                      - /url: /@gonzalochale/components/commits-grid
+                      - img "Commits Grid" [ref=e341]
+                    - generic [ref=e342]:
+                      - link "gonzalo chalé" [ref=e343] [cursor=pointer]:
+                        - /url: /@gonzalochale
+                        - img "gonzalo chalé" [ref=e345]
+                      - paragraph [ref=e346]: Commits Grid
+                      - button "413" [ref=e347]:
+                        - img [ref=e348]
+                        - generic [ref=e351]: "413"
+                - listitem [ref=e353]:
+                  - generic [ref=e354]:
+                    - link "Magic Text" [ref=e355] [cursor=pointer]:
+                      - /url: /@hextaui/components/magic-text
+                      - img "Magic Text" [ref=e356]
+                    - generic [ref=e357]:
+                      - link "HextaUI" [ref=e358] [cursor=pointer]:
+                        - /url: /@hextaui
+                        - img "HextaUI" [ref=e360]
+                      - paragraph [ref=e361]: Magic Text
+                      - button "435" [ref=e362]:
+                        - img [ref=e363]
+                        - generic [ref=e366]: "435"
+                - listitem [ref=e368]:
+                  - generic [ref=e369]:
+                    - link "Parallax Cosmic Background" [ref=e370] [cursor=pointer]:
+                      - /url: /@easemize/components/parallax-cosmic-background
+                      - img "Parallax Cosmic Background" [ref=e371]
+                    - generic [ref=e372]:
+                      - link "Hossain Jahed" [ref=e373] [cursor=pointer]:
+                        - /url: /@easemize
+                        - img "Hossain Jahed" [ref=e375]
+                      - paragraph [ref=e376]: Parallax Cosmic Background
+                      - button "444" [ref=e377]:
+                        - img [ref=e378]
+                        - generic [ref=e381]: "444"
+                - listitem [ref=e383]:
+                  - generic [ref=e384]:
+                    - link "Gradient Card" [ref=e385] [cursor=pointer]:
+                      - /url: /@jatin-yadav05/components/gradient-card
+                      - img "Gradient Card" [ref=e386]
+                    - generic [ref=e387]:
+                      - link "Jatin Yadav" [ref=e388] [cursor=pointer]:
+                        - /url: /@jatin-yadav05
+                        - img "Jatin Yadav" [ref=e390]
+                      - paragraph [ref=e391]: Gradient Card
+                      - button "645" [ref=e392]:
+                        - img [ref=e393]
+                        - generic [ref=e396]: "645"
+                - listitem [ref=e398]:
+                  - generic [ref=e399]:
+                    - link "Ghost 404 page" [ref=e400] [cursor=pointer]:
+                      - /url: /@Kain0127/components/ghost-404-page
+                      - img "Ghost 404 page" [ref=e401]
+                    - generic [ref=e402]:
+                      - link "KainXu" [ref=e403] [cursor=pointer]:
+                        - /url: /@Kain0127
+                        - img "KainXu" [ref=e405]
+                      - paragraph [ref=e406]: Ghost 404 page
+                      - button "181" [ref=e407]:
+                        - img [ref=e408]
+                        - generic [ref=e411]: "181"
+                - listitem [ref=e413]:
+                  - generic [ref=e414]:
+                    - link "Animated Glow Card" [ref=e415] [cursor=pointer]:
+                      - /url: /@easemize/components/animated-glow-card
+                      - img "Animated Glow Card" [ref=e416]
+                    - generic [ref=e417]:
+                      - link "Hossain Jahed" [ref=e418] [cursor=pointer]:
+                        - /url: /@easemize
+                        - img "Hossain Jahed" [ref=e420]
+                      - paragraph [ref=e421]: Animated Glow Card
+                      - button "269" [ref=e422]:
+                        - img [ref=e423]
+                        - generic [ref=e426]: "269"
+                - listitem [ref=e428]:
+                  - generic [ref=e429]:
+                    - link "Dynamic Wave Canvas Background" [ref=e430] [cursor=pointer]:
+                      - /url: /@thanh/components/dynamic-wave-canvas-background
+                      - img "Dynamic Wave Canvas Background" [ref=e431]
+                    - generic [ref=e432]:
+                      - link "Le Thanh" [ref=e433] [cursor=pointer]:
+                        - /url: /@thanh
+                        - img "Le Thanh" [ref=e435]
+                      - paragraph [ref=e436]: Dynamic Wave Canvas Background
+                      - button "643" [ref=e437]:
+                        - img [ref=e438]
+                        - generic [ref=e441]: "643"
+                - listitem [ref=e443]:
+                  - generic [ref=e444]:
+                    - link "Moving Dot Card" [ref=e445] [cursor=pointer]:
+                      - /url: /@thanh/components/moving-dot-card
+                      - img "Moving Dot Card" [ref=e446]
+                    - generic [ref=e447]:
+                      - link "Le Thanh" [ref=e448] [cursor=pointer]:
+                        - /url: /@thanh
+                        - img "Le Thanh" [ref=e450]
+                      - paragraph [ref=e451]: Moving Dot Card
+                      - button "384" [ref=e452]:
+                        - img [ref=e453]
+                        - generic [ref=e456]: "384"
+                - listitem [ref=e458]:
+                  - generic [ref=e459]:
+                    - link "Animated Counter" [ref=e460] [cursor=pointer]:
+                      - /url: /@hextaui/components/animated-counter
+                      - img "Animated Counter" [ref=e461]
+                    - generic [ref=e462]:
+                      - link "HextaUI" [ref=e463] [cursor=pointer]:
+                        - /url: /@hextaui
+                        - img "HextaUI" [ref=e465]
+                      - paragraph [ref=e466]: Animated Counter
+                      - button "188" [ref=e467]:
+                        - img [ref=e468]
+                        - generic [ref=e471]: "188"
+                - listitem [ref=e473]:
+                  - generic [ref=e474]:
+                    - link "Text Particle" [ref=e475] [cursor=pointer]:
+                      - /url: /@aliimam/components/text-particle
+                      - img "Text Particle" [ref=e476]
+                    - generic [ref=e477]:
+                      - link "Ali Imam" [ref=e478] [cursor=pointer]:
+                        - /url: /@aliimam
+                        - img "Ali Imam" [ref=e480]
+                      - paragraph [ref=e481]: Text Particle
+                      - button "310" [ref=e482]:
+                        - img [ref=e483]
+                        - generic [ref=e486]: "310"
+                - listitem [ref=e488]:
+                  - generic [ref=e489]:
+                    - link "Interactive Neural Vortex Background" [ref=e490] [cursor=pointer]:
+                      - /url: /@thanh/components/interactive-neural-vortex-background
+                      - img "Interactive Neural Vortex Background" [ref=e491]
+                    - generic [ref=e492]:
+                      - link "Le Thanh" [ref=e493] [cursor=pointer]:
+                        - /url: /@thanh
+                        - img "Le Thanh" [ref=e495]
+                      - paragraph [ref=e496]: Interactive Neural Vortex Background
+                      - button "479" [ref=e497]:
+                        - img [ref=e498]
+                        - generic [ref=e501]: "479"
+                - listitem [ref=e503]:
+                  - generic [ref=e504]:
+                    - link "LiquidRadio" [ref=e505] [cursor=pointer]:
+                      - /url: /@Kain0127/components/liquid-radio
+                      - img "LiquidRadio" [ref=e506]
+                    - generic [ref=e507]:
+                      - link "KainXu" [ref=e508] [cursor=pointer]:
+                        - /url: /@Kain0127
+                        - img "KainXu" [ref=e510]
+                      - paragraph [ref=e511]: LiquidRadio
+                      - button "442" [ref=e512]:
+                        - img [ref=e513]
+                        - generic [ref=e516]: "442"
+                - listitem [ref=e518]:
+                  - generic [ref=e519]:
+                    - link "AI Chat Image Generation" [ref=e520] [cursor=pointer]:
+                      - /url: /@gonzalochale/components/ai-chat-image-generation-1
+                      - img "AI Chat Image Generation" [ref=e521]
+                    - generic [ref=e522]:
+                      - link "gonzalo chalé" [ref=e523] [cursor=pointer]:
+                        - /url: /@gonzalochale
+                        - img "gonzalo chalé" [ref=e525]
+                      - paragraph [ref=e526]: AI Chat Image Generation
+                      - button "384" [ref=e527]:
+                        - img [ref=e528]
+                        - generic [ref=e531]: "384"
+                - listitem [ref=e533]:
+                  - generic [ref=e534]:
+                    - link "Simple UI" [ref=e535] [cursor=pointer]:
+                      - /url: /@thanh/components/simple-ui
+                      - img "Simple UI" [ref=e536]
+                    - generic [ref=e537]:
+                      - link "Le Thanh" [ref=e538] [cursor=pointer]:
+                        - /url: /@thanh
+                        - img "Le Thanh" [ref=e540]
+                      - paragraph [ref=e541]: Simple UI
+                      - button "346" [ref=e542]:
+                        - img [ref=e543]
+                        - generic [ref=e546]: "346"
+                - listitem [ref=e548]:
+                  - generic [ref=e549]:
+                    - link "BlurTextAnimation" [ref=e550] [cursor=pointer]:
+                      - /url: /@Kain0127/components/blur-text-animation
+                      - img "BlurTextAnimation" [ref=e551]
+                    - generic [ref=e552]:
+                      - link "KainXu" [ref=e553] [cursor=pointer]:
+                        - /url: /@Kain0127
+                        - img "KainXu" [ref=e555]
+                      - paragraph [ref=e556]: BlurTextAnimation
+                      - button "339" [ref=e557]:
+                        - img [ref=e558]
+                        - generic [ref=e561]: "339"
+                - listitem [ref=e563]:
+                  - generic [ref=e564]:
+                    - link "FileUpload" [ref=e565] [cursor=pointer]:
+                      - /url: /@flower0wine/components/file-upload
+                      - img "FileUpload" [ref=e566]
+                    - generic [ref=e567]:
+                      - link "花间酒" [ref=e568] [cursor=pointer]:
+                        - /url: /@flower0wine
+                        - img "花间酒" [ref=e570]
+                      - paragraph [ref=e571]: FileUpload
+                      - button "28" [ref=e572]:
+                        - img [ref=e573]
+                        - generic [ref=e576]: "28"
+                - listitem [ref=e578]:
+                  - generic [ref=e579]:
+                    - link "Spotify Card" [ref=e580] [cursor=pointer]:
+                      - /url: /@jatin-yadav05/components/spotify-card/spotify-card
+                      - img "Spotify Card" [ref=e581]
+                    - generic [ref=e582]:
+                      - link "Jatin Yadav" [ref=e583] [cursor=pointer]:
+                        - /url: /@jatin-yadav05
+                        - img "Jatin Yadav" [ref=e585]
+                      - paragraph [ref=e586]: Spotify Card
+                      - button "178" [ref=e587]:
+                        - img [ref=e588]
+                        - generic [ref=e591]: "178"
+                - listitem [ref=e593]:
+                  - generic [ref=e594]:
+                    - link "Thanos snap effect" [ref=e595] [cursor=pointer]:
+                      - /url: /@bart-krakowski/components/thanos-snap-effect
+                      - img "Thanos snap effect" [ref=e596]
+                    - generic [ref=e597]:
+                      - link "Bartłomiej Krakowski" [ref=e598] [cursor=pointer]:
+                        - /url: /@bart-krakowski
+                        - img "Bartłomiej Krakowski" [ref=e600]
+                      - paragraph [ref=e601]: Thanos snap effect
+                      - button "244" [ref=e602]:
+                        - img [ref=e603]
+                        - generic [ref=e606]: "244"
+                - listitem [ref=e608]:
+                  - generic [ref=e609]:
+                    - link "Sign In" [ref=e610] [cursor=pointer]:
+                      - /url: /@muditgoel1512/components/sign-in/sign-in
+                      - img "Sign In" [ref=e611]
+                    - generic [ref=e612]:
+                      - link "Mudit Goel" [ref=e613] [cursor=pointer]:
+                        - /url: /@muditgoel1512
+                        - img "Mudit Goel" [ref=e615]
+                      - paragraph [ref=e616]: Sign In
+                      - button "72" [ref=e617]:
+                        - img [ref=e618]
+                        - generic [ref=e621]: "72"
+                - listitem [ref=e623]:
+                  - generic [ref=e624]:
+                    - link "Mini Calendar" [ref=e625] [cursor=pointer]:
+                      - /url: /@hardik0110/components/mini-calendar
+                      - img "Mini Calendar" [ref=e626]
+                    - generic [ref=e627]:
+                      - link "Hardik Kubavat" [ref=e628] [cursor=pointer]:
+                        - /url: /@hardik0110
+                        - img "Hardik Kubavat" [ref=e630]
+                      - paragraph [ref=e631]: Mini Calendar
+                      - button "111" [ref=e632]:
+                        - img [ref=e633]
+                        - generic [ref=e636]: "111"
+                - listitem [ref=e638]:
+                  - generic [ref=e639]:
+                    - link "Interactive Particle Typography" [ref=e640] [cursor=pointer]:
+                      - /url: /@thanh/components/interactive-particle-typography-1
+                      - img "Interactive Particle Typography" [ref=e641]
+                    - generic [ref=e642]:
+                      - link "Le Thanh" [ref=e643] [cursor=pointer]:
+                        - /url: /@thanh
+                        - img "Le Thanh" [ref=e645]
+                      - paragraph [ref=e646]: Interactive Particle Typography
+                      - button "147" [ref=e647]:
+                        - img [ref=e648]
+                        - generic [ref=e651]: "147"
+                - listitem [ref=e653]:
+                  - generic [ref=e654]:
+                    - link "Dotted Vignette background" [ref=e655] [cursor=pointer]:
+                      - /url: /@easemize/components/dotted-vignette-background
+                      - img "Dotted Vignette background" [ref=e656]
+                    - generic [ref=e657]:
+                      - link "Hossain Jahed" [ref=e658] [cursor=pointer]:
+                        - /url: /@easemize
+                        - img "Hossain Jahed" [ref=e660]
+                      - paragraph [ref=e661]: Dotted Vignette background
+                      - button "105" [ref=e662]:
+                        - img [ref=e663]
+                        - generic [ref=e666]: "105"
+                - listitem [ref=e668]:
+                  - generic [ref=e669]:
+                    - link "ghost 404 page" [ref=e670] [cursor=pointer]:
+                      - /url: /@Kain0127/components/ghost-404-page-1
+                      - img "ghost 404 page" [ref=e671]
+                    - generic [ref=e672]:
+                      - link "KainXu" [ref=e673] [cursor=pointer]:
+                        - /url: /@Kain0127
+                        - img "KainXu" [ref=e675]
+                      - paragraph [ref=e676]: ghost 404 page
+                      - button "29" [ref=e677]:
+                        - img [ref=e678]
+                        - generic [ref=e681]: "29"
+                - listitem [ref=e683]:
+                  - generic [ref=e684]:
+                    - link "Stacked Activity Cards" [ref=e685] [cursor=pointer]:
+                      - /url: /@spydiecy/components/stacked-activity-cards
+                      - img "Stacked Activity Cards" [ref=e686]
+                    - generic [ref=e687]:
+                      - link "Tanishq" [ref=e688] [cursor=pointer]:
+                        - /url: /@spydiecy
+                        - img "Tanishq" [ref=e690]
+                      - paragraph [ref=e691]: Stacked Activity Cards
+                      - button "238" [ref=e692]:
+                        - img [ref=e693]
+                        - generic [ref=e696]: "238"
+                - listitem [ref=e698]:
+                  - generic [ref=e699]:
+                    - link "Animated Blur Blob background" [ref=e700] [cursor=pointer]:
+                      - /url: /@easemize/components/animated-blur-blob-background
+                      - img "Animated Blur Blob background" [ref=e701]
+                    - generic [ref=e702]:
+                      - link "Hossain Jahed" [ref=e703] [cursor=pointer]:
+                        - /url: /@easemize
+                        - img "Hossain Jahed" [ref=e705]
+                      - paragraph [ref=e706]: Animated Blur Blob background
+                      - button "66" [ref=e707]:
+                        - img [ref=e708]
+                        - generic [ref=e711]: "66"
+                - listitem [ref=e713]:
+                  - generic [ref=e714]:
+                    - link "Parallax Scrolling Effect" [ref=e715] [cursor=pointer]:
+                      - /url: /@thanh/components/parallax-scrolling-effect
+                      - img "Parallax Scrolling Effect" [ref=e716]
+                    - generic [ref=e717]:
+                      - link "Le Thanh" [ref=e718] [cursor=pointer]:
+                        - /url: /@thanh
+                        - img "Le Thanh" [ref=e720]
+                      - paragraph [ref=e721]: Parallax Scrolling Effect
+                      - button "55" [ref=e722]:
+                        - img [ref=e723]
+                        - generic [ref=e726]: "55"
+                - listitem [ref=e728]:
+                  - generic [ref=e729]:
+                    - link "NeonRGBTextEffect" [ref=e730] [cursor=pointer]:
+                      - /url: /@Kain0127/components/neon-rgbtext-effect
+                      - img "NeonRGBTextEffect" [ref=e731]
+                    - generic [ref=e732]:
+                      - link "KainXu" [ref=e733] [cursor=pointer]:
+                        - /url: /@Kain0127
+                        - img "KainXu" [ref=e735]
+                      - paragraph [ref=e736]: NeonRGBTextEffect
+                      - button "93" [ref=e737]:
+                        - img [ref=e738]
+                        - generic [ref=e741]: "93"
+                - listitem [ref=e743]:
+                  - generic [ref=e744]:
+                    - link "Dynamic background" [ref=e745] [cursor=pointer]:
+                      - /url: /@Frontlyt/components/dynamic-background
+                      - img "Dynamic background" [ref=e746]
+                    - generic [ref=e747]:
+                      - link "Frontlyt" [ref=e748] [cursor=pointer]:
+                        - /url: /@Frontlyt
+                        - img "Frontlyt" [ref=e750]
+                      - paragraph [ref=e751]: Dynamic background
+                      - button "34" [ref=e752]:
+                        - img [ref=e753]
+                        - generic [ref=e756]: "34"
+                - listitem [ref=e758]:
+                  - generic [ref=e759]:
+                    - link "Animated Theme Toggler" [ref=e760] [cursor=pointer]:
+                      - /url: /@ruixenui/components/animated-theme-toggler
+                      - img "Animated Theme Toggler" [ref=e761]
+                    - generic [ref=e762]:
+                      - link "Ruixen UI" [ref=e763] [cursor=pointer]:
+                        - /url: /@ruixenui
+                        - img "Ruixen UI" [ref=e765]
+                      - paragraph [ref=e766]: Animated Theme Toggler
+                      - button "637" [ref=e767]:
+                        - img [ref=e768]
+                        - generic [ref=e771]: "637"
+                - listitem [ref=e773]:
+                  - generic [ref=e774]:
+                    - link "Switch" [ref=e775] [cursor=pointer]:
+                      - /url: /@reapollo/components/interfaces-switch/with-form
+                      - img "Switch" [ref=e776]
+                    - generic [ref=e777]:
+                      - link "David Hakobyan" [ref=e778] [cursor=pointer]:
+                        - /url: /@reapollo
+                        - img "David Hakobyan" [ref=e780]
+                      - paragraph [ref=e781]: Switch
+                      - button "4" [ref=e782]:
+                        - img [ref=e783]
+                        - generic [ref=e786]: "4"
+                - listitem [ref=e788]:
+                  - generic [ref=e789]:
+                    - link "Switch" [ref=e790] [cursor=pointer]:
+                      - /url: /@reapollo/components/interfaces-switch
+                      - img "Switch" [ref=e791]
+                    - generic [ref=e792]:
+                      - link "David Hakobyan" [ref=e793] [cursor=pointer]:
+                        - /url: /@reapollo
+                        - img "David Hakobyan" [ref=e795]
+                      - paragraph [ref=e796]: Switch
+                      - img [ref=e799]
+                      - button "120" [ref=e803]:
+                        - img [ref=e804]
+                        - generic [ref=e807]: "120"
+                - listitem [ref=e809]:
+                  - generic [ref=e810]:
+                    - link "Interactive Animated Arrow Icon" [ref=e811] [cursor=pointer]:
+                      - /url: /@ringlabs/components/interactive-animated-arrow-icon
+                      - img "Interactive Animated Arrow Icon" [ref=e812]
+                    - generic [ref=e813]:
+                      - link "ring labs" [ref=e814] [cursor=pointer]:
+                        - /url: /@ringlabs
+                        - img "ring labs" [ref=e816]
+                      - paragraph [ref=e817]: Interactive Animated Arrow Icon
+                      - button "20" [ref=e818]:
+                        - img [ref=e819]
+                        - generic [ref=e822]: "20"
+                - listitem [ref=e824]:
+                  - generic [ref=e825]:
+                    - link "MultiSelect" [ref=e826] [cursor=pointer]:
+                      - /url: /@flower0wine/components/multi-select
+                      - img "MultiSelect" [ref=e827]
+                    - generic [ref=e828]:
+                      - link "花间酒" [ref=e829] [cursor=pointer]:
+                        - /url: /@flower0wine
+                        - img "花间酒" [ref=e831]
+                      - paragraph [ref=e832]: MultiSelect
+                      - button "18" [ref=e833]:
+                        - img [ref=e834]
+                        - generic [ref=e837]: "18"
+                - listitem [ref=e839]:
+                  - generic [ref=e840]:
+                    - link "AuroraCard" [ref=e841] [cursor=pointer]:
+                      - /url: /@Kain0127/components/aurora-card
+                      - img "AuroraCard" [ref=e842]
+                    - generic [ref=e843]:
+                      - link "KainXu" [ref=e844] [cursor=pointer]:
+                        - /url: /@Kain0127
+                        - img "KainXu" [ref=e846]
+                      - paragraph [ref=e847]: AuroraCard
+                      - button "61" [ref=e848]:
+                        - img [ref=e849]
+                        - generic [ref=e852]: "61"
+                - listitem [ref=e854]:
+                  - generic [ref=e855]:
+                    - link "Spinning Arc Logo with Gradient Text" [ref=e856] [cursor=pointer]:
+                      - /url: /@thanh/components/spinning-arc-logo-with-gradient-text-1
+                      - img "Spinning Arc Logo with Gradient Text" [ref=e857]
+                    - generic [ref=e858]:
+                      - link "Le Thanh" [ref=e859] [cursor=pointer]:
+                        - /url: /@thanh
+                        - img "Le Thanh" [ref=e861]
+                      - paragraph [ref=e862]: Spinning Arc Logo with Gradient Text
+                      - button "21" [ref=e863]:
+                        - img [ref=e864]
+                        - generic [ref=e867]: "21"
+                - listitem [ref=e869]:
+                  - generic [ref=e870]:
+                    - link "Triangles Falling" [ref=e871] [cursor=pointer]:
+                      - /url: /@thanh/components/triangles-falling
+                      - img "Triangles Falling" [ref=e872]
+                    - generic [ref=e873]:
+                      - link "Le Thanh" [ref=e874] [cursor=pointer]:
+                        - /url: /@thanh
+                        - img "Le Thanh" [ref=e876]
+                      - paragraph [ref=e877]: Triangles Falling
+                      - button "36" [ref=e878]:
+                        - img [ref=e879]
+                        - generic [ref=e882]: "36"
+                - listitem [ref=e884]:
+                  - generic [ref=e885]:
+                    - link "Field" [ref=e886] [cursor=pointer]:
+                      - /url: /@reapollo/components/interfaces-field/complex-form
+                      - img "Field" [ref=e887]
+                    - generic [ref=e888]:
+                      - link "David Hakobyan" [ref=e889] [cursor=pointer]:
+                        - /url: /@reapollo
+                        - img "David Hakobyan" [ref=e891]
+                      - paragraph [ref=e892]: Field
+                      - button "27" [ref=e893]:
+                        - img [ref=e894]
+                        - generic [ref=e897]: "27"
+                - listitem [ref=e899]:
+                  - generic [ref=e900]:
+                    - link "Field" [ref=e901] [cursor=pointer]:
+                      - /url: /@reapollo/components/interfaces-field/error-state
+                      - img "Field" [ref=e902]
+                    - generic [ref=e903]:
+                      - link "David Hakobyan" [ref=e904] [cursor=pointer]:
+                        - /url: /@reapollo
+                        - img "David Hakobyan" [ref=e906]
+                      - paragraph [ref=e907]: Field
+                      - button "5" [ref=e908]:
+                        - img [ref=e909]
+                        - generic [ref=e912]: "5"
+                - listitem [ref=e914]:
+                  - generic [ref=e915]:
+                    - link "Field" [ref=e916] [cursor=pointer]:
+                      - /url: /@reapollo/components/interfaces-field/simple-field
+                      - img "Field" [ref=e917]
+                    - generic [ref=e918]:
+                      - link "David Hakobyan" [ref=e919] [cursor=pointer]:
+                        - /url: /@reapollo
+                        - img "David Hakobyan" [ref=e921]
+                      - paragraph [ref=e922]: Field
+                      - button "1" [ref=e923]:
+                        - img [ref=e924]
+                        - generic [ref=e927]: "1"
+                - listitem [ref=e929]:
+                  - generic [ref=e930]:
+                    - link "HeroUI Button" [ref=e931] [cursor=pointer]:
+                      - /url: /@hero_ui/components/heroui-button
+                      - img "HeroUI Button" [ref=e932]
+                    - generic [ref=e933]:
+                      - link "Hero Ui" [ref=e934] [cursor=pointer]:
+                        - /url: /@hero_ui
+                        - img "Hero Ui" [ref=e936]
+                      - paragraph [ref=e937]: HeroUI Button
+                      - button "21" [ref=e938]:
+                        - img [ref=e939]
+                        - generic [ref=e942]: "21"
+                - listitem [ref=e944]:
+                  - generic [ref=e945]:
+                    - link "ButtonGroup" [ref=e946] [cursor=pointer]:
+                      - /url: /@flower0wine/components/button-group
+                      - img "ButtonGroup" [ref=e947]
+                    - generic [ref=e948]:
+                      - link "花间酒" [ref=e949] [cursor=pointer]:
+                        - /url: /@flower0wine
+                        - img "花间酒" [ref=e951]
+                      - paragraph [ref=e952]: ButtonGroup
+                      - button "2" [ref=e953]:
+                        - img [ref=e954]
+                        - generic [ref=e957]: "2"
+                - listitem [ref=e959]:
+                  - generic [ref=e960]:
+                    - link "Card" [ref=e961] [cursor=pointer]:
+                      - /url: /@tailgrids/components/tailgrids-card/mobile-responsiveness
+                      - img "Card" [ref=e962]
+                    - generic [ref=e963]:
+                      - link "TailGrids" [ref=e964] [cursor=pointer]:
+                        - /url: /@tailgrids
+                        - img "TailGrids" [ref=e966]
+                      - paragraph [ref=e967]: Card
+                      - button [ref=e968]:
+                        - img [ref=e969]
+                - listitem [ref=e973]:
+                  - generic [ref=e974]:
+                    - link "Card" [ref=e975] [cursor=pointer]:
+                      - /url: /@tailgrids/components/tailgrids-card/horizontal-card
+                      - img "Card" [ref=e976]
+                    - generic [ref=e977]:
+                      - link "TailGrids" [ref=e978] [cursor=pointer]:
+                        - /url: /@tailgrids
+                        - img "TailGrids" [ref=e980]
+                      - paragraph [ref=e981]: Card
+                      - button [ref=e982]:
+                        - img [ref=e983]
+                - listitem [ref=e987]:
+                  - generic [ref=e988]:
+                    - link "Card" [ref=e989] [cursor=pointer]:
+                      - /url: /@tailgrids/components/tailgrids-card/article-card
+                      - img "Card" [ref=e990]
+                    - generic [ref=e991]:
+                      - link "TailGrids" [ref=e992] [cursor=pointer]:
+                        - /url: /@tailgrids
+                        - img "TailGrids" [ref=e994]
+                      - paragraph [ref=e995]: Card
+                      - button [ref=e996]:
+                        - img [ref=e997]
+                - listitem [ref=e1001]:
+                  - generic [ref=e1002]:
+                    - link "Card" [ref=e1003] [cursor=pointer]:
+                      - /url: /@tailgrids/components/tailgrids-card
+                      - img "Card" [ref=e1004]
+                    - generic [ref=e1005]:
+                      - link "TailGrids" [ref=e1006] [cursor=pointer]:
+                        - /url: /@tailgrids
+                        - img "TailGrids" [ref=e1008]
+                      - paragraph [ref=e1009]: Card
+                      - button [ref=e1010]:
+                        - img [ref=e1011]
+                - listitem [ref=e1015]:
+                  - generic [ref=e1016]:
+                    - link "Card" [ref=e1017] [cursor=pointer]:
+                      - /url: /@tailgrids/components/tailgrids-card/with-avatar
+                      - img "Card" [ref=e1018]
+                    - generic [ref=e1019]:
+                      - link "TailGrids" [ref=e1020] [cursor=pointer]:
+                        - /url: /@tailgrids
+                        - img "TailGrids" [ref=e1022]
+                      - paragraph [ref=e1023]: Card
+                      - button [ref=e1024]:
+                        - img [ref=e1025]
+                - listitem [ref=e1029]:
+                  - generic [ref=e1030]:
+                    - link "Card" [ref=e1031] [cursor=pointer]:
+                      - /url: /@tailgrids/components/tailgrids-card/with-image
+                      - img "Card" [ref=e1032]
+                    - generic [ref=e1033]:
+                      - link "TailGrids" [ref=e1034] [cursor=pointer]:
+                        - /url: /@tailgrids
+                        - img "TailGrids" [ref=e1036]
+                      - paragraph [ref=e1037]: Card
+                      - button "1" [ref=e1038]:
+                        - img [ref=e1039]
+                        - generic [ref=e1042]: "1"
+                - listitem [ref=e1044]:
+                  - generic [ref=e1045]:
+                    - link "Card" [ref=e1046] [cursor=pointer]:
+                      - /url: /@tailgrids/components/tailgrids-card/with-badge
+                      - img "Card" [ref=e1047]
+                    - generic [ref=e1048]:
+                      - link "TailGrids" [ref=e1049] [cursor=pointer]:
+                        - /url: /@tailgrids
+                        - img "TailGrids" [ref=e1051]
+                      - paragraph [ref=e1052]: Card
+                      - button [ref=e1053]:
+                        - img [ref=e1054]
+                - listitem [ref=e1058]:
+                  - generic [ref=e1059]:
+                    - link "Card" [ref=e1060] [cursor=pointer]:
+                      - /url: /@tailgrids/components/tailgrids-card/list-style
+                      - img "Card" [ref=e1061]
+                    - generic [ref=e1062]:
+                      - link "TailGrids" [ref=e1063] [cursor=pointer]:
+                        - /url: /@tailgrids
+                        - img "TailGrids" [ref=e1065]
+                      - paragraph [ref=e1066]: Card
+                      - button [ref=e1067]:
+                        - img [ref=e1068]
+                - generic [ref=e1073]: Similar components
+    - region "Notifications alt+T"
+  - alert [ref=e1075]

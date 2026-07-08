@@ -1,0 +1,428 @@
+- generic [active] [ref=f3e1]:
+  - banner [ref=f3e2]:
+    - generic [ref=f3e5]:
+      - link "Vengeance UI" [ref=f3e6] [cursor=pointer]:
+        - /url: /
+        - img [ref=f3e7]
+        - generic [ref=f3e12]: Vengeance UI
+      - generic [ref=f3e13]:
+        - button "Search documentation... ⌘ K" [ref=f3e14]:
+          - generic [ref=f3e15]:
+            - img [ref=f3e16]
+            - generic [ref=f3e19]: Search documentation...
+          - generic [ref=f3e20]: ⌘ K
+        - generic [ref=f3e21]:
+          - heading "Search documentation" [level=2] [ref=f3e22]
+          - paragraph [ref=f3e23]: Search pages, components, blocks, and snippets.
+        - generic [ref=f3e24]:
+          - link "Templates" [ref=f3e25] [cursor=pointer]:
+            - /url: /templates
+          - link "Docs" [ref=f3e26] [cursor=pointer]:
+            - /url: /docs
+        - generic [ref=f3e27]:
+          - 'link "Star Vengeance UI on GitHub. Current stars: ..." [ref=f3e28] [cursor=pointer]':
+            - /url: https://github.com/Ashutoshx7/VengenceUI
+            - img
+            - generic [ref=f3e29]:
+              - img
+              - text: ...
+          - button "toggle theme" [ref=f3e30] [cursor=pointer]:
+            - img
+  - generic [ref=f3e31]:
+    - complementary [ref=f3e32]:
+      - generic [ref=f3e33]:
+        - generic [ref=f3e34]:
+          - generic [ref=f3e35]:
+            - img [ref=f3e36]
+            - generic [ref=f3e39]: Follow for updates
+            - img [ref=f3e40]
+          - link "X @Ashutosh_7x7" [ref=f3e44] [cursor=pointer]:
+            - /url: https://x.com/Ashutosh_7x7
+            - generic [ref=f3e45]: X @Ashutosh_7x7
+        - generic [ref=f3e46]:
+          - generic [ref=f3e47]:
+            - img [ref=f3e48]
+            - generic [ref=f3e51]: Installation
+            - img [ref=f3e52]
+          - generic [ref=f3e54]:
+            - link "Install Next.js" [ref=f3e56] [cursor=pointer]:
+              - /url: /docs/install-nextjs
+              - generic [ref=f3e57]: Install Next.js
+            - link "Install Tailwind CSS" [ref=f3e59] [cursor=pointer]:
+              - /url: /docs/install-tailwind
+              - generic [ref=f3e60]: Install Tailwind CSS
+            - link "Add utilities" [ref=f3e62] [cursor=pointer]:
+              - /url: /docs/add-utilities
+              - generic [ref=f3e63]: Add utilities
+            - link "CLI" [ref=f3e65] [cursor=pointer]:
+              - /url: /docs/cli
+              - generic [ref=f3e66]: CLI
+        - generic [ref=f3e67]:
+          - button "Buttons" [ref=f3e68]:
+            - img [ref=f3e69]
+            - text: Buttons
+          - generic [ref=f3e71]:
+            - link "Animated Button" [ref=f3e73] [cursor=pointer]:
+              - /url: /components/my-animated-button
+              - generic [ref=f3e74]: Animated Button
+            - link "Candy Button New" [ref=f3e76] [cursor=pointer]:
+              - /url: /components/candy-button
+              - generic [ref=f3e77]: Candy Button
+              - generic [ref=f3e78]: New
+            - link "Pop Button New" [ref=f3e80] [cursor=pointer]:
+              - /url: /components/pop-button
+              - generic [ref=f3e81]: Pop Button
+              - generic [ref=f3e82]: New
+            - link "Generate Button New" [ref=f3e84] [cursor=pointer]:
+              - /url: /components/generate-button
+              - generic [ref=f3e85]: Generate Button
+              - generic [ref=f3e86]: New
+            - link "Radial Glow Button New" [ref=f3e88] [cursor=pointer]:
+              - /url: /components/radial-glow-button
+              - generic [ref=f3e89]: Radial Glow Button
+              - generic [ref=f3e90]: New
+            - link "Social Flip Button" [ref=f3e92] [cursor=pointer]:
+              - /url: /components/social-flip-button
+              - generic [ref=f3e93]: Social Flip Button
+            - link "Liquid Metal" [ref=f3e95] [cursor=pointer]:
+              - /url: /components/liquid-metal
+              - generic [ref=f3e96]: Liquid Metal
+            - link "Creepy Button" [ref=f3e98] [cursor=pointer]:
+              - /url: /components/creepy-button
+              - generic [ref=f3e99]: Creepy Button
+            - link "Corner Button New" [ref=f3e101] [cursor=pointer]:
+              - /url: /components/corner-button
+              - generic [ref=f3e102]: Corner Button
+              - generic [ref=f3e103]: New
+        - generic [ref=f3e104]:
+          - button "Text & Motion" [ref=f3e105]:
+            - img [ref=f3e106]
+            - text: Text & Motion
+          - generic [ref=f3e108]:
+            - link "Animated Number" [ref=f3e110] [cursor=pointer]:
+              - /url: /components/animated-number
+              - generic [ref=f3e111]: Animated Number
+            - link "Flip Text" [ref=f3e114] [cursor=pointer]:
+              - /url: /components/flip-text
+              - generic [ref=f3e115]: Flip Text
+            - link "Flip Fade Text" [ref=f3e117] [cursor=pointer]:
+              - /url: /components/flip-fade-text
+              - generic [ref=f3e118]: Flip Fade Text
+            - link "Liquid Text" [ref=f3e120] [cursor=pointer]:
+              - /url: /components/liquid-text
+              - generic [ref=f3e121]: Liquid Text
+            - link "Morph Text New" [ref=f3e123] [cursor=pointer]:
+              - /url: /components/morph-text
+              - generic [ref=f3e124]: Morph Text
+              - generic [ref=f3e125]: New
+            - link "ASCII Glitch Ripple New" [ref=f3e127] [cursor=pointer]:
+              - /url: /components/ascii-glitch-ripple
+              - generic [ref=f3e128]: ASCII Glitch Ripple
+              - generic [ref=f3e129]: New
+        - generic [ref=f3e130]:
+          - button "Interactive" [ref=f3e131]:
+            - img [ref=f3e132]
+            - text: Interactive
+          - generic [ref=f3e138]:
+            - link "Image Collage New" [ref=f3e140] [cursor=pointer]:
+              - /url: /components/image-collage
+              - generic [ref=f3e141]: Image Collage
+              - generic [ref=f3e142]: New
+            - link "Interactive Book" [ref=f3e144] [cursor=pointer]:
+              - /url: /components/interactive-book
+              - generic [ref=f3e145]: Interactive Book
+            - link "Image Trail New" [ref=f3e147] [cursor=pointer]:
+              - /url: /components/image-trail
+              - generic [ref=f3e148]: Image Trail
+              - generic [ref=f3e149]: New
+            - link "Perspective Carousel New" [ref=f3e151] [cursor=pointer]:
+              - /url: /components/perspective-carousel
+              - generic [ref=f3e152]: Perspective Carousel
+              - generic [ref=f3e153]: New
+            - link "Cylinder Carousel New" [ref=f3e155] [cursor=pointer]:
+              - /url: /components/cylinder-carousel
+              - generic [ref=f3e156]: Cylinder Carousel
+              - generic [ref=f3e157]: New
+            - link "Diagonal Carousel New" [ref=f3e159] [cursor=pointer]:
+              - /url: /components/diagonal-carousel
+              - generic [ref=f3e160]: Diagonal Carousel
+              - generic [ref=f3e161]: New
+            - link "Ripple Displacement Slider New" [ref=f3e163] [cursor=pointer]:
+              - /url: /components/ripple-displacement-slider
+              - generic [ref=f3e164]: Ripple Displacement Slider
+              - generic [ref=f3e165]: New
+            - link "Scroll Dissolve Reveal New" [ref=f3e167] [cursor=pointer]:
+              - /url: /components/scroll-dissolve-reveal
+              - generic [ref=f3e168]: Scroll Dissolve Reveal
+              - generic [ref=f3e169]: New
+            - link "Pixelated Image Trail" [ref=f3e171] [cursor=pointer]:
+              - /url: /components/pixelated-image-trail
+              - generic [ref=f3e172]: Pixelated Image Trail
+            - link "Interactive Keyboard New" [ref=f3e174] [cursor=pointer]:
+              - /url: /components/interactive-keyboard
+              - generic [ref=f3e175]: Interactive Keyboard
+              - generic [ref=f3e176]: New
+            - link "Typing Keyboard New" [ref=f3e178] [cursor=pointer]:
+              - /url: /components/typing-keyboard
+              - generic [ref=f3e179]: Typing Keyboard
+              - generic [ref=f3e180]: New
+        - generic [ref=f3e181]:
+          - button "Layout & Cards" [ref=f3e182]:
+            - img [ref=f3e183]
+            - text: Layout & Cards
+          - generic [ref=f3e188]:
+            - link "Agent Bento Grid New" [ref=f3e190] [cursor=pointer]:
+              - /url: /components/agent-bento-grid
+              - generic [ref=f3e191]: Agent Bento Grid
+              - generic [ref=f3e192]: New
+            - link "Expandable Bento Grid" [ref=f3e194] [cursor=pointer]:
+              - /url: /components/expandable-bento-grid
+              - generic [ref=f3e195]: Expandable Bento Grid
+            - link "Staggered Grid" [ref=f3e197] [cursor=pointer]:
+              - /url: /components/staggered-grid
+              - generic [ref=f3e198]: Staggered Grid
+            - link "Image Scatter New" [ref=f3e200] [cursor=pointer]:
+              - /url: /components/image-scatter
+              - generic [ref=f3e201]: Image Scatter
+              - generic [ref=f3e202]: New
+            - link "Glow Border Card" [ref=f3e204] [cursor=pointer]:
+              - /url: /components/glow-border-card
+              - generic [ref=f3e205]: Glow Border Card
+            - link "Testimonials Card" [ref=f3e207] [cursor=pointer]:
+              - /url: /components/testimonials-card
+              - generic [ref=f3e208]: Testimonials Card
+        - generic [ref=f3e209]:
+          - button "Tooltip & Marquee" [ref=f3e210]:
+            - img [ref=f3e211]
+            - text: Tooltip & Marquee
+          - generic [ref=f3e215]:
+            - link "Cursor Card New" [ref=f3e217] [cursor=pointer]:
+              - /url: /components/cursor-card
+              - generic [ref=f3e218]: Cursor Card
+              - generic [ref=f3e219]: New
+            - link "Elastic Stack New" [ref=f3e221] [cursor=pointer]:
+              - /url: /components/elastic-stack
+              - generic [ref=f3e222]: Elastic Stack
+              - generic [ref=f3e223]: New
+            - link "Logo Slider" [ref=f3e225] [cursor=pointer]:
+              - /url: /components/logo-slider
+              - generic [ref=f3e226]: Logo Slider
+            - link "Stacked Logos" [ref=f3e228] [cursor=pointer]:
+              - /url: /components/stacked-logos
+              - generic [ref=f3e229]: Stacked Logos
+            - link "Masked Avatars" [ref=f3e231] [cursor=pointer]:
+              - /url: /components/masked-avatars
+              - generic [ref=f3e232]: Masked Avatars
+            - link "Image Reveal List New" [ref=f3e234] [cursor=pointer]:
+              - /url: /components/image-reveal-list
+              - generic [ref=f3e235]: Image Reveal List
+              - generic [ref=f3e236]: New
+            - link "FAQ Accordion New" [ref=f3e238] [cursor=pointer]:
+              - /url: /components/faq-accordion
+              - generic [ref=f3e239]: FAQ Accordion
+              - generic [ref=f3e240]: New
+            - link "Shared Tooltip Avatars New" [ref=f3e242] [cursor=pointer]:
+              - /url: /components/shared-tooltip-avatars
+              - generic [ref=f3e243]: Shared Tooltip Avatars
+              - generic [ref=f3e244]: New
+            - link "Magnetic Spotlight Marquee New" [ref=f3e246] [cursor=pointer]:
+              - /url: /components/magnetic-spotlight-marquee
+              - generic [ref=f3e247]: Magnetic Spotlight Marquee
+              - generic [ref=f3e248]: New
+        - generic [ref=f3e249]:
+          - button "Loaders" [ref=f3e250]:
+            - img [ref=f3e251]
+            - text: Loaders
+          - link "Kinetic Text Loader New" [ref=f3e256] [cursor=pointer]:
+            - /url: /components/kinetic-text-loader
+            - generic [ref=f3e257]: Kinetic Text Loader
+            - generic [ref=f3e258]: New
+        - generic [ref=f3e259]:
+          - button "Navbar & Docs" [ref=f3e260]:
+            - img [ref=f3e261]
+            - text: Navbar & Docs
+          - generic [ref=f3e263]:
+            - link "Glass Dock" [ref=f3e265] [cursor=pointer]:
+              - /url: /components/glass-dock
+              - generic [ref=f3e266]: Glass Dock
+            - link "Spotlight Navbar" [ref=f3e268] [cursor=pointer]:
+              - /url: /components/spotlight-navbar
+              - generic [ref=f3e269]: Spotlight Navbar
+            - link "Notch Navbar New" [ref=f3e271] [cursor=pointer]:
+              - /url: /components/notch-navbar
+              - generic [ref=f3e272]: Notch Navbar
+              - generic [ref=f3e273]: New
+        - generic [ref=f3e274]:
+          - button "Collections" [ref=f3e275]:
+            - img [ref=f3e276]
+            - text: Collections
+          - generic [ref=f3e278]:
+            - link "Line Hover Link" [ref=f3e280] [cursor=pointer]:
+              - /url: /components/line-hover-link
+              - generic [ref=f3e281]: Line Hover Link
+            - link "Folder Preview" [ref=f3e283] [cursor=pointer]:
+              - /url: /components/folder-preview
+              - generic [ref=f3e284]: Folder Preview
+        - generic [ref=f3e285]:
+          - button "Backgrounds" [ref=f3e286]:
+            - img [ref=f3e287]
+            - text: Backgrounds
+          - generic [ref=f3e291]:
+            - link "Aurora Hero New" [ref=f3e293] [cursor=pointer]:
+              - /url: /components/aurora-hero
+              - generic [ref=f3e294]: Aurora Hero
+              - generic [ref=f3e295]: New
+            - link "Fluid Morph Background New" [ref=f3e297] [cursor=pointer]:
+              - /url: /components/fluid-morph-bg
+              - generic [ref=f3e298]: Fluid Morph Background
+              - generic [ref=f3e299]: New
+            - link "Twisting Ribbon New" [ref=f3e301] [cursor=pointer]:
+              - /url: /components/twisting-ribbon
+              - generic [ref=f3e302]: Twisting Ribbon
+              - generic [ref=f3e303]: New
+            - link "Animated Rays New" [ref=f3e305] [cursor=pointer]:
+              - /url: /components/animated-rays
+              - generic [ref=f3e306]: Animated Rays
+              - generic [ref=f3e307]: New
+            - link "Perspective Grid" [ref=f3e309] [cursor=pointer]:
+              - /url: /components/perspective-grid
+              - generic [ref=f3e310]: Perspective Grid
+            - link "Light Lines" [ref=f3e312] [cursor=pointer]:
+              - /url: /components/light-lines
+              - generic [ref=f3e313]: Light Lines
+            - link "Liquid Ocean" [ref=f3e315] [cursor=pointer]:
+              - /url: /components/liquid-ocean
+              - generic [ref=f3e316]: Liquid Ocean
+    - main [ref=f3e319]:
+      - generic [ref=f3e321]:
+        - generic [ref=f3e322]:
+          - paragraph [ref=f3e323]: Components /Flip Text
+          - heading "Flip Text" [level=1] [ref=f3e324]
+          - paragraph [ref=f3e325]: Character flip text animation
+        - generic [ref=f3e326]:
+          - generic [ref=f3e327]:
+            - generic [ref=f3e328]:
+              - button "Preview" [ref=f3e329]:
+                - img [ref=f3e330]
+                - text: Preview
+              - button "Code" [ref=f3e333]:
+                - img [ref=f3e334]
+                - text: Code
+            - generic [ref=f3e337]:
+              - img [ref=f3e339]
+              - generic [ref=f3e341]: npx shadcn@latest add https://www.vengenceui.com/r/flip-text.json
+              - button "Copy" [ref=f3e342]:
+                - generic [ref=f3e343]: Copy
+                - img [ref=f3e344]
+              - button "Expand to fullscreen" [ref=f3e347]:
+                - img [ref=f3e348]
+          - generic [ref=f3e361]: Loading preview…
+        - generic [ref=f3e362]:
+          - generic [ref=f3e363]:
+            - heading "Installation" [level=2] [ref=f3e364]
+            - generic [ref=f3e365]:
+              - button "CLI" [ref=f3e366]
+              - button "Manual" [ref=f3e367]
+            - generic [ref=f3e368]:
+              - paragraph [ref=f3e369]: Run the following command
+              - generic [ref=f3e370]:
+                - generic [ref=f3e371]:
+                  - generic [ref=f3e372]:
+                    - button "npm" [ref=f3e373]:
+                      - img [ref=f3e375]
+                      - generic [ref=f3e377]: npm
+                    - button "pnpm" [ref=f3e378]:
+                      - img [ref=f3e379]
+                      - generic [ref=f3e381]: pnpm
+                    - button "bun" [ref=f3e382]:
+                      - img [ref=f3e383]
+                      - generic [ref=f3e387]: bun
+                    - button "yarn" [ref=f3e388]:
+                      - img [ref=f3e389]
+                      - generic [ref=f3e391]: yarn
+                  - button "Copy command" [ref=f3e392]:
+                    - img [ref=f3e393]
+                - code [ref=f3e397]: npx shadcn@latest add https://www.vengenceui.com/r/flip-text.json
+          - generic [ref=f3e398]:
+            - heading "Usage" [level=2] [ref=f3e399]
+            - generic [ref=f3e400]:
+              - button "Copy code" [ref=f3e402]:
+                - img [ref=f3e403]
+              - generic [ref=f3e407]:
+                - generic [ref=f3e408]:
+                  - generic [ref=f3e409]: "1"
+                  - generic [ref=f3e410]: "import { FlipText } from \"@/components/ui/flip-text\""
+                - generic [ref=f3e412]: "2"
+                - generic [ref=f3e414]:
+                  - generic [ref=f3e415]: "3"
+                  - generic [ref=f3e416]: "export default function Example() {"
+                - generic [ref=f3e417]:
+                  - generic [ref=f3e418]: "4"
+                  - generic [ref=f3e419]: return (
+                - generic [ref=f3e420]:
+                  - generic [ref=f3e421]: "5"
+                  - generic [ref=f3e422]: <FlipText className="text-4xl font-bold">
+                - generic [ref=f3e423]:
+                  - generic [ref=f3e424]: "6"
+                  - generic [ref=f3e425]: Your amazing text here
+                - generic [ref=f3e426]:
+                  - generic [ref=f3e427]: "7"
+                  - generic [ref=f3e428]: </FlipText>
+                - generic [ref=f3e429]:
+                  - generic [ref=f3e430]: "8"
+                  - generic [ref=f3e431]: )
+                - generic [ref=f3e432]:
+                  - generic [ref=f3e433]: "9"
+                  - generic [ref=f3e434]: "}"
+          - generic [ref=f3e435]:
+            - heading "Props" [level=2] [ref=f3e436]
+            - table [ref=f3e439]:
+              - rowgroup [ref=f3e440]:
+                - row "Prop Name Type Default Description" [ref=f3e441]:
+                  - columnheader "Prop Name" [ref=f3e442]
+                  - columnheader "Type" [ref=f3e443]
+                  - columnheader "Default" [ref=f3e444]
+                  - columnheader "Description" [ref=f3e445]
+              - rowgroup [ref=f3e446]:
+                - row "children string - The text content to animate. Must be a string." [ref=f3e447]:
+                  - cell "children" [ref=f3e448]
+                  - cell "string" [ref=f3e449]:
+                    - code [ref=f3e450]: string
+                  - cell "-" [ref=f3e451]:
+                    - code [ref=f3e452]: "-"
+                  - cell "The text content to animate. Must be a string." [ref=f3e453]
+                - row "className string - Additional CSS classes to apply to the wrapper element." [ref=f3e454]:
+                  - cell "className" [ref=f3e455]
+                  - cell "string" [ref=f3e456]:
+                    - code [ref=f3e457]: string
+                  - cell "-" [ref=f3e458]:
+                    - code [ref=f3e459]: "-"
+                  - cell "Additional CSS classes to apply to the wrapper element." [ref=f3e460]
+                - row "duration number 2.2 Duration of the flip animation in seconds." [ref=f3e461]:
+                  - cell "duration" [ref=f3e462]
+                  - cell "number" [ref=f3e463]:
+                    - code [ref=f3e464]: number
+                  - cell "2.2" [ref=f3e465]:
+                    - code [ref=f3e466]: "2.2"
+                  - cell "Duration of the flip animation in seconds." [ref=f3e467]
+                - row "delay number 0 Initial delay before animation starts in seconds." [ref=f3e468]:
+                  - cell "delay" [ref=f3e469]
+                  - cell "number" [ref=f3e470]:
+                    - code [ref=f3e471]: number
+                  - cell "0" [ref=f3e472]:
+                    - code [ref=f3e473]: "0"
+                  - cell "Initial delay before animation starts in seconds." [ref=f3e474]
+                - row "loop boolean true Whether the animation should loop infinitely or play once." [ref=f3e475]:
+                  - cell "loop" [ref=f3e476]
+                  - cell "boolean" [ref=f3e477]:
+                    - code [ref=f3e478]: boolean
+                  - cell "true" [ref=f3e479]:
+                    - code [ref=f3e480]: "true"
+                  - cell "Whether the animation should loop infinitely or play once." [ref=f3e481]
+                - row "separator string ' ' Custom separator for splitting text. Default is space." [ref=f3e482]:
+                  - cell "separator" [ref=f3e483]
+                  - cell "string" [ref=f3e484]:
+                    - code [ref=f3e485]: string
+                  - cell "' '" [ref=f3e486]:
+                    - code [ref=f3e487]: "' '"
+                  - cell "Custom separator for splitting text. Default is space." [ref=f3e488]

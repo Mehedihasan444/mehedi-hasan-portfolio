@@ -1,0 +1,424 @@
+- generic [active] [ref=f1e1]:
+  - banner [ref=f1e2]:
+    - generic [ref=f1e5]:
+      - link "Vengeance UI" [ref=f1e6] [cursor=pointer]:
+        - /url: /
+        - img [ref=f1e7]
+        - generic [ref=f1e12]: Vengeance UI
+      - generic [ref=f1e13]:
+        - button "Search documentation... ⌘ K" [ref=f1e14]:
+          - generic [ref=f1e15]:
+            - img [ref=f1e16]
+            - generic [ref=f1e19]: Search documentation...
+          - generic [ref=f1e20]: ⌘ K
+        - generic [ref=f1e21]:
+          - heading "Search documentation" [level=2] [ref=f1e22]
+          - paragraph [ref=f1e23]: Search pages, components, blocks, and snippets.
+        - generic [ref=f1e24]:
+          - link "Templates" [ref=f1e25] [cursor=pointer]:
+            - /url: /templates
+          - link "Docs" [ref=f1e26] [cursor=pointer]:
+            - /url: /docs
+        - generic [ref=f1e27]:
+          - 'link "Star Vengeance UI on GitHub. Current stars: ..." [ref=f1e28] [cursor=pointer]':
+            - /url: https://github.com/Ashutoshx7/VengenceUI
+            - img
+            - generic [ref=f1e29]:
+              - img
+              - text: ...
+          - button "toggle theme" [ref=f1e30] [cursor=pointer]:
+            - img
+  - generic [ref=f1e31]:
+    - complementary [ref=f1e32]:
+      - generic [ref=f1e33]:
+        - generic [ref=f1e34]:
+          - generic [ref=f1e35]:
+            - img [ref=f1e36]
+            - generic [ref=f1e39]: Follow for updates
+            - img [ref=f1e40]
+          - link "X @Ashutosh_7x7" [ref=f1e44] [cursor=pointer]:
+            - /url: https://x.com/Ashutosh_7x7
+            - generic [ref=f1e45]: X @Ashutosh_7x7
+        - generic [ref=f1e46]:
+          - generic [ref=f1e47]:
+            - img [ref=f1e48]
+            - generic [ref=f1e51]: Installation
+            - img [ref=f1e52]
+          - generic [ref=f1e54]:
+            - link "Install Next.js" [ref=f1e56] [cursor=pointer]:
+              - /url: /docs/install-nextjs
+              - generic [ref=f1e57]: Install Next.js
+            - link "Install Tailwind CSS" [ref=f1e59] [cursor=pointer]:
+              - /url: /docs/install-tailwind
+              - generic [ref=f1e60]: Install Tailwind CSS
+            - link "Add utilities" [ref=f1e62] [cursor=pointer]:
+              - /url: /docs/add-utilities
+              - generic [ref=f1e63]: Add utilities
+            - link "CLI" [ref=f1e65] [cursor=pointer]:
+              - /url: /docs/cli
+              - generic [ref=f1e66]: CLI
+        - generic [ref=f1e67]:
+          - button "Buttons" [ref=f1e68]:
+            - img [ref=f1e69]
+            - text: Buttons
+          - generic [ref=f1e71]:
+            - link "Animated Button" [ref=f1e73] [cursor=pointer]:
+              - /url: /components/my-animated-button
+              - generic [ref=f1e74]: Animated Button
+            - link "Candy Button New" [ref=f1e76] [cursor=pointer]:
+              - /url: /components/candy-button
+              - generic [ref=f1e77]: Candy Button
+              - generic [ref=f1e78]: New
+            - link "Pop Button New" [ref=f1e80] [cursor=pointer]:
+              - /url: /components/pop-button
+              - generic [ref=f1e81]: Pop Button
+              - generic [ref=f1e82]: New
+            - link "Generate Button New" [ref=f1e84] [cursor=pointer]:
+              - /url: /components/generate-button
+              - generic [ref=f1e85]: Generate Button
+              - generic [ref=f1e86]: New
+            - link "Radial Glow Button New" [ref=f1e88] [cursor=pointer]:
+              - /url: /components/radial-glow-button
+              - generic [ref=f1e89]: Radial Glow Button
+              - generic [ref=f1e90]: New
+            - link "Social Flip Button" [ref=f1e92] [cursor=pointer]:
+              - /url: /components/social-flip-button
+              - generic [ref=f1e93]: Social Flip Button
+            - link "Liquid Metal" [ref=f1e95] [cursor=pointer]:
+              - /url: /components/liquid-metal
+              - generic [ref=f1e96]: Liquid Metal
+            - link "Creepy Button" [ref=f1e98] [cursor=pointer]:
+              - /url: /components/creepy-button
+              - generic [ref=f1e99]: Creepy Button
+            - link "Corner Button New" [ref=f1e101] [cursor=pointer]:
+              - /url: /components/corner-button
+              - generic [ref=f1e102]: Corner Button
+              - generic [ref=f1e103]: New
+        - generic [ref=f1e104]:
+          - button "Text & Motion" [ref=f1e105]:
+            - img [ref=f1e106]
+            - text: Text & Motion
+          - generic [ref=f1e108]:
+            - link "Animated Number" [ref=f1e110] [cursor=pointer]:
+              - /url: /components/animated-number
+              - generic [ref=f1e111]: Animated Number
+            - link "Flip Text" [ref=f1e113] [cursor=pointer]:
+              - /url: /components/flip-text
+              - generic [ref=f1e114]: Flip Text
+            - link "Flip Fade Text" [ref=f1e116] [cursor=pointer]:
+              - /url: /components/flip-fade-text
+              - generic [ref=f1e117]: Flip Fade Text
+            - link "Liquid Text" [ref=f1e119] [cursor=pointer]:
+              - /url: /components/liquid-text
+              - generic [ref=f1e120]: Liquid Text
+            - link "Morph Text New" [ref=f1e122] [cursor=pointer]:
+              - /url: /components/morph-text
+              - generic [ref=f1e123]: Morph Text
+              - generic [ref=f1e124]: New
+            - link "ASCII Glitch Ripple New" [ref=f1e126] [cursor=pointer]:
+              - /url: /components/ascii-glitch-ripple
+              - generic [ref=f1e127]: ASCII Glitch Ripple
+              - generic [ref=f1e128]: New
+        - generic [ref=f1e129]:
+          - button "Interactive" [ref=f1e130]:
+            - img [ref=f1e131]
+            - text: Interactive
+          - generic [ref=f1e137]:
+            - link "Image Collage New" [ref=f1e139] [cursor=pointer]:
+              - /url: /components/image-collage
+              - generic [ref=f1e140]: Image Collage
+              - generic [ref=f1e141]: New
+            - link "Interactive Book" [ref=f1e143] [cursor=pointer]:
+              - /url: /components/interactive-book
+              - generic [ref=f1e144]: Interactive Book
+            - link "Image Trail New" [ref=f1e146] [cursor=pointer]:
+              - /url: /components/image-trail
+              - generic [ref=f1e147]: Image Trail
+              - generic [ref=f1e148]: New
+            - link "Perspective Carousel New" [ref=f1e150] [cursor=pointer]:
+              - /url: /components/perspective-carousel
+              - generic [ref=f1e151]: Perspective Carousel
+              - generic [ref=f1e152]: New
+            - link "Cylinder Carousel New" [ref=f1e154] [cursor=pointer]:
+              - /url: /components/cylinder-carousel
+              - generic [ref=f1e155]: Cylinder Carousel
+              - generic [ref=f1e156]: New
+            - link "Diagonal Carousel New" [ref=f1e158] [cursor=pointer]:
+              - /url: /components/diagonal-carousel
+              - generic [ref=f1e159]: Diagonal Carousel
+              - generic [ref=f1e160]: New
+            - link "Ripple Displacement Slider New" [ref=f1e162] [cursor=pointer]:
+              - /url: /components/ripple-displacement-slider
+              - generic [ref=f1e163]: Ripple Displacement Slider
+              - generic [ref=f1e164]: New
+            - link "Scroll Dissolve Reveal New" [ref=f1e167] [cursor=pointer]:
+              - /url: /components/scroll-dissolve-reveal
+              - generic [ref=f1e168]: Scroll Dissolve Reveal
+              - generic [ref=f1e169]: New
+            - link "Pixelated Image Trail" [ref=f1e171] [cursor=pointer]:
+              - /url: /components/pixelated-image-trail
+              - generic [ref=f1e172]: Pixelated Image Trail
+            - link "Interactive Keyboard New" [ref=f1e174] [cursor=pointer]:
+              - /url: /components/interactive-keyboard
+              - generic [ref=f1e175]: Interactive Keyboard
+              - generic [ref=f1e176]: New
+            - link "Typing Keyboard New" [ref=f1e178] [cursor=pointer]:
+              - /url: /components/typing-keyboard
+              - generic [ref=f1e179]: Typing Keyboard
+              - generic [ref=f1e180]: New
+        - generic [ref=f1e181]:
+          - button "Layout & Cards" [ref=f1e182]:
+            - img [ref=f1e183]
+            - text: Layout & Cards
+          - generic [ref=f1e188]:
+            - link "Agent Bento Grid New" [ref=f1e190] [cursor=pointer]:
+              - /url: /components/agent-bento-grid
+              - generic [ref=f1e191]: Agent Bento Grid
+              - generic [ref=f1e192]: New
+            - link "Expandable Bento Grid" [ref=f1e194] [cursor=pointer]:
+              - /url: /components/expandable-bento-grid
+              - generic [ref=f1e195]: Expandable Bento Grid
+            - link "Staggered Grid" [ref=f1e197] [cursor=pointer]:
+              - /url: /components/staggered-grid
+              - generic [ref=f1e198]: Staggered Grid
+            - link "Image Scatter New" [ref=f1e200] [cursor=pointer]:
+              - /url: /components/image-scatter
+              - generic [ref=f1e201]: Image Scatter
+              - generic [ref=f1e202]: New
+            - link "Glow Border Card" [ref=f1e204] [cursor=pointer]:
+              - /url: /components/glow-border-card
+              - generic [ref=f1e205]: Glow Border Card
+            - link "Testimonials Card" [ref=f1e207] [cursor=pointer]:
+              - /url: /components/testimonials-card
+              - generic [ref=f1e208]: Testimonials Card
+        - generic [ref=f1e209]:
+          - button "Tooltip & Marquee" [ref=f1e210]:
+            - img [ref=f1e211]
+            - text: Tooltip & Marquee
+          - generic [ref=f1e215]:
+            - link "Cursor Card New" [ref=f1e217] [cursor=pointer]:
+              - /url: /components/cursor-card
+              - generic [ref=f1e218]: Cursor Card
+              - generic [ref=f1e219]: New
+            - link "Elastic Stack New" [ref=f1e221] [cursor=pointer]:
+              - /url: /components/elastic-stack
+              - generic [ref=f1e222]: Elastic Stack
+              - generic [ref=f1e223]: New
+            - link "Logo Slider" [ref=f1e225] [cursor=pointer]:
+              - /url: /components/logo-slider
+              - generic [ref=f1e226]: Logo Slider
+            - link "Stacked Logos" [ref=f1e228] [cursor=pointer]:
+              - /url: /components/stacked-logos
+              - generic [ref=f1e229]: Stacked Logos
+            - link "Masked Avatars" [ref=f1e231] [cursor=pointer]:
+              - /url: /components/masked-avatars
+              - generic [ref=f1e232]: Masked Avatars
+            - link "Image Reveal List New" [ref=f1e234] [cursor=pointer]:
+              - /url: /components/image-reveal-list
+              - generic [ref=f1e235]: Image Reveal List
+              - generic [ref=f1e236]: New
+            - link "FAQ Accordion New" [ref=f1e238] [cursor=pointer]:
+              - /url: /components/faq-accordion
+              - generic [ref=f1e239]: FAQ Accordion
+              - generic [ref=f1e240]: New
+            - link "Shared Tooltip Avatars New" [ref=f1e242] [cursor=pointer]:
+              - /url: /components/shared-tooltip-avatars
+              - generic [ref=f1e243]: Shared Tooltip Avatars
+              - generic [ref=f1e244]: New
+            - link "Magnetic Spotlight Marquee New" [ref=f1e246] [cursor=pointer]:
+              - /url: /components/magnetic-spotlight-marquee
+              - generic [ref=f1e247]: Magnetic Spotlight Marquee
+              - generic [ref=f1e248]: New
+        - generic [ref=f1e249]:
+          - button "Loaders" [ref=f1e250]:
+            - img [ref=f1e251]
+            - text: Loaders
+          - link "Kinetic Text Loader New" [ref=f1e256] [cursor=pointer]:
+            - /url: /components/kinetic-text-loader
+            - generic [ref=f1e257]: Kinetic Text Loader
+            - generic [ref=f1e258]: New
+        - generic [ref=f1e259]:
+          - button "Navbar & Docs" [ref=f1e260]:
+            - img [ref=f1e261]
+            - text: Navbar & Docs
+          - generic [ref=f1e263]:
+            - link "Glass Dock" [ref=f1e265] [cursor=pointer]:
+              - /url: /components/glass-dock
+              - generic [ref=f1e266]: Glass Dock
+            - link "Spotlight Navbar" [ref=f1e268] [cursor=pointer]:
+              - /url: /components/spotlight-navbar
+              - generic [ref=f1e269]: Spotlight Navbar
+            - link "Notch Navbar New" [ref=f1e271] [cursor=pointer]:
+              - /url: /components/notch-navbar
+              - generic [ref=f1e272]: Notch Navbar
+              - generic [ref=f1e273]: New
+        - generic [ref=f1e274]:
+          - button "Collections" [ref=f1e275]:
+            - img [ref=f1e276]
+            - text: Collections
+          - generic [ref=f1e278]:
+            - link "Line Hover Link" [ref=f1e280] [cursor=pointer]:
+              - /url: /components/line-hover-link
+              - generic [ref=f1e281]: Line Hover Link
+            - link "Folder Preview" [ref=f1e283] [cursor=pointer]:
+              - /url: /components/folder-preview
+              - generic [ref=f1e284]: Folder Preview
+        - generic [ref=f1e285]:
+          - button "Backgrounds" [ref=f1e286]:
+            - img [ref=f1e287]
+            - text: Backgrounds
+          - generic [ref=f1e291]:
+            - link "Aurora Hero New" [ref=f1e293] [cursor=pointer]:
+              - /url: /components/aurora-hero
+              - generic [ref=f1e294]: Aurora Hero
+              - generic [ref=f1e295]: New
+            - link "Fluid Morph Background New" [ref=f1e297] [cursor=pointer]:
+              - /url: /components/fluid-morph-bg
+              - generic [ref=f1e298]: Fluid Morph Background
+              - generic [ref=f1e299]: New
+            - link "Twisting Ribbon New" [ref=f1e301] [cursor=pointer]:
+              - /url: /components/twisting-ribbon
+              - generic [ref=f1e302]: Twisting Ribbon
+              - generic [ref=f1e303]: New
+            - link "Animated Rays New" [ref=f1e305] [cursor=pointer]:
+              - /url: /components/animated-rays
+              - generic [ref=f1e306]: Animated Rays
+              - generic [ref=f1e307]: New
+            - link "Perspective Grid" [ref=f1e309] [cursor=pointer]:
+              - /url: /components/perspective-grid
+              - generic [ref=f1e310]: Perspective Grid
+            - link "Light Lines" [ref=f1e312] [cursor=pointer]:
+              - /url: /components/light-lines
+              - generic [ref=f1e313]: Light Lines
+            - link "Liquid Ocean" [ref=f1e315] [cursor=pointer]:
+              - /url: /components/liquid-ocean
+              - generic [ref=f1e316]: Liquid Ocean
+    - main [ref=f1e319]:
+      - generic [ref=f1e322]:
+        - generic [ref=f1e323]:
+          - paragraph [ref=f1e324]: Components /Scroll Dissolve Reveal
+          - heading "Scroll Dissolve Reveal" [level=1] [ref=f1e325]
+          - paragraph [ref=f1e326]: A beautiful image dissolve effect driven by scrolling using React Three Fiber and Shaders.
+        - generic [ref=f1e327]:
+          - generic [ref=f1e328]:
+            - generic [ref=f1e329]:
+              - button "Preview" [ref=f1e330]:
+                - img [ref=f1e331]
+                - text: Preview
+              - button "Code" [ref=f1e334]:
+                - img [ref=f1e335]
+                - text: Code
+            - generic [ref=f1e338]:
+              - img [ref=f1e340]
+              - generic [ref=f1e342]: npx shadcn@latest add https://www.vengenceui.com/r/scroll-dissolve-reveal.json
+              - button "Copy" [ref=f1e343]:
+                - generic [ref=f1e344]: Copy
+                - img [ref=f1e345]
+              - button "Expand to fullscreen" [ref=f1e348]:
+                - img [ref=f1e349]
+          - generic [ref=f1e360]:
+            - generic [ref=f1e361]:
+              - heading "Scroll Down" [level=1] [ref=f1e362]
+              - paragraph [ref=f1e363]: To see the dissolve reveal effect
+            - generic [ref=f1e369]:
+              - heading "End of Effect" [level=1] [ref=f1e370]
+              - paragraph [ref=f1e371]: Scroll up to reverse
+        - generic [ref=f1e372]:
+          - generic [ref=f1e373]:
+            - heading "Installation" [level=2] [ref=f1e374]
+            - generic [ref=f1e375]:
+              - button "CLI" [ref=f1e376]
+              - button "Manual" [ref=f1e377]
+            - generic [ref=f1e378]:
+              - paragraph [ref=f1e379]: Run the following command
+              - generic [ref=f1e380]:
+                - generic [ref=f1e381]:
+                  - generic [ref=f1e382]:
+                    - button "npm" [ref=f1e383]:
+                      - img [ref=f1e385]
+                      - generic [ref=f1e387]: npm
+                    - button "pnpm" [ref=f1e388]:
+                      - img [ref=f1e389]
+                      - generic [ref=f1e391]: pnpm
+                    - button "bun" [ref=f1e392]:
+                      - img [ref=f1e393]
+                      - generic [ref=f1e397]: bun
+                    - button "yarn" [ref=f1e398]:
+                      - img [ref=f1e399]
+                      - generic [ref=f1e401]: yarn
+                  - button "Copy command" [ref=f1e402]:
+                    - img [ref=f1e403]
+                - code [ref=f1e407]: npx shadcn@latest add https://www.vengenceui.com/r/scroll-dissolve-reveal.json
+          - generic [ref=f1e408]:
+            - heading "Usage" [level=2] [ref=f1e409]
+            - generic [ref=f1e410]:
+              - button "Copy code" [ref=f1e412]:
+                - img [ref=f1e413]
+              - generic [ref=f1e417]:
+                - generic [ref=f1e418]:
+                  - generic [ref=f1e419]: "1"
+                  - generic [ref=f1e420]: "import { ScrollDissolveReveal } from \"@/components/ui/scroll-dissolve-reveal\""
+                - generic [ref=f1e422]: "2"
+                - generic [ref=f1e424]:
+                  - generic [ref=f1e425]: "3"
+                  - generic [ref=f1e426]: "export function ScrollDissolveRevealDemo() {"
+                - generic [ref=f1e427]:
+                  - generic [ref=f1e428]: "4"
+                  - generic [ref=f1e429]: return (
+                - generic [ref=f1e430]:
+                  - generic [ref=f1e431]: "5"
+                  - generic [ref=f1e432]: <ScrollDissolveReveal
+                - generic [ref=f1e433]:
+                  - generic [ref=f1e434]: "6"
+                  - generic [ref=f1e435]: imageFront="/front.jpg"
+                - generic [ref=f1e436]:
+                  - generic [ref=f1e437]: "7"
+                  - generic [ref=f1e438]: imageBack="/back.jpg"
+                - generic [ref=f1e439]:
+                  - generic [ref=f1e440]: "8"
+                  - generic [ref=f1e441]: />
+                - generic [ref=f1e442]:
+                  - generic [ref=f1e443]: "9"
+                  - generic [ref=f1e444]: )
+                - generic [ref=f1e445]:
+                  - generic [ref=f1e446]: "10"
+                  - generic [ref=f1e447]: "}"
+          - generic [ref=f1e448]:
+            - heading "Props" [level=2] [ref=f1e449]
+            - table [ref=f1e452]:
+              - rowgroup [ref=f1e453]:
+                - row "Prop Name Type Default Description" [ref=f1e454]:
+                  - columnheader "Prop Name" [ref=f1e455]
+                  - columnheader "Type" [ref=f1e456]
+                  - columnheader "Default" [ref=f1e457]
+                  - columnheader "Description" [ref=f1e458]
+              - rowgroup [ref=f1e459]:
+                - row "imageFront string - The image to display initially and dissolve away." [ref=f1e460]:
+                  - cell "imageFront" [ref=f1e461]
+                  - cell "string" [ref=f1e462]:
+                    - code [ref=f1e463]: string
+                  - cell "-" [ref=f1e464]:
+                    - code [ref=f1e465]: "-"
+                  - cell "The image to display initially and dissolve away." [ref=f1e466]
+                - row "imageBack string - The image to reveal underneath the dissolve effect." [ref=f1e467]:
+                  - cell "imageBack" [ref=f1e468]
+                  - cell "string" [ref=f1e469]:
+                    - code [ref=f1e470]: string
+                  - cell "-" [ref=f1e471]:
+                    - code [ref=f1e472]: "-"
+                  - cell "The image to reveal underneath the dissolve effect." [ref=f1e473]
+                - row "className string - Additional CSS classes for the sticky container." [ref=f1e474]:
+                  - cell "className" [ref=f1e475]
+                  - cell "string" [ref=f1e476]:
+                    - code [ref=f1e477]: string
+                  - cell "-" [ref=f1e478]:
+                    - code [ref=f1e479]: "-"
+                  - cell "Additional CSS classes for the sticky container." [ref=f1e480]
+                - row "containerClassName string - Additional CSS classes for the outer scroll container." [ref=f1e481]:
+                  - cell "containerClassName" [ref=f1e482]
+                  - cell "string" [ref=f1e483]:
+                    - code [ref=f1e484]: string
+                  - cell "-" [ref=f1e485]:
+                    - code [ref=f1e486]: "-"
+                  - cell "Additional CSS classes for the outer scroll container." [ref=f1e487]
+  - alert [ref=f1e488]

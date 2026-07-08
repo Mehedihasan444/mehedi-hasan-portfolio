@@ -1,0 +1,780 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e5]:
+      - link "Vengeance UI" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img [ref=e7]
+        - generic [ref=e12]: Vengeance UI
+      - generic [ref=e13]:
+        - button "Search documentation... ⌘ K" [ref=e14]:
+          - generic [ref=e15]:
+            - img [ref=e16]
+            - generic [ref=e19]: Search documentation...
+          - generic [ref=e20]: ⌘ K
+        - generic [ref=e21]:
+          - heading "Search documentation" [level=2] [ref=e22]
+          - paragraph [ref=e23]: Search pages, components, blocks, and snippets.
+        - generic [ref=e24]:
+          - link "Templates" [ref=e25] [cursor=pointer]:
+            - /url: /templates
+          - link "Docs" [ref=e26] [cursor=pointer]:
+            - /url: /docs
+        - generic [ref=e27]:
+          - 'link "Star Vengeance UI on GitHub. Current stars: 863" [ref=e895] [cursor=pointer]':
+            - /url: https://github.com/Ashutoshx7/VengenceUI
+            - img
+            - generic [ref=e29]:
+              - img
+              - text: "863"
+          - button "toggle theme" [ref=e30] [cursor=pointer]:
+            - img
+  - generic [ref=e31]:
+    - complementary [ref=e32]:
+      - generic [ref=e33]:
+        - generic [ref=e34]:
+          - generic [ref=e35]:
+            - img [ref=e36]
+            - generic [ref=e39]: Follow for updates
+            - img [ref=e40]
+          - link "X @Ashutosh_7x7" [ref=e44] [cursor=pointer]:
+            - /url: https://x.com/Ashutosh_7x7
+            - generic [ref=e45]: X @Ashutosh_7x7
+        - generic [ref=e46]:
+          - generic [ref=e47]:
+            - img [ref=e48]
+            - generic [ref=e51]: Installation
+            - img [ref=e52]
+          - generic [ref=e54]:
+            - link "Install Next.js" [ref=e56] [cursor=pointer]:
+              - /url: /docs/install-nextjs
+              - generic [ref=e57]: Install Next.js
+            - link "Install Tailwind CSS" [ref=e59] [cursor=pointer]:
+              - /url: /docs/install-tailwind
+              - generic [ref=e60]: Install Tailwind CSS
+            - link "Add utilities" [ref=e62] [cursor=pointer]:
+              - /url: /docs/add-utilities
+              - generic [ref=e63]: Add utilities
+            - link "CLI" [ref=e65] [cursor=pointer]:
+              - /url: /docs/cli
+              - generic [ref=e66]: CLI
+        - generic [ref=e67]:
+          - button "Buttons" [ref=e68]:
+            - img [ref=e69]
+            - text: Buttons
+          - generic [ref=e71]:
+            - link "Animated Button" [ref=e73] [cursor=pointer]:
+              - /url: /components/my-animated-button
+              - generic [ref=e74]: Animated Button
+            - link "Candy Button New" [ref=e76] [cursor=pointer]:
+              - /url: /components/candy-button
+              - generic [ref=e77]: Candy Button
+              - generic [ref=e78]: New
+            - link "Pop Button New" [ref=e80] [cursor=pointer]:
+              - /url: /components/pop-button
+              - generic [ref=e81]: Pop Button
+              - generic [ref=e82]: New
+            - link "Generate Button New" [ref=e84] [cursor=pointer]:
+              - /url: /components/generate-button
+              - generic [ref=e85]: Generate Button
+              - generic [ref=e86]: New
+            - link "Radial Glow Button New" [ref=e88] [cursor=pointer]:
+              - /url: /components/radial-glow-button
+              - generic [ref=e89]: Radial Glow Button
+              - generic [ref=e90]: New
+            - link "Social Flip Button" [ref=e92] [cursor=pointer]:
+              - /url: /components/social-flip-button
+              - generic [ref=e93]: Social Flip Button
+            - link "Liquid Metal" [ref=e95] [cursor=pointer]:
+              - /url: /components/liquid-metal
+              - generic [ref=e96]: Liquid Metal
+            - link "Creepy Button" [ref=e98] [cursor=pointer]:
+              - /url: /components/creepy-button
+              - generic [ref=e99]: Creepy Button
+            - link "Corner Button New" [ref=e101] [cursor=pointer]:
+              - /url: /components/corner-button
+              - generic [ref=e102]: Corner Button
+              - generic [ref=e103]: New
+        - generic [ref=e104]:
+          - button "Text & Motion" [ref=e105]:
+            - img [ref=e106]
+            - text: Text & Motion
+          - generic [ref=e108]:
+            - link "Animated Number" [ref=e110] [cursor=pointer]:
+              - /url: /components/animated-number
+              - generic [ref=e111]: Animated Number
+            - link "Flip Text" [ref=e113] [cursor=pointer]:
+              - /url: /components/flip-text
+              - generic [ref=e114]: Flip Text
+            - link "Flip Fade Text" [ref=e116] [cursor=pointer]:
+              - /url: /components/flip-fade-text
+              - generic [ref=e117]: Flip Fade Text
+            - link "Liquid Text" [ref=e119] [cursor=pointer]:
+              - /url: /components/liquid-text
+              - generic [ref=e120]: Liquid Text
+            - link "Morph Text New" [ref=e122] [cursor=pointer]:
+              - /url: /components/morph-text
+              - generic [ref=e123]: Morph Text
+              - generic [ref=e124]: New
+            - link "ASCII Glitch Ripple New" [ref=e126] [cursor=pointer]:
+              - /url: /components/ascii-glitch-ripple
+              - generic [ref=e127]: ASCII Glitch Ripple
+              - generic [ref=e128]: New
+        - generic [ref=e129]:
+          - button "Interactive" [ref=e130]:
+            - img [ref=e131]
+            - text: Interactive
+          - generic [ref=e137]:
+            - link "Image Collage New" [ref=e139] [cursor=pointer]:
+              - /url: /components/image-collage
+              - generic [ref=e140]: Image Collage
+              - generic [ref=e141]: New
+            - link "Interactive Book" [ref=e143] [cursor=pointer]:
+              - /url: /components/interactive-book
+              - generic [ref=e144]: Interactive Book
+            - link "Image Trail New" [ref=e146] [cursor=pointer]:
+              - /url: /components/image-trail
+              - generic [ref=e147]: Image Trail
+              - generic [ref=e148]: New
+            - link "Perspective Carousel New" [ref=e150] [cursor=pointer]:
+              - /url: /components/perspective-carousel
+              - generic [ref=e151]: Perspective Carousel
+              - generic [ref=e152]: New
+            - link "Cylinder Carousel New" [ref=e154] [cursor=pointer]:
+              - /url: /components/cylinder-carousel
+              - generic [ref=e155]: Cylinder Carousel
+              - generic [ref=e156]: New
+            - link "Diagonal Carousel New" [ref=e158] [cursor=pointer]:
+              - /url: /components/diagonal-carousel
+              - generic [ref=e159]: Diagonal Carousel
+              - generic [ref=e160]: New
+            - link "Ripple Displacement Slider New" [ref=e162] [cursor=pointer]:
+              - /url: /components/ripple-displacement-slider
+              - generic [ref=e163]: Ripple Displacement Slider
+              - generic [ref=e164]: New
+            - link "Scroll Dissolve Reveal New" [ref=e166] [cursor=pointer]:
+              - /url: /components/scroll-dissolve-reveal
+              - generic [ref=e167]: Scroll Dissolve Reveal
+              - generic [ref=e168]: New
+            - link "Pixelated Image Trail" [ref=e170] [cursor=pointer]:
+              - /url: /components/pixelated-image-trail
+              - generic [ref=e171]: Pixelated Image Trail
+            - link "Interactive Keyboard New" [ref=e173] [cursor=pointer]:
+              - /url: /components/interactive-keyboard
+              - generic [ref=e174]: Interactive Keyboard
+              - generic [ref=e175]: New
+            - link "Typing Keyboard New" [ref=e177] [cursor=pointer]:
+              - /url: /components/typing-keyboard
+              - generic [ref=e178]: Typing Keyboard
+              - generic [ref=e179]: New
+        - generic [ref=e180]:
+          - button "Layout & Cards" [ref=e181]:
+            - img [ref=e182]
+            - text: Layout & Cards
+          - generic [ref=e187]:
+            - link "Agent Bento Grid New" [ref=e189] [cursor=pointer]:
+              - /url: /components/agent-bento-grid
+              - generic [ref=e190]: Agent Bento Grid
+              - generic [ref=e191]: New
+            - link "Expandable Bento Grid" [ref=e193] [cursor=pointer]:
+              - /url: /components/expandable-bento-grid
+              - generic [ref=e194]: Expandable Bento Grid
+            - link "Staggered Grid" [ref=e196] [cursor=pointer]:
+              - /url: /components/staggered-grid
+              - generic [ref=e197]: Staggered Grid
+            - link "Image Scatter New" [ref=e199] [cursor=pointer]:
+              - /url: /components/image-scatter
+              - generic [ref=e200]: Image Scatter
+              - generic [ref=e201]: New
+            - link "Glow Border Card" [ref=e203] [cursor=pointer]:
+              - /url: /components/glow-border-card
+              - generic [ref=e204]: Glow Border Card
+            - link "Testimonials Card" [ref=e206] [cursor=pointer]:
+              - /url: /components/testimonials-card
+              - generic [ref=e207]: Testimonials Card
+        - generic [ref=e208]:
+          - button "Tooltip & Marquee" [ref=e209]:
+            - img [ref=e210]
+            - text: Tooltip & Marquee
+          - generic [ref=e214]:
+            - link "Cursor Card New" [ref=e216] [cursor=pointer]:
+              - /url: /components/cursor-card
+              - generic [ref=e217]: Cursor Card
+              - generic [ref=e218]: New
+            - link "Elastic Stack New" [ref=e220] [cursor=pointer]:
+              - /url: /components/elastic-stack
+              - generic [ref=e221]: Elastic Stack
+              - generic [ref=e222]: New
+            - link "Logo Slider" [ref=e224] [cursor=pointer]:
+              - /url: /components/logo-slider
+              - generic [ref=e225]: Logo Slider
+            - link "Stacked Logos" [ref=e227] [cursor=pointer]:
+              - /url: /components/stacked-logos
+              - generic [ref=e228]: Stacked Logos
+            - link "Masked Avatars" [ref=e230] [cursor=pointer]:
+              - /url: /components/masked-avatars
+              - generic [ref=e231]: Masked Avatars
+            - link "Image Reveal List New" [ref=e233] [cursor=pointer]:
+              - /url: /components/image-reveal-list
+              - generic [ref=e234]: Image Reveal List
+              - generic [ref=e235]: New
+            - link "FAQ Accordion New" [ref=e237] [cursor=pointer]:
+              - /url: /components/faq-accordion
+              - generic [ref=e238]: FAQ Accordion
+              - generic [ref=e239]: New
+            - link "Shared Tooltip Avatars New" [ref=e241] [cursor=pointer]:
+              - /url: /components/shared-tooltip-avatars
+              - generic [ref=e242]: Shared Tooltip Avatars
+              - generic [ref=e243]: New
+            - link "Magnetic Spotlight Marquee New" [ref=e245] [cursor=pointer]:
+              - /url: /components/magnetic-spotlight-marquee
+              - generic [ref=e246]: Magnetic Spotlight Marquee
+              - generic [ref=e247]: New
+        - generic [ref=e248]:
+          - button "Loaders" [ref=e249]:
+            - img [ref=e250]
+            - text: Loaders
+          - link "Kinetic Text Loader New" [ref=e255] [cursor=pointer]:
+            - /url: /components/kinetic-text-loader
+            - generic [ref=e256]: Kinetic Text Loader
+            - generic [ref=e257]: New
+        - generic [ref=e258]:
+          - button "Navbar & Docs" [ref=e259]:
+            - img [ref=e260]
+            - text: Navbar & Docs
+          - generic [ref=e262]:
+            - link "Glass Dock" [ref=e264] [cursor=pointer]:
+              - /url: /components/glass-dock
+              - generic [ref=e265]: Glass Dock
+            - link "Spotlight Navbar" [ref=e267] [cursor=pointer]:
+              - /url: /components/spotlight-navbar
+              - generic [ref=e268]: Spotlight Navbar
+            - link "Notch Navbar New" [ref=e270] [cursor=pointer]:
+              - /url: /components/notch-navbar
+              - generic [ref=e271]: Notch Navbar
+              - generic [ref=e272]: New
+        - generic [ref=e273]:
+          - button "Collections" [ref=e274]:
+            - img [ref=e275]
+            - text: Collections
+          - generic [ref=e277]:
+            - link "Line Hover Link" [ref=e279] [cursor=pointer]:
+              - /url: /components/line-hover-link
+              - generic [ref=e280]: Line Hover Link
+            - link "Folder Preview" [ref=e282] [cursor=pointer]:
+              - /url: /components/folder-preview
+              - generic [ref=e283]: Folder Preview
+        - generic [ref=e284]:
+          - button "Backgrounds" [ref=e285]:
+            - img [ref=e286]
+            - text: Backgrounds
+          - generic [ref=e290]:
+            - link "Aurora Hero New" [ref=e292] [cursor=pointer]:
+              - /url: /components/aurora-hero
+              - generic [ref=e293]: Aurora Hero
+              - generic [ref=e294]: New
+            - link "Fluid Morph Background New" [ref=e296] [cursor=pointer]:
+              - /url: /components/fluid-morph-bg
+              - generic [ref=e297]: Fluid Morph Background
+              - generic [ref=e298]: New
+            - link "Twisting Ribbon New" [ref=e300] [cursor=pointer]:
+              - /url: /components/twisting-ribbon
+              - generic [ref=e301]: Twisting Ribbon
+              - generic [ref=e302]: New
+            - link "Animated Rays New" [ref=e304] [cursor=pointer]:
+              - /url: /components/animated-rays
+              - generic [ref=e305]: Animated Rays
+              - generic [ref=e306]: New
+            - link "Perspective Grid" [ref=e308] [cursor=pointer]:
+              - /url: /components/perspective-grid
+              - generic [ref=e309]: Perspective Grid
+            - link "Light Lines" [ref=e311] [cursor=pointer]:
+              - /url: /components/light-lines
+              - generic [ref=e312]: Light Lines
+            - link "Liquid Ocean" [ref=e314] [cursor=pointer]:
+              - /url: /components/liquid-ocean
+              - generic [ref=e315]: Liquid Ocean
+    - main [ref=e318]:
+      - generic [ref=e320]:
+        - generic [ref=e321]:
+          - generic [ref=e322]:
+            - img [ref=e323]
+            - text: Component catalog
+          - generic [ref=e333]:
+            - generic [ref=e334]:
+              - heading "Browse the Vengeance UI component library." [level=1] [ref=e335]
+              - paragraph [ref=e336]: Pick a category, open a component, preview the demo, then copy the install command or manual source from the docs.
+              - generic [ref=e337]:
+                - link "Start with buttons" [ref=e338] [cursor=pointer]:
+                  - /url: /components/my-animated-button
+                  - text: Start with buttons
+                  - img
+                - link "CLI install" [ref=e339] [cursor=pointer]:
+                  - /url: /docs/cli
+            - generic [ref=e340]:
+              - generic [ref=e341]:
+                - paragraph [ref=e342]: "54"
+                - paragraph [ref=e343]: components
+              - generic [ref=e344]:
+                - paragraph [ref=e345]: "30"
+                - paragraph [ref=e346]: new
+              - paragraph [ref=e348]:
+                - img [ref=e349]
+                - text: Live demos, usage snippets, and prop notes.
+        - generic [ref=e352]:
+          - generic [ref=e353]:
+            - generic [ref=e354]:
+              - generic [ref=e355]:
+                - img [ref=e357]
+                - generic [ref=e359]:
+                  - heading "Buttons" [level=2] [ref=e360]
+                  - paragraph [ref=e361]: 9 components
+              - generic [ref=e362]: New
+            - generic [ref=e363]:
+              - link "Animated Button Animated CTA button with shine effect" [ref=e364] [cursor=pointer]:
+                - /url: /components/my-animated-button
+                - generic [ref=e365]:
+                  - generic [ref=e366]:
+                    - generic [ref=e367]: Animated Button
+                    - generic [ref=e368]: Animated CTA button with shine effect
+                  - img [ref=e369]
+              - link "Candy Button Glassy candy-like button with top highlight" [ref=e372] [cursor=pointer]:
+                - /url: /components/candy-button
+                - generic [ref=e373]:
+                  - generic [ref=e374]:
+                    - generic [ref=e375]: Candy Button
+                    - generic [ref=e376]: Glassy candy-like button with top highlight
+                  - img [ref=e377]
+              - link "Pop Button Interactive 3D pushable pop button" [ref=e380] [cursor=pointer]:
+                - /url: /components/pop-button
+                - generic [ref=e381]:
+                  - generic [ref=e382]:
+                    - generic [ref=e383]: Pop Button
+                    - generic [ref=e384]: Interactive 3D pushable pop button
+                  - img [ref=e385]
+              - link "Generate Button An interactive, animated button for AI generation tasks." [ref=e388] [cursor=pointer]:
+                - /url: /components/generate-button
+                - generic [ref=e389]:
+                  - generic [ref=e390]:
+                    - generic [ref=e391]: Generate Button
+                    - generic [ref=e392]: An interactive, animated button for AI generation tasks.
+                  - img [ref=e393]
+              - link "Radial Glow Button Button with animated radial gradient hover" [ref=e396] [cursor=pointer]:
+                - /url: /components/radial-glow-button
+                - generic [ref=e397]:
+                  - generic [ref=e398]:
+                    - generic [ref=e399]: Radial Glow Button
+                    - generic [ref=e400]: Button with animated radial gradient hover
+                  - img [ref=e401]
+              - link "Social Flip Button Social icon flip interaction" [ref=e404] [cursor=pointer]:
+                - /url: /components/social-flip-button
+                - generic [ref=e405]:
+                  - generic [ref=e406]:
+                    - generic [ref=e407]: Social Flip Button
+                    - generic [ref=e408]: Social icon flip interaction
+                  - img [ref=e409]
+              - link "Liquid Metal Metallic fluid shader effect" [ref=e412] [cursor=pointer]:
+                - /url: /components/liquid-metal
+                - generic [ref=e413]:
+                  - generic [ref=e414]:
+                    - generic [ref=e415]: Liquid Metal
+                    - generic [ref=e416]: Metallic fluid shader effect
+                  - img [ref=e417]
+              - link "Creepy Button Button with tracking eyes" [ref=e420] [cursor=pointer]:
+                - /url: /components/creepy-button
+                - generic [ref=e421]:
+                  - generic [ref=e422]:
+                    - generic [ref=e423]: Creepy Button
+                    - generic [ref=e424]: Button with tracking eyes
+                  - img [ref=e425]
+              - link "Corner Button Animated corner dots & lines button" [ref=e428] [cursor=pointer]:
+                - /url: /components/corner-button
+                - generic [ref=e429]:
+                  - generic [ref=e430]:
+                    - generic [ref=e431]: Corner Button
+                    - generic [ref=e432]: Animated corner dots & lines button
+                  - img [ref=e433]
+          - generic [ref=e436]:
+            - generic [ref=e437]:
+              - generic [ref=e438]:
+                - img [ref=e440]
+                - generic [ref=e442]:
+                  - heading "Text & Motion" [level=2] [ref=e443]
+                  - paragraph [ref=e444]: 6 components
+              - generic [ref=e445]: New
+            - generic [ref=e446]:
+              - link "Animated Number Smooth numeric transitions" [ref=e447] [cursor=pointer]:
+                - /url: /components/animated-number
+                - generic [ref=e448]:
+                  - generic [ref=e449]:
+                    - generic [ref=e450]: Animated Number
+                    - generic [ref=e451]: Smooth numeric transitions
+                  - img [ref=e452]
+              - link "Flip Text Character flip text animation" [ref=e455] [cursor=pointer]:
+                - /url: /components/flip-text
+                - generic [ref=e456]:
+                  - generic [ref=e457]:
+                    - generic [ref=e458]: Flip Text
+                    - generic [ref=e459]: Character flip text animation
+                  - img [ref=e460]
+              - link "Flip Fade Text Word flip and fade cycle" [ref=e463] [cursor=pointer]:
+                - /url: /components/flip-fade-text
+                - generic [ref=e464]:
+                  - generic [ref=e465]:
+                    - generic [ref=e466]: Flip Fade Text
+                    - generic [ref=e467]: Word flip and fade cycle
+                  - img [ref=e468]
+              - link "Liquid Text Fluid displacement text effect" [ref=e471] [cursor=pointer]:
+                - /url: /components/liquid-text
+                - generic [ref=e472]:
+                  - generic [ref=e473]:
+                    - generic [ref=e474]: Liquid Text
+                    - generic [ref=e475]: Fluid displacement text effect
+                  - img [ref=e476]
+              - link "Morph Text Blur-morph word rotation effect" [ref=e479] [cursor=pointer]:
+                - /url: /components/morph-text
+                - generic [ref=e480]:
+                  - generic [ref=e481]:
+                    - generic [ref=e482]: Morph Text
+                    - generic [ref=e483]: Blur-morph word rotation effect
+                  - img [ref=e484]
+              - link "ASCII Glitch Ripple Dynamic character-scramble wave ripple hover effect" [ref=e487] [cursor=pointer]:
+                - /url: /components/ascii-glitch-ripple
+                - generic [ref=e488]:
+                  - generic [ref=e489]:
+                    - generic [ref=e490]: ASCII Glitch Ripple
+                    - generic [ref=e491]: Dynamic character-scramble wave ripple hover effect
+                  - img [ref=e492]
+          - generic [ref=e495]:
+            - generic [ref=e496]:
+              - generic [ref=e497]:
+                - img [ref=e499]
+                - generic [ref=e505]:
+                  - heading "Interactive" [level=2] [ref=e506]
+                  - paragraph [ref=e507]: 11 components
+              - generic [ref=e508]: New
+            - generic [ref=e509]:
+              - link "Image Collage Interactive scattered image collage toggle" [ref=e510] [cursor=pointer]:
+                - /url: /components/image-collage
+                - generic [ref=e511]:
+                  - generic [ref=e512]:
+                    - generic [ref=e513]: Image Collage
+                    - generic [ref=e514]: Interactive scattered image collage toggle
+                  - img [ref=e515]
+              - link "Interactive Book 3D page-flip style book" [ref=e518] [cursor=pointer]:
+                - /url: /components/interactive-book
+                - generic [ref=e519]:
+                  - generic [ref=e520]:
+                    - generic [ref=e521]: Interactive Book
+                    - generic [ref=e522]: 3D page-flip style book
+                  - img [ref=e523]
+              - link "Image Trail Cursor-following image trail effect" [ref=e526] [cursor=pointer]:
+                - /url: /components/image-trail
+                - generic [ref=e527]:
+                  - generic [ref=e528]:
+                    - generic [ref=e529]: Image Trail
+                    - generic [ref=e530]: Cursor-following image trail effect
+                  - img [ref=e531]
+              - link "Perspective Carousel Spring-driven 3D image carousel" [ref=e534] [cursor=pointer]:
+                - /url: /components/perspective-carousel
+                - generic [ref=e535]:
+                  - generic [ref=e536]:
+                    - generic [ref=e537]: Perspective Carousel
+                    - generic [ref=e538]: Spring-driven 3D image carousel
+                  - img [ref=e539]
+              - link "Cylinder Carousel Infinite CSS 3D cylinder image carousel" [ref=e542] [cursor=pointer]:
+                - /url: /components/cylinder-carousel
+                - generic [ref=e543]:
+                  - generic [ref=e544]:
+                    - generic [ref=e545]: Cylinder Carousel
+                    - generic [ref=e546]: Infinite CSS 3D cylinder image carousel
+                  - img [ref=e547]
+              - link "Diagonal Carousel Spring-driven diagonal image carousel" [ref=e550] [cursor=pointer]:
+                - /url: /components/diagonal-carousel
+                - generic [ref=e551]:
+                  - generic [ref=e552]:
+                    - generic [ref=e553]: Diagonal Carousel
+                    - generic [ref=e554]: Spring-driven diagonal image carousel
+                  - img [ref=e555]
+              - link "Ripple Displacement Slider Interactive full-screen WebGL slider with fluid ripple displacement transitions" [ref=e558] [cursor=pointer]:
+                - /url: /components/ripple-displacement-slider
+                - generic [ref=e559]:
+                  - generic [ref=e560]:
+                    - generic [ref=e561]: Ripple Displacement Slider
+                    - generic [ref=e562]: Interactive full-screen WebGL slider with fluid ripple displacement transitions
+                  - img [ref=e563]
+              - link "Scroll Dissolve Reveal A beautiful image dissolve effect driven by scrolling using React Three Fiber and Shaders." [ref=e566] [cursor=pointer]:
+                - /url: /components/scroll-dissolve-reveal
+                - generic [ref=e567]:
+                  - generic [ref=e568]:
+                    - generic [ref=e569]: Scroll Dissolve Reveal
+                    - generic [ref=e570]: A beautiful image dissolve effect driven by scrolling using React Three Fiber and Shaders.
+                  - img [ref=e571]
+              - link "Pixelated Image Trail Cursor trail image reveal" [ref=e574] [cursor=pointer]:
+                - /url: /components/pixelated-image-trail
+                - generic [ref=e575]:
+                  - generic [ref=e576]:
+                    - generic [ref=e577]: Pixelated Image Trail
+                    - generic [ref=e578]: Cursor trail image reveal
+                  - img [ref=e579]
+              - link "Interactive Keyboard Animated physical keyboard UI" [ref=e582] [cursor=pointer]:
+                - /url: /components/interactive-keyboard
+                - generic [ref=e583]:
+                  - generic [ref=e584]:
+                    - generic [ref=e585]: Interactive Keyboard
+                    - generic [ref=e586]: Animated physical keyboard UI
+                  - img [ref=e587]
+              - link "Typing Keyboard 3D isometric keyboard with auto-typing screen" [ref=e590] [cursor=pointer]:
+                - /url: /components/typing-keyboard
+                - generic [ref=e591]:
+                  - generic [ref=e592]:
+                    - generic [ref=e593]: Typing Keyboard
+                    - generic [ref=e594]: 3D isometric keyboard with auto-typing screen
+                  - img [ref=e595]
+          - generic [ref=e598]:
+            - generic [ref=e599]:
+              - generic [ref=e600]:
+                - img [ref=e602]
+                - generic [ref=e607]:
+                  - heading "Layout & Cards" [level=2] [ref=e608]
+                  - paragraph [ref=e609]: 6 components
+              - generic [ref=e610]: New
+            - generic [ref=e611]:
+              - link "Agent Bento Grid Multi-agent workspace grid layout" [ref=e612] [cursor=pointer]:
+                - /url: /components/agent-bento-grid
+                - generic [ref=e613]:
+                  - generic [ref=e614]:
+                    - generic [ref=e615]: Agent Bento Grid
+                    - generic [ref=e616]: Multi-agent workspace grid layout
+                  - img [ref=e617]
+              - link "Expandable Bento Grid Interactive multi-panel bento" [ref=e620] [cursor=pointer]:
+                - /url: /components/expandable-bento-grid
+                - generic [ref=e621]:
+                  - generic [ref=e622]:
+                    - generic [ref=e623]: Expandable Bento Grid
+                    - generic [ref=e624]: Interactive multi-panel bento
+                  - img [ref=e625]
+              - link "Staggered Grid Offset card grid composition" [ref=e628] [cursor=pointer]:
+                - /url: /components/staggered-grid
+                - generic [ref=e629]:
+                  - generic [ref=e630]:
+                    - generic [ref=e631]: Staggered Grid
+                    - generic [ref=e632]: Offset card grid composition
+                  - img [ref=e633]
+              - link "Image Scatter Smooth scroll-triggered scattered photo gallery" [ref=e636] [cursor=pointer]:
+                - /url: /components/image-scatter
+                - generic [ref=e637]:
+                  - generic [ref=e638]:
+                    - generic [ref=e639]: Image Scatter
+                    - generic [ref=e640]: Smooth scroll-triggered scattered photo gallery
+                  - img [ref=e641]
+              - link "Glow Border Card Card with animated glow border" [ref=e644] [cursor=pointer]:
+                - /url: /components/glow-border-card
+                - generic [ref=e645]:
+                  - generic [ref=e646]:
+                    - generic [ref=e647]: Glow Border Card
+                    - generic [ref=e648]: Card with animated glow border
+                  - img [ref=e649]
+              - link "Testimonials Card Animated testimonial stack" [ref=e652] [cursor=pointer]:
+                - /url: /components/testimonials-card
+                - generic [ref=e653]:
+                  - generic [ref=e654]:
+                    - generic [ref=e655]: Testimonials Card
+                    - generic [ref=e656]: Animated testimonial stack
+                  - img [ref=e657]
+          - generic [ref=e660]:
+            - generic [ref=e661]:
+              - generic [ref=e662]:
+                - img [ref=e664]
+                - generic [ref=e668]:
+                  - heading "Tooltip & Marquee" [level=2] [ref=e669]
+                  - paragraph [ref=e670]: 9 components
+              - generic [ref=e671]: New
+            - generic [ref=e672]:
+              - link "Cursor Card Inline text link with cursor tracking preview card" [ref=e673] [cursor=pointer]:
+                - /url: /components/cursor-card
+                - generic [ref=e674]:
+                  - generic [ref=e675]:
+                    - generic [ref=e676]: Cursor Card
+                    - generic [ref=e677]: Inline text link with cursor tracking preview card
+                  - img [ref=e678]
+              - link "Elastic Stack Horizontal expanding staggered stack" [ref=e681] [cursor=pointer]:
+                - /url: /components/elastic-stack
+                - generic [ref=e682]:
+                  - generic [ref=e683]:
+                    - generic [ref=e684]: Elastic Stack
+                    - generic [ref=e685]: Horizontal expanding staggered stack
+                  - img [ref=e686]
+              - link "Logo Slider Infinite logo marquee" [ref=e689] [cursor=pointer]:
+                - /url: /components/logo-slider
+                - generic [ref=e690]:
+                  - generic [ref=e691]:
+                    - generic [ref=e692]: Logo Slider
+                    - generic [ref=e693]: Infinite logo marquee
+                  - img [ref=e694]
+              - link "Stacked Logos Overlapping brand logos" [ref=e697] [cursor=pointer]:
+                - /url: /components/stacked-logos
+                - generic [ref=e698]:
+                  - generic [ref=e699]:
+                    - generic [ref=e700]: Stacked Logos
+                    - generic [ref=e701]: Overlapping brand logos
+                  - img [ref=e702]
+              - link "Masked Avatars Stacked masked avatar list" [ref=e705] [cursor=pointer]:
+                - /url: /components/masked-avatars
+                - generic [ref=e706]:
+                  - generic [ref=e707]:
+                    - generic [ref=e708]: Masked Avatars
+                    - generic [ref=e709]: Stacked masked avatar list
+                  - img [ref=e710]
+              - link "Image Reveal List Hover-based image reveal tooltip list" [ref=e713] [cursor=pointer]:
+                - /url: /components/image-reveal-list
+                - generic [ref=e714]:
+                  - generic [ref=e715]:
+                    - generic [ref=e716]: Image Reveal List
+                    - generic [ref=e717]: Hover-based image reveal tooltip list
+                  - img [ref=e718]
+              - link "FAQ Accordion Animated expanding FAQ list" [ref=e721] [cursor=pointer]:
+                - /url: /components/faq-accordion
+                - generic [ref=e722]:
+                  - generic [ref=e723]:
+                    - generic [ref=e724]: FAQ Accordion
+                    - generic [ref=e725]: Animated expanding FAQ list
+                  - img [ref=e726]
+              - link "Shared Tooltip Avatars Avatar stack with a sliding shared tooltip" [ref=e729] [cursor=pointer]:
+                - /url: /components/shared-tooltip-avatars
+                - generic [ref=e730]:
+                  - generic [ref=e731]:
+                    - generic [ref=e732]: Shared Tooltip Avatars
+                    - generic [ref=e733]: Avatar stack with a sliding shared tooltip
+                  - img [ref=e734]
+              - link "Magnetic Spotlight Marquee Interactive full-screen marquee with spotlight cursor effect" [ref=e737] [cursor=pointer]:
+                - /url: /components/magnetic-spotlight-marquee
+                - generic [ref=e738]:
+                  - generic [ref=e739]:
+                    - generic [ref=e740]: Magnetic Spotlight Marquee
+                    - generic [ref=e741]: Interactive full-screen marquee with spotlight cursor effect
+                  - img [ref=e742]
+          - generic [ref=e745]:
+            - generic [ref=e746]:
+              - generic [ref=e747]:
+                - img [ref=e749]
+                - generic [ref=e752]:
+                  - heading "Loaders" [level=2] [ref=e753]
+                  - paragraph [ref=e754]: 1 components
+              - generic [ref=e755]: New
+            - link "Kinetic Text Loader Typography-based animated loader" [ref=e757] [cursor=pointer]:
+              - /url: /components/kinetic-text-loader
+              - generic [ref=e758]:
+                - generic [ref=e759]:
+                  - generic [ref=e760]: Kinetic Text Loader
+                  - generic [ref=e761]: Typography-based animated loader
+                - img [ref=e762]
+          - generic [ref=e765]:
+            - generic [ref=e766]:
+              - generic [ref=e767]:
+                - img [ref=e769]
+                - generic [ref=e771]:
+                  - heading "Navbar & Docs" [level=2] [ref=e772]
+                  - paragraph [ref=e773]: 3 components
+              - generic [ref=e774]: New
+            - generic [ref=e775]:
+              - link "Glass Dock Mac-style floating dock" [ref=e776] [cursor=pointer]:
+                - /url: /components/glass-dock
+                - generic [ref=e777]:
+                  - generic [ref=e778]:
+                    - generic [ref=e779]: Glass Dock
+                    - generic [ref=e780]: Mac-style floating dock
+                  - img [ref=e781]
+              - link "Spotlight Navbar Navbar with animated spotlight effect" [ref=e784] [cursor=pointer]:
+                - /url: /components/spotlight-navbar
+                - generic [ref=e785]:
+                  - generic [ref=e786]:
+                    - generic [ref=e787]: Spotlight Navbar
+                    - generic [ref=e788]: Navbar with animated spotlight effect
+                  - img [ref=e789]
+              - link "Notch Navbar Responsive navbar with a sleek cutout notch design" [ref=e792] [cursor=pointer]:
+                - /url: /components/notch-navbar
+                - generic [ref=e793]:
+                  - generic [ref=e794]:
+                    - generic [ref=e795]: Notch Navbar
+                    - generic [ref=e796]: Responsive navbar with a sleek cutout notch design
+                  - img [ref=e797]
+          - generic [ref=e800]:
+            - generic [ref=e802]:
+              - img [ref=e804]
+              - generic [ref=e806]:
+                - heading "Collections" [level=2] [ref=e807]
+                - paragraph [ref=e808]: 2 components
+            - generic [ref=e809]:
+              - link "Line Hover Link Animated hover underline styles" [ref=e810] [cursor=pointer]:
+                - /url: /components/line-hover-link
+                - generic [ref=e811]:
+                  - generic [ref=e812]:
+                    - generic [ref=e813]: Line Hover Link
+                    - generic [ref=e814]: Animated hover underline styles
+                  - img [ref=e815]
+              - link "Folder Preview Folder stack visual preview" [ref=e818] [cursor=pointer]:
+                - /url: /components/folder-preview
+                - generic [ref=e819]:
+                  - generic [ref=e820]:
+                    - generic [ref=e821]: Folder Preview
+                    - generic [ref=e822]: Folder stack visual preview
+                  - img [ref=e823]
+          - generic [ref=e826]:
+            - generic [ref=e827]:
+              - generic [ref=e828]:
+                - img [ref=e830]
+                - generic [ref=e834]:
+                  - heading "Backgrounds" [level=2] [ref=e835]
+                  - paragraph [ref=e836]: 7 components
+              - generic [ref=e837]: New
+            - generic [ref=e838]:
+              - link "Aurora Hero Fluted glass dynamic hero with interactive switch" [ref=e839] [cursor=pointer]:
+                - /url: /components/aurora-hero
+                - generic [ref=e840]:
+                  - generic [ref=e841]:
+                    - generic [ref=e842]: Aurora Hero
+                    - generic [ref=e843]: Fluted glass dynamic hero with interactive switch
+                  - img [ref=e844]
+              - link "Fluid Morph Background Organic fluid shape morphing animation" [ref=e847] [cursor=pointer]:
+                - /url: /components/fluid-morph-bg
+                - generic [ref=e848]:
+                  - generic [ref=e849]:
+                    - generic [ref=e850]: Fluid Morph Background
+                    - generic [ref=e851]: Organic fluid shape morphing animation
+                  - img [ref=e852]
+              - link "Twisting Ribbon 3D waving neon ribbon animation" [ref=e855] [cursor=pointer]:
+                - /url: /components/twisting-ribbon
+                - generic [ref=e856]:
+                  - generic [ref=e857]:
+                    - generic [ref=e858]: Twisting Ribbon
+                    - generic [ref=e859]: 3D waving neon ribbon animation
+                  - img [ref=e860]
+              - link "Animated Rays Hero with animated heading" [ref=e863] [cursor=pointer]:
+                - /url: /components/animated-rays
+                - generic [ref=e864]:
+                  - generic [ref=e865]:
+                    - generic [ref=e866]: Animated Rays
+                    - generic [ref=e867]: Hero with animated heading
+                  - img [ref=e868]
+              - link "Perspective Grid 3D perspective matrix background" [ref=e871] [cursor=pointer]:
+                - /url: /components/perspective-grid
+                - generic [ref=e872]:
+                  - generic [ref=e873]:
+                    - generic [ref=e874]: Perspective Grid
+                    - generic [ref=e875]: 3D perspective matrix background
+                  - img [ref=e876]
+              - link "Light Lines Animated flowing line background" [ref=e879] [cursor=pointer]:
+                - /url: /components/light-lines
+                - generic [ref=e880]:
+                  - generic [ref=e881]:
+                    - generic [ref=e882]: Light Lines
+                    - generic [ref=e883]: Animated flowing line background
+                  - img [ref=e884]
+              - link "Liquid Ocean Animated ocean wave field" [ref=e887] [cursor=pointer]:
+                - /url: /components/liquid-ocean
+                - generic [ref=e888]:
+                  - generic [ref=e889]:
+                    - generic [ref=e890]: Liquid Ocean
+                    - generic [ref=e891]: Animated ocean wave field
+                  - img [ref=e892]
+  - alert [ref=e896]
