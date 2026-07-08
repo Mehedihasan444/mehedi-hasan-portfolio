@@ -1,117 +1,263 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useEffect } from "react";
+import Image from "next/image";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollReveal, StaggerReveal, RevealItem } from "@/components/animations/scroll-reveal";
+import { AnimatedCounterGroup } from "@/components/animations/animated-counter";
+import { useParallax } from "@/hooks/use-parallax";
+import { Code2, Lightbulb, Microscope, Puzzle } from "lucide-react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
-  { label: "Experience", value: "1+" },
-  { label: "Projects", value: "10+" },
-  { label: "Technologies", value: "15+" },
-  { label: "Open Source", value: "5+" },
+  { end: 1, suffix: "+", label: "Years Experience" },
+  { end: 10, suffix: "+", label: "Projects Completed" },
+  { end: 18, suffix: "+", label: "Technologies" },
+  { end: 5, suffix: "+", label: "Open Source" },
+];
+
+const values = [
+  {
+    Icon: Code2,
+    title: "Clean Code Advocate",
+    desc: "Passionate about writing maintainable, efficient, and scalable code that stands the test of time",
+    gradient: "from-emerald/20 to-teal/10",
+    color: "text-emerald",
+  },
+  {
+    Icon: Lightbulb,
+    title: "Innovation Driven",
+    desc: "Always exploring emerging technologies and pushing boundaries to deliver exceptional results",
+    gradient: "from-teal/20 to-cyan/10",
+    color: "text-teal",
+  },
+  {
+    Icon: Microscope,
+    title: "Detail Oriented",
+    desc: "Pixel-perfect implementation with meticulous attention to performance and user experience",
+    gradient: "from-cyan/20 to-emerald/10",
+    color: "text-cyan",
+  },
+  {
+    Icon: Puzzle,
+    title: "Problem Solver",
+    desc: "Analytical mindset focused on breaking down complex problems into elegant solutions",
+    gradient: "from-emerald/20 to-cyan/10",
+    color: "text-violet-soft",
+  },
 ];
 
 export function AboutSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+  const imageRef = useParallax<HTMLDivElement>({ speed: 0.3 });
 
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const paragraphs = textRef.current?.querySelectorAll(".reveal-text");
+      if (paragraphs) {
+        paragraphs.forEach((p) => {
+          const text = p.textContent || "";
+          p.innerHTML = "";
+          text.split(" ").forEach((word, i) => {
+            const span = document.createElement("span");
+            span.textContent = word;
+            span.style.display = "inline-block";
+            span.style.opacity = "0";
+            span.style.transform = "translateY(18px)";
+            (p as HTMLElement).appendChild(span);
+            if (i < text.split(" ").length - 1) {
+              const space = document.createTextNode("\u00A0");
+              (p as HTMLElement).appendChild(space);
+            }
+          });
+
+          gsap.to(p.querySelectorAll("span"), {
+            opacity: 1,
+            y: 0,
+            stagger: 0.025,
+            duration: 0.55,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: p,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+          });
+        });
+      }
+
+      // Rounded-top rise effect
+      if (sectionRef.current) {
+        gsap.fromTo(
+          sectionRef.current,
+          { y: 30 },
+          {
+            y: 0,
+            ease: "power2.out",
+            duration: 0.8,
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top bottom",
+              end: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+          },
+        );
+      }
+    }, textRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section ref={ref} id="about" className="relative overflow-hidden px-6 py-32">
+    <section
+      ref={sectionRef}
+      id="about"
+      className="bg-background relative z-10 overflow-hidden rounded-t-[3rem] px-6 py-32"
+      style={{ marginTop: "clamp(-10rem, -15vh, -4rem)" }}
+    >
+      {/* Ambient glow */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <div className="from-emerald/5 via-teal/5 absolute left-0 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r to-transparent blur-[150px]" />
+      </div>
+
       <div className="mx-auto max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-muted-foreground mb-4 text-sm font-medium uppercase tracking-widest"
-        >
-          About Me
-        </motion.div>
+        <ScrollReveal>
+          <p className="text-muted-foreground mb-4 text-sm font-medium uppercase tracking-[0.3em]">
+            About Me
+          </p>
+        </ScrollReveal>
 
         <div className="grid gap-16 lg:grid-cols-2">
-          <motion.div style={{ y, opacity }}>
-            <h2 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-              Turning complex problems into <span className="text-gradient">elegant solutions</span>
-            </h2>
+          {/* Left: text */}
+          <div>
+            <ScrollReveal direction="left" delay={0.2}>
+              <h2 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+                Turning complex problems into{" "}
+                <span className="text-gradient">elegant solutions</span>
+              </h2>
+            </ScrollReveal>
 
-            <div className="text-muted-foreground mt-8 space-y-4 leading-relaxed">
-              <p>
+            <div ref={textRef} className="text-muted-foreground mt-8 space-y-4 leading-relaxed">
+              <p className="reveal-text">
                 With over 1+ years of experience in full-stack development, I&apos;m dedicated to
                 creating elegant solutions to complex problems. My journey in technology is driven
-                by a passion for innovation and a commitment to excellence.
+                by a passion for innovation and a commitment to excellence in every project I
+                undertake.
               </p>
-              <p>
+              <p className="reveal-text">
                 I specialize in building scalable web applications using React, Next.js, Node.js,
-                and TypeScript. Every project is an opportunity to push boundaries and deliver
-                exceptional results.
+                and TypeScript. Every project is an opportunity to push boundaries, learn new
+                things, and deliver exceptional results that make a real impact.
               </p>
             </div>
 
-            <div className="mt-12 grid grid-cols-2 gap-8 sm:grid-cols-4">
-              {stats.map((stat) => (
-                <div key={stat.label}>
-                  <div className="text-3xl font-bold text-white">{stat.value}</div>
-                  <div className="text-muted-foreground mt-1 text-sm">{stat.label}</div>
-                </div>
-              ))}
+            <div className="mt-12">
+              <AnimatedCounterGroup items={stats} />
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative flex items-center justify-center"
-          >
-            <div className="relative h-80 w-80 sm:h-96 sm:w-96">
-              <div className="from-cyan/20 via-purple/20 absolute inset-0 rounded-full bg-gradient-to-br to-transparent blur-3xl" />
-              <div className="glass glow-border flex h-full w-full items-center justify-center rounded-2xl">
-                <div className="text-center">
-                  <div className="text-gradient text-6xl font-bold">MH</div>
-                  <div className="text-muted-foreground mt-2 text-sm">Full Stack Developer</div>
+          {/* Right: avatar */}
+          <div ref={imageRef} className="relative flex items-center justify-center">
+            <ScrollReveal direction="right" delay={0.3}>
+              <div className="relative h-80 w-80 sm:h-96 sm:w-96">
+                {/* Outer glow rings */}
+                <div className="from-emerald/30 via-teal/30 animate-pulse-slow absolute -inset-4 rounded-full bg-gradient-to-br to-transparent blur-3xl" />
+                <div
+                  className="from-emerald/20 via-teal/20 animate-spin-slow absolute inset-0 rounded-full bg-gradient-to-br to-transparent blur-2xl"
+                  style={{ animationDuration: "8s" }}
+                />
+
+                {/* Avatar card */}
+                <div className="glass glow-border relative flex h-full w-full items-center justify-center overflow-hidden rounded-2xl">
+                  <div className="from-emerald/10 via-teal/10 absolute inset-0 bg-gradient-to-br to-transparent" />
+
+                  {/* Profile content */}
+                  <div className="relative z-10 flex flex-col items-center gap-4 p-8 text-center">
+                    {/* Avatar ring */}
+                    <div className="relative">
+                      <div className="from-emerald via-teal to-cyan absolute -inset-1 rounded-full bg-gradient-to-br opacity-70 blur-sm" />
+                      <div className="relative flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border-2 border-white/10 bg-[#050810]">
+                        {/* Fallback gradient avatar */}
+                        <div className="from-emerald/30 to-teal/30 absolute inset-0 bg-gradient-to-br" />
+                        <span className="text-gradient font-heading relative text-4xl font-bold">
+                          MH
+                        </span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="font-heading text-lg font-bold text-white">Mehedi Hasan</div>
+                      <div className="text-muted-foreground mt-1 text-sm uppercase tracking-wider">
+                        Full Stack Developer
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <span className="relative flex h-2 w-2">
+                        <span className="bg-emerald absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" />
+                        <span className="bg-emerald relative inline-flex h-2 w-2 rounded-full" />
+                      </span>
+                      <span className="bg-emerald/15 text-emerald rounded-full px-3 py-1 text-xs font-medium">
+                        Available for Work
+                      </span>
+                    </div>
+
+                    {/* Quick info */}
+                    <div className="mt-2 w-full space-y-2 border-t border-white/[0.07] pt-4">
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="text-muted-foreground">Location</span>
+                        <span className="text-white/70">Dhaka, Bangladesh 🇧🇩</span>
+                      </div>
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="text-muted-foreground">Experience</span>
+                        <span className="text-white/70">1+ Years</span>
+                      </div>
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="text-muted-foreground">Focus</span>
+                        <span className="text-white/70">Full Stack & AI</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
+            </ScrollReveal>
+          </div>
         </div>
 
-        <div className="mt-24 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            {
-              title: "Clean Code Advocate",
-              desc: "Passionate about writing maintainable, efficient, and scalable code",
-            },
-            {
-              title: "Team Player",
-              desc: "Strong believer in collaboration and knowledge sharing",
-            },
-            {
-              title: "Innovation Driven",
-              desc: "Always exploring new technologies and best practices",
-            },
-            {
-              title: "Fast Learner",
-              desc: "Quick to adapt and master new technologies and frameworks",
-            },
-          ].map((item, i) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="glass glass-hover rounded-xl p-6"
-            >
-              <h3 className="font-medium text-white">{item.title}</h3>
-              <p className="text-muted-foreground mt-2 text-sm">{item.desc}</p>
-            </motion.div>
-          ))}
+        {/* Values grid */}
+        <div className="mt-32">
+          <ScrollReveal>
+            <h3 className="text-muted-foreground mb-12 text-center text-sm font-medium uppercase tracking-[0.3em]">
+              What Defines Me
+            </h3>
+          </ScrollReveal>
+
+          <StaggerReveal staggerDelay={0.1}>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {values.map((item) => (
+                <RevealItem key={item.title} direction="up" distance={40}>
+                  <div className="glass glass-hover group relative rounded-xl p-6 transition-all duration-500">
+                    <div
+                      className={`absolute inset-0 rounded-xl bg-gradient-to-br ${item.gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
+                    />
+                    <div className="relative z-10">
+                      <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 transition-all duration-300 group-hover:bg-white/10">
+                        <item.Icon className={`h-5 w-5 ${item.color}`} />
+                      </div>
+                      <h3 className="font-medium text-white">{item.title}</h3>
+                      <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                </RevealItem>
+              ))}
+            </div>
+          </StaggerReveal>
         </div>
       </div>
     </section>
