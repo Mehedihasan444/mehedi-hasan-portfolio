@@ -156,7 +156,7 @@ export function SkillsSection() {
         </ScrollReveal>
 
         {/* Proficiency bars */}
-        <ScrollReveal delay={0.3}>
+        {/* <ScrollReveal delay={0.3}>
           <div className="mt-20">
             <p className="text-muted-foreground mb-8 text-center text-xs font-medium uppercase tracking-[0.3em]">
               Area Proficiency
@@ -167,7 +167,7 @@ export function SkillsSection() {
               ))}
             </div>
           </div>
-        </ScrollReveal>
+        </ScrollReveal> */}
 
         {/* Skill categories (text list — typographic layout) */}
         <ScrollReveal delay={0.4}>
@@ -186,7 +186,7 @@ export function SkillsSection() {
               },
               {
                 name: "Backend",
-                skills: ["Node.js", "Express.js", "Python", "Java", "REST APIs", "GraphQL"],
+                skills: ["Node.js", "Express.js", "Python", "Java", "REST APIs"],
               },
               {
                 name: "Database",
@@ -194,7 +194,7 @@ export function SkillsSection() {
               },
               {
                 name: "Tools & Infra",
-                skills: ["Git", "Docker", "Linux", "CI/CD", "AWS", "Nginx"],
+                skills: ["Git", "Docker", "Linux", "CI/CD", "Nginx"],
               },
             ].map((category) => (
               <div key={category.name} className="group">

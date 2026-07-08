@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { TextHoverEffect, FooterBackgroundGradient } from "@/components/ui/hover-footer";
 
 const socialLinks = [
   { label: "GitHub", href: "https://github.com/Mehedihasan444" },
@@ -17,8 +20,8 @@ const quickLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-white/5 bg-[oklch(0.04_0.01_260/0.5)]">
-      <div className="mx-auto max-w-7xl px-6 py-16">
+    <footer className="relative overflow-hidden border-t border-white/5 bg-[oklch(0.04_0.01_260/0.5)]">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 py-16 pb-8">
         <div className="grid gap-12 md:grid-cols-3">
           <div>
             <Link href="/" className="text-lg font-semibold">
@@ -65,12 +68,19 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-white/5 pt-8 text-center">
+        <div className="mt-8 border-t border-white/5 pt-8 text-center">
           <p className="text-muted-foreground text-xs">
             &copy; {new Date().getFullYear()} Mehedi Hasan. Built with precision.
           </p>
         </div>
       </div>
+
+      {/* Text hover effect */}
+      <div className="pointer-events-none relative z-10 -mb-28 -mt-40 flex h-[20rem] select-none items-center justify-center">
+        <TextHoverEffect text="Mehedi" className="pointer-events-auto" />
+      </div>
+
+      <FooterBackgroundGradient />
     </footer>
   );
 }

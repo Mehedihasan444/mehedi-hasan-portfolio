@@ -171,57 +171,16 @@ export function AboutSection() {
                   style={{ animationDuration: "8s" }}
                 />
 
-                {/* Avatar card */}
-                <div className="glass glow-border relative flex h-full w-full items-center justify-center overflow-hidden rounded-2xl">
-                  <div className="from-emerald/10 via-teal/10 absolute inset-0 bg-gradient-to-br to-transparent" />
-
-                  {/* Profile content */}
-                  <div className="relative z-10 flex flex-col items-center gap-4 p-8 text-center">
-                    {/* Avatar ring */}
-                    <div className="relative">
-                      <div className="from-emerald via-teal to-cyan absolute -inset-1 rounded-full bg-gradient-to-br opacity-70 blur-sm" />
-                      <div className="relative flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border-2 border-white/10 bg-[#050810]">
-                        {/* Fallback gradient avatar */}
-                        <div className="from-emerald/30 to-teal/30 absolute inset-0 bg-gradient-to-br" />
-                        <span className="text-gradient font-heading relative text-4xl font-bold">
-                          MH
-                        </span>
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="font-heading text-lg font-bold text-white">Mehedi Hasan</div>
-                      <div className="text-muted-foreground mt-1 text-sm uppercase tracking-wider">
-                        Full Stack Developer
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <span className="relative flex h-2 w-2">
-                        <span className="bg-emerald absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" />
-                        <span className="bg-emerald relative inline-flex h-2 w-2 rounded-full" />
-                      </span>
-                      <span className="bg-emerald/15 text-emerald rounded-full px-3 py-1 text-xs font-medium">
-                        Available for Work
-                      </span>
-                    </div>
-
-                    {/* Quick info */}
-                    <div className="mt-2 w-full space-y-2 border-t border-white/[0.07] pt-4">
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-muted-foreground">Location</span>
-                        <span className="text-white/70">Dhaka, Bangladesh 🇧🇩</span>
-                      </div>
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-muted-foreground">Experience</span>
-                        <span className="text-white/70">1+ Years</span>
-                      </div>
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-muted-foreground">Focus</span>
-                        <span className="text-white/70">Full Stack & AI</span>
-                      </div>
-                    </div>
-                  </div>
+                {/* Avatar card — photo only */}
+                <div className="glow-border relative h-full w-full overflow-hidden rounded-2xl">
+                  <Image
+                    src="/mehedi_hasan.jpg"
+                    alt="Mehedi Hasan"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 320px, 384px"
+                    priority
+                  />
                 </div>
               </div>
             </ScrollReveal>

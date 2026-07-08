@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import { AuroraBackground } from "@/components/animations/aurora-background";
+import { AuroraShaderBackground } from "@/components/ui/animated-shader-background";
 import { MagneticButton } from "@/components/animations/magnetic-button";
 import { AnimatedBadge } from "@/components/ui/animated-badge";
 import { Typewriter } from "@/components/animations/typewriter";
@@ -258,8 +258,8 @@ export function HeroSection() {
       className="relative flex min-h-screen flex-col overflow-hidden"
       aria-label="Hero — Mehedi Hasan"
     >
-      {/* Aurora canvas background */}
-      <AuroraBackground />
+      {/* WebGL aurora shader background */}
+      <AuroraShaderBackground className="absolute inset-0" />
 
       {/* Grid overlay */}
       <div
