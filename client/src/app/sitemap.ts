@@ -1,7 +1,16 @@
 import type { MetadataRoute } from "next";
+import { getProjects } from "@/lib/api-public";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://mehedi-hasan.dev";
+
+  const projects = await getProjects();
+  const projectEntries: MetadataRoute.Sitemap = projects.map((project) => ({
+    url: `${baseUrl}/projects/${project.slug}`,
+    lastModified: project.updatedAt ? new Date(project.updatedAt) : new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
 
   return [
     {
@@ -16,5 +25,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.5,
     },
+    {
+      url: `${baseUrl}/projects`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    ...projectEntries,
   ];
 }

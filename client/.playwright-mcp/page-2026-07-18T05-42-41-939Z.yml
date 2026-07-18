@@ -1,0 +1,898 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e1376]:
+    - link "Home" [ref=e1377] [cursor=pointer]:
+      - /url: "#hero"
+    - link "About" [ref=e1380] [cursor=pointer]:
+      - /url: "#about"
+    - link "Skills" [ref=e1383] [cursor=pointer]:
+      - /url: "#skills"
+    - link "Experience" [ref=e1386] [cursor=pointer]:
+      - /url: "#experience"
+    - link "Projects" [ref=e1389] [cursor=pointer]:
+      - /url: "#projects"
+    - link "Education" [ref=e1392] [cursor=pointer]:
+      - /url: "#education"
+    - link "Certs" [ref=e1395] [cursor=pointer]:
+      - /url: "#certifications"
+    - link "Awards" [ref=e1398] [cursor=pointer]:
+      - /url: "#achievements"
+    - link "GitHub" [ref=e1401] [cursor=pointer]:
+      - /url: "#github"
+    - link "Testimonials" [ref=e1404] [cursor=pointer]:
+      - /url: "#testimonials"
+    - link "Blog" [ref=e1407] [cursor=pointer]:
+      - /url: "#blog"
+    - link "Contact" [ref=e1410] [cursor=pointer]:
+      - /url: "#contact"
+  - banner [ref=e9]:
+    - generic [ref=e10]:
+      - link "Mehedi Hasan — Home" [ref=e11] [cursor=pointer]:
+        - /url: "#hero"
+        - generic [ref=e12]: MH
+        - generic [ref=e14]: Mehedi.
+      - button "Open menu" [ref=e15]
+  - main [ref=e17]:
+    - generic [ref=e18]:
+      - region "Hero — Mehedi Hasan" [ref=e19]:
+        - generic [ref=e21]:
+          - generic [ref=e22]: Available for new opportunities
+          - paragraph [ref=e26]:
+            - text: //
+            - generic [ref=e27]: Full Stack Developer
+          - paragraph [ref=e29]: Crafting elegant, scalable web applications at the intersection of design and engineering. Passionate about clean code, performance, and user experience.
+          - generic [ref=e31]:
+            - generic [ref=e32]: portfolio — zsh
+            - generic [ref=e37]:
+              - generic [ref=e38]: ❯
+              - generic [ref=e39]: npx create-next-app portfolio
+            - generic [ref=e41]:
+              - generic [ref=e42]: ❯
+              - generic [ref=e43]: cd portfolio && npm install
+            - generic [ref=e45]:
+              - generic [ref=e46]: ❯
+              - generic [ref=e47]: npm run dev
+            - generic [ref=e49]: ✓ Ready on http://localhost:3000
+          - generic [ref=e50]:
+            - generic [ref=e51]:
+              - generic [ref=e52]: 1+
+              - generic [ref=e53]: Years Exp.
+            - generic [ref=e54]:
+              - generic [ref=e55]: 10+
+              - generic [ref=e56]: Projects
+            - generic [ref=e57]:
+              - generic [ref=e58]: 18+
+              - generic [ref=e59]: Technologies
+            - generic [ref=e60]:
+              - generic [ref=e61]: Open
+              - generic [ref=e62]: to Work
+          - generic [ref=e63]:
+            - link "View My Work" [ref=e65] [cursor=pointer]:
+              - /url: "#projects"
+            - link "Download CV" [ref=e69] [cursor=pointer]:
+              - /url: /resume.pdf
+          - generic [ref=e73]:
+            - link "GitHub" [ref=e74] [cursor=pointer]:
+              - /url: https://github.com/Mehedihasan444
+            - link "LinkedIn" [ref=e77] [cursor=pointer]:
+              - /url: https://linkedin.com/in/mehedi-hasan-893500301
+            - link "Twitter" [ref=e80] [cursor=pointer]:
+              - /url: https://twitter.com/MEHEDIH60833052
+            - generic [ref=e84]: mehedihasan67705251@gmail.com
+        - generic "Hi, I'm Mehedi Hasan" [ref=e85]:
+          - heading [level=1] [ref=e86]:
+            - generic [ref=e87]: H
+            - generic [ref=e88]: i
+            - generic [ref=e89]: ","
+            - generic [ref=e91]: I
+            - generic [ref=e92]: "'"
+            - generic [ref=e93]: m
+            - generic [ref=e95]: M
+            - generic [ref=e96]: e
+            - generic [ref=e97]: h
+            - generic [ref=e98]: e
+            - generic [ref=e99]: d
+            - generic [ref=e100]: i
+            - generic [ref=e102]: H
+            - generic [ref=e103]: a
+            - generic [ref=e104]: s
+            - generic [ref=e105]: a
+            - generic [ref=e106]: "n"
+        - button "Scroll to About section" [ref=e107]:
+          - generic [ref=e115]: Scroll
+      - generic [ref=e118]:
+        - paragraph [ref=e120]: About Me
+        - generic [ref=e121]:
+          - generic [ref=e122]:
+            - heading "Turning complex problems into elegant solutions" [level=2] [ref=e124]
+            - generic [ref=e125]:
+              - paragraph [ref=e126]:
+                - generic [ref=e127]: With
+                - generic [ref=e128]: over
+                - generic [ref=e129]: 1+
+                - generic [ref=e130]: years
+                - generic [ref=e131]: of
+                - generic [ref=e132]: experience
+                - generic [ref=e133]: in
+                - generic [ref=e134]: full-stack
+                - generic [ref=e135]: development,
+                - generic [ref=e136]: I'm
+                - generic [ref=e137]: dedicated
+                - generic [ref=e138]: to
+                - generic [ref=e139]: creating
+                - generic [ref=e140]: elegant
+                - generic [ref=e141]: solutions
+                - generic [ref=e142]: to
+                - generic [ref=e143]: complex
+                - generic [ref=e144]: problems.
+                - generic [ref=e145]: My
+                - generic [ref=e146]: journey
+                - generic [ref=e147]: in
+                - generic [ref=e148]: technology
+                - generic [ref=e149]: is
+                - generic [ref=e150]: driven
+                - generic [ref=e151]: by
+                - generic [ref=e152]: a
+                - generic [ref=e153]: passion
+                - generic [ref=e154]: for
+                - generic [ref=e155]: innovation
+                - generic [ref=e156]: and
+                - generic [ref=e157]: a
+                - generic [ref=e158]: commitment
+                - generic [ref=e159]: to
+                - generic [ref=e160]: excellence
+                - generic [ref=e161]: in
+                - generic [ref=e162]: every
+                - generic [ref=e163]: project
+                - generic [ref=e164]: I
+                - generic [ref=e165]: undertake.
+              - paragraph [ref=e166]:
+                - generic [ref=e167]: I
+                - generic [ref=e168]: specialize
+                - generic [ref=e169]: in
+                - generic [ref=e170]: building
+                - generic [ref=e171]: scalable
+                - generic [ref=e172]: web
+                - generic [ref=e173]: applications
+                - generic [ref=e174]: using
+                - generic [ref=e175]: React,
+                - generic [ref=e176]: Next.js,
+                - generic [ref=e177]: Node.js,
+                - generic [ref=e178]: and
+                - generic [ref=e179]: TypeScript.
+                - generic [ref=e180]: Every
+                - generic [ref=e181]: project
+                - generic [ref=e182]: is
+                - generic [ref=e183]: an
+                - generic [ref=e184]: opportunity
+                - generic [ref=e185]: to
+                - generic [ref=e186]: push
+                - generic [ref=e187]: boundaries,
+                - generic [ref=e188]: learn
+                - generic [ref=e189]: new
+                - generic [ref=e190]: things,
+                - generic [ref=e191]: and
+                - generic [ref=e192]: deliver
+                - generic [ref=e193]: exceptional
+                - generic [ref=e194]: results
+                - generic [ref=e195]: that
+                - generic [ref=e196]: make
+                - generic [ref=e197]: a
+                - generic [ref=e198]: real
+                - generic [ref=e199]: impact.
+            - generic [ref=e201]:
+              - generic [ref=e202]:
+                - text: 0+
+                - paragraph [ref=e203]: Years Experience
+              - generic [ref=e204]:
+                - text: 0+
+                - paragraph [ref=e205]: Projects Completed
+              - generic [ref=e206]:
+                - text: 0+
+                - paragraph [ref=e207]: Technologies
+              - generic [ref=e208]:
+                - text: 0+
+                - paragraph [ref=e209]: Open Source
+          - img "Mehedi Hasan" [ref=e216]
+        - generic [ref=e217]:
+          - heading "What Defines Me" [level=3] [ref=e219]
+          - generic [ref=e221]:
+            - generic [ref=e226]:
+              - heading "Clean Code Advocate" [level=3] [ref=e232]
+              - paragraph [ref=e233]: Passionate about writing maintainable, efficient, and scalable code that stands the test of time
+            - generic [ref=e238]:
+              - heading "Innovation Driven" [level=3] [ref=e242]
+              - paragraph [ref=e243]: Always exploring emerging technologies and pushing boundaries to deliver exceptional results
+            - generic [ref=e248]:
+              - heading "Detail Oriented" [level=3] [ref=e254]
+              - paragraph [ref=e255]: Pixel-perfect implementation with meticulous attention to performance and user experience
+            - generic [ref=e260]:
+              - heading "Problem Solver" [level=3] [ref=e264]
+              - paragraph [ref=e265]: Analytical mindset focused on breaking down complex problems into elegant solutions
+      - generic [ref=e268]:
+        - generic [ref=e270]:
+          - paragraph [ref=e271]: Technology Stack
+          - heading "Technical Skills" [level=2] [ref=e272]
+          - paragraph [ref=e273]: A curated set of technologies I use to build scalable, high-performance applications
+        - generic [ref=e275]:
+          - generic [ref=e277]:
+            - generic [ref=e278]: React
+            - generic [ref=e280]: Next.js
+            - generic [ref=e282]: TypeScript
+            - generic [ref=e284]: Node.js
+            - generic [ref=e286]: PostgreSQL
+            - generic [ref=e288]: MongoDB
+            - generic [ref=e290]: Tailwind CSS
+            - generic [ref=e292]: GraphQL
+            - generic [ref=e294]: Docker
+            - generic [ref=e296]: React
+            - generic [ref=e298]: Next.js
+            - generic [ref=e300]: TypeScript
+            - generic [ref=e302]: Node.js
+            - generic [ref=e304]: PostgreSQL
+            - generic [ref=e306]: MongoDB
+            - generic [ref=e308]: Tailwind CSS
+            - generic [ref=e310]: GraphQL
+            - generic [ref=e312]: Docker
+          - generic [ref=e315]:
+            - generic [ref=e316]: Express.js
+            - generic [ref=e318]: Prisma
+            - generic [ref=e320]: Redis
+            - generic [ref=e322]: Git
+            - generic [ref=e324]: AWS
+            - generic [ref=e326]: Python
+            - generic [ref=e328]: Framer Motion
+            - generic [ref=e330]: GSAP
+            - generic [ref=e332]: Three.js
+            - generic [ref=e334]: Express.js
+            - generic [ref=e336]: Prisma
+            - generic [ref=e338]: Redis
+            - generic [ref=e340]: Git
+            - generic [ref=e342]: AWS
+            - generic [ref=e344]: Python
+            - generic [ref=e346]: Framer Motion
+            - generic [ref=e348]: GSAP
+            - generic [ref=e350]: Three.js
+        - generic [ref=e353]:
+          - generic [ref=e354]:
+            - heading "Frontend" [level=3] [ref=e356]
+            - list [ref=e358]:
+              - listitem [ref=e359]: React
+              - listitem [ref=e361]: Next.js
+              - listitem [ref=e363]: TypeScript
+              - listitem [ref=e365]: Tailwind CSS
+              - listitem [ref=e367]: Redux
+              - listitem [ref=e369]: Framer Motion
+          - generic [ref=e371]:
+            - heading "Backend" [level=3] [ref=e373]
+            - list [ref=e375]:
+              - listitem [ref=e376]: Node.js
+              - listitem [ref=e378]: Express.js
+              - listitem [ref=e380]: Python
+              - listitem [ref=e382]: Java
+              - listitem [ref=e384]: REST APIs
+          - generic [ref=e386]:
+            - heading "Database" [level=3] [ref=e388]
+            - list [ref=e390]:
+              - listitem [ref=e391]: PostgreSQL
+              - listitem [ref=e393]: MongoDB
+              - listitem [ref=e395]: Prisma
+              - listitem [ref=e397]: Mongoose
+              - listitem [ref=e399]: Redis
+          - generic [ref=e401]:
+            - heading "Tools & Infra" [level=3] [ref=e403]
+            - list [ref=e405]:
+              - listitem [ref=e406]: Git
+              - listitem [ref=e408]: Docker
+              - listitem [ref=e410]: Linux
+              - listitem [ref=e412]: CI/CD
+              - listitem [ref=e414]: Nginx
+      - generic [ref=e417]:
+        - generic [ref=e419]:
+          - paragraph [ref=e420]: Career
+          - heading "Work Experience" [level=2] [ref=e421]
+          - paragraph [ref=e422]: My professional journey building impactful products and growing as an engineer
+        - generic [ref=e423]:
+          - generic [ref=e428]:
+            - generic [ref=e429]:
+              - generic [ref=e430]: 2024 – Present
+              - generic [ref=e433]: Current
+            - heading "Full Stack Developer" [level=3] [ref=e434]
+            - generic [ref=e435]:
+              - generic [ref=e436]: Freelance / Self-Employed
+              - generic [ref=e440]: Remote
+            - paragraph [ref=e444]: Building scalable web applications for clients using React, Next.js, Node.js, and modern technologies. Delivering end-to-end solutions from conception to deployment with focus on performance and user experience.
+            - generic [ref=e445]:
+              - generic [ref=e446]: React
+              - generic [ref=e447]: Next.js
+              - generic [ref=e448]: Node.js
+              - generic [ref=e449]: TypeScript
+              - generic [ref=e450]: PostgreSQL
+          - generic [ref=e454]:
+            - generic [ref=e455]: 2023 – 2024
+            - heading "Junior Full Stack Developer" [level=3] [ref=e459]
+            - generic [ref=e460]:
+              - generic [ref=e461]: Freelance
+              - generic [ref=e465]: Remote
+            - paragraph [ref=e469]: Developed full-stack web applications including e-commerce platforms, content management systems, and RESTful APIs. Collaborated with clients to gather requirements and deliver solutions on time.
+            - generic [ref=e470]:
+              - generic [ref=e471]: React
+              - generic [ref=e472]: Node.js
+              - generic [ref=e473]: Express
+              - generic [ref=e474]: MongoDB
+              - generic [ref=e475]: JavaScript
+          - generic [ref=e479]:
+            - generic [ref=e480]: 2022 – 2023
+            - heading "Frontend Developer Intern" [level=3] [ref=e484]
+            - generic [ref=e485]:
+              - generic [ref=e486]: Freelance / Personal Projects
+              - generic [ref=e490]: Remote
+            - paragraph [ref=e494]: Started journey in web development by building responsive websites and learning modern JavaScript frameworks. Contributed to open-source projects and built a strong foundation in web technologies.
+            - generic [ref=e495]:
+              - generic [ref=e496]: HTML/CSS
+              - generic [ref=e497]: JavaScript
+              - generic [ref=e498]: React
+              - generic [ref=e499]: Git
+              - generic [ref=e500]: Responsive Design
+      - generic [ref=e503]:
+        - generic [ref=e505]:
+          - paragraph [ref=e506]: Portfolio
+          - heading "Featured Projects" [level=2] [ref=e507]
+          - paragraph [ref=e508]: A selection of projects that showcase my skills and passion for building exceptional digital experiences
+        - generic [ref=e510]:
+          - link "View MarketSphere project" [ref=e513] [cursor=pointer]:
+            - /url: /projects/marketsphere
+            - generic [ref=e514]:
+              - generic [ref=e515]:
+                - img "MarketSphere preview" [ref=e516]
+                - generic [ref=e518]: "01"
+              - generic [ref=e519]:
+                - generic [ref=e521]:
+                  - generic [ref=e522]:
+                    - generic [ref=e523]: In Development
+                    - generic [ref=e524]: "2024"
+                  - heading "MarketSphere" [level=3] [ref=e525]
+                - paragraph [ref=e530]: A multivendor e-commerce platform with product management, cart system, payment integration, and vendor dashboards.
+                - generic [ref=e531]:
+                  - generic [ref=e532]: React
+                  - generic [ref=e533]: Next.js
+                  - generic [ref=e534]: TypeScript
+                  - generic [ref=e535]: PostgreSQL
+                  - generic [ref=e536]: Prisma
+                - button "View MarketSphere on GitHub" [ref=e538]: GitHub
+          - link "View Tech Tips & Tricks Hub project" [ref=e543] [cursor=pointer]:
+            - /url: /projects/tech-tips-tricks-hub
+            - generic [ref=e544]:
+              - generic [ref=e545]:
+                - img "Tech Tips & Tricks Hub preview" [ref=e546]
+                - generic [ref=e548]: "01"
+              - generic [ref=e549]:
+                - heading "Tech Tips & Tricks Hub" [level=3] [ref=e551]
+                - paragraph [ref=e555]: A content platform for sharing technical tutorials, tips, and tricks. Features blog posts, code snippets, and community interaction.
+                - generic [ref=e556]:
+                  - generic [ref=e557]: React
+                  - generic [ref=e558]: Next.js
+                  - generic [ref=e559]: TypeScript
+                  - generic [ref=e560]: "+2"
+          - link "View Car Rental Reservation project" [ref=e563] [cursor=pointer]:
+            - /url: /projects/car-rental-reservation-system
+            - generic [ref=e564]:
+              - generic [ref=e565]:
+                - img "Car Rental Reservation preview" [ref=e566]
+                - generic [ref=e568]: "02"
+              - generic [ref=e569]:
+                - heading "Car Rental Reservation" [level=3] [ref=e571]
+                - paragraph [ref=e575]: A full-stack car rental platform with vehicle browsing, booking management, payment processing, and comprehensive admin dashboard.
+                - generic [ref=e576]:
+                  - generic [ref=e577]: React
+                  - generic [ref=e578]: TypeScript
+                  - generic [ref=e579]: Node.js
+                  - generic [ref=e580]: "+2"
+        - link "View All Projects on GitHub" [ref=e583] [cursor=pointer]:
+          - /url: https://github.com/Mehedihasan444
+      - generic [ref=e589]:
+        - generic [ref=e591]:
+          - paragraph [ref=e592]: Learning
+          - heading "Education" [level=2] [ref=e593]
+        - generic [ref=e599]:
+          - generic [ref=e600]:
+            - generic [ref=e605]:
+              - generic [ref=e606]:
+                - heading "Bachelor of Science in Computer Science & Engineering" [level=3] [ref=e607]
+                - generic [ref=e608]: Ongoing
+              - paragraph [ref=e612]: University of Information Technology & Sciences
+            - generic [ref=e613]: 2022 – 2026
+          - generic [ref=e616]:
+            - generic [ref=e617]: Dhaka, Bangladesh
+            - generic [ref=e621]: "GPA: On Track"
+          - paragraph [ref=e624]: Focusing on software engineering, algorithms, data structures, and modern web technologies. Engaged in research projects and competitive programming throughout the program.
+          - generic [ref=e625]:
+            - generic [ref=e626]: Computer Science
+            - generic [ref=e627]: Software Engineering
+            - generic [ref=e628]: Algorithms
+            - generic [ref=e629]: Data Structures
+            - generic [ref=e630]: Web Dev
+      - generic [ref=e635]:
+        - generic [ref=e637]:
+          - paragraph [ref=e638]: Credentials
+          - heading "Certifications" [level=2] [ref=e639]
+          - paragraph [ref=e640]: Professional certifications that validate my expertise and commitment to continuous learning
+        - generic [ref=e642]:
+          - generic [ref=e647]:
+            - generic [ref=e648]: 🎓
+            - generic [ref=e650]:
+              - generic [ref=e651]: "2023"
+              - heading "Complete Web Development" [level=3] [ref=e654]
+              - paragraph [ref=e655]: Programming Hero
+              - paragraph [ref=e656]: Full-stack web development with React, Node.js, Express, MongoDB and modern tooling
+            - generic [ref=e657]: Verified Certificate
+          - generic [ref=e666]:
+            - generic [ref=e667]:
+              - generic [ref=e668]: 🧮
+              - link "Verify JavaScript Algorithms & Data Structures credential" [ref=e669] [cursor=pointer]:
+                - /url: https://freecodecamp.org
+            - generic [ref=e674]:
+              - generic [ref=e675]: "2023"
+              - heading "JavaScript Algorithms & Data Structures" [level=3] [ref=e678]
+              - paragraph [ref=e679]: FreeCodeCamp
+              - paragraph [ref=e680]: Advanced algorithm design, data structures, and problem solving with JavaScript
+            - generic [ref=e681]: Verified Certificate
+          - generic [ref=e690]:
+            - generic [ref=e691]:
+              - generic [ref=e692]: 📱
+              - link "Verify Responsive Web Design credential" [ref=e693] [cursor=pointer]:
+                - /url: https://freecodecamp.org
+            - generic [ref=e698]:
+              - generic [ref=e699]: "2022"
+              - heading "Responsive Web Design" [level=3] [ref=e702]
+              - paragraph [ref=e703]: FreeCodeCamp
+              - paragraph [ref=e704]: Modern CSS layouts, Flexbox, Grid, and responsive design patterns
+            - generic [ref=e705]: Verified Certificate
+      - generic [ref=e714]:
+        - generic [ref=e716]:
+          - paragraph [ref=e717]: Milestones
+          - heading "Achievements" [level=2] [ref=e718]
+        - generic [ref=e719]:
+          - generic [ref=e722]:
+            - generic [ref=e726]: 10+
+            - generic [ref=e727]: Projects Shipped
+          - generic [ref=e730]:
+            - generic [ref=e736]: 100+
+            - generic [ref=e737]: Problems Solved
+          - generic [ref=e740]:
+            - generic [ref=e746]: 5+
+            - generic [ref=e747]: Open Source Repos
+          - generic [ref=e750]:
+            - generic [ref=e754]: 1K+
+            - generic [ref=e755]: Cups of Coffee
+        - generic [ref=e757]:
+          - generic [ref=e770]:
+            - heading "Problem Solver" [level=3] [ref=e771]
+            - paragraph [ref=e772]: Solved 100+ algorithmic problems across various competitive programming platforms
+          - generic [ref=e783]:
+            - heading "Open Source Contributor" [level=3] [ref=e784]
+            - paragraph [ref=e785]: Active contributor to open-source projects and developer communities
+          - generic [ref=e794]:
+            - heading "Continuous Learner" [level=3] [ref=e795]
+            - paragraph [ref=e796]: Constantly learning new technologies and best practices in software engineering
+          - generic [ref=e805]:
+            - heading "Project Excellence" [level=3] [ref=e806]
+            - paragraph [ref=e807]: Delivered multiple end-to-end projects with high quality and performance standards
+      - generic [ref=e809]:
+        - generic [ref=e811]:
+          - paragraph [ref=e812]: Open Source
+          - heading "GitHub Statistics" [level=2] [ref=e813]
+          - paragraph [ref=e814]: My open source contributions and coding activity across various projects
+        - generic [ref=e816]:
+          - generic [ref=e819]:
+            - generic [ref=e822]: 20+
+            - generic [ref=e823]: Stars Earned
+          - generic [ref=e826]:
+            - generic [ref=e832]: 15+
+            - generic [ref=e833]: Repos Forked
+          - generic [ref=e836]:
+            - generic [ref=e841]: 30+
+            - generic [ref=e842]: Pull Requests
+          - generic [ref=e845]:
+            - generic [ref=e851]: 25+
+            - generic [ref=e852]: Followers
+        - generic [ref=e853]:
+          - generic [ref=e857]:
+            - heading "Language Breakdown" [level=3] [ref=e858]
+            - generic [ref=e859]:
+              - generic [ref=e860]:
+                - generic [ref=e861]: 45%
+                - generic "TypeScript"
+                - generic [ref=e862]: TypeScript
+              - generic [ref=e863]:
+                - generic [ref=e864]: 25%
+                - generic "JavaScript"
+                - generic [ref=e865]: JavaScript
+              - generic [ref=e866]:
+                - generic [ref=e867]: 15%
+                - generic "HTML/CSS"
+                - generic [ref=e868]: HTML/CSS
+              - generic [ref=e869]:
+                - generic [ref=e870]: 10%
+                - generic "Python"
+                - generic [ref=e871]: Python
+              - generic [ref=e872]:
+                - generic [ref=e873]: 5%
+                - generic "Other"
+                - generic [ref=e874]: Other
+            - generic [ref=e875]:
+              - generic [ref=e876]: TypeScript
+              - generic [ref=e878]: JavaScript
+              - generic [ref=e880]: HTML/CSS
+              - generic [ref=e882]: Python
+              - generic [ref=e884]: Other
+          - generic [ref=e889]:
+            - generic [ref=e890]:
+              - heading "Contribution Activity" [level=3] [ref=e891]
+              - generic [ref=e892]: Last 6 months
+            - img "GitHub contribution heatmap" [ref=e894]:
+              - generic [ref=e895]:
+                - generic "0 contributions" [ref=e896]
+                - generic "7 contributions" [ref=e897]
+                - generic "4 contributions" [ref=e898]
+                - generic "2 contributions" [ref=e899]
+                - generic "3 contributions" [ref=e900]
+                - generic "7 contributions" [ref=e901]
+                - generic "8 contributions" [ref=e902]
+              - generic [ref=e903]:
+                - generic "6 contributions" [ref=e904]
+                - generic "7 contributions" [ref=e905]
+                - generic "2 contributions" [ref=e906]
+                - generic "0 contributions" [ref=e907]
+                - generic "3 contributions" [ref=e908]
+                - generic "1 contributions" [ref=e909]
+                - generic "7 contributions" [ref=e910]
+              - generic [ref=e911]:
+                - generic "3 contributions" [ref=e912]
+                - generic "4 contributions" [ref=e913]
+                - generic "1 contributions" [ref=e914]
+                - generic "4 contributions" [ref=e915]
+                - generic "7 contributions" [ref=e916]
+                - generic "4 contributions" [ref=e917]
+                - generic "6 contributions" [ref=e918]
+              - generic [ref=e919]:
+                - generic "4 contributions" [ref=e920]
+                - generic "1 contributions" [ref=e921]
+                - generic "8 contributions" [ref=e922]
+                - generic "0 contributions" [ref=e923]
+                - generic "5 contributions" [ref=e924]
+                - generic "0 contributions" [ref=e925]
+                - generic "2 contributions" [ref=e926]
+              - generic [ref=e927]:
+                - generic "0 contributions" [ref=e928]
+                - generic "5 contributions" [ref=e929]
+                - generic "6 contributions" [ref=e930]
+                - generic "2 contributions" [ref=e931]
+                - generic "6 contributions" [ref=e932]
+                - generic "0 contributions" [ref=e933]
+                - generic "1 contributions" [ref=e934]
+              - generic [ref=e935]:
+                - generic "5 contributions" [ref=e936]
+                - generic "6 contributions" [ref=e937]
+                - generic "4 contributions" [ref=e938]
+                - generic "5 contributions" [ref=e939]
+                - generic "8 contributions" [ref=e940]
+                - generic "1 contributions" [ref=e941]
+                - generic "4 contributions" [ref=e942]
+              - generic [ref=e943]:
+                - generic "0 contributions" [ref=e944]
+                - generic "5 contributions" [ref=e945]
+                - generic "4 contributions" [ref=e946]
+                - generic "7 contributions" [ref=e947]
+                - generic "8 contributions" [ref=e948]
+                - generic "3 contributions" [ref=e949]
+                - generic "1 contributions" [ref=e950]
+              - generic [ref=e951]:
+                - generic "5 contributions" [ref=e952]
+                - generic "7 contributions" [ref=e953]
+                - generic "4 contributions" [ref=e954]
+                - generic "6 contributions" [ref=e955]
+                - generic "2 contributions" [ref=e956]
+                - generic "6 contributions" [ref=e957]
+                - generic "0 contributions" [ref=e958]
+              - generic [ref=e959]:
+                - generic "6 contributions" [ref=e960]
+                - generic "4 contributions" [ref=e961]
+                - generic "6 contributions" [ref=e962]
+                - generic "5 contributions" [ref=e963]
+                - generic "6 contributions" [ref=e964]
+                - generic "4 contributions" [ref=e965]
+                - generic "2 contributions" [ref=e966]
+              - generic [ref=e967]:
+                - generic "8 contributions" [ref=e968]
+                - generic "7 contributions" [ref=e969]
+                - generic "4 contributions" [ref=e970]
+                - generic "6 contributions" [ref=e971]
+                - generic "5 contributions" [ref=e972]
+                - generic "4 contributions" [ref=e973]
+                - generic "2 contributions" [ref=e974]
+              - generic [ref=e975]:
+                - generic "3 contributions" [ref=e976]
+                - generic "7 contributions" [ref=e977]
+                - generic "3 contributions" [ref=e978]
+                - generic "7 contributions" [ref=e979]
+                - generic "8 contributions" [ref=e980]
+                - generic "2 contributions" [ref=e981]
+                - generic "0 contributions" [ref=e982]
+              - generic [ref=e983]:
+                - generic "7 contributions" [ref=e984]
+                - generic "7 contributions" [ref=e985]
+                - generic "1 contributions" [ref=e986]
+                - generic "4 contributions" [ref=e987]
+                - generic "8 contributions" [ref=e988]
+                - generic "1 contributions" [ref=e989]
+                - generic "5 contributions" [ref=e990]
+              - generic [ref=e991]:
+                - generic "8 contributions" [ref=e992]
+                - generic "6 contributions" [ref=e993]
+                - generic "4 contributions" [ref=e994]
+                - generic "3 contributions" [ref=e995]
+                - generic "3 contributions" [ref=e996]
+                - generic "7 contributions" [ref=e997]
+                - generic "4 contributions" [ref=e998]
+              - generic [ref=e999]:
+                - generic "7 contributions" [ref=e1000]
+                - generic "5 contributions" [ref=e1001]
+                - generic "6 contributions" [ref=e1002]
+                - generic "7 contributions" [ref=e1003]
+                - generic "2 contributions" [ref=e1004]
+                - generic "6 contributions" [ref=e1005]
+                - generic "6 contributions" [ref=e1006]
+              - generic [ref=e1007]:
+                - generic "1 contributions" [ref=e1008]
+                - generic "5 contributions" [ref=e1009]
+                - generic "4 contributions" [ref=e1010]
+                - generic "4 contributions" [ref=e1011]
+                - generic "5 contributions" [ref=e1012]
+                - generic "6 contributions" [ref=e1013]
+                - generic "0 contributions" [ref=e1014]
+              - generic [ref=e1015]:
+                - generic "5 contributions" [ref=e1016]
+                - generic "7 contributions" [ref=e1017]
+                - generic "4 contributions" [ref=e1018]
+                - generic "4 contributions" [ref=e1019]
+                - generic "7 contributions" [ref=e1020]
+                - generic "7 contributions" [ref=e1021]
+                - generic "3 contributions" [ref=e1022]
+              - generic [ref=e1023]:
+                - generic "2 contributions" [ref=e1024]
+                - generic "5 contributions" [ref=e1025]
+                - generic "5 contributions" [ref=e1026]
+                - generic "3 contributions" [ref=e1027]
+                - generic "2 contributions" [ref=e1028]
+                - generic "4 contributions" [ref=e1029]
+                - generic "1 contributions" [ref=e1030]
+              - generic [ref=e1031]:
+                - generic "0 contributions" [ref=e1032]
+                - generic "1 contributions" [ref=e1033]
+                - generic "7 contributions" [ref=e1034]
+                - generic "5 contributions" [ref=e1035]
+                - generic "5 contributions" [ref=e1036]
+                - generic "6 contributions" [ref=e1037]
+                - generic "1 contributions" [ref=e1038]
+              - generic [ref=e1039]:
+                - generic "0 contributions" [ref=e1040]
+                - generic "4 contributions" [ref=e1041]
+                - generic "7 contributions" [ref=e1042]
+                - generic "7 contributions" [ref=e1043]
+                - generic "4 contributions" [ref=e1044]
+                - generic "3 contributions" [ref=e1045]
+                - generic "5 contributions" [ref=e1046]
+              - generic [ref=e1047]:
+                - generic "2 contributions" [ref=e1048]
+                - generic "6 contributions" [ref=e1049]
+                - generic "0 contributions" [ref=e1050]
+                - generic "7 contributions" [ref=e1051]
+                - generic "5 contributions" [ref=e1052]
+                - generic "8 contributions" [ref=e1053]
+                - generic "8 contributions" [ref=e1054]
+              - generic [ref=e1055]:
+                - generic "5 contributions" [ref=e1056]
+                - generic "2 contributions" [ref=e1057]
+                - generic "8 contributions" [ref=e1058]
+                - generic "6 contributions" [ref=e1059]
+                - generic "8 contributions" [ref=e1060]
+                - generic "4 contributions" [ref=e1061]
+                - generic "2 contributions" [ref=e1062]
+              - generic [ref=e1063]:
+                - generic "3 contributions" [ref=e1064]
+                - generic "5 contributions" [ref=e1065]
+                - generic "3 contributions" [ref=e1066]
+                - generic "1 contributions" [ref=e1067]
+                - generic "3 contributions" [ref=e1068]
+                - generic "4 contributions" [ref=e1069]
+                - generic "1 contributions" [ref=e1070]
+              - generic [ref=e1071]:
+                - generic "6 contributions" [ref=e1072]
+                - generic "7 contributions" [ref=e1073]
+                - generic "8 contributions" [ref=e1074]
+                - generic "0 contributions" [ref=e1075]
+                - generic "5 contributions" [ref=e1076]
+                - generic "4 contributions" [ref=e1077]
+                - generic "1 contributions" [ref=e1078]
+              - generic [ref=e1079]:
+                - generic "3 contributions" [ref=e1080]
+                - generic "7 contributions" [ref=e1081]
+                - generic "2 contributions" [ref=e1082]
+                - generic "1 contributions" [ref=e1083]
+                - generic "5 contributions" [ref=e1084]
+                - generic "5 contributions" [ref=e1085]
+                - generic "2 contributions" [ref=e1086]
+            - generic [ref=e1087]:
+              - generic [ref=e1088]: Less
+              - generic [ref=e1095]: More
+        - link "View GitHub Profile" [ref=e1098] [cursor=pointer]:
+          - /url: https://github.com/Mehedihasan444
+      - generic [ref=e1102]:
+        - generic [ref=e1104]:
+          - paragraph [ref=e1105]: Testimonials
+          - heading "What People Say" [level=2] [ref=e1106]
+          - paragraph [ref=e1107]: Feedback from clients and collaborators who've experienced working with me first-hand
+        - generic [ref=e1109]:
+          - generic [ref=e1111]:
+            - generic [ref=e1115] [cursor=pointer]:
+              - generic "5 out of 5 stars" [ref=e1121]
+              - blockquote [ref=e1132]: “Outstanding work on the project. The attention to detail and commitment to quality was evident throughout the entire development process. Delivered ahead of schedule with exceptional results that exceeded all expectations.”
+              - generic [ref=e1133]:
+                - generic [ref=e1134]: CF
+                - generic [ref=e1135]:
+                  - paragraph [ref=e1136]: Client Feedback
+                  - paragraph [ref=e1137]: Product Owner·Web Development Project
+            - generic [ref=e1141]:
+              - generic "5 out of 5 stars" [ref=e1147]
+              - blockquote [ref=e1158]: “A highly skilled developer who brings both technical expertise and creative problem-solving to every project. Great communication and a genuine passion for building quality software that makes a real impact.”
+              - generic [ref=e1159]:
+                - generic [ref=e1160]: TC
+                - generic [ref=e1161]:
+                  - paragraph [ref=e1162]: Team Collaboration
+                  - paragraph [ref=e1163]: Engineering Lead·Open Source Project
+            - generic [ref=e1167] [cursor=pointer]:
+              - generic "5 out of 5 stars" [ref=e1173]
+              - blockquote [ref=e1184]: “Mehedi transformed our idea into a production-ready application with clean architecture, beautiful UI, and excellent performance. His expertise in full-stack development is top-notch.”
+              - generic [ref=e1185]:
+                - generic [ref=e1186]: PD
+                - generic [ref=e1187]:
+                  - paragraph [ref=e1188]: Project Delivery
+                  - paragraph [ref=e1189]: Startup Founder·SaaS Platform
+          - generic [ref=e1191]:
+            - button "Go to Client Feedback" [ref=e1192]
+            - button "Go to Team Collaboration" [ref=e1193]
+            - button "Go to Project Delivery" [ref=e1194]
+      - generic [ref=e1199]:
+        - generic [ref=e1201]:
+          - paragraph [ref=e1202]: Articles
+          - heading "Latest Blog Posts" [level=2] [ref=e1203]
+          - paragraph [ref=e1204]: Thoughts, tutorials, and insights about web development, technology, and software engineering
+        - generic [ref=e1206]:
+          - link "Architecture Next.js Building Scalable Web Apps Best practices for building scalable and maintainable web applications with modern technologies. Read more" [ref=e1209] [cursor=pointer]:
+            - /url: /blog
+            - generic [ref=e1212]:
+              - generic [ref=e1213]:
+                - generic [ref=e1214]: Architecture
+                - generic [ref=e1215]: Next.js
+              - heading "Building Scalable Web Apps" [level=3] [ref=e1216]
+              - paragraph [ref=e1217]: Best practices for building scalable and maintainable web applications with modern technologies.
+              - generic [ref=e1218]: Read more
+          - link "TypeScript JavaScript Mastering TypeScript Advanced TypeScript patterns and techniques for production-ready code in large codebases. Read more" [ref=e1224] [cursor=pointer]:
+            - /url: /blog
+            - generic [ref=e1227]:
+              - generic [ref=e1228]:
+                - generic [ref=e1229]: TypeScript
+                - generic [ref=e1230]: JavaScript
+              - heading "Mastering TypeScript" [level=3] [ref=e1231]
+              - paragraph [ref=e1232]: Advanced TypeScript patterns and techniques for production-ready code in large codebases.
+              - generic [ref=e1233]: Read more
+          - link "CSS Frontend Modern CSS Techniques Exploring modern CSS features like container queries, layers, and advanced animations. Read more" [ref=e1239] [cursor=pointer]:
+            - /url: /blog
+            - generic [ref=e1242]:
+              - generic [ref=e1243]:
+                - generic [ref=e1244]: CSS
+                - generic [ref=e1245]: Frontend
+              - heading "Modern CSS Techniques" [level=3] [ref=e1246]
+              - paragraph [ref=e1247]: Exploring modern CSS features like container queries, layers, and advanced animations.
+              - generic [ref=e1248]: Read more
+        - link "View All Posts" [ref=e1255] [cursor=pointer]:
+          - /url: /blog
+      - generic [ref=e1259]:
+        - generic [ref=e1261]:
+          - paragraph [ref=e1262]: Contact
+          - heading "Let's Connect" [level=2] [ref=e1263]
+          - paragraph [ref=e1264]: Have a project in mind or want to collaborate? I'd love to hear from you. Let's create something amazing together.
+        - generic [ref=e1265]:
+          - generic [ref=e1267]:
+            - generic [ref=e1268]:
+              - generic [ref=e1269]:
+                - generic [ref=e1270]: Name
+                - textbox "Name" [ref=e1271]:
+                  - /placeholder: Your name
+              - generic [ref=e1272]:
+                - generic [ref=e1273]: Email
+                - textbox "Email" [ref=e1274]:
+                  - /placeholder: your@email.com
+            - generic [ref=e1275]:
+              - generic [ref=e1276]: Subject
+              - textbox "Subject" [ref=e1277]:
+                - /placeholder: What's this about?
+            - generic [ref=e1278]:
+              - generic [ref=e1279]: Message
+              - textbox "Message" [ref=e1280]:
+                - /placeholder: Tell me about your project...
+            - button "Send Message" [ref=e1282]
+          - generic [ref=e1286]:
+            - generic [ref=e1290]:
+              - heading "Contact Info" [level=3] [ref=e1291]
+              - generic [ref=e1292]:
+                - generic [ref=e1298]:
+                  - generic [ref=e1299]: Email
+                  - link "mehedihasan67705251@gmail.com" [ref=e1300] [cursor=pointer]:
+                    - /url: mailto:mehedihasan67705251@gmail.com
+                - generic [ref=e1306]:
+                  - generic [ref=e1307]: Location
+                  - generic [ref=e1308]: Dhaka, Bangladesh 🇧🇩
+                - generic [ref=e1314]:
+                  - generic [ref=e1315]: Timezone
+                  - generic [ref=e1316]: Asia/Dhaka (UTC+6)
+            - generic [ref=e1320]:
+              - heading "Currently Available" [level=3] [ref=e1325]
+              - paragraph [ref=e1326]: Open for freelance projects and full-time opportunities. Typical response time within 24 hours.
+              - generic [ref=e1327]:
+                - generic [ref=e1328]: Freelance
+                - generic [ref=e1329]: Remote
+                - generic [ref=e1330]: Full-time
+              - generic [ref=e1331]:
+                - link "GitHub" [ref=e1332] [cursor=pointer]:
+                  - /url: https://github.com/Mehedihasan444
+                - link "LinkedIn" [ref=e1335] [cursor=pointer]:
+                  - /url: https://linkedin.com/in/mehedi-hasan-893500301
+                - link "Twitter / X" [ref=e1338] [cursor=pointer]:
+                  - /url: https://twitter.com/MEHEDIH60833052
+  - contentinfo [ref=e1341]:
+    - generic [ref=e1342]:
+      - generic [ref=e1343]:
+        - generic [ref=e1344]:
+          - link "MH" [ref=e1345] [cursor=pointer]:
+            - /url: /
+          - paragraph [ref=e1346]: Full Stack Developer passionate about creating exceptional web experiences with modern technologies and best practices. Always learning, always building.
+        - generic [ref=e1347]:
+          - heading "Quick Links" [level=3] [ref=e1348]
+          - list [ref=e1349]:
+            - listitem [ref=e1350]:
+              - link "About" [ref=e1351] [cursor=pointer]:
+                - /url: "#about"
+            - listitem [ref=e1352]:
+              - link "Skills" [ref=e1353] [cursor=pointer]:
+                - /url: "#skills"
+            - listitem [ref=e1354]:
+              - link "Projects" [ref=e1355] [cursor=pointer]:
+                - /url: "#projects"
+            - listitem [ref=e1356]:
+              - link "Experience" [ref=e1357] [cursor=pointer]:
+                - /url: "#experience"
+            - listitem [ref=e1358]:
+              - link "Contact" [ref=e1359] [cursor=pointer]:
+                - /url: "#contact"
+        - generic [ref=e1360]:
+          - heading "Connect" [level=3] [ref=e1361]
+          - list [ref=e1362]:
+            - listitem [ref=e1363]:
+              - link "GitHub" [ref=e1364] [cursor=pointer]:
+                - /url: https://github.com/Mehedihasan444
+            - listitem [ref=e1365]:
+              - link "LinkedIn" [ref=e1366] [cursor=pointer]:
+                - /url: https://linkedin.com/in/mehedi-hasan-893500301
+            - listitem [ref=e1367]:
+              - link "Twitter" [ref=e1368] [cursor=pointer]:
+                - /url: https://twitter.com/MEHEDIH60833052
+            - listitem [ref=e1369]:
+              - link "Email" [ref=e1370] [cursor=pointer]:
+                - /url: mailto:mehedihasan67705251@gmail.com
+      - paragraph [ref=e1372]: © 2026 Mehedi Hasan. Built with precision.
+    - img [ref=e1373] [cursor=pointer]:
+      - generic: Mehedi
+      - generic: Mehedi
+  - region "Notifications alt+T"
+  - alert [ref=e1374]

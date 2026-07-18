@@ -1,10 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useInView } from "framer-motion";
 
 interface UseCountUpOptions {
   end: number;
@@ -13,7 +10,7 @@ interface UseCountUpOptions {
   prefix?: string;
   suffix?: string;
   decimals?: number;
-  scrollTrigger?: boolean;
+  disableScrollTrigger?: boolean;
 }
 
 export function useCountUp<T extends HTMLElement>(options: UseCountUpOptions) {
@@ -26,40 +23,33 @@ export function useCountUp<T extends HTMLElement>(options: UseCountUpOptions) {
     prefix = "",
     suffix = "",
     decimals = 0,
-    scrollTrigger = true,
+    disableScrollTrigger = false,
   } = options;
 
+  const isInView = useInView(ref as React.RefObject<Element>, {
+    once: true,
+    margin: "-50px",
+  });
+
+  const shouldAnimate = disableScrollTrigger || isInView;
+
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    if (!shouldAnimate) return;
 
-    const obj = { val: start };
+    const startTime = performance.now();
+    const range = end - start;
 
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        ...(scrollTrigger
-          ? {
-              scrollTrigger: {
-                trigger: el,
-                start: "top 90%",
-                toggleActions: "play none none reverse",
-              },
-            }
-          : {}),
-      });
+    const raf = (now: number) => {
+      const elapsed = (now - startTime) / 1000;
+      const t = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - t, 3);
+      setCount(start + range * ease);
+      if (t < 1) requestAnimationFrame(raf);
+    };
 
-      tl.to(obj, {
-        val: end,
-        duration,
-        ease: "power2.out",
-        onUpdate: () => {
-          setCount(obj.val);
-        },
-      });
-    }, el);
-
-    return () => ctx.revert();
-  }, [end, start, duration, scrollTrigger]);
+    const id = requestAnimationFrame(raf);
+    return () => cancelAnimationFrame(id);
+  }, [shouldAnimate, end, start, duration]);
 
   const display = `${prefix}${count.toFixed(decimals)}${suffix}`;
 

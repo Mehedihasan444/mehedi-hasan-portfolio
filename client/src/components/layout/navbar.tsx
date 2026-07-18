@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -38,24 +38,25 @@ export function Navbar() {
   );
   const navBlur = useTransform(scrollY, [0, 80], [0, 1]);
 
-  // Active section tracking
-  const updateActive = useCallback(() => {
-    const sections = navLinks.map((l) => l.href.replace("#", ""));
-    const scrollPos = window.scrollY + 120;
-    for (let i = sections.length - 1; i >= 0; i--) {
-      const el = document.getElementById(sections[i]);
-      if (el && scrollPos >= el.offsetTop) {
-        setActiveSection(sections[i]);
-        return;
-      }
-    }
-    setActiveSection("hero");
-  }, []);
-
+  // Active section tracking via IntersectionObserver (no forced layout)
   useEffect(() => {
-    window.addEventListener("scroll", updateActive, { passive: true });
-    return () => window.removeEventListener("scroll", updateActive);
-  }, [updateActive]);
+    const sectionIds = navLinks.map((l) => l.href.replace("#", ""));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        }
+      },
+      { rootMargin: "-20% 0px -60% 0px", threshold: 0 },
+    );
+    for (const id of sectionIds) {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    }
+    return () => observer.disconnect();
+  }, []);
 
   const scrollTo = (href: string) => {
     const id = href.replace("#", "");

@@ -49,10 +49,10 @@
   --color-indigo: var(--indigo);
   --color-rose: var(--rose);
   --color-amber: var(--amber);
-  --color-emerald: var(--violet);
-  --color-emerald-soft: var(--violet-soft);
-  --color-teal: var(--cyan);
-  --color-teal-soft: var(--cyan-soft);
+  --color-emerald: #059669;
+  --color-emerald-soft: #34d399;
+  --color-teal: #14b8a6;
+  --color-teal-soft: #5eead4;
   --color-glass: rgba(255, 255, 255, 0.03);
 
   /* Typography */
@@ -123,7 +123,7 @@
 
   /* Muted */
   --muted: rgba(8, 18, 12, 0.8);
-  --muted-foreground: #6b9980;
+  --muted-foreground: #94a3b8;
 
   /* Accent cyan */
   --accent: #06b6d4;
@@ -180,7 +180,7 @@
   --secondary: rgba(8, 22, 16, 0.9);
   --secondary-foreground: #a0c8b0;
   --muted: rgba(8, 18, 12, 0.8);
-  --muted-foreground: #6b9980;
+  --muted-foreground: #94a3b8;
   --accent: #06b6d4;
   --accent-foreground: #050810;
   --destructive: oklch(0.55 0.2 25);
@@ -320,7 +320,7 @@
 
 /* --- Glass morphism --- */
 @utility glass {
-  background: rgba(6, 14, 10, 0.5);
+  background: rgba(6, 14, 10, 0.65);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   border: 1px solid rgba(5, 150, 105, 0.12);

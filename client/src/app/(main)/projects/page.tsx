@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { getProjects, type FormattedProject } from "@/lib/api-public";
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { ArrowUpRight, ExternalLink, Search } from "lucide-react";
+import { ArrowLeftIcon } from "@/components/ui/icons";
 
 // Static fallback projects in case the backend API is not available/running
 const fallbackProjects: FormattedProject[] = [
@@ -21,7 +22,7 @@ const fallbackProjects: FormattedProject[] = [
     techStack: ["React", "Next.js", "TypeScript", "PostgreSQL", "Prisma"],
     liveUrl: null,
     githubUrl: "https://github.com/Mehedihasan444/marketsphere-frontend",
-    image: "/projects/marketsphere.png",
+    image: "/projects/marketsphere.webp",
     images: [],
     featured: true,
     order: 1,
@@ -40,7 +41,7 @@ const fallbackProjects: FormattedProject[] = [
     techStack: ["React", "Next.js", "TypeScript", "MongoDB", "Mongoose"],
     liveUrl: null,
     githubUrl: "https://github.com/Mehedihasan444/tech-tips-and-tricks-hub-frontend",
-    image: "/projects/techtips.png",
+    image: "/projects/techtips.webp",
     images: [],
     featured: false,
     order: 2,
@@ -58,7 +59,7 @@ const fallbackProjects: FormattedProject[] = [
     techStack: ["React", "TypeScript", "Node.js", "Express", "MongoDB"],
     liveUrl: null,
     githubUrl: "https://github.com/Mehedihasan444/Car-Rental-Reservation-System-Frontend",
-    image: "/projects/carrental.png",
+    image: "/projects/carrental.webp",
     images: [],
     featured: false,
     order: 3,
@@ -109,19 +110,7 @@ export default function ProjectsPage() {
           href="/"
           className="text-muted-foreground hover:text-emerald group mb-8 inline-flex items-center gap-2 text-sm transition-colors"
         >
-          <svg
-            className="h-4 w-4 transition-transform group-hover:-translate-x-1"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
+          <ArrowLeftIcon className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
           Back to Home
         </Link>
 

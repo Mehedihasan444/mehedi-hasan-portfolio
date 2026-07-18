@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/sections/hero-section";
 import { AboutSection } from "@/components/sections/about-section";
 import { SkillsSection } from "@/components/sections/skills-section";
@@ -10,29 +12,90 @@ import { GitHubSection } from "@/components/sections/github-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import { BlogPreviewSection } from "@/components/sections/blog-preview-section";
 import { ContactSection } from "@/components/sections/contact-section";
-import { ProgressiveBlur } from "@/components/animations/progressive-blur";
 import { getSectionVisibility } from "@/lib/sections";
+
+const ProgressiveBlur = dynamic(
+  () =>
+    import("@/components/animations/progressive-blur").then((m) => ({
+      default: m.ProgressiveBlur,
+    })),
+  { loading: () => <div className="h-[15vh]" /> },
+);
+
+const SectionFallback = ({ height = "100vh" }: { height?: string }) => (
+  <div className="flex items-center justify-center px-6 py-32" style={{ minHeight: height }}>
+    <div className="border-emerald/30 h-8 w-8 animate-spin rounded-full border-2 border-t-transparent" />
+  </div>
+);
 
 export default async function Home() {
   const s = await getSectionVisibility();
 
   return (
     <>
-      {s.hero && <HeroSection />}
+      {s.hero && (
+        <Suspense fallback={<SectionFallback />}>
+          <HeroSection />
+        </Suspense>
+      )}
       {s.hero && s.about && <ProgressiveBlur height="20vh" />}
-      {s.about && <AboutSection />}
+      {s.about && (
+        <Suspense fallback={<SectionFallback />}>
+          <AboutSection />
+        </Suspense>
+      )}
       {s.about && s.skills && <ProgressiveBlur height="15vh" />}
-      {s.skills && <SkillsSection />}
-      {s.experience && <ExperienceSection />}
+      {s.skills && (
+        <Suspense fallback={<SectionFallback height="60vh" />}>
+          <SkillsSection />
+        </Suspense>
+      )}
+      {s.experience && (
+        <Suspense fallback={<SectionFallback height="60vh" />}>
+          <ExperienceSection />
+        </Suspense>
+      )}
       {s.experience && s.projects && <ProgressiveBlur height="15vh" />}
-      {s.projects && <ProjectsSection />}
-      {s.education && <EducationSection />}
-      {s.certifications && <CertificationsSection />}
-      {s.achievements && <AchievementsSection />}
-      {s.github && <GitHubSection />}
-      {s.testimonials && <TestimonialsSection />}
-      {s.blog && <BlogPreviewSection />}
-      {s.contact && <ContactSection />}
+      {s.projects && (
+        <Suspense fallback={<SectionFallback />}>
+          <ProjectsSection />
+        </Suspense>
+      )}
+      {s.education && (
+        <Suspense fallback={<SectionFallback height="60vh" />}>
+          <EducationSection />
+        </Suspense>
+      )}
+      {s.certifications && (
+        <Suspense fallback={<SectionFallback height="60vh" />}>
+          <CertificationsSection />
+        </Suspense>
+      )}
+      {s.achievements && (
+        <Suspense fallback={<SectionFallback height="60vh" />}>
+          <AchievementsSection />
+        </Suspense>
+      )}
+      {s.github && (
+        <Suspense fallback={<SectionFallback height="60vh" />}>
+          <GitHubSection />
+        </Suspense>
+      )}
+      {s.testimonials && (
+        <Suspense fallback={<SectionFallback height="60vh" />}>
+          <TestimonialsSection />
+        </Suspense>
+      )}
+      {s.blog && (
+        <Suspense fallback={<SectionFallback height="60vh" />}>
+          <BlogPreviewSection />
+        </Suspense>
+      )}
+      {s.contact && (
+        <Suspense fallback={<SectionFallback height="80vh" />}>
+          <ContactSection />
+        </Suspense>
+      )}
     </>
   );
 }

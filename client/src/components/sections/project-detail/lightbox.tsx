@@ -1,0 +1,87 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Image from "next/image";
+
+export function Lightbox({
+  images,
+  index,
+  onClose,
+}: {
+  images: string[];
+  index: number;
+  onClose: () => void;
+}) {
+  const [current, setCurrent] = useState(index);
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") setCurrent((i) => (i > 0 ? i - 1 : i));
+      if (e.key === "ArrowRight") setCurrent((i) => (i < images.length - 1 ? i + 1 : i));
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [images, onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <button
+        onClick={onClose}
+        className="absolute right-6 top-6 text-2xl text-white/70 transition-colors hover:text-white"
+      >
+        ✕
+      </button>
+
+      {images.length > 1 && current > 0 && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setCurrent((i) => i - 1);
+          }}
+          className="absolute left-6 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-2xl text-white transition-all hover:bg-white/20"
+        >
+          ‹
+        </button>
+      )}
+
+      {images.length > 1 && current < images.length - 1 && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setCurrent((i) => i + 1);
+          }}
+          className="absolute right-6 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-2xl text-white transition-all hover:bg-white/20"
+        >
+          ›
+        </button>
+      )}
+
+      <div
+        className="flex h-full w-full items-center justify-center p-4"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="relative flex flex-col items-center">
+          <div className="overflow-hidden rounded-2xl">
+            <Image
+              src={images[current]}
+              alt={`Gallery ${current + 1}`}
+              width={1200}
+              height={800}
+              className="max-h-[80vh] w-auto object-contain"
+              unoptimized
+            />
+          </div>
+          {images.length > 1 && (
+            <p className="mt-4 text-sm text-white/50">
+              {current + 1} / {images.length}
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

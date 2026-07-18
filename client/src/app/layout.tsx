@@ -1,21 +1,30 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import { Providers } from "@/providers";
 import { Toaster } from "@/components/ui/sonner";
+import {
+  SITE_URL,
+  SITE_TITLE,
+  SITE_DESCRIPTION,
+  SOCIAL_LINKS,
+  EMAIL,
+  PHONE,
+} from "@/lib/constants";
 import "./globals.css";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
   display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -25,11 +34,6 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "500", "600"],
 });
 
-const siteUrl = "https://mehedi-hasan.dev";
-const siteTitle = "Mehedi Hasan — Full Stack Developer & Software Engineer";
-const siteDescription =
-  "Full Stack Developer & Software Engineer based in Dhaka, Bangladesh. Specializing in React, Next.js, Node.js, TypeScript, and modern web technologies. Building scalable, high-performance applications.";
-
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -38,10 +42,10 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: siteTitle,
+    default: SITE_TITLE,
     template: "%s | Mehedi Hasan",
   },
-  description: siteDescription,
+  description: SITE_DESCRIPTION,
   keywords: [
     "Full Stack Developer",
     "Software Engineer",
@@ -63,20 +67,20 @@ export const metadata: Metadata = {
     "Express.js Developer",
     "Web Developer Bangladesh",
   ],
-  authors: [{ name: "Mehedi Hasan", url: siteUrl }],
+  authors: [{ name: "Mehedi Hasan", url: SITE_URL }],
   creator: "Mehedi Hasan",
   publisher: "Mehedi Hasan",
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
   alternates: {
-    canonical: siteUrl,
+    canonical: SITE_URL,
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: siteUrl,
+    url: SITE_URL,
     siteName: "Mehedi Hasan",
-    title: siteTitle,
-    description: siteDescription,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: [
       {
         url: "/og-image.png",
@@ -88,8 +92,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: siteTitle,
-    description: siteDescription,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     creator: "@MEHEDIH60833052",
     images: ["/og-image.png"],
   },
@@ -116,23 +120,19 @@ const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Mehedi Hasan",
-  url: siteUrl,
-  image: `${siteUrl}/profile.jpg`,
+  url: SITE_URL,
+  image: `${SITE_URL}/profile.jpg`,
   jobTitle: "Full Stack Developer",
-  description: siteDescription,
-  email: "mehedihasan67705251@gmail.com",
-  telephone: "+8801767705251",
+  description: SITE_DESCRIPTION,
+  email: EMAIL,
+  telephone: PHONE,
   address: {
     "@type": "PostalAddress",
     addressLocality: "Dhaka",
     addressCountry: "Bangladesh",
     addressRegion: "Dhaka",
   },
-  sameAs: [
-    "https://github.com/Mehedihasan444",
-    "https://linkedin.com/in/mehedi-hasan-893500301",
-    "https://twitter.com/MEHEDIH60833052",
-  ],
+  sameAs: [SOCIAL_LINKS.github, SOCIAL_LINKS.linkedin, SOCIAL_LINKS.twitter],
   knowsAbout: [
     "React",
     "Next.js",
@@ -176,17 +176,14 @@ export default function RootLayout({
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} dark h-full antialiased`}
       suppressHydrationWarning
     >
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
-        />
-      </head>
       <body className="flex min-h-full flex-col">
         <Providers>{children}</Providers>
         <Toaster position="bottom-right" />
+        <Script
+          id="schema-person"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
       </body>
     </html>
   );

@@ -3,6 +3,7 @@
 import * as React from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { SquareArrowOutUpRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 function cn(...classes: Array<string | undefined | null | false>) {
@@ -321,12 +322,14 @@ function DefaultCard({ item }: { item: CardStackItem }) {
     <div className="relative h-full w-full">
       <div className="absolute inset-0">
         {item.imageSrc ? (
-          <img
+          <Image
             src={item.imageSrc}
             alt={item.title}
-            className="h-full w-full object-cover"
+            fill
+            className="object-cover"
             draggable={false}
-            loading="eager"
+            sizes="520px"
+            unoptimized
           />
         ) : (
           <div className="bg-secondary text-muted-foreground flex h-full w-full items-center justify-center text-sm">
