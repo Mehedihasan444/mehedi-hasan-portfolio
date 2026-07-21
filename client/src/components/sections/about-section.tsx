@@ -12,7 +12,7 @@ export function AboutSection() {
   return (
     <section
       id="about"
-      className="bg-background relative z-10 overflow-hidden rounded-t-[3rem] px-6 py-32"
+      className="relative z-10 overflow-hidden rounded-t-[3rem] px-6 py-32"
       style={{ marginTop: "clamp(-10rem, -15vh, -4rem)" }}
     >
       <AmbientGlow
