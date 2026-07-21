@@ -8,12 +8,14 @@ import { useScrollProgress } from "@/hooks/use-scroll-progress";
 
 function FloatingIcosahedron() {
   const meshRef = useRef<THREE.Mesh>(null);
+  const timerRef = useRef(new THREE.Timer());
   const { pointer } = useThree();
   const { progress } = useScrollProgress();
 
-  useFrame((state) => {
+  useFrame(() => {
     if (!meshRef.current) return;
-    const t = state.clock.getElapsedTime();
+    timerRef.current.update();
+    const t = timerRef.current.getElapsed();
     const scrollOffset = progress * 3;
     meshRef.current.rotation.x = Math.sin(t * 0.2) * 0.3 + progress * 1.5;
     meshRef.current.rotation.y = Math.sin(t * 0.3) * 0.3 + progress * 2;
@@ -44,12 +46,14 @@ function FloatingIcosahedron() {
 
 function FloatingTorus() {
   const meshRef = useRef<THREE.Mesh>(null);
+  const timerRef = useRef(new THREE.Timer());
   const { pointer } = useThree();
   const { progress } = useScrollProgress();
 
-  useFrame((state) => {
+  useFrame(() => {
     if (!meshRef.current) return;
-    const t = state.clock.getElapsedTime();
+    timerRef.current.update();
+    const t = timerRef.current.getElapsed();
     const scrollOffset = progress * 3;
     meshRef.current.rotation.x = Math.sin(t * 0.15 + 1) * 0.5 + progress;
     meshRef.current.rotation.y = Math.sin(t * 0.25 + 1) * 0.5 + progress * 1.5;
@@ -80,12 +84,14 @@ function FloatingTorus() {
 
 function FloatingOctahedron() {
   const meshRef = useRef<THREE.Mesh>(null);
+  const timerRef = useRef(new THREE.Timer());
   const { pointer } = useThree();
   const { progress } = useScrollProgress();
 
-  useFrame((state) => {
+  useFrame(() => {
     if (!meshRef.current) return;
-    const t = state.clock.getElapsedTime();
+    timerRef.current.update();
+    const t = timerRef.current.getElapsed();
     const scrollOffset = progress * 3;
     meshRef.current.rotation.x = Math.sin(t * 0.25 + 2) * 0.4 + progress * 0.8;
     meshRef.current.rotation.y = Math.sin(t * 0.35 + 2) * 0.4 + progress * 1.2;
@@ -125,11 +131,13 @@ function Particles3D() {
   });
 
   const ref = useRef<THREE.Points>(null);
+  const timerRef = useRef(new THREE.Timer());
   const { progress } = useScrollProgress();
 
-  useFrame((state) => {
+  useFrame(() => {
     if (!ref.current) return;
-    const t = state.clock.getElapsedTime() * 0.05;
+    timerRef.current.update();
+    const t = timerRef.current.getElapsed() * 0.05;
     ref.current.rotation.y = t + progress * 2;
     ref.current.rotation.x = Math.sin(t * 0.5) * 0.3 + progress * 0.5;
     const material = ref.current.material as THREE.PointsMaterial;

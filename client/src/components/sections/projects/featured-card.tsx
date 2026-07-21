@@ -4,9 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { GithubIcon } from "@/components/ui/icons";
-import type { ProjectItem } from "./constants";
+import type { FormattedProject } from "@/lib/api-public";
 
-export function FeaturedCard({ project }: { project: ProjectItem }) {
+export function FeaturedCard({ project }: { project: FormattedProject }) {
+  const year = project.createdAt ? new Date(project.createdAt).getFullYear().toString() : "";
+
   return (
     <Link
       href={`/projects/${project.slug}`}
@@ -16,7 +18,7 @@ export function FeaturedCard({ project }: { project: ProjectItem }) {
       <div className="glass relative h-full min-h-[440px] overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-1 hover:border-white/20">
         <div className="relative h-56 w-full overflow-hidden">
           <Image
-            src={project.image}
+            src={project.image || "/projects/marketsphere.webp"}
             alt={`${project.title} preview`}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -35,7 +37,7 @@ export function FeaturedCard({ project }: { project: ProjectItem }) {
                 <span className="bg-emerald/10 text-emerald rounded-full px-3 py-1 text-xs font-medium">
                   {project.status}
                 </span>
-                <span className="text-muted-foreground text-xs">{project.year}</span>
+                {year && <span className="text-muted-foreground text-xs">{year}</span>}
               </div>
               <h3 className="group-hover:text-gradient mt-3 text-xl font-bold text-white transition-all duration-300">
                 {project.title}
@@ -51,7 +53,7 @@ export function FeaturedCard({ project }: { project: ProjectItem }) {
           </p>
 
           <div className="mt-5 flex flex-wrap gap-2">
-            {project.tech.map((t) => (
+            {project.techStack.map((t) => (
               <span
                 key={t}
                 className="text-muted-foreground rounded-full bg-white/5 px-3 py-1 text-xs transition-colors group-hover:bg-white/10 group-hover:text-white"
@@ -62,26 +64,28 @@ export function FeaturedCard({ project }: { project: ProjectItem }) {
           </div>
 
           <div className="mt-5 flex items-center gap-3">
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-                window.open(project.github, "_blank", "noopener,noreferrer");
-              }}
-              aria-label={`View ${project.title} on GitHub`}
-              className="text-muted-foreground flex cursor-pointer items-center gap-1.5 text-xs transition-colors hover:text-white"
-            >
-              <GithubIcon />
-              GitHub
-            </button>
-            {project.demo && (
+            {project.githubUrl && (
               <button
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation();
                   e.preventDefault();
-                  window.open(project.demo!, "_blank", "noopener,noreferrer");
+                  window.open(project.githubUrl!, "_blank", "noopener,noreferrer");
+                }}
+                aria-label={`View ${project.title} on GitHub`}
+                className="text-muted-foreground flex cursor-pointer items-center gap-1.5 text-xs transition-colors hover:text-white"
+              >
+                <GithubIcon />
+                GitHub
+              </button>
+            )}
+            {project.liveUrl && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  window.open(project.liveUrl!, "_blank", "noopener,noreferrer");
                 }}
                 aria-label={`View ${project.title} live demo`}
                 className="text-muted-foreground hover:text-emerald flex cursor-pointer items-center gap-1.5 text-xs transition-colors"

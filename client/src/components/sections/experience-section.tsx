@@ -1,9 +1,11 @@
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
-import { experiences } from "./experience/constants";
+import { getExperiences } from "@/lib/api-public";
 import { TimelineLine } from "./experience/timeline-line";
 import { TimelineCard } from "./experience/timeline-card";
 
-export function ExperienceSection() {
+export async function ExperienceSection() {
+  const experiences = await getExperiences();
+
   return (
     <section id="experience" className="relative overflow-hidden px-6 py-32">
       <div className="mx-auto max-w-7xl">
@@ -27,7 +29,7 @@ export function ExperienceSection() {
           </div>
 
           {experiences.map((exp, i) => (
-            <TimelineCard key={i} exp={exp} index={i} />
+            <TimelineCard key={exp.id} exp={exp} index={i} />
           ))}
         </div>
       </div>

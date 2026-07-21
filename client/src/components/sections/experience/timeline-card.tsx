@@ -3,18 +3,15 @@
 import { useRef, useEffect } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { CalendarDays, Briefcase, MapPin } from "lucide-react";
+import type { FormattedExperience } from "@/lib/api-public";
 
-interface ExperienceItem {
-  period: string;
-  role: string;
-  company: string;
-  location: string;
-  description: string;
-  tags: string[];
-  current: boolean;
+function formatPeriod(startDate: string, endDate: string | null): string {
+  const start = new Date(startDate).getFullYear();
+  const end = endDate ? new Date(endDate).getFullYear() : "Present";
+  return `${start} – ${end}`;
 }
 
-export function TimelineCard({ exp, index }: { exp: ExperienceItem; index: number }) {
+export function TimelineCard({ exp, index }: { exp: FormattedExperience; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -94,7 +91,7 @@ export function TimelineCard({ exp, index }: { exp: ExperienceItem; index: numbe
           >
             <span className="bg-emerald/10 text-emerald inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium">
               <CalendarDays size={10} />
-              {exp.period}
+              {formatPeriod(exp.startDate, exp.endDate)}
             </span>
             {exp.current && (
               <span className="bg-teal/10 text-teal rounded-full px-3 py-1 text-xs font-medium">
@@ -114,10 +111,12 @@ export function TimelineCard({ exp, index }: { exp: ExperienceItem; index: numbe
               <Briefcase size={11} />
               {exp.company}
             </span>
-            <span className="flex items-center gap-1">
-              <MapPin size={11} />
-              {exp.location}
-            </span>
+            {exp.location && (
+              <span className="flex items-center gap-1">
+                <MapPin size={11} />
+                {exp.location}
+              </span>
+            )}
           </div>
 
           <p
@@ -128,16 +127,18 @@ export function TimelineCard({ exp, index }: { exp: ExperienceItem; index: numbe
             {exp.description}
           </p>
 
-          <div className={`mt-4 flex flex-wrap gap-2 ${index % 2 === 0 ? "md:justify-end" : ""}`}>
-            {exp.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-muted-foreground rounded-full bg-white/5 px-3 py-1 text-xs transition-colors hover:bg-white/10 hover:text-white"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+          {exp.tags.length > 0 && (
+            <div className={`mt-4 flex flex-wrap gap-2 ${index % 2 === 0 ? "md:justify-end" : ""}`}>
+              {exp.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-muted-foreground rounded-full bg-white/5 px-3 py-1 text-xs transition-colors hover:bg-white/10 hover:text-white"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

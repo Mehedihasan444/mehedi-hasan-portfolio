@@ -20,9 +20,14 @@ class ApiClient {
 
   private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
     const headers: Record<string, string> = {
-      "Content-Type": "application/json",
       ...(options.headers as Record<string, string>),
     };
+
+    const isFormData = options.body instanceof FormData;
+
+    if (!isFormData) {
+      headers["Content-Type"] = "application/json";
+    }
 
     if (this.token) {
       headers.Authorization = `Bearer ${this.token}`;
@@ -39,7 +44,7 @@ class ApiClient {
       throw new Error(data.message || "Request failed");
     }
 
-    return data.data;
+    return data.data ?? data;
   }
 
   async get<T>(endpoint: string) {
@@ -62,6 +67,13 @@ class ApiClient {
 
   async delete<T>(endpoint: string) {
     return this.request<T>(endpoint, { method: "DELETE" });
+  }
+
+  async upload<T>(endpoint: string, formData: FormData) {
+    return this.request<T>(endpoint, {
+      method: "POST",
+      body: formData,
+    });
   }
 
   async login(email: string, password: string) {

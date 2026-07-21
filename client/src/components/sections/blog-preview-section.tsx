@@ -1,10 +1,13 @@
 import Link from "next/link";
 import { ScrollReveal, StaggerReveal, RevealItem } from "@/components/animations/scroll-reveal";
 import { MagneticButton } from "@/components/animations/magnetic-button";
-import { blogPosts } from "./blog-preview/constants";
+import { getBlogPosts } from "@/lib/api-public";
 import { BlogCard } from "./blog-preview/blog-card";
 
-export function BlogPreviewSection() {
+export async function BlogPreviewSection() {
+  const posts = await getBlogPosts();
+  const published = posts.filter((p) => p.published).slice(0, 3);
+
   return (
     <section id="blog" className="relative overflow-hidden px-6 py-24">
       <div className="mx-auto max-w-7xl">
@@ -25,8 +28,8 @@ export function BlogPreviewSection() {
 
         <StaggerReveal staggerDelay={0.15}>
           <div className="mt-16 grid gap-8 md:grid-cols-3">
-            {blogPosts.map((post, i) => (
-              <RevealItem key={i} direction="up" distance={40}>
+            {published.map((post, i) => (
+              <RevealItem key={post.slug} direction="up" distance={40}>
                 <BlogCard post={post} />
               </RevealItem>
             ))}

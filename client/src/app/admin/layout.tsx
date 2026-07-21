@@ -10,6 +10,10 @@ const sidebarLinks = [
   { label: "Projects", href: "/admin/projects" },
   { label: "Skills", href: "/admin/skills" },
   { label: "Experiences", href: "/admin/experiences" },
+  { label: "Education", href: "/admin/education" },
+  { label: "Certifications", href: "/admin/certifications" },
+  { label: "Testimonials", href: "/admin/testimonials" },
+  { label: "Achievements", href: "/admin/achievements" },
   { label: "Blog", href: "/admin/blog" },
   { label: "Messages", href: "/admin/messages" },
   { label: "Settings", href: "/admin/settings" },
@@ -48,7 +52,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <div className="flex min-h-screen">
       <aside className="fixed left-0 top-0 z-40 flex h-full w-64 flex-col border-r border-white/5 bg-[oklch(0.04_0.01_260)]">
-        <div className="flex items-center gap-2 border-b border-white/5 px-6 py-5">
+        <div className="flex items-center justify-center gap-2 border-b border-white/5 px-6 py-5">
           <Link href="/" className="text-gradient text-lg font-bold">
             MH
           </Link>

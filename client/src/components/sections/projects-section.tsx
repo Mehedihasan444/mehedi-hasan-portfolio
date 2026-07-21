@@ -2,12 +2,15 @@ import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { ScrollReveal, StaggerReveal, RevealItem } from "@/components/animations/scroll-reveal";
 import { SectionOverlay, AmbientGlow } from "@/components/ui/section-overlay";
-import { projects } from "./projects/constants";
 import { FeaturedCard } from "./projects/featured-card";
 import { SmallCard } from "./projects/small-card";
+import { getProjects } from "@/lib/api-public";
 
-export function ProjectsSection() {
-  const [featured, ...rest] = projects;
+export async function ProjectsSection() {
+  const projects = await getProjects();
+  const sorted = [...projects].sort((a, b) => b.order - a.order);
+  const featured = sorted.find((p) => p.featured) || sorted[0];
+  const rest = sorted.filter((p) => p.slug !== featured?.slug).slice(0, 2);
 
   return (
     <section id="projects" className="relative overflow-hidden px-6 py-32">
@@ -30,24 +33,24 @@ export function ProjectsSection() {
           </div>
         </ScrollReveal>
 
-        <StaggerReveal staggerDelay={0.15}>
-          <div className="mt-16 grid gap-5 lg:grid-cols-5 lg:grid-rows-2">
-            {featured && (
+        {featured && (
+          <StaggerReveal staggerDelay={0.15}>
+            <div className="mt-16 grid gap-5 lg:grid-cols-5 lg:grid-rows-2">
               <div className="lg:col-span-3 lg:row-span-2">
                 <RevealItem direction="up" distance={50}>
                   <FeaturedCard project={featured} />
                 </RevealItem>
               </div>
-            )}
-            {rest.map((project) => (
-              <div key={project.slug} className="lg:col-span-2">
-                <RevealItem direction="up" distance={50}>
-                  <SmallCard project={project} num={projects.indexOf(project)} />
-                </RevealItem>
-              </div>
-            ))}
-          </div>
-        </StaggerReveal>
+              {rest.map((project, i) => (
+                <div key={project.slug} className="lg:col-span-2">
+                  <RevealItem direction="up" distance={50}>
+                    <SmallCard project={project} num={i + 2} />
+                  </RevealItem>
+                </div>
+              ))}
+            </div>
+          </StaggerReveal>
+        )}
 
         <ScrollReveal delay={0.4}>
           <div className="mt-12 text-center">

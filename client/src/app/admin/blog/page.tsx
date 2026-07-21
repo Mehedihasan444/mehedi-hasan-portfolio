@@ -50,6 +50,20 @@ export default function AdminBlogPage() {
     setModalOpen(true);
   };
 
+  function parseJsonField(value: unknown): string {
+    if (!value) return "";
+    if (Array.isArray(value)) return value.join(", ");
+    if (typeof value === "string") {
+      try {
+        const parsed = JSON.parse(value);
+        return Array.isArray(parsed) ? parsed.join(", ") : value;
+      } catch {
+        return value;
+      }
+    }
+    return String(value);
+  }
+
   const openEdit = (item: any) => {
     setEditing(item);
     setForm({
@@ -57,7 +71,7 @@ export default function AdminBlogPage() {
       slug: item.slug,
       content: item.content || "",
       excerpt: item.excerpt || "",
-      tags: item.tags ? (Array.isArray(item.tags) ? item.tags.join(", ") : item.tags) : "",
+      tags: parseJsonField(item.tags),
       published: item.published,
     });
     setModalOpen(true);

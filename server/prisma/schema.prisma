@@ -55,6 +55,7 @@ model Experience {
   location    String?
   type        String   @default("full-time")
   current     Boolean  @default(false)
+  tags        String   @default("[]")
   createdAt   DateTime @default(now())
 }
 
@@ -66,18 +67,21 @@ model Education {
   description String?
   startDate   DateTime
   endDate     DateTime?
+  location    String?
   gpa         String?
+  tags        String   @default("[]")
   createdAt   DateTime @default(now())
 }
 
 model Certification {
-  id        String   @id @default(cuid())
-  title     String
-  issuer    String
-  url       String?
-  date      DateTime?
-  image     String?
-  createdAt DateTime @default(now())
+  id          String   @id @default(cuid())
+  title       String
+  issuer      String
+  url         String?
+  date        DateTime?
+  description String?
+  image       String?
+  createdAt   DateTime @default(now())
 }
 
 model BlogPost {

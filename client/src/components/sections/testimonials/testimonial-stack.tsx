@@ -1,13 +1,22 @@
 "use client";
 
+import type { Testimonial } from "@/lib/api-public";
 import { CardStack } from "@/components/ui/card-stack";
-import { testimonialCards } from "./constants";
-import { renderTestimonialCard } from "./render-card";
+import { renderTestimonialCard, setTestimonials } from "./render-card";
 
-export function TestimonialStack() {
+export function TestimonialStack({ testimonials: items }: { testimonials: Testimonial[] }) {
+  setTestimonials(items);
+
+  const cardItems = items.map((t) => ({
+    id: t.id,
+    title: t.name,
+    description: t.content,
+    tag: [t.role, t.company].filter(Boolean).join(" · "),
+  }));
+
   return (
     <CardStack
-      items={testimonialCards}
+      items={cardItems}
       renderCard={renderTestimonialCard}
       cardWidth={520}
       cardHeight={340}

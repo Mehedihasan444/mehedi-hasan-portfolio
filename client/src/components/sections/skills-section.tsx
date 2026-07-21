@@ -1,9 +1,26 @@
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { SectionOverlay, AmbientGlow } from "@/components/ui/section-overlay";
-import { techRow1, techRow2, skillCategories } from "./skills/constants";
+import { getSkills } from "@/lib/api-public";
 import { MarqueeRow } from "./skills/marquee-row";
 
-export function SkillsSection() {
+export async function SkillsSection() {
+  const skills = await getSkills();
+  const sorted = [...skills].sort((a, b) => a.order - b.order);
+
+  const categories = sorted.reduce(
+    (acc, skill) => {
+      const cat = skill.category || "Other";
+      if (!acc[cat]) acc[cat] = [];
+      acc[cat].push(skill.name);
+      return acc;
+    },
+    {} as Record<string, string[]>,
+  );
+
+  const mid = Math.ceil(sorted.length / 2);
+  const row1 = sorted.slice(0, mid).map((s) => s.name);
+  const row2 = sorted.slice(mid).map((s) => s.name);
+
   return (
     <section id="skills" className="relative overflow-hidden px-6 py-32">
       <AmbientGlow position="right" color="from-teal/5 via-emerald/5" size="h-80 w-80" />
@@ -24,25 +41,27 @@ export function SkillsSection() {
           </div>
         </ScrollReveal>
 
-        <ScrollReveal delay={0.2}>
-          <div className="mt-20 space-y-3">
-            <MarqueeRow items={techRow1} />
-            <MarqueeRow items={techRow2} reverse />
-          </div>
-        </ScrollReveal>
+        {row1.length > 0 && (
+          <ScrollReveal delay={0.2}>
+            <div className="mt-20 space-y-3">
+              <MarqueeRow items={row1} />
+              <MarqueeRow items={row2} />
+            </div>
+          </ScrollReveal>
+        )}
 
         <ScrollReveal delay={0.4}>
           <div className="mt-20 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            {skillCategories.map((category) => (
-              <div key={category.name} className="group">
+            {Object.entries(categories).map(([name, skillNames]) => (
+              <div key={name} className="group">
                 <div className="mb-4 flex items-center gap-3">
                   <h3 className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/30 transition-colors duration-300 group-hover:text-white/50">
-                    {category.name}
+                    {name}
                   </h3>
                   <div className="h-px flex-1 bg-gradient-to-r from-white/[0.07] to-transparent" />
                 </div>
                 <ul className="space-y-2">
-                  {category.skills.map((skill) => (
+                  {skillNames.map((skill) => (
                     <li
                       key={skill}
                       className="flex cursor-default items-center gap-2 text-sm text-white/50 transition-all duration-200 hover:text-white/90"

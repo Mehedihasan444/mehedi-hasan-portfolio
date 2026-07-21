@@ -2,7 +2,24 @@
 
 import type { CardStackItem } from "@/components/ui/card-stack";
 import { Quote } from "lucide-react";
-import { testimonials } from "./constants";
+import type { Testimonial } from "@/lib/api-public";
+
+const gradients = [
+  "from-emerald to-teal",
+  "from-teal to-cyan",
+  "from-cyan to-emerald",
+  "from-emerald to-cyan",
+  "from-teal to-emerald",
+];
+
+function getInitials(name: string) {
+  return name
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+}
 
 function StarRating({ count }: { count: number }) {
   return (
@@ -21,9 +38,18 @@ function StarRating({ count }: { count: number }) {
   );
 }
 
+const testimonialMap = new Map<string, Testimonial>();
+
+export function setTestimonials(items: Testimonial[]) {
+  testimonialMap.clear();
+  items.forEach((t) => testimonialMap.set(t.id, t));
+}
+
 export function renderTestimonialCard(item: CardStackItem, { active }: { active: boolean }) {
-  const t = testimonials[item.id as number];
+  const t = testimonialMap.get(item.id as string);
   if (!t) return null;
+
+  const gradient = gradients[Math.abs(hashCode(t.id)) % gradients.length];
 
   return (
     <div
@@ -35,7 +61,7 @@ export function renderTestimonialCard(item: CardStackItem, { active }: { active:
       style={{ border: "1px solid rgba(5,150,105,0.12)" }}
     >
       <div
-        className={`pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br ${t.gradient} opacity-[0.04]`}
+        className={`pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br ${gradient} opacity-[0.04]`}
         aria-hidden
       />
 
@@ -53,20 +79,34 @@ export function renderTestimonialCard(item: CardStackItem, { active }: { active:
 
         <div className="mt-auto flex items-center gap-3 border-t border-white/[0.07] pt-4">
           <div
-            className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br ${t.gradient} text-xs font-bold text-white shadow-lg`}
+            className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br ${gradient} text-xs font-bold text-white shadow-lg`}
           >
-            {t.avatar}
+            {t.avatar || getInitials(t.name)}
           </div>
           <div className="min-w-0">
             <p className="truncate text-sm font-semibold text-white">{t.name}</p>
             <p className="text-muted-foreground truncate text-xs">
               {t.role}
-              <span className="mx-1 text-white/20">·</span>
-              {t.company}
+              {t.company && (
+                <>
+                  <span className="mx-1 text-white/20">·</span>
+                  {t.company}
+                </>
+              )}
             </p>
           </div>
         </div>
       </div>
     </div>
   );
+}
+
+function hashCode(str: string) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = (hash << 5) - hash + char;
+    hash |= 0;
+  }
+  return hash;
 }

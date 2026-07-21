@@ -1,15 +1,10 @@
 import Link from "next/link";
+import type { FormattedBlogPost } from "@/lib/api-public";
 
-interface BlogPost {
-  title: string;
-  excerpt: string;
-  tags: string[];
-}
-
-export function BlogCard({ post }: { post: BlogPost }) {
+export function BlogCard({ post }: { post: FormattedBlogPost }) {
   return (
     <div className="group h-full">
-      <Link href="/blog" className="block h-full">
+      <Link href={`/blog/${post.slug}`} className="block h-full">
         <div className="glass relative h-full rounded-xl p-6 transition-all duration-500 hover:-translate-y-1 hover:border-white/20">
           <div className="from-emerald/5 via-teal/5 absolute inset-0 rounded-xl bg-gradient-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           <div className="relative z-10 flex h-full flex-col">

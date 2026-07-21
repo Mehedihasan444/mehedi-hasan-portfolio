@@ -1,17 +1,15 @@
 import { GraduationCap, CalendarDays, MapPin, BookOpen } from "lucide-react";
+import type { FormattedEducation } from "@/lib/api-public";
 
-interface EducationItem {
-  degree: string;
-  institution: string;
-  period: string;
-  location: string;
-  description: string;
-  tags: string[];
-  gpa: string;
-  current: boolean;
+function formatPeriod(startDate: string, endDate: string | null): string {
+  const start = new Date(startDate).getFullYear();
+  const end = endDate ? new Date(endDate).getFullYear() : "Present";
+  return `${start} – ${end}`;
 }
 
-export function EducationCard({ edu }: { edu: EducationItem }) {
+export function EducationCard({ edu }: { edu: FormattedEducation }) {
+  const current = !edu.endDate;
+
   return (
     <div className="glass group relative rounded-2xl p-8 transition-all duration-500 hover:border-white/20">
       <div className="from-emerald/5 via-teal/5 absolute inset-0 rounded-2xl bg-gradient-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -24,7 +22,7 @@ export function EducationCard({ edu }: { edu: EducationItem }) {
           <div className="flex-1">
             <div className="flex flex-wrap items-center gap-2">
               <h3 className="text-xl font-bold text-white">{edu.degree}</h3>
-              {edu.current && (
+              {current && (
                 <span className="bg-teal/10 text-teal flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium">
                   <span className="relative flex h-1.5 w-1.5">
                     <span className="bg-teal/70 absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" />
@@ -39,33 +37,39 @@ export function EducationCard({ edu }: { edu: EducationItem }) {
 
           <span className="bg-emerald/10 text-emerald flex flex-shrink-0 items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium">
             <CalendarDays size={10} />
-            {edu.period}
+            {formatPeriod(edu.startDate, edu.endDate)}
           </span>
         </div>
 
         <div className="text-muted-foreground mt-4 flex flex-wrap items-center gap-4 text-xs">
-          <span className="flex items-center gap-1.5">
-            <MapPin size={12} />
-            {edu.location}
-          </span>
-          <span className="flex items-center gap-1.5">
-            <BookOpen size={12} />
-            GPA: {edu.gpa}
-          </span>
+          {edu.location && (
+            <span className="flex items-center gap-1.5">
+              <MapPin size={12} />
+              {edu.location}
+            </span>
+          )}
+          {edu.gpa && (
+            <span className="flex items-center gap-1.5">
+              <BookOpen size={12} />
+              GPA: {edu.gpa}
+            </span>
+          )}
         </div>
 
         <p className="text-muted-foreground mt-5 leading-relaxed">{edu.description}</p>
 
-        <div className="mt-5 flex flex-wrap gap-2">
-          {edu.tags.map((tag) => (
-            <span
-              key={tag}
-              className="text-muted-foreground rounded-full bg-white/5 px-3 py-1 text-xs transition-colors hover:bg-white/10 hover:text-white"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
+        {edu.tags.length > 0 && (
+          <div className="mt-5 flex flex-wrap gap-2">
+            {edu.tags.map((tag) => (
+              <span
+                key={tag}
+                className="text-muted-foreground rounded-full bg-white/5 px-3 py-1 text-xs transition-colors hover:bg-white/10 hover:text-white"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

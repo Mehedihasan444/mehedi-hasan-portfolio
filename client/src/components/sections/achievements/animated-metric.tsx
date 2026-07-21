@@ -57,7 +57,7 @@ export function AnimatedMetric({ value, label, icon, gradient, index }: MetricPr
           className={`pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br ${gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-[0.06]`}
         />
         <div className="relative z-10">
-          <div className="${gradient} mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-opacity-10 bg-gradient-to-br">
+          <div className={`mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${gradient} bg-opacity-10`}>
             <Icon className="h-6 w-6 text-white" />
           </div>
           <div className="font-heading text-gradient text-4xl font-bold">{value}</div>

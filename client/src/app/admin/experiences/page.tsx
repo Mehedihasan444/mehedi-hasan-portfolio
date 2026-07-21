@@ -21,6 +21,20 @@ export default function AdminExperiencesPage() {
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<any>(null);
+  function parseJsonField(value: unknown): string {
+    if (!value) return "";
+    if (Array.isArray(value)) return value.join(", ");
+    if (typeof value === "string") {
+      try {
+        const parsed = JSON.parse(value);
+        return Array.isArray(parsed) ? parsed.join(", ") : value;
+      } catch {
+        return value;
+      }
+    }
+    return String(value);
+  }
+
   const [form, setForm] = useState({
     company: "",
     role: "",
@@ -30,6 +44,7 @@ export default function AdminExperiencesPage() {
     startDate: "",
     endDate: "",
     current: false,
+    tags: "",
   });
 
   const load = async () => {
@@ -58,6 +73,7 @@ export default function AdminExperiencesPage() {
       startDate: "",
       endDate: "",
       current: false,
+      tags: "",
     });
     setModalOpen(true);
   };
@@ -73,6 +89,7 @@ export default function AdminExperiencesPage() {
       startDate: item.startDate?.split("T")[0] || "",
       endDate: item.endDate?.split("T")[0] || "",
       current: item.current,
+      tags: parseJsonField(item.tags),
     });
     setModalOpen(true);
   };
@@ -84,6 +101,12 @@ export default function AdminExperiencesPage() {
         ...form,
         startDate: new Date(form.startDate),
         endDate: form.endDate ? new Date(form.endDate) : null,
+        tags: JSON.stringify(
+          form.tags
+            .split(",")
+            .map((s: string) => s.trim())
+            .filter(Boolean),
+        ),
       };
       if (editing) {
         await api.put(`/experiences/${editing.id}`, payload);
@@ -176,6 +199,12 @@ export default function AdminExperiencesPage() {
             onChange={(e) => setForm({ ...form, endDate: e.target.value })}
             className="focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
             disabled={form.current}
+          />
+          <input
+            placeholder="Tags (comma separated)"
+            value={form.tags}
+            onChange={(e) => setForm({ ...form, tags: e.target.value })}
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
           />
           <label className="text-muted-foreground flex items-center gap-2 text-sm">
             <input

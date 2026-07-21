@@ -1,9 +1,11 @@
 import { ScrollReveal, StaggerReveal, RevealItem } from "@/components/animations/scroll-reveal";
 import { SvgDivider } from "@/components/animations/svg-divider";
-import { certifications } from "./certifications/constants";
+import { getCertifications } from "@/lib/api-public";
 import { CertCard } from "./certifications/cert-card";
 
-export function CertificationsSection() {
+export async function CertificationsSection() {
+  const certifications = await getCertifications();
+
   return (
     <section id="certifications" className="relative overflow-hidden px-6 py-24">
       <div className="mx-auto max-w-7xl">
@@ -24,8 +26,8 @@ export function CertificationsSection() {
 
         <StaggerReveal staggerDelay={0.12}>
           <div className="mx-auto mt-16 grid max-w-5xl gap-5 md:grid-cols-3">
-            {certifications.map((cert, i) => (
-              <RevealItem key={i} direction="up" distance={30}>
+            {certifications.map((cert) => (
+              <RevealItem key={cert.id} direction="up" distance={30}>
                 <CertCard cert={cert} />
               </RevealItem>
             ))}

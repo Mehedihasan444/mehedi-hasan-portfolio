@@ -1,9 +1,11 @@
 import { ScrollReveal, StaggerReveal, RevealItem } from "@/components/animations/scroll-reveal";
 import { SvgDivider } from "@/components/animations/svg-divider";
-import { education } from "./education/constants";
+import { getEducation } from "@/lib/api-public";
 import { EducationCard } from "./education/education-card";
 
-export function EducationSection() {
+export async function EducationSection() {
+  const education = await getEducation();
+
   return (
     <section id="education" className="relative overflow-hidden px-6 py-24">
       <div className="mx-auto max-w-7xl">
@@ -21,7 +23,7 @@ export function EducationSection() {
         <div className="mx-auto mt-16 max-w-4xl">
           <StaggerReveal staggerDelay={0.2}>
             {education.map((edu, i) => (
-              <RevealItem key={i} direction="up" distance={40}>
+              <RevealItem key={edu.id} direction="up" distance={40}>
                 <EducationCard edu={edu} />
               </RevealItem>
             ))}

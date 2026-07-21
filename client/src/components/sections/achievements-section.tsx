@@ -1,10 +1,13 @@
+import { getAchievements } from "@/lib/api-public";
 import { ScrollReveal, StaggerReveal, RevealItem } from "@/components/animations/scroll-reveal";
 import { SectionOverlay, AmbientGlow } from "@/components/ui/section-overlay";
-import { metrics, achievementList } from "./achievements/constants";
+import { metrics } from "./achievements/constants";
 import { AnimatedMetric } from "./achievements/animated-metric";
 import { AchievementCard } from "./achievements/achievement-card";
 
-export function AchievementsSection() {
+export async function AchievementsSection() {
+  const achievements = await getAchievements();
+
   return (
     <section id="achievements" className="relative overflow-hidden px-6 py-24">
       <AmbientGlow position="center" color="from-emerald/5 via-teal/5" size="h-96 w-96" />
@@ -30,8 +33,8 @@ export function AchievementsSection() {
 
         <StaggerReveal staggerDelay={0.12}>
           <div className="mx-auto mt-14 grid max-w-4xl gap-5 sm:grid-cols-2">
-            {achievementList.map((item, i) => (
-              <RevealItem key={i} direction="up" distance={30}>
+            {achievements.map((item) => (
+              <RevealItem key={item.id} direction="up" distance={30}>
                 <AchievementCard item={item} />
               </RevealItem>
             ))}

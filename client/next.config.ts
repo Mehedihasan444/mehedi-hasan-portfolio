@@ -12,6 +12,7 @@ const nextConfig: NextConfig = withBundleAnalyzer({
     remotePatterns: [
       { protocol: "http", hostname: "localhost", port: "4000", pathname: "/**" },
       { protocol: "https", hostname: "**.vercel.app", pathname: "/**" },
+      { protocol: "https", hostname: "res.cloudinary.com", pathname: "/**" },
     ],
   },
   cacheComponents: true,

@@ -1,9 +1,13 @@
+import { getTestimonials } from "@/lib/api-public";
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { SvgDivider } from "@/components/animations/svg-divider";
 import { SectionOverlay, AmbientGlow } from "@/components/ui/section-overlay";
 import { TestimonialStack } from "./testimonials/testimonial-stack";
 
-export function TestimonialsSection() {
+export async function TestimonialsSection() {
+  const testimonials = await getTestimonials();
+  if (!testimonials.length) return null;
+
   return (
     <section id="testimonials" className="relative overflow-hidden px-6 py-28">
       <AmbientGlow position="center" color="from-emerald/5 via-teal/5" size="h-[600px] w-[600px]" />
@@ -26,7 +30,7 @@ export function TestimonialsSection() {
         </ScrollReveal>
 
         <div className="relative mx-auto mt-16 max-w-4xl">
-          <TestimonialStack />
+          <TestimonialStack testimonials={testimonials} />
         </div>
       </div>
 

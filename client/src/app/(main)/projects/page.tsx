@@ -9,66 +9,6 @@ import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { ArrowUpRight, ExternalLink, Search } from "lucide-react";
 import { ArrowLeftIcon } from "@/components/ui/icons";
 
-// Static fallback projects in case the backend API is not available/running
-const fallbackProjects: FormattedProject[] = [
-  {
-    id: "1",
-    title: "MarketSphere",
-    slug: "marketsphere",
-    description:
-      "A multivendor e-commerce platform with product management, cart system, payment integration, and vendor dashboards.",
-    content:
-      "## Overview\nMarketSphere is a next-generation marketplace designed for seamless multivendor sales.",
-    techStack: ["React", "Next.js", "TypeScript", "PostgreSQL", "Prisma"],
-    liveUrl: null,
-    githubUrl: "https://github.com/Mehedihasan444/marketsphere-frontend",
-    image: "/projects/marketsphere.webp",
-    images: [],
-    featured: true,
-    order: 1,
-    status: "In Development",
-    createdAt: "",
-    updatedAt: "",
-  },
-  {
-    id: "2",
-    title: "Tech Tips & Tricks Hub",
-    slug: "tech-tips-tricks-hub",
-    description:
-      "A content platform for sharing technical tutorials, tips, and tricks. Features blog posts, code snippets, and community interaction.",
-    content:
-      "## Overview\nTech Tips & Tricks Hub is a developer content platform built for sharing insights.",
-    techStack: ["React", "Next.js", "TypeScript", "MongoDB", "Mongoose"],
-    liveUrl: null,
-    githubUrl: "https://github.com/Mehedihasan444/tech-tips-and-tricks-hub-frontend",
-    image: "/projects/techtips.webp",
-    images: [],
-    featured: false,
-    order: 2,
-    status: "Completed",
-    createdAt: "",
-    updatedAt: "",
-  },
-  {
-    id: "3",
-    title: "Car Rental Reservation",
-    slug: "car-rental-reservation-system",
-    description:
-      "A full-stack car rental platform with vehicle browsing, booking management, payment processing, and comprehensive admin dashboard.",
-    content: "## Overview\nA complete booking solution for luxury fleets.",
-    techStack: ["React", "TypeScript", "Node.js", "Express", "MongoDB"],
-    liveUrl: null,
-    githubUrl: "https://github.com/Mehedihasan444/Car-Rental-Reservation-System-Frontend",
-    image: "/projects/carrental.webp",
-    images: [],
-    featured: false,
-    order: 3,
-    status: "Completed",
-    createdAt: "",
-    updatedAt: "",
-  },
-];
-
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<FormattedProject[]>([]);
   const [search, setSearch] = useState("");
@@ -77,11 +17,7 @@ export default function ProjectsPage() {
   useEffect(() => {
     async function load() {
       const data = await getProjects();
-      if (data && data.length > 0) {
-        setProjects(data);
-      } else {
-        setProjects(fallbackProjects);
-      }
+      setProjects(data);
     }
     load();
   }, []);
