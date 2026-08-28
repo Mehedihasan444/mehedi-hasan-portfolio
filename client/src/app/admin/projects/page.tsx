@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { api } from "@/lib/api";
 import { DataTable, AdminPageHeader, AdminFormModal } from "@/components/admin/data-table";
 import { toast } from "sonner";
+import type { Project } from "@/lib/api-public";
 
 const columns = [
   { key: "title", label: "Title" },
@@ -11,20 +12,20 @@ const columns = [
   {
     key: "featured",
     label: "Featured",
-    render: (item: any) => (item.featured ? "✓" : "—"),
+    render: (item: Project) => (item.featured ? "✓" : "—"),
   },
   {
     key: "createdAt",
     label: "Created",
-    render: (item: any) => new Date(item.createdAt).toLocaleDateString(),
+    render: (item: Project) => new Date(item.createdAt).toLocaleDateString(),
   },
 ];
 
 export default function AdminProjectsPage() {
-  const [projects, setProjects] = useState<any[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
-  const [editing, setEditing] = useState<any>(null);
+  const [editing, setEditing] = useState<Project | null>(null);
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const galleryInputRef = useRef<HTMLInputElement>(null);
@@ -45,7 +46,7 @@ export default function AdminProjectsPage() {
 
   const load = async () => {
     try {
-      const data = await api.get<any[]>("/projects");
+      const data = await api.get<Project[]>("/projects");
       setProjects(data);
     } catch {
       toast.error("Failed to load projects");
@@ -53,8 +54,8 @@ export default function AdminProjectsPage() {
       setLoading(false);
     }
   };
-
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     load();
   }, []);
 
@@ -91,7 +92,7 @@ export default function AdminProjectsPage() {
     return String(value);
   }
 
-  const openEdit = (item: any) => {
+  const openEdit = (item: Project) => {
     setEditing(item);
     setForm({
       title: item.title,
@@ -189,7 +190,7 @@ export default function AdminProjectsPage() {
     }
   };
 
-  const handleDelete = async (item: any) => {
+  const handleDelete = async (item: Project) => {
     if (!confirm("Delete this project?")) return;
     try {
       await api.delete(`/projects/${item.id}`);
@@ -293,6 +294,7 @@ export default function AdminProjectsPage() {
               </label>
             </div>
             {form.image && (
+              // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={form.image}
                 alt="thumbnail preview"

@@ -11,9 +11,9 @@ export default function AdminSettingsPage() {
 
   const load = async () => {
     try {
-      const data = await api.get<any[]>("/site-settings");
+      const data = await api.get<Record<string, string>[]>("/site-settings");
       const map: Record<string, string> = {};
-      data.forEach((s: any) => {
+      data.forEach((s: Record<string, string>) => {
         map[s.key] = s.value;
       });
       setSettings(map);
@@ -23,16 +23,16 @@ export default function AdminSettingsPage() {
       setLoading(false);
     }
   };
-
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     load();
   }, []);
 
   const handleSave = async () => {
     try {
       for (const [key, value] of Object.entries(settings)) {
-        const existing = await api.get<any[]>("/site-settings");
-        const found = existing.find((s: any) => s.key === key);
+        const existing = await api.get<Record<string, string>[]>("/site-settings");
+        const found = existing.find((s: Record<string, string>) => s.key === key);
         if (found) {
           await api.put(`/site-settings/${found.id}`, { value });
         }

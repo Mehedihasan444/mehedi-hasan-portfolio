@@ -44,6 +44,7 @@ export function HeroCanvasBackground() {
   const timeRef = useRef<number>(0);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -69,9 +70,7 @@ export function HeroCanvasBackground() {
     };
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    orbsRef.current = Array.from({ length: 6 }, (_, i) => {
-      const angle = (i / 6) * Math.PI * 2;
-      const dist = 0.25 + Math.random() * 0.15;
+    orbsRef.current = Array.from({ length: 6 }, () => {
       const cx = 0.3 + Math.random() * 0.4;
       const cy = 0.3 + Math.random() * 0.4;
       return {
@@ -97,6 +96,10 @@ export function HeroCanvasBackground() {
     }));
 
     const animate = () => {
+      if (document.hidden) {
+        frameRef.current = requestAnimationFrame(animate);
+        return;
+      }
       timeRef.current += 0.008;
       const scroll = scrollRef.current;
       const mx = mouseRef.current.x;

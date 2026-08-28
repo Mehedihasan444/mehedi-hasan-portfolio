@@ -71,13 +71,16 @@ function LandDots() {
   useEffect(() => {
     const group = groupRef.current;
     let cancelled = false;
+    const controller = new AbortController();
 
     const load = async () => {
       try {
         const res = await fetch(
           "https://raw.githubusercontent.com/martynafford/natural-earth-geojson/refs/heads/master/50m/physical/ne_50m_land.json",
+          { signal: controller.signal, cache: "force-cache" },
         );
         if (!res.ok) return;
+        if (cancelled || document.hidden) return;
         const geo: { features: unknown[] } = await res.json();
 
         const w = 1024,
@@ -139,9 +142,16 @@ function LandDots() {
       }
     };
 
-    load();
+    // Defer heavy parsing to idle period
+    const hasRIC = typeof window.requestIdleCallback === "function";
+    const idle: number = hasRIC
+      ? window.requestIdleCallback(() => load(), { timeout: 2000 })
+      : (setTimeout(load, 500) as unknown as number);
     return () => {
       cancelled = true;
+      controller.abort();
+      if (hasRIC) cancelIdleCallback(idle);
+      else clearTimeout(idle);
       if (group) {
         while (group.children.length > 0) {
           const child = group.children[0];
@@ -224,11 +234,18 @@ export function GlobeScene() {
   const currentRotation = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+    let ticking = false;
     const onMouse = (e: MouseEvent) => {
-      mouseRef.current = {
-        x: (e.clientX / window.innerWidth - 0.5) * 2,
-        y: (e.clientY / window.innerHeight - 0.5) * 2,
-      };
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        mouseRef.current = {
+          x: (e.clientX / window.innerWidth - 0.5) * 2,
+          y: (e.clientY / window.innerHeight - 0.5) * 2,
+        };
+        ticking = false;
+      });
     };
     window.addEventListener("mousemove", onMouse, { passive: true });
     return () => window.removeEventListener("mousemove", onMouse);

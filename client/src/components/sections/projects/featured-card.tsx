@@ -23,6 +23,8 @@ export function FeaturedCard({ project }: { project: FormattedProject }) {
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, 60vw"
+            priority
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050810] via-[#050810]/40 to-transparent" />
           <span className="font-heading absolute right-4 top-4 select-none text-7xl font-bold text-white/[0.07]">

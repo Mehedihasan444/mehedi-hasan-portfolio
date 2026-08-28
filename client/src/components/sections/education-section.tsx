@@ -22,7 +22,7 @@ export async function EducationSection() {
 
         <div className="mx-auto mt-16 max-w-4xl">
           <StaggerReveal staggerDelay={0.2}>
-            {education.map((edu, i) => (
+            {education.map((edu) => (
               <RevealItem key={edu.id} direction="up" distance={40}>
                 <EducationCard edu={edu} />
               </RevealItem>

@@ -40,12 +40,16 @@ export function ParticleBackground() {
 
   useEffect(() => {
     if (prefersReduced) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    const MAX_PARTICLES = 120;
+    let lastMouseSpawn = 0;
 
     const onResize = () => {
       canvas.width = window.innerWidth;
@@ -55,8 +59,12 @@ export function ParticleBackground() {
     window.addEventListener("resize", onResize);
 
     const onMouse = (e: MouseEvent) => {
+      const now = performance.now();
+      if (now - lastMouseSpawn < 32) return; // ~30fps cap
+      lastMouseSpawn = now;
       mouseRef.current = { x: e.clientX, y: e.clientY };
-      for (let i = 0; i < 2; i++) {
+      if (particlesRef.current.length >= MAX_PARTICLES) return;
+      for (let i = 0; i < 1; i++) {
         particlesRef.current.push(
           spawnParticle(
             e.clientX + (Math.random() - 0.5) * 20,
@@ -65,15 +73,24 @@ export function ParticleBackground() {
         );
       }
     };
-    window.addEventListener("mousemove", onMouse);
+    window.addEventListener("mousemove", onMouse, { passive: true });
 
     const ambientInterval = setInterval(() => {
-      for (let i = 0; i < 3; i++) {
-        particlesRef.current.push(spawnParticle(Math.random() * canvas.width, canvas.height + 10));
+      if (document.hidden) return;
+      if (particlesRef.current.length >= MAX_PARTICLES) return;
+      for (let i = 0; i < 2; i++) {
+        if (particlesRef.current.length < MAX_PARTICLES)
+          particlesRef.current.push(
+            spawnParticle(Math.random() * canvas.width, canvas.height + 10),
+          );
       }
-    }, 500);
+    }, 700);
 
     const animate = () => {
+      if (document.hidden) {
+        rafId.current = requestAnimationFrame(animate);
+        return;
+      }
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particlesRef.current = particlesRef.current.filter((p) => p.life < p.maxLife);

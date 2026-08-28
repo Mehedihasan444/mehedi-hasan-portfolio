@@ -28,7 +28,7 @@ export async function BlogPreviewSection() {
 
         <StaggerReveal staggerDelay={0.15}>
           <div className="mt-16 grid gap-8 md:grid-cols-3">
-            {published.map((post, i) => (
+            {published.map((post) => (
               <RevealItem key={post.slug} direction="up" distance={40}>
                 <BlogCard post={post} />
               </RevealItem>

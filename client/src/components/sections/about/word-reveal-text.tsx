@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 export function WordRevealText({ children }: { children: string }) {
   const pRef = useRef<HTMLParagraphElement>(null);

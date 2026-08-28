@@ -7,6 +7,7 @@ import { Send } from "lucide-react";
 import { MagneticButton } from "@/components/animations/magnetic-button";
 import { SpinnerIcon } from "@/components/ui/icons";
 import { cn } from "@/lib/utils";
+import { API_BASE } from "@/lib/constants";
 import { SuccessState } from "./success-state";
 
 interface FormData {
@@ -14,6 +15,7 @@ interface FormData {
   email: string;
   subject: string;
   message: string;
+  website: string; // honeypot — must stay empty
 }
 
 const inputCls = cn(
@@ -39,18 +41,32 @@ export function ContactForm() {
     email: "",
     subject: "",
     message: "",
+    website: "",
   });
   const [sending, setSending] = useState(false);
   const [success, setSuccess] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const isInView = useInView(formRef, { once: true, margin: "-100px" });
 
+  const validate = (): string | null => {
+    if (formData.name.trim().length < 2) return "Name must be at least 2 characters.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) return "Please enter a valid email.";
+    if (formData.subject.trim().length < 3) return "Subject must be at least 3 characters.";
+    if (formData.message.trim().length < 10) return "Message must be at least 10 characters.";
+    return null;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const err = validate();
+    if (err) {
+      toast.error(err);
+      return;
+    }
     setSending(true);
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contact`, {
+      const res = await fetch(`${API_BASE}/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -58,10 +74,11 @@ export function ContactForm() {
 
       if (res.ok) {
         setSuccess(true);
-        setFormData({ name: "", email: "", subject: "", message: "" });
+        toast.success("Message sent — I'll reply within 24 hours.");
+        setFormData({ name: "", email: "", subject: "", message: "", website: "" });
       } else {
-        const data = await res.json();
-        toast.error(data.message || "Failed to send message. Please try again.");
+        const data = await res.json().catch(() => null);
+        toast.error(data?.message || "Failed to send message. Please try again.");
       }
     } catch {
       toast.error("Network error. Please check your connection and try again.");
@@ -154,6 +171,18 @@ export function ContactForm() {
           className={cn(inputCls, "resize-none")}
         />
       </motion.div>
+
+      {/* Honeypot — hidden from users, bots fill it */}
+      <input
+        type="text"
+        name="website"
+        value={formData.website}
+        onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+      />
 
       <MagneticButton>
         <motion.div custom={4} variants={inputVariants}>

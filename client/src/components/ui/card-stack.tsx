@@ -94,6 +94,7 @@ export function CardStack<T extends CardStackItem>({
   const [containerWidth, setContainerWidth] = React.useState(0);
 
   React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setActive((a) => wrapIndex(a, len));
   }, [len]);
 
@@ -209,7 +210,7 @@ export function CardStack<T extends CardStackItem>({
                     dragConstraints: { left: 0, right: 0 },
                     dragElastic: 0.18,
                     onDragEnd: (
-                      _e: any,
+                      _e: unknown,
                       info: {
                         offset: { x: number };
                         velocity: { x: number };
@@ -329,7 +330,6 @@ function DefaultCard({ item }: { item: CardStackItem }) {
             className="object-cover"
             draggable={false}
             sizes="520px"
-            unoptimized
           />
         ) : (
           <div className="bg-secondary text-muted-foreground flex h-full w-full items-center justify-center text-sm">

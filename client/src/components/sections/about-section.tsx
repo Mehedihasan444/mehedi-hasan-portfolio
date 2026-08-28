@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { ScrollReveal, StaggerReveal, RevealItem } from "@/components/animations/scroll-reveal";
 import { AnimatedCounterGroup } from "@/components/animations/animated-counter";
 import { ElegantShape } from "@/components/ui/shape-landing-hero";

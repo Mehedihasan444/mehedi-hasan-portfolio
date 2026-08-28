@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { Lightbox } from "./lightbox";
 
@@ -61,7 +61,7 @@ export function GalleryGrid({ images }: { images: string[] }) {
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-110"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              unoptimized
+              loading="lazy"
             />
             <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/40" />
             <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">

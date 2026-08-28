@@ -1,6 +1,5 @@
 import type { NextConfig } from "next";
-
-const withBundleAnalyzer = require("@next/bundle-analyzer");
+import withBundleAnalyzer from "@next/bundle-analyzer";
 
 const nextConfig: NextConfig = withBundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
@@ -13,7 +12,10 @@ const nextConfig: NextConfig = withBundleAnalyzer({
       { protocol: "http", hostname: "localhost", port: "4000", pathname: "/**" },
       { protocol: "https", hostname: "**.vercel.app", pathname: "/**" },
       { protocol: "https", hostname: "res.cloudinary.com", pathname: "/**" },
+      { protocol: "https", hostname: "images.unsplash.com", pathname: "/**" },
     ],
+    minimumCacheTTL: 31536000,
+    dangerouslyAllowSVG: false,
   },
   cacheComponents: true,
   experimental: {
@@ -28,6 +30,15 @@ const nextConfig: NextConfig = withBundleAnalyzer({
     ],
   },
   headers: async () => [
+    {
+      source: "/:path*",
+      headers: [
+        { key: "X-Frame-Options", value: "DENY" },
+        { key: "X-Content-Type-Options", value: "nosniff" },
+        { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+        { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+      ],
+    },
     {
       source: "/fonts/:path*",
       headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],

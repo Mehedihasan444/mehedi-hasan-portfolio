@@ -19,6 +19,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${post.title} | Mehedi Hasan`,
     description: post.excerpt || post.title,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt || post.title,
+      images: post.image ? [{ url: post.image }] : [{ url: "/og-image.png" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt || post.title,
+      images: post.image ? [post.image] : ["/og-image.png"],
+    },
   };
 }
 
@@ -46,10 +57,7 @@ export default async function BlogPostPage({ params }: Props) {
         <ScrollReveal>
           <div className="flex flex-wrap gap-2">
             {post.tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full bg-white/5 px-3 py-1 text-xs text-white/60"
-              >
+              <span key={tag} className="rounded-full bg-white/5 px-3 py-1 text-xs text-white/60">
                 {tag}
               </span>
             ))}

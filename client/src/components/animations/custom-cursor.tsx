@@ -40,7 +40,14 @@ export function CustomCursor() {
   };
 
   useEffect(() => {
-    window.addEventListener("mousemove", onMouseMove);
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const onMoveThrottled = (e: MouseEvent) => {
+      // throttle via rAF – push at most once per frame
+      if (rafId.current === 0) onMouseMove(e);
+    };
+    window.addEventListener("mousemove", onMoveThrottled, { passive: true });
     window.addEventListener("mousedown", onMouseDown);
     window.addEventListener("mouseup", onMouseUp);
 
@@ -63,7 +70,7 @@ export function CustomCursor() {
     });
 
     return () => {
-      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mousemove", onMoveThrottled);
       window.removeEventListener("mousedown", onMouseDown);
       window.removeEventListener("mouseup", onMouseUp);
       interactiveElements.forEach((el) => {
@@ -75,10 +82,15 @@ export function CustomCursor() {
   }, [onMouseMove]);
 
   useEffect(() => {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
 
+    let running = true;
     const renderTrails = () => {
+      if (!running || document.hidden) {
+        rafId.current = requestAnimationFrame(renderTrails);
+        return;
+      }
       if (trailsRef.current) {
         const dots = trailsRef.current.querySelectorAll<HTMLSpanElement>("span");
         trailPositions.current.forEach((pos, i) => {
@@ -92,13 +104,16 @@ export function CustomCursor() {
     };
 
     rafId.current = requestAnimationFrame(renderTrails);
-    return () => cancelAnimationFrame(rafId.current);
+    return () => {
+      running = false;
+      cancelAnimationFrame(rafId.current);
+    };
   }, []);
 
-  const prefersReduced =
-    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  if (prefersReduced) return null;
+  if (typeof window !== "undefined") {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return null;
+    if (window.matchMedia("(pointer: coarse)").matches) return null;
+  }
 
   return (
     <>

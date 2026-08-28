@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import { DataTable, AdminPageHeader, AdminFormModal } from "@/components/admin/data-table";
 import { toast } from "sonner";
+import type { Achievement } from "@/lib/api-public";
 
 const columns = [
   { key: "title", label: "Title" },
@@ -11,15 +12,15 @@ const columns = [
 ];
 
 export default function AdminAchievementsPage() {
-  const [items, setItems] = useState<any[]>([]);
+  const [items, setItems] = useState<Achievement[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
-  const [editing, setEditing] = useState<any>(null);
+  const [editing, setEditing] = useState<Achievement | null>(null);
   const [form, setForm] = useState({ title: "", description: "", icon: "" });
 
   const load = async () => {
     try {
-      const data = await api.get<any[]>("/achievements");
+      const data = await api.get<Achievement[]>("/achievements");
       setItems(data);
     } catch {
       toast.error("Failed to load");
@@ -27,8 +28,10 @@ export default function AdminAchievementsPage() {
       setLoading(false);
     }
   };
-
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    load();
+  }, []);
 
   const openCreate = () => {
     setEditing(null);
@@ -36,7 +39,7 @@ export default function AdminAchievementsPage() {
     setModalOpen(true);
   };
 
-  const openEdit = (item: any) => {
+  const openEdit = (item: Achievement) => {
     setEditing(item);
     setForm({ title: item.title, description: item.description || "", icon: item.icon || "" });
     setModalOpen(true);
@@ -59,28 +62,67 @@ export default function AdminAchievementsPage() {
     }
   };
 
-  const handleDelete = async (item: any) => {
+  const handleDelete = async (item: Achievement) => {
     if (!confirm("Delete?")) return;
-    try { await api.delete(`/achievements/${item.id}`); toast.success("Deleted"); load(); }
-    catch { toast.error("Failed"); }
+    try {
+      await api.delete(`/achievements/${item.id}`);
+      toast.success("Deleted");
+      load();
+    } catch {
+      toast.error("Failed");
+    }
   };
 
   return (
     <div>
-      <AdminPageHeader title="Achievements" action={
-        <button onClick={openCreate} className="from-emerald to-teal rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white">New Achievement</button>
-      } />
-      <DataTable columns={columns} data={items} loading={loading} onEdit={openEdit} onDelete={handleDelete} />
-      <AdminFormModal open={modalOpen} onClose={() => setModalOpen(false)} title={editing ? "Edit Achievement" : "New Achievement"}>
+      <AdminPageHeader
+        title="Achievements"
+        action={
+          <button
+            onClick={openCreate}
+            className="from-emerald to-teal rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white"
+          >
+            New Achievement
+          </button>
+        }
+      />
+      <DataTable
+        columns={columns}
+        data={items}
+        loading={loading}
+        onEdit={openEdit}
+        onDelete={handleDelete}
+      />
+      <AdminFormModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title={editing ? "Edit Achievement" : "New Achievement"}
+      >
         <form onSubmit={handleSave} className="space-y-4">
-          <input required placeholder="Title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none" />
-          <textarea placeholder="Description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none" rows={3} />
-          <input placeholder="Icon name (Trophy, GitBranch, BookOpen, Zap, Code2, Coffee)" value={form.icon}
+          <input
+            required
+            placeholder="Title"
+            value={form.title}
+            onChange={(e) => setForm({ ...form, title: e.target.value })}
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+          />
+          <textarea
+            placeholder="Description"
+            value={form.description}
+            onChange={(e) => setForm({ ...form, description: e.target.value })}
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+            rows={3}
+          />
+          <input
+            placeholder="Icon name (Trophy, GitBranch, BookOpen, Zap, Code2, Coffee)"
+            value={form.icon}
             onChange={(e) => setForm({ ...form, icon: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none" />
-          <button type="submit" className="from-emerald to-teal w-full rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white">
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+          />
+          <button
+            type="submit"
+            className="from-emerald to-teal w-full rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white"
+          >
             {editing ? "Update" : "Create"}
           </button>
         </form>

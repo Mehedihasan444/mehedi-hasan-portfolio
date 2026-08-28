@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 interface TextRevealProps {
   children: string;
@@ -96,7 +96,7 @@ export function TextReveal({
   }
 
   return (
-    <Tag ref={textRef as any} className={className}>
+    <Tag ref={textRef as unknown as never} className={className}>
       <div ref={containerRef} className="inline" aria-label={children} />
     </Tag>
   );

@@ -31,16 +31,15 @@ export default function AdminDashboardPage() {
   const [loading, setLoading] = useState(true);
   const [toggles, setToggles] = useState<Record<string, boolean>>({});
   const [saving, setSaving] = useState<string | null>(null);
-
   useEffect(() => {
     async function load() {
       try {
         const [projects, skills, experiences, messages, settings] = await Promise.all([
-          api.get<any[]>("/projects"),
-          api.get<any[]>("/skills"),
-          api.get<any[]>("/experiences"),
-          api.get<any[]>("/contact"),
-          api.get<any[]>("/site-settings"),
+          api.get<unknown[]>("/projects"),
+          api.get<unknown[]>("/skills"),
+          api.get<unknown[]>("/experiences"),
+          api.get<unknown[]>("/contact"),
+          api.get<{ id: string; key: string; value: string }[]>("/site-settings"),
         ]);
         setStats({
           projects: projects.length,
@@ -72,8 +71,8 @@ export default function AdminDashboardPage() {
     setToggles((prev) => ({ ...prev, [key]: next }));
     setSaving(key);
     try {
-      const all = await api.get<any[]>("/site-settings");
-      const existing = all.find((s: any) => s.key === key);
+      const all = await api.get<{ id: string; key: string; value: string }[]>("/site-settings");
+      const existing = all.find((s) => s.key === key);
       if (existing) {
         await api.put(`/site-settings/${existing.id}`, { value: String(next) });
       } else {

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import { DataTable, AdminPageHeader, AdminFormModal } from "@/components/admin/data-table";
 import { toast } from "sonner";
+import type { Certification } from "@/lib/api-public";
 
 const columns = [
   { key: "title", label: "Title" },
@@ -11,15 +12,16 @@ const columns = [
   {
     key: "date",
     label: "Date",
-    render: (item: any) => (item.date ? new Date(item.date).getFullYear().toString() : "—"),
+    render: (item: Certification) =>
+      item.date ? new Date(item.date).getFullYear().toString() : "—",
   },
 ];
 
 export default function AdminCertificationsPage() {
-  const [items, setItems] = useState<any[]>([]);
+  const [items, setItems] = useState<Certification[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
-  const [editing, setEditing] = useState<any>(null);
+  const [editing, setEditing] = useState<Certification | null>(null);
   const [form, setForm] = useState({
     title: "",
     issuer: "",
@@ -31,7 +33,7 @@ export default function AdminCertificationsPage() {
 
   const load = async () => {
     try {
-      const data = await api.get<any[]>("/certifications");
+      const data = await api.get<Certification[]>("/certifications");
       setItems(data);
     } catch {
       toast.error("Failed to load");
@@ -39,8 +41,8 @@ export default function AdminCertificationsPage() {
       setLoading(false);
     }
   };
-
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     load();
   }, []);
 
@@ -50,7 +52,7 @@ export default function AdminCertificationsPage() {
     setModalOpen(true);
   };
 
-  const openEdit = (item: any) => {
+  const openEdit = (item: Certification) => {
     setEditing(item);
     setForm({
       title: item.title,
@@ -85,7 +87,7 @@ export default function AdminCertificationsPage() {
     }
   };
 
-  const handleDelete = async (item: any) => {
+  const handleDelete = async (item: Certification) => {
     if (!confirm("Delete?")) return;
     try {
       await api.delete(`/certifications/${item.id}`);
@@ -98,33 +100,67 @@ export default function AdminCertificationsPage() {
 
   return (
     <div>
-      <AdminPageHeader title="Certifications" action={
-        <button onClick={openCreate}
-          className="from-emerald to-teal rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white">
-          New Certification
-        </button>
-      } />
-      <DataTable columns={columns} data={items} loading={loading} onEdit={openEdit} onDelete={handleDelete} />
-      <AdminFormModal open={modalOpen} onClose={() => setModalOpen(false)}
-        title={editing ? "Edit Certification" : "New Certification"}>
+      <AdminPageHeader
+        title="Certifications"
+        action={
+          <button
+            onClick={openCreate}
+            className="from-emerald to-teal rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white"
+          >
+            New Certification
+          </button>
+        }
+      />
+      <DataTable
+        columns={columns}
+        data={items}
+        loading={loading}
+        onEdit={openEdit}
+        onDelete={handleDelete}
+      />
+      <AdminFormModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title={editing ? "Edit Certification" : "New Certification"}
+      >
         <form onSubmit={handleSave} className="space-y-4">
-          <input required placeholder="Title" value={form.title}
+          <input
+            required
+            placeholder="Title"
+            value={form.title}
             onChange={(e) => setForm({ ...form, title: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none" />
-          <input required placeholder="Issuer" value={form.issuer}
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+          />
+          <input
+            required
+            placeholder="Issuer"
+            value={form.issuer}
             onChange={(e) => setForm({ ...form, issuer: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none" />
-          <textarea placeholder="Description" value={form.description}
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+          />
+          <textarea
+            placeholder="Description"
+            value={form.description}
             onChange={(e) => setForm({ ...form, description: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none" rows={3} />
-          <input placeholder="Credential URL" value={form.url}
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+            rows={3}
+          />
+          <input
+            placeholder="Credential URL"
+            value={form.url}
             onChange={(e) => setForm({ ...form, url: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none" />
-          <input type="date" value={form.date}
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+          />
+          <input
+            type="date"
+            value={form.date}
             onChange={(e) => setForm({ ...form, date: e.target.value })}
-            className="focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none" />
-          <button type="submit"
-            className="from-emerald to-teal w-full rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white">
+            className="focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+          />
+          <button
+            type="submit"
+            className="from-emerald to-teal w-full rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white"
+          >
             {editing ? "Update" : "Create"}
           </button>
         </form>

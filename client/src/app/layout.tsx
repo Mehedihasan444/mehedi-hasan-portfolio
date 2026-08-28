@@ -17,21 +17,21 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600", "700"],
 });
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600", "700"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600"],
+  weight: ["400", "500"],
 });
 
 export const viewport: Viewport = {
@@ -121,7 +121,7 @@ const personJsonLd = {
   "@type": "Person",
   name: "Mehedi Hasan",
   url: SITE_URL,
-  image: `${SITE_URL}/profile.jpg`,
+  image: `${SITE_URL}/mehedi_hasan.webp`,
   jobTitle: "Full Stack Developer",
   description: SITE_DESCRIPTION,
   email: EMAIL,
@@ -177,6 +177,12 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-black focus:outline-none focus:ring-2 focus:ring-emerald-500"
+        >
+          Skip to content
+        </a>
         <Providers>{children}</Providers>
         <Toaster position="bottom-right" />
         <Script

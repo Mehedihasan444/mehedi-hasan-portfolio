@@ -35,9 +35,7 @@ export async function uploadMultipleImages(req: AuthRequest, res: Response, next
     const files = req.files as Express.Multer.File[];
     const folder = (req.body.folder as string) || "portfolio";
 
-    const results = await Promise.all(
-      files.map((file) => uploadToCloudinary(file.buffer, folder)),
-    );
+    const results = await Promise.all(files.map((file) => uploadToCloudinary(file.buffer, folder)));
 
     res.status(201).json({
       status: "success",

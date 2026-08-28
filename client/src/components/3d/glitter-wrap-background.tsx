@@ -21,6 +21,7 @@ function GlitterWrapCanvas({
   const rafRef = useRef(0);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -58,6 +59,10 @@ function GlitterWrapCanvas({
     });
 
     const loop = (t: number) => {
+      if (document.hidden) {
+        rafRef.current = requestAnimationFrame(loop);
+        return;
+      }
       ctx.clearRect(0, 0, w, h);
 
       for (const s of stars) {

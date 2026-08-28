@@ -36,7 +36,9 @@ export function CertCard({ cert }: { cert: Certification }) {
             <h3 className="mt-2 font-semibold leading-snug text-white">{cert.title}</h3>
             <p className="text-muted-foreground mt-1 text-xs font-medium">{cert.issuer}</p>
             {cert.description && (
-              <p className="text-muted-foreground mt-3 text-sm leading-relaxed">{cert.description}</p>
+              <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
+                {cert.description}
+              </p>
             )}
           </div>
 

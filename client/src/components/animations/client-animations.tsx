@@ -18,35 +18,17 @@ const ScrollProgress = dynamic(
   { ssr: false },
 );
 
-const PixelatedImageTrail = dynamic(
-  () => import("./pixelated-image-trail").then((m) => ({ default: m.PixelatedImageTrail })),
-  { ssr: false },
-);
-
 const FluidMorphBackground = dynamic(
   () => import("./fluid-morph-background").then((m) => ({ default: m.FluidMorphBackground })),
   { ssr: false },
 );
-
-const LoadingIntro = dynamic(
-  () => import("./loading-intro").then((m) => ({ default: m.LoadingIntro })),
-  { ssr: false },
-);
-
-function DelayedMount({ children, ms }: { children: React.ReactNode; ms: number }) {
-  const [show, setShow] = useState(false);
-  useEffect(() => {
-    const id = setTimeout(() => setShow(true), ms);
-    return () => clearTimeout(id);
-  }, [ms]);
-  return show ? <>{children}</> : null;
-}
 
 export function ClientAnimations() {
   const [interacted, setInteracted] = useState(false);
   const trackerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const tracker = trackerRef.current;
     if (!tracker) return;
 
@@ -58,31 +40,40 @@ export function ClientAnimations() {
       }
     };
 
-    document.addEventListener("mousemove", onInteraction, { once: true });
-    document.addEventListener("touchstart", onInteraction, { once: true });
-    document.addEventListener("keydown", onInteraction, { once: true });
-    window.addEventListener("scroll", onScrollVisible, { once: true, passive: true });
-
+    // Defer listeners to idle to avoid blocking initial paint
+    const start = () => {
+      document.addEventListener("mousemove", onInteraction, { once: true });
+      document.addEventListener("keydown", onInteraction, { once: true });
+      window.addEventListener("scroll", onScrollVisible, { once: true, passive: true });
+      // touch alone no longer triggers heavy canvas on mobile
+    };
+    if ("requestIdleCallback" in window) {
+      const id = requestIdleCallback(start, { timeout: 1500 });
+      return () => cancelIdleCallback(id);
+    }
+    const id = setTimeout(start, 600);
     return () => {
+      clearTimeout(id);
       document.removeEventListener("mousemove", onInteraction);
-      document.removeEventListener("touchstart", onInteraction);
       document.removeEventListener("keydown", onInteraction);
       window.removeEventListener("scroll", onScrollVisible);
     };
   }, []);
 
+  // Only mount heavy canvases on fine pointer devices; mobile gets lightweight scroll indicator only
+  const isCoarse = typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
+
   return (
     <>
       <div ref={trackerRef} aria-hidden />
-      {interacted && (
+      {interacted && !isCoarse && (
         <>
           <CustomCursor />
           <ParticleBackground />
-          <PixelatedImageTrail />
           <FluidMorphBackground />
-          <ScrollProgress />
         </>
       )}
+      {interacted && <ScrollProgress />}
     </>
   );
 }

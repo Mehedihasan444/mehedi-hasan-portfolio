@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 
 interface ScrollProgress {
   progress: number;
@@ -8,39 +8,53 @@ interface ScrollProgress {
   direction: "up" | "down";
 }
 
-export function useScrollProgress(): ScrollProgress {
-  const [state, setState] = useState<ScrollProgress>({
-    progress: 0,
-    scrollY: 0,
-    direction: "down",
+// Singleton store: hero-scene instantiated 4× useScrollProgress -> 4 identical listeners
+let sharedState: ScrollProgress = { progress: 0, scrollY: 0, direction: "down" };
+let prevY = 0;
+let rafId = 0;
+const listeners = new Set<() => void>();
+let initialized = false;
+
+function subscribe(cb: () => void) {
+  listeners.add(cb);
+  return () => listeners.delete(cb);
+}
+function getSnapshot(): ScrollProgress {
+  return sharedState;
+}
+function getServerSnapshot(): ScrollProgress {
+  return sharedState;
+}
+function emit() {
+  listeners.forEach((cb) => cb());
+}
+function onScroll() {
+  if (rafId) cancelAnimationFrame(rafId);
+  rafId = requestAnimationFrame(() => {
+    if (typeof window === "undefined") return;
+    const scrollY = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = max > 0 ? scrollY / max : 0;
+    sharedState = {
+      progress: Math.min(1, Math.max(0, progress)),
+      scrollY,
+      direction: scrollY > prevY ? "down" : "up",
+    };
+    prevY = scrollY;
+    emit();
   });
-  const prevScrollY = useRef(0);
-  const rafId = useRef<number>(0);
+}
+function ensureInit() {
+  if (initialized || typeof window === "undefined") return;
+  initialized = true;
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+}
 
+export function useScrollProgress(): ScrollProgress {
+  const live = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   useEffect(() => {
-    const onScroll = () => {
-      if (rafId.current) cancelAnimationFrame(rafId.current);
-      rafId.current = requestAnimationFrame(() => {
-        const scrollY = window.scrollY;
-        const max = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = max > 0 ? scrollY / max : 0;
-
-        setState({
-          progress: Math.min(1, Math.max(0, progress)),
-          scrollY,
-          direction: scrollY > prevScrollY.current ? "down" : "up",
-        });
-        prevScrollY.current = scrollY;
-      });
-    };
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      cancelAnimationFrame(rafId.current);
-    };
+    ensureInit();
   }, []);
-
-  return state;
+  return live;
 }

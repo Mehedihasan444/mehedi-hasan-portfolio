@@ -2,12 +2,16 @@
 
 import { ReactNode, useEffect, useRef } from "react";
 import Lenis from "lenis";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { ScrollTrigger } from "@/lib/gsap";
 
 export function SmoothScrollProvider({ children }: { children: ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Skip Lenis on touch/coarse devices where native scroll is smoother
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1 - Math.pow(1 - t, 3)),
@@ -22,14 +26,27 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
 
     lenis.on("scroll", ScrollTrigger.update);
 
+    let rafId = 0;
+    let running = true;
+
     const raf = (time: number) => {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
+      if (!running) return;
+      if (!document.hidden) lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
     };
-    const id = requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
+
+    const onVisibility = () => {
+      if (!document.hidden && running) {
+        // resume already handled by rAF guard
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibility);
 
     return () => {
-      cancelAnimationFrame(id);
+      running = false;
+      cancelAnimationFrame(rafId);
+      document.removeEventListener("visibilitychange", onVisibility);
       lenis.destroy();
     };
   }, []);

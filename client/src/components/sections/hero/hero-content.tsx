@@ -96,7 +96,8 @@ export function HeroContent() {
         <MagneticButton strength={0.2}>
           <a
             href="/resume.pdf"
-            download
+            download="Mehedi-Hasan-Resume.pdf"
+            aria-label="Download CV as PDF"
             className="text-foreground/80 hover:border-violet/30 hover:bg-violet/5 hover:text-foreground group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-7 py-3 text-sm font-semibold backdrop-blur-sm transition-all duration-300"
           >
             <Download size={15} className="text-violet-soft" />

@@ -38,6 +38,7 @@ export function HeroSection() {
     const lowPerf =
       navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency <= 4;
     if (mql.matches || lowPerf) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setBgLevel(lowPerf ? "minimal" : "reduced");
     }
   }, []);
@@ -61,7 +62,7 @@ export function HeroSection() {
         <GlobeBackground />
         {bgLevel === "full" && (
           <GlitterWrapBackground
-            particleCount={180}
+            particleCount={90}
             color1="#34d399"
             color2="#06b6d4"
             color3="#a78bfa"

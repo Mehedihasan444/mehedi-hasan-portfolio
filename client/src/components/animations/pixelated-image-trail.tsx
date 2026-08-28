@@ -18,9 +18,9 @@ interface PixelatedImageTrailProps {
 }
 
 export function PixelatedImageTrail({
-  imageSrc = "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=32&q=80&fit=crop",
+  imageSrc = "",
   pixelSize = 8,
-  trailLength = 15,
+  trailLength = 6,
   className = "",
 }: PixelatedImageTrailProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -30,6 +30,9 @@ export function PixelatedImageTrail({
   const frameRef = useRef<number>(0);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (!imageSrc) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -53,6 +56,10 @@ export function PixelatedImageTrail({
     window.addEventListener("mousemove", onMouse);
 
     const animate = () => {
+      if (document.hidden) {
+        frameRef.current = requestAnimationFrame(animate);
+        return;
+      }
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const { x, y } = mouseRef.current;

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import { DataTable, AdminPageHeader, AdminFormModal } from "@/components/admin/data-table";
 import { toast } from "sonner";
+import type { Skill } from "@/lib/api-public";
 
 const columns = [
   { key: "name", label: "Name" },
@@ -11,15 +12,15 @@ const columns = [
   {
     key: "proficiency",
     label: "Proficiency",
-    render: (item: any) => `${item.proficiency}%`,
+    render: (item: Skill) => `${item.proficiency}%`,
   },
 ];
 
 export default function AdminSkillsPage() {
-  const [skills, setSkills] = useState<any[]>([]);
+  const [skills, setSkills] = useState<Skill[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
-  const [editing, setEditing] = useState<any>(null);
+  const [editing, setEditing] = useState<Skill | null>(null);
   const [form, setForm] = useState({
     name: "",
     category: "Frontend",
@@ -30,7 +31,7 @@ export default function AdminSkillsPage() {
 
   const load = async () => {
     try {
-      const data = await api.get<any[]>("/skills");
+      const data = await api.get<Skill[]>("/skills");
       setSkills(data);
     } catch {
       toast.error("Failed to load skills");
@@ -38,8 +39,8 @@ export default function AdminSkillsPage() {
       setLoading(false);
     }
   };
-
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     load();
   }, []);
 
@@ -49,7 +50,7 @@ export default function AdminSkillsPage() {
     setModalOpen(true);
   };
 
-  const openEdit = (item: any) => {
+  const openEdit = (item: Skill) => {
     setEditing(item);
     setForm({
       name: item.name,
@@ -78,7 +79,7 @@ export default function AdminSkillsPage() {
     }
   };
 
-  const handleDelete = async (item: any) => {
+  const handleDelete = async (item: Skill) => {
     if (!confirm("Delete this skill?")) return;
     try {
       await api.delete(`/skills/${item.id}`);

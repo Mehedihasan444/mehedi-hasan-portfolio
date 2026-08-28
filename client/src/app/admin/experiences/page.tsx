@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import { DataTable, AdminPageHeader, AdminFormModal } from "@/components/admin/data-table";
 import { toast } from "sonner";
+import type { Experience } from "@/lib/api-public";
 
 const columns = [
   { key: "role", label: "Role" },
@@ -12,15 +13,15 @@ const columns = [
   {
     key: "current",
     label: "Current",
-    render: (item: any) => (item.current ? "✓" : "—"),
+    render: (item: Experience) => (item.current ? "✓" : "—"),
   },
 ];
 
 export default function AdminExperiencesPage() {
-  const [items, setItems] = useState<any[]>([]);
+  const [items, setItems] = useState<Experience[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
-  const [editing, setEditing] = useState<any>(null);
+  const [editing, setEditing] = useState<Experience | null>(null);
   function parseJsonField(value: unknown): string {
     if (!value) return "";
     if (Array.isArray(value)) return value.join(", ");
@@ -49,7 +50,7 @@ export default function AdminExperiencesPage() {
 
   const load = async () => {
     try {
-      const data = await api.get<any[]>("/experiences");
+      const data = await api.get<Experience[]>("/experiences");
       setItems(data);
     } catch {
       toast.error("Failed to load");
@@ -57,8 +58,8 @@ export default function AdminExperiencesPage() {
       setLoading(false);
     }
   };
-
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     load();
   }, []);
 
@@ -78,7 +79,7 @@ export default function AdminExperiencesPage() {
     setModalOpen(true);
   };
 
-  const openEdit = (item: any) => {
+  const openEdit = (item: Experience) => {
     setEditing(item);
     setForm({
       company: item.company,
@@ -122,7 +123,7 @@ export default function AdminExperiencesPage() {
     }
   };
 
-  const handleDelete = async (item: any) => {
+  const handleDelete = async (item: Experience) => {
     if (!confirm("Delete?")) return;
     try {
       await api.delete(`/experiences/${item.id}`);

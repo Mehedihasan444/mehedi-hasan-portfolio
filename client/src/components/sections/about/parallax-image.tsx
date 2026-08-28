@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef } from "react";
 import Image from "next/image";
 import { useParallax } from "@/hooks/use-parallax";
 
@@ -17,12 +16,13 @@ export function ParallaxImage() {
         />
         <div className="glow-border relative h-full w-full overflow-hidden rounded-2xl">
           <Image
-            src="/mehedi_hasan.jpg"
+            src="/mehedi_hasan.webp"
             alt="Mehedi Hasan"
             fill
             className="object-cover"
             sizes="(max-width: 640px) 320px, 384px"
             priority
+            fetchPriority="high"
           />
         </div>
       </div>

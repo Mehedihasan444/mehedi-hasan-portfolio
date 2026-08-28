@@ -1,7 +1,19 @@
 const COLORS = [
-  "#61dafb", "#3178c6", "#68a063", "#38bdf8", "#e535ab",
-  "#2496ed", "#f05032", "#ff9900", "#bb4bf8", "#88ce02",
-  "#dc382d", "#5a67d8", "#47a248", "#336791", "#3776ab",
+  "#61dafb",
+  "#3178c6",
+  "#68a063",
+  "#38bdf8",
+  "#e535ab",
+  "#2496ed",
+  "#f05032",
+  "#ff9900",
+  "#bb4bf8",
+  "#88ce02",
+  "#dc382d",
+  "#5a67d8",
+  "#47a248",
+  "#336791",
+  "#3776ab",
 ];
 
 function hashColor(name: string): string {
@@ -27,7 +39,7 @@ function TechPill({ name, color }: { name: string; color: string }) {
 export function MarqueeRow({ items }: { items: string[] }) {
   return (
     <div className="marquee-container overflow-hidden py-2">
-      <div className="flex gap-3 marquee-track" aria-hidden="true">
+      <div className="marquee-track flex gap-3" aria-hidden="true">
         {[...items, ...items].map((name, i) => (
           <TechPill key={i} name={name} color={hashColor(name)} />
         ))}

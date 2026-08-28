@@ -27,6 +27,7 @@ export function AuroraBackground({
   const timeRef = useRef(0);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -52,6 +53,10 @@ export function AuroraBackground({
     }));
 
     const draw = () => {
+      if (document.hidden) {
+        animRef.current = requestAnimationFrame(draw);
+        return;
+      }
       timeRef.current += 0.003;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 

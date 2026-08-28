@@ -48,7 +48,9 @@ export function SmallCard({ project, num }: { project: FormattedProject; num: nu
               </span>
             ))}
             {project.techStack.length > 3 && (
-              <span className="text-muted-foreground text-[10px]">+{project.techStack.length - 3}</span>
+              <span className="text-muted-foreground text-[10px]">
+                +{project.techStack.length - 3}
+              </span>
             )}
           </div>
         </div>

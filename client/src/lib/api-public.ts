@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { API_BASE } from "./constants";
 
 export interface Project {
@@ -42,7 +43,7 @@ export function formatProject(project: Project) {
 
 export type FormattedProject = ReturnType<typeof formatProject>;
 
-export async function getProjectBySlug(slug: string): Promise<FormattedProject | null> {
+export const getProjectBySlug = cache(async (slug: string): Promise<FormattedProject | null> => {
   try {
     const res = await fetch(`${API_BASE}/projects/slug/${slug}`, {
       next: { revalidate: 60 },
@@ -53,7 +54,7 @@ export async function getProjectBySlug(slug: string): Promise<FormattedProject |
   } catch {
     return null;
   }
-}
+});
 
 export interface BlogPost {
   id: string;
@@ -78,7 +79,7 @@ function formatBlogPost(post: BlogPost) {
 
 export type FormattedBlogPost = ReturnType<typeof formatBlogPost>;
 
-export async function getBlogPosts(): Promise<FormattedBlogPost[]> {
+export const getBlogPosts = cache(async (): Promise<FormattedBlogPost[]> => {
   try {
     const res = await fetch(`${API_BASE}/blog`, {
       next: { revalidate: 60 },
@@ -89,16 +90,27 @@ export async function getBlogPosts(): Promise<FormattedBlogPost[]> {
   } catch {
     return [];
   }
-}
+});
 
-export async function getBlogPostBySlug(slug: string): Promise<FormattedBlogPost | null> {
+export const getBlogPostBySlug = cache(async (slug: string): Promise<FormattedBlogPost | null> => {
+  try {
+    // Try dedicated endpoint first (avoids fetching all posts)
+    const res = await fetch(`${API_BASE}/blog/slug/${slug}`, {
+      next: { revalidate: 60 },
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return formatBlogPost(data.data as BlogPost);
+    }
+  } catch {}
+  // Fallback to full list scan
   try {
     const all = await getBlogPosts();
     return all.find((p) => p.slug === slug) ?? null;
   } catch {
     return null;
   }
-}
+});
 
 export interface Skill {
   id: string;
@@ -139,7 +151,7 @@ export interface Education {
 
 export type FormattedEducation = Omit<Education, "tags"> & { tags: string[] };
 
-export async function getEducation(): Promise<FormattedEducation[]> {
+export const getEducation = cache(async (): Promise<FormattedEducation[]> => {
   try {
     const res = await fetch(`${API_BASE}/education`, {
       next: { revalidate: 60 },
@@ -153,7 +165,7 @@ export async function getEducation(): Promise<FormattedEducation[]> {
   } catch {
     return [];
   }
-}
+});
 
 export interface Certification {
   id: string;

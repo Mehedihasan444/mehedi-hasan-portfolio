@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-
 interface Column<T> {
   key: string;
   label: string;
@@ -16,6 +14,7 @@ interface DataTableProps<T> {
   loading?: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function DataTable<T extends Record<string, any>>({
   columns,
   data,

@@ -31,6 +31,7 @@ export function FluidMorphBackground({
   const timeRef = useRef<number>(0);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -43,7 +44,7 @@ export function FluidMorphBackground({
     resize();
     window.addEventListener("resize", resize);
 
-    blobsRef.current = Array.from({ length: blobCount }, (_, i) => ({
+    blobsRef.current = Array.from({ length: blobCount }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       vx: (Math.random() - 0.5) * 0.5,
@@ -56,6 +57,10 @@ export function FluidMorphBackground({
     }));
 
     const animate = () => {
+      if (document.hidden) {
+        frameRef.current = requestAnimationFrame(animate);
+        return;
+      }
       timeRef.current += 0.005;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 

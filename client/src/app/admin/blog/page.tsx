@@ -4,22 +4,27 @@ import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import { DataTable, AdminPageHeader, AdminFormModal } from "@/components/admin/data-table";
 import { toast } from "sonner";
+import type { BlogPost } from "@/lib/api-public";
 
 const columns = [
   { key: "title", label: "Title" },
-  { key: "published", label: "Published", render: (item: any) => (item.published ? "✓" : "—") },
+  {
+    key: "published",
+    label: "Published",
+    render: (item: BlogPost) => (item.published ? "✓" : "—"),
+  },
   {
     key: "createdAt",
     label: "Date",
-    render: (item: any) => new Date(item.createdAt).toLocaleDateString(),
+    render: (item: BlogPost) => new Date(item.createdAt).toLocaleDateString(),
   },
 ];
 
 export default function AdminBlogPage() {
-  const [items, setItems] = useState<any[]>([]);
+  const [items, setItems] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
-  const [editing, setEditing] = useState<any>(null);
+  const [editing, setEditing] = useState<BlogPost | null>(null);
   const [form, setForm] = useState({
     title: "",
     slug: "",
@@ -31,7 +36,7 @@ export default function AdminBlogPage() {
 
   const load = async () => {
     try {
-      const data = await api.get<any[]>("/blog");
+      const data = await api.get<BlogPost[]>("/blog");
       setItems(data);
     } catch {
       toast.error("Failed to load");
@@ -39,8 +44,8 @@ export default function AdminBlogPage() {
       setLoading(false);
     }
   };
-
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     load();
   }, []);
 
@@ -64,7 +69,7 @@ export default function AdminBlogPage() {
     return String(value);
   }
 
-  const openEdit = (item: any) => {
+  const openEdit = (item: BlogPost) => {
     setEditing(item);
     setForm({
       title: item.title,
@@ -103,7 +108,7 @@ export default function AdminBlogPage() {
     }
   };
 
-  const handleDelete = async (item: any) => {
+  const handleDelete = async (item: BlogPost) => {
     if (!confirm("Delete?")) return;
     try {
       await api.delete(`/blog/${item.id}`);

@@ -5,6 +5,11 @@ export function AuroraShaderBackground({ className }: { className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(pointer: coarse)").matches) {
+      // Skip heavy shader on touch/low-end; CSS aurora fallback is lighter
+      return;
+    }
     const container = containerRef.current;
     if (!container) return;
 

@@ -20,7 +20,7 @@ interface RadialOrbitalTimelineProps {
   className?: string;
 }
 
-function TimelineCard({ item, index }: { item: TimelineItem; index: number }) {
+function TimelineCard({ item }: { item: TimelineItem }) {
   return (
     <div className="glass group relative rounded-xl p-6 transition-all duration-500 hover:border-white/20">
       <div className="from-emerald/5 via-teal/5 absolute inset-0 rounded-xl bg-gradient-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -147,7 +147,7 @@ export function RadialOrbitalTimeline({ items, className = "" }: RadialOrbitalTi
                 >
                   {i % 2 === 0 && (
                     <div className="w-full max-w-lg">
-                      <TimelineCard item={item} index={i} />
+                      <TimelineCard item={item} />
                     </div>
                   )}
                 </div>
@@ -165,14 +165,14 @@ export function RadialOrbitalTimeline({ items, className = "" }: RadialOrbitalTi
                 >
                   {i % 2 !== 0 && (
                     <div className="w-full max-w-lg">
-                      <TimelineCard item={item} index={i} />
+                      <TimelineCard item={item} />
                     </div>
                   )}
                 </div>
 
                 {/* Mobile: full-width card */}
                 <div className="-mt-6 pl-10 md:hidden">
-                  <TimelineCard item={item} index={i} />
+                  <TimelineCard item={item} />
                 </div>
               </div>
             ))}

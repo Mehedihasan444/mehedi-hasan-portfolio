@@ -54,7 +54,9 @@ export function AchievementCard({ item }: { item: AchievementItem }) {
           <div>
             <h3 className="font-medium text-white">{item.title}</h3>
             {item.description && (
-              <p className="text-muted-foreground mt-1 text-sm leading-relaxed">{item.description}</p>
+              <p className="text-muted-foreground mt-1 text-sm leading-relaxed">
+                {item.description}
+              </p>
             )}
           </div>
         </div>

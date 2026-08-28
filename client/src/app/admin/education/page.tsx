@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import { DataTable, AdminPageHeader, AdminFormModal } from "@/components/admin/data-table";
 import { toast } from "sonner";
+import type { Education } from "@/lib/api-public";
 
 const columns = [
   { key: "degree", label: "Degree" },
@@ -26,10 +27,10 @@ function parseJsonField(value: unknown): string {
 }
 
 export default function AdminEducationPage() {
-  const [items, setItems] = useState<any[]>([]);
+  const [items, setItems] = useState<Education[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
-  const [editing, setEditing] = useState<any>(null);
+  const [editing, setEditing] = useState<Education | null>(null);
   const [form, setForm] = useState({
     institution: "",
     degree: "",
@@ -44,7 +45,7 @@ export default function AdminEducationPage() {
 
   const load = async () => {
     try {
-      const data = await api.get<any[]>("/education");
+      const data = await api.get<Education[]>("/education");
       setItems(data);
     } catch {
       toast.error("Failed to load");
@@ -52,21 +53,28 @@ export default function AdminEducationPage() {
       setLoading(false);
     }
   };
-
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     load();
   }, []);
 
   const openCreate = () => {
     setEditing(null);
     setForm({
-      institution: "", degree: "", field: "", description: "",
-      location: "", startDate: "", endDate: "", gpa: "", tags: "",
+      institution: "",
+      degree: "",
+      field: "",
+      description: "",
+      location: "",
+      startDate: "",
+      endDate: "",
+      gpa: "",
+      tags: "",
     });
     setModalOpen(true);
   };
 
-  const openEdit = (item: any) => {
+  const openEdit = (item: Education) => {
     setEditing(item);
     setForm({
       institution: item.institution,
@@ -90,7 +98,10 @@ export default function AdminEducationPage() {
         startDate: new Date(form.startDate).toISOString(),
         endDate: form.endDate ? new Date(form.endDate).toISOString() : null,
         tags: JSON.stringify(
-          form.tags.split(",").map((s) => s.trim()).filter(Boolean),
+          form.tags
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean),
         ),
       };
       if (editing) {
@@ -107,7 +118,7 @@ export default function AdminEducationPage() {
     }
   };
 
-  const handleDelete = async (item: any) => {
+  const handleDelete = async (item: Education) => {
     if (!confirm("Delete?")) return;
     try {
       await api.delete(`/education/${item.id}`);
@@ -144,37 +155,71 @@ export default function AdminEducationPage() {
         title={editing ? "Edit Education" : "New Education"}
       >
         <form onSubmit={handleSave} className="space-y-4">
-          <input required placeholder="Institution" value={form.institution}
+          <input
+            required
+            placeholder="Institution"
+            value={form.institution}
             onChange={(e) => setForm({ ...form, institution: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none" />
-          <input required placeholder="Degree" value={form.degree}
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+          />
+          <input
+            required
+            placeholder="Degree"
+            value={form.degree}
             onChange={(e) => setForm({ ...form, degree: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none" />
-          <input required placeholder="Field of Study" value={form.field}
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+          />
+          <input
+            required
+            placeholder="Field of Study"
+            value={form.field}
             onChange={(e) => setForm({ ...form, field: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none" />
-          <textarea placeholder="Description" value={form.description}
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+          />
+          <textarea
+            placeholder="Description"
+            value={form.description}
             onChange={(e) => setForm({ ...form, description: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none" rows={3} />
-          <input placeholder="Location" value={form.location}
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+            rows={3}
+          />
+          <input
+            placeholder="Location"
+            value={form.location}
             onChange={(e) => setForm({ ...form, location: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none" />
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+          />
           <div className="grid grid-cols-2 gap-4">
-            <input type="date" value={form.startDate}
+            <input
+              type="date"
+              value={form.startDate}
               onChange={(e) => setForm({ ...form, startDate: e.target.value })}
-              className="focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none" />
-            <input type="date" placeholder="End Date" value={form.endDate}
+              className="focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+            />
+            <input
+              type="date"
+              placeholder="End Date"
+              value={form.endDate}
               onChange={(e) => setForm({ ...form, endDate: e.target.value })}
-              className="focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none" />
+              className="focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+            />
           </div>
-          <input placeholder="GPA" value={form.gpa}
+          <input
+            placeholder="GPA"
+            value={form.gpa}
             onChange={(e) => setForm({ ...form, gpa: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none" />
-          <input placeholder="Tags (comma separated)" value={form.tags}
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+          />
+          <input
+            placeholder="Tags (comma separated)"
+            value={form.tags}
             onChange={(e) => setForm({ ...form, tags: e.target.value })}
-            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none" />
-          <button type="submit"
-            className="from-emerald to-teal w-full rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white">
+            className="placeholder:text-muted-foreground focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
+          />
+          <button
+            type="submit"
+            className="from-emerald to-teal w-full rounded-lg bg-gradient-to-r px-4 py-2 text-sm font-medium text-white"
+          >
             {editing ? "Update" : "Create"}
           </button>
         </form>

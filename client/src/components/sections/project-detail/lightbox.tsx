@@ -24,13 +24,25 @@ export function Lightbox({
     return () => window.removeEventListener("keydown", handleKey);
   }, [images, onClose]);
 
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, []);
+
   return (
     <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Image gallery"
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
       onClick={onClose}
     >
       <button
         onClick={onClose}
+        aria-label="Close gallery"
         className="absolute right-6 top-6 text-2xl text-white/70 transition-colors hover:text-white"
       >
         ✕
@@ -42,6 +54,7 @@ export function Lightbox({
             e.stopPropagation();
             setCurrent((i) => i - 1);
           }}
+          aria-label="Previous image"
           className="absolute left-6 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-2xl text-white transition-all hover:bg-white/20"
         >
           ‹
@@ -54,6 +67,7 @@ export function Lightbox({
             e.stopPropagation();
             setCurrent((i) => i + 1);
           }}
+          aria-label="Next image"
           className="absolute right-6 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-2xl text-white transition-all hover:bg-white/20"
         >
           ›
@@ -72,7 +86,6 @@ export function Lightbox({
               width={1200}
               height={800}
               className="max-h-[80vh] w-auto object-contain"
-              unoptimized
             />
           </div>
           {images.length > 1 && (

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Menu, X, Code2, Briefcase, MessageCircle } from "lucide-react";
@@ -29,6 +30,9 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
   const { scrollY } = useScroll();
+  const pathname = usePathname();
+  const router = useRouter();
+  const isHome = pathname === "/";
 
   const navBg = useTransform(scrollY, [0, 80], ["rgba(5, 8, 16, 0)", "rgba(5, 8, 16, 0.85)"]);
   const navBorder = useTransform(
@@ -60,12 +64,32 @@ export function Navbar() {
 
   const scrollTo = (href: string) => {
     const id = href.replace("#", "");
+    if (!isHome) {
+      router.push(`/${href}`);
+      setMobileOpen(false);
+      return;
+    }
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
     }
     setMobileOpen(false);
   };
+
+  // ESC to close, body scroll lock, and focus restoration
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [mobileOpen]);
 
   return (
     <>
