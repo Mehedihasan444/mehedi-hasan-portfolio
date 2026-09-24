@@ -96,6 +96,7 @@
   --animate-loading-bar: loading-bar 2s ease-in-out infinite;
   --animate-ripple: ripple 1s ease-out forwards;
   --animate-orbit: orbit 8s linear infinite;
+  --animate-rail-flow: rail-flow 1.4s linear infinite;
   --animate-ping-slow: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
@@ -224,6 +225,11 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+  }
+
+  section[id],
+  div[id] {
+    scroll-margin-top: 5rem;
   }
 
   body {
@@ -721,6 +727,15 @@
   100% {
     transform: scale(4);
     opacity: 0;
+  }
+}
+
+@keyframes rail-flow {
+  from {
+    background-position-y: 0;
+  }
+  to {
+    background-position-y: 28px;
   }
 }
 

@@ -2,19 +2,20 @@
 
 import { useRef, useEffect } from "react";
 import { gsap } from "@/lib/gsap";
+import { formatPeriod } from "@/lib/date";
 import { CalendarDays, Briefcase, MapPin } from "lucide-react";
 import type { FormattedExperience } from "@/lib/api-public";
-
-function formatPeriod(startDate: string, endDate: string | null): string {
-  const start = new Date(startDate).getFullYear();
-  const end = endDate ? new Date(endDate).getFullYear() : "Present";
-  return `${start} – ${end}`;
-}
 
 export function TimelineCard({ exp, index }: { exp: FormattedExperience; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
     const ctx = gsap.context(() => {
       if (!cardRef.current) return;
 
@@ -57,6 +58,8 @@ export function TimelineCard({ exp, index }: { exp: FormattedExperience; index: 
     return () => ctx.revert();
   }, [index]);
 
+  const description = exp.description?.trim() ? exp.description.trim() : null;
+
   return (
     <div
       ref={cardRef}
@@ -74,10 +77,10 @@ export function TimelineCard({ exp, index }: { exp: FormattedExperience; index: 
             <span className="animate-ping-slow bg-emerald/50 absolute inline-flex h-full w-full rounded-full" />
           )}
           <span
-            className={`relative inline-flex h-3.5 w-3.5 rounded-full border-2 ${
+            className={`relative inline-flex h-3.5 w-3.5 rounded-full border-2 transition-shadow duration-500 ${
               exp.current
                 ? "border-emerald bg-emerald/30 shadow-emerald/30 shadow-lg"
-                : "bg-background border-white/20"
+                : "bg-background border-white/20 shadow-[0_0_12px_rgba(52,211,153,0.25)]"
             }`}
           />
         </div>
@@ -119,13 +122,15 @@ export function TimelineCard({ exp, index }: { exp: FormattedExperience; index: 
             )}
           </div>
 
-          <p
-            className={`text-muted-foreground mt-3 text-sm leading-relaxed ${
-              index % 2 === 0 ? "md:text-right" : ""
-            }`}
-          >
-            {exp.description}
-          </p>
+          {description && (
+            <p
+              className={`text-muted-foreground mt-3 text-sm leading-relaxed ${
+                index % 2 === 0 ? "md:text-right" : ""
+              }`}
+            >
+              {description}
+            </p>
+          )}
 
           {exp.tags.length > 0 && (
             <div className={`mt-4 flex flex-wrap gap-2 ${index % 2 === 0 ? "md:justify-end" : ""}`}>

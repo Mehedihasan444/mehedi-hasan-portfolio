@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, type ReactNode } from "react";
 import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/sections/hero-section";
 import { AboutSection } from "@/components/sections/about-section";
@@ -11,7 +11,9 @@ import { AchievementsSection } from "@/components/sections/achievements-section"
 import { GitHubSection } from "@/components/sections/github-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import { BlogPreviewSection } from "@/components/sections/blog-preview-section";
+import { OrbitSection } from "@/components/sections/orbit-section";
 import { ContactSection } from "@/components/sections/contact-section";
+import { SectionErrorBoundary } from "@/components/layout/section-error-boundary";
 import { getSectionVisibility } from "@/lib/sections";
 
 const ProgressiveBlur = dynamic(
@@ -28,73 +30,95 @@ const SectionFallback = ({ height = "100vh" }: { height?: string }) => (
   </div>
 );
 
+function Section({
+  label,
+  height,
+  children,
+}: {
+  label: string;
+  height?: string;
+  children: ReactNode;
+}) {
+  return (
+    <SectionErrorBoundary label={label}>
+      <Suspense fallback={<SectionFallback height={height} />}>{children}</Suspense>
+    </SectionErrorBoundary>
+  );
+}
+
 export default async function Home() {
   const s = await getSectionVisibility();
 
   return (
     <>
       {s.hero && (
-        <Suspense fallback={<SectionFallback />}>
+        <Section label="hero">
           <HeroSection />
-        </Suspense>
+        </Section>
       )}
       {s.hero && s.about && <ProgressiveBlur height="20vh" />}
       {s.about && (
-        <Suspense fallback={<SectionFallback />}>
+        <Section label="about">
           <AboutSection />
-        </Suspense>
+        </Section>
       )}
-      {s.about && s.skills && <ProgressiveBlur height="15vh" />}
+      {s.about && s.orbit && <ProgressiveBlur height="15vh" />}
+      {s.orbit && (
+        <Section label="orbit" height="100vh">
+          <OrbitSection />
+        </Section>
+      )}
+      {s.orbit && s.skills && <ProgressiveBlur height="15vh" />}
       {s.skills && (
-        <Suspense fallback={<SectionFallback height="60vh" />}>
+        <Section label="skills" height="60vh">
           <SkillsSection />
-        </Suspense>
+        </Section>
       )}
       {s.experience && (
-        <Suspense fallback={<SectionFallback height="60vh" />}>
+        <Section label="experience" height="60vh">
           <ExperienceSection />
-        </Suspense>
+        </Section>
       )}
       {s.experience && s.projects && <ProgressiveBlur height="15vh" />}
       {s.projects && (
-        <Suspense fallback={<SectionFallback />}>
+        <Section label="projects">
           <ProjectsSection />
-        </Suspense>
+        </Section>
       )}
       {s.education && (
-        <Suspense fallback={<SectionFallback height="60vh" />}>
+        <Section label="education" height="60vh">
           <EducationSection />
-        </Suspense>
+        </Section>
       )}
       {s.certifications && (
-        <Suspense fallback={<SectionFallback height="60vh" />}>
+        <Section label="certifications" height="60vh">
           <CertificationsSection />
-        </Suspense>
+        </Section>
       )}
       {s.achievements && (
-        <Suspense fallback={<SectionFallback height="60vh" />}>
+        <Section label="achievements" height="60vh">
           <AchievementsSection />
-        </Suspense>
+        </Section>
       )}
       {s.github && (
-        <Suspense fallback={<SectionFallback height="60vh" />}>
+        <Section label="github" height="60vh">
           <GitHubSection />
-        </Suspense>
+        </Section>
       )}
       {s.testimonials && (
-        <Suspense fallback={<SectionFallback height="60vh" />}>
+        <Section label="testimonials" height="60vh">
           <TestimonialsSection />
-        </Suspense>
+        </Section>
       )}
       {s.blog && (
-        <Suspense fallback={<SectionFallback height="60vh" />}>
+        <Section label="blog" height="60vh">
           <BlogPreviewSection />
-        </Suspense>
+        </Section>
       )}
       {s.contact && (
-        <Suspense fallback={<SectionFallback height="80vh" />}>
+        <Section label="contact" height="80vh">
           <ContactSection />
-        </Suspense>
+        </Section>
       )}
     </>
   );

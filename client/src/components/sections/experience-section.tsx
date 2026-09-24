@@ -24,7 +24,7 @@ export async function ExperienceSection() {
         </ScrollReveal>
 
         <div className="relative mt-20">
-          <div className="absolute left-8 top-0 h-full w-0.5 overflow-hidden md:left-1/2 md:-translate-x-0.5">
+          <div className="absolute left-8 top-0 h-full w-[18px] translate-x-[-2px] md:left-1/2 md:-translate-x-1/2">
             <TimelineLine />
           </div>
 
