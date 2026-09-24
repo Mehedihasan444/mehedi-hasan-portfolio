@@ -1,6 +1,7 @@
 node_modules/
 dist/
 .next/
+.turbo/
 *.log
 .env
 .env.local
@@ -9,3 +10,4 @@ dist/
 *.tsbuildinfo
 turbo.log
 coverage/
+package-lock.json

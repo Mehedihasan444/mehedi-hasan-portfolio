@@ -7,13 +7,19 @@
     },
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "dist/**"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"],
+      "env": ["NEXT_PUBLIC_API_URL", "NEXT_PUBLIC_SITE_URL", "ANALYZE"]
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": ["^lint"],
+      "inputs": ["src/**/*", "eslint.config.*", "package.json"],
+      "outputs": []
     },
     "typecheck": {
-      "dependsOn": ["^typecheck"]
+      "dependsOn": ["^typecheck"],
+      "inputs": ["src/**/*", "tsconfig.json", "package.json"],
+      "outputs": []
     }
-  }
+  },
+  "globalEnv": ["NEXT_PUBLIC_API_URL", "NEXT_PUBLIC_SITE_URL", "ANALYZE"]
 }
