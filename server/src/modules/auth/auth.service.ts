@@ -1,17 +1,32 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { prisma } from "../../config/database";
-import { env } from "../../config/env";
+import { env, allowPublicRegister } from "../../config/env";
 import { AppError } from "../../middleware/error-handler";
 import type { LoginInput, CreateUserInput } from "./auth.validation";
 
+const DUMMY_HASH = "$2b$12$C6UzMDM.H6dfI/f/IKc8xej8xej8xej8xej8xej8xej8xej8xej8xe.";
+
+function signToken(userId: string, role: string) {
+  return jwt.sign({ userId, role }, env.JWT_SECRET, {
+    algorithm: "HS256",
+    expiresIn: env.JWT_EXPIRES_IN as unknown as number,
+  });
+}
+
+function normalizeEmail(email: string) {
+  return email.trim().toLowerCase();
+}
+
 export class AuthService {
   async login(input: LoginInput) {
+    const email = normalizeEmail(input.email);
     const user = await prisma.user.findUnique({
-      where: { email: input.email },
+      where: { email },
     });
 
     if (!user) {
+      await bcrypt.compare(input.password, DUMMY_HASH).catch(() => false);
       throw new AppError("Invalid email or password", 401);
     }
 
@@ -20,9 +35,7 @@ export class AuthService {
       throw new AppError("Invalid email or password", 401);
     }
 
-    const token = jwt.sign({ userId: user.id }, env.JWT_SECRET, {
-      expiresIn: 604800,
-    });
+    const token = signToken(user.id, user.role);
 
     return {
       token,
@@ -36,26 +49,33 @@ export class AuthService {
   }
 
   async register(input: CreateUserInput) {
+    if (!allowPublicRegister && env.NODE_ENV === "production") {
+      throw new AppError("Public registration is disabled", 403);
+    }
+
+    const email = normalizeEmail(input.email);
     const existing = await prisma.user.findUnique({
-      where: { email: input.email },
+      where: { email },
     });
 
     if (existing) {
       throw new AppError("Email already in use", 409);
     }
 
+    const userCount = await prisma.user.count();
+    const role = userCount === 0 ? "admin" : "user";
+
     const hashed = await bcrypt.hash(input.password, 12);
     const user = await prisma.user.create({
       data: {
-        email: input.email,
+        email,
         password: hashed,
-        name: input.name,
+        name: input.name.trim(),
+        role,
       },
     });
 
-    const token = jwt.sign({ userId: user.id }, env.JWT_SECRET, {
-      expiresIn: 604800,
-    });
+    const token = signToken(user.id, user.role);
 
     return {
       token,

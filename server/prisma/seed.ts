@@ -6,19 +6,24 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("Seeding database...");
 
-  const adminEmail = "admin@mehedi.dev";
+  const adminEmail = process.env.ADMIN_EMAIL || "admin@mehedi.dev";
+  const adminPassword = process.env.ADMIN_PASSWORD;
   const existingAdmin = await prisma.user.findUnique({ where: { email: adminEmail } });
   if (!existingAdmin) {
-    const hashed = await bcrypt.hash("admin123", 12);
-    await prisma.user.create({
-      data: {
-        email: adminEmail,
-        password: hashed,
-        name: "Mehedi Hasan",
-        role: "admin",
-      },
-    });
-    console.log(`Admin user created: ${adminEmail}`);
+    if (!adminPassword) {
+      console.log("Skipping admin creation: set ADMIN_PASSWORD (>=12 chars) to seed admin.");
+    } else {
+      const hashed = await bcrypt.hash(adminPassword, 12);
+      await prisma.user.create({
+        data: {
+          email: adminEmail,
+          password: hashed,
+          name: "Mehedi Hasan",
+          role: "admin",
+        },
+      });
+      console.log(`Admin user created: ${adminEmail}`);
+    }
   }
 
   const settings = [

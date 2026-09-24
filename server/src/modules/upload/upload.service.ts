@@ -54,7 +54,11 @@ export async function deleteFromCloudinary(publicId: string): Promise<void> {
 }
 
 export function extractPublicId(secureUrl: string): string | null {
-  const regex = /\/v\d+\/(.+)\.\w+$/;
-  const match = secureUrl.match(regex);
-  return match ? match[1] : null;
+  try {
+    const u = new URL(secureUrl);
+    const m = u.pathname.match(/\/v\d+\/(.+)\.\w+$/);
+    return m ? m[1] : null;
+  } catch {
+    return null;
+  }
 }
