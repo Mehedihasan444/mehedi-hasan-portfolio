@@ -13,17 +13,17 @@ const columns = [
 ];
 
 function parseJsonField(value: unknown): string {
-  if (!value) return "";
-  if (Array.isArray(value)) return value.join(", ");
-  if (typeof value === "string") {
-    try {
-      const parsed = JSON.parse(value);
-      return Array.isArray(parsed) ? parsed.join(", ") : value;
-    } catch {
-      return value;
-    }
+  if (value === null || value === undefined) return "";
+  if (Array.isArray(value)) return value.map(String).join(", ");
+  if (typeof value !== "string") return "";
+  if (value.trim() === "") return "";
+  try {
+    const parsed: unknown = JSON.parse(value);
+    if (Array.isArray(parsed)) return parsed.map(String).join(", ");
+    return value;
+  } catch {
+    return value;
   }
-  return String(value);
 }
 
 export default function AdminEducationPage() {
@@ -43,19 +43,25 @@ export default function AdminEducationPage() {
     tags: "",
   });
 
-  const load = async () => {
+  const load = async (isCancelled?: () => boolean) => {
     try {
       const data = await api.get<Education[]>("/education");
+      if (isCancelled?.()) return;
       setItems(data);
     } catch {
+      if (isCancelled?.()) return;
       toast.error("Failed to load");
     } finally {
-      setLoading(false);
+      if (!isCancelled?.()) setLoading(false);
     }
   };
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    load();
+    let cancelled = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- initial data load
+    load(() => cancelled);
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const openCreate = () => {
@@ -82,8 +88,8 @@ export default function AdminEducationPage() {
       field: item.field,
       description: item.description || "",
       location: item.location || "",
-      startDate: item.startDate?.split("T")[0] || "",
-      endDate: item.endDate?.split("T")[0] || "",
+      startDate: item.startDate?.split("T")[0] ?? "",
+      endDate: item.endDate?.split("T")[0] ?? "",
       gpa: item.gpa || "",
       tags: parseJsonField(item.tags),
     });
@@ -112,7 +118,7 @@ export default function AdminEducationPage() {
         toast.success("Created");
       }
       setModalOpen(false);
-      load();
+      await load();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Failed");
     }
@@ -123,7 +129,7 @@ export default function AdminEducationPage() {
     try {
       await api.delete(`/education/${item.id}`);
       toast.success("Deleted");
-      load();
+      await load();
     } catch {
       toast.error("Failed");
     }

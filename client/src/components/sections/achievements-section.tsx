@@ -6,6 +6,10 @@ import { AnimatedMetric } from "./achievements/animated-metric";
 import { AchievementCard } from "./achievements/achievement-card";
 
 export async function AchievementsSection() {
+  // Mixed data sources (intentional): headline metrics are hardcoded in
+  // src/lib/stats.ts (via ./achievements/constants) while the cards below come
+  // from the live achievements API. Keep both — metrics are curated marketing
+  // copy, cards are CMS-managed.
   const achievements = await getAchievements();
 
   return (

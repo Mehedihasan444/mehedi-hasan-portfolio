@@ -23,17 +23,17 @@ export default function AdminExperiencesPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<Experience | null>(null);
   function parseJsonField(value: unknown): string {
-    if (!value) return "";
-    if (Array.isArray(value)) return value.join(", ");
-    if (typeof value === "string") {
-      try {
-        const parsed = JSON.parse(value);
-        return Array.isArray(parsed) ? parsed.join(", ") : value;
-      } catch {
-        return value;
-      }
+    if (value === null || value === undefined) return "";
+    if (Array.isArray(value)) return value.map(String).join(", ");
+    if (typeof value !== "string") return "";
+    if (value.trim() === "") return "";
+    try {
+      const parsed: unknown = JSON.parse(value);
+      if (Array.isArray(parsed)) return parsed.map(String).join(", ");
+      return value;
+    } catch {
+      return value;
     }
-    return String(value);
   }
 
   const [form, setForm] = useState({
@@ -48,19 +48,25 @@ export default function AdminExperiencesPage() {
     tags: "",
   });
 
-  const load = async () => {
+  const load = async (isCancelled?: () => boolean) => {
     try {
       const data = await api.get<Experience[]>("/experiences");
+      if (isCancelled?.()) return;
       setItems(data);
     } catch {
+      if (isCancelled?.()) return;
       toast.error("Failed to load");
     } finally {
-      setLoading(false);
+      if (!isCancelled?.()) setLoading(false);
     }
   };
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    load();
+    let cancelled = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- initial data load
+    load(() => cancelled);
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const openCreate = () => {
@@ -87,8 +93,8 @@ export default function AdminExperiencesPage() {
       description: item.description || "",
       location: item.location || "",
       type: item.type,
-      startDate: item.startDate?.split("T")[0] || "",
-      endDate: item.endDate?.split("T")[0] || "",
+      startDate: item.startDate?.split("T")[0] ?? "",
+      endDate: item.endDate?.split("T")[0] ?? "",
       current: item.current,
       tags: parseJsonField(item.tags),
     });
@@ -117,7 +123,7 @@ export default function AdminExperiencesPage() {
         toast.success("Created");
       }
       setModalOpen(false);
-      load();
+      await load();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Failed");
     }
@@ -128,7 +134,7 @@ export default function AdminExperiencesPage() {
     try {
       await api.delete(`/experiences/${item.id}`);
       toast.success("Deleted");
-      load();
+      await load();
     } catch {
       toast.error("Failed");
     }

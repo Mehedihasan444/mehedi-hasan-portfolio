@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { api } from "@/lib/api";
 import { toast } from "sonner";
 
@@ -11,12 +11,30 @@ export default function AdminLoginPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    try {
+      if (localStorage.getItem("admin_token")) {
+        router.replace("/admin/dashboard");
+      }
+    } catch {
+      /* ignore */
+    }
+  }, [router]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      toast.error("Please enter a valid email.");
+      return;
+    }
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters.");
+      return;
+    }
     setLoading(true);
 
     try {
-      await api.login(email, password);
+      await api.login(email.trim(), password);
       toast.success("Logged in successfully");
       router.push("/admin/dashboard");
     } catch (err) {
@@ -43,6 +61,7 @@ export default function AdminLoginPage() {
               id="email"
               type="email"
               required
+              autoComplete="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
@@ -57,6 +76,7 @@ export default function AdminLoginPage() {
               id="password"
               type="password"
               required
+              autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
@@ -66,6 +86,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading}
+            aria-busy={loading}
             className="from-emerald to-teal w-full rounded-lg bg-gradient-to-r px-8 py-3 text-sm font-medium text-white transition-all duration-300 hover:shadow-lg hover:shadow-teal-500/25 disabled:opacity-50"
           >
             {loading ? "Signing in..." : "Sign In"}

@@ -16,6 +16,8 @@ const socialLinks = [
   { href: "https://twitter.com/MEHEDIH60833052", icon: TwitterIcon, label: "Twitter" },
 ];
 
+const EMAIL = "mehedihasan67705251@gmail.com";
+
 export function HeroContent() {
   return (
     <div className="mx-auto max-w-5xl text-center">
@@ -28,11 +30,14 @@ export function HeroContent() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1, duration: 0.6 }}
         className="text-cyan-soft font-mono text-base sm:text-lg md:text-xl"
-        aria-live="polite"
-        aria-label="Current role"
+        aria-label={`Current roles: ${roles.join(", ")}`}
       >
         <span className="text-violet-soft/60">{"// "}</span>
-        <Typewriter words={roles} speed={55} deleteSpeed={30} />
+        {/* Decorative fast typewriter — hidden from AT to avoid live-region spam. */}
+        <span aria-hidden="true">
+          <Typewriter words={roles} speed={55} deleteSpeed={30} />
+        </span>
+        <span className="sr-only">{roles[0] ?? "Full Stack Developer"}</span>
       </motion.p>
 
       <motion.p
@@ -60,8 +65,8 @@ export function HeroContent() {
         transition={{ delay: 1.2, duration: 0.6 }}
         className="mt-8 flex flex-wrap items-center justify-center gap-px overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-sm"
       >
-        {stats.map((stat, i) => (
-          <div key={i} className="flex flex-col items-center gap-0.5 px-6 py-4 sm:px-8">
+        {stats.map((stat) => (
+          <div key={stat.label} className="flex flex-col items-center gap-0.5 px-6 py-4 sm:px-8">
             <span className="font-heading text-gradient text-2xl font-bold sm:text-3xl">
               {stat.value}
             </span>
@@ -83,7 +88,7 @@ export function HeroContent() {
               e.preventDefault();
               document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
             }}
-            className="from-violet to-cyan shadow-violet/25 hover:shadow-violet/40 group inline-flex items-center gap-2 rounded-full bg-gradient-to-r px-7 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105"
+            className="from-violet to-cyan shadow-violet/25 hover:shadow-violet/40 group inline-flex items-center gap-2 rounded-full bg-gradient-to-r px-7 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300"
           >
             View My Work
             <ArrowRight
@@ -125,7 +130,12 @@ export function HeroContent() {
           </a>
         ))}
         <div className="h-px w-8 bg-gradient-to-r from-transparent to-white/10" />
-        <span className="text-muted-foreground/60 text-xs">mehedihasan67705251@gmail.com</span>
+        <a
+          href={`mailto:${EMAIL}`}
+          className="text-muted-foreground/60 hover:text-muted-foreground text-xs underline-offset-4 transition-colors hover:underline"
+        >
+          {EMAIL}
+        </a>
       </motion.div>
     </div>
   );

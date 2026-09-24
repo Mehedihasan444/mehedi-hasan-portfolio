@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+// Single-loader component: mounted once at the app root. There is exactly one
+// loading overlay instance — do not render a second spinner elsewhere.
 export function LoadingScreen() {
   const [visible, setVisible] = useState(false);
   const [progress, setProgress] = useState(0);
   const [phase, setPhase] = useState<"logo" | "bar" | "exit">("logo");
-  const startedRef = useRef(false);
 
   useEffect(() => {
     // Only show on first visit
@@ -16,10 +17,10 @@ export function LoadingScreen() {
     sessionStorage.setItem("portfolio-loaded", "1");
 
     // Defer state update to next tick to avoid synchronous cascading render warning/error
-    setTimeout(() => {
+    const showTimer = setTimeout(() => {
       setVisible(true);
-      startedRef.current = true;
     }, 0);
+    return () => clearTimeout(showTimer);
   }, []);
 
   useEffect(() => {
@@ -33,20 +34,26 @@ export function LoadingScreen() {
     if (phase !== "bar") return;
 
     let p = 0;
+    let exitTimer: ReturnType<typeof setTimeout> | undefined;
+    let hideTimer: ReturnType<typeof setTimeout> | undefined;
     const interval = setInterval(() => {
       p += Math.random() * 22 + 8;
       if (p >= 100) {
         p = 100;
         setProgress(100);
         clearInterval(interval);
-        setTimeout(() => setPhase("exit"), 300);
-        setTimeout(() => setVisible(false), 900);
+        exitTimer = setTimeout(() => setPhase("exit"), 300);
+        hideTimer = setTimeout(() => setVisible(false), 900);
       } else {
         setProgress(Math.round(p));
       }
     }, 120);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      if (exitTimer) clearTimeout(exitTimer);
+      if (hideTimer) clearTimeout(hideTimer);
+    };
   }, [phase]);
 
   return (
@@ -63,6 +70,7 @@ export function LoadingScreen() {
           aria-valuenow={progress}
           aria-valuemin={0}
           aria-valuemax={100}
+          aria-valuetext={`${progress}% loaded`}
         >
           {/* Background grid */}
           <div
@@ -90,11 +98,10 @@ export function LoadingScreen() {
             <div className="border-violet/30 from-violet/20 to-cyan/10 relative flex h-full w-full items-center justify-center rounded-2xl border bg-gradient-to-br">
               <span className="font-heading text-gradient text-2xl font-bold">MH</span>
             </div>
-            {/* Orbiting dot */}
-            <div
-              className="bg-cyan absolute h-2 w-2 rounded-full"
-              style={{ animation: "orbit 2s linear infinite" }}
-            />
+            {/* Orbiting dot — tailwind animate-spin wrapper (no custom keyframes). */}
+            <div className="absolute inset-0 animate-spin" style={{ animationDuration: "2s" }}>
+              <div className="bg-cyan absolute -top-1 left-1/2 h-2 w-2 -translate-x-1/2 rounded-full" />
+            </div>
           </motion.div>
 
           {/* Name */}

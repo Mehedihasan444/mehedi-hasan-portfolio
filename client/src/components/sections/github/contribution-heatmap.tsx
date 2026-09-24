@@ -1,3 +1,5 @@
+// NOTE: Offline sample snapshot — deterministic sin-based placeholder, not live
+// GitHub contribution data. Labeled as such in the UI until API wiring lands.
 function seed(w: number, d: number) {
   const n = Math.sin(w * 37 + d * 13) * 43758.5453;
   return Math.abs(n - Math.floor(n));
@@ -15,9 +17,25 @@ export function ContributionHeatmap() {
   const weeks = 24;
   const days = 7;
 
+  // Deterministic total for the screen-reader summary (mirrors the grid below).
+  let total = 0;
+  for (let w = 0; w < weeks; w++) {
+    for (let d = 0; d < days; d++) {
+      total += Math.round(seed(w, d) * 8);
+    }
+  }
+
   return (
     <div className="overflow-x-auto pb-2">
-      <div className="flex min-w-max gap-1" aria-label="GitHub contribution heatmap" role="img">
+      <p className="mb-3 text-xs text-white/40">
+        Sample snapshot — offline placeholder, not live GitHub data
+      </p>
+      {/* Keyboard-/screen-reader-accessible text summary of the decorative grid. */}
+      <p className="sr-only">
+        Sample contribution activity: approximately {total} contributions over the last 6 months (24
+        weeks). This is placeholder data, not live GitHub activity.
+      </p>
+      <div className="flex min-w-max gap-1" aria-hidden="true">
         {Array.from({ length: weeks }).map((_, w) => (
           <div key={w} className="flex flex-col gap-1">
             {Array.from({ length: days }).map((_, d) => {

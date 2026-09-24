@@ -46,9 +46,9 @@ export function SectionHeader({
             labelClassName,
           )}
         >
-          <span className="via-violet h-px w-8 bg-gradient-to-r from-transparent to-transparent opacity-60" />
+          <span className="h-px w-8 bg-gradient-to-r from-transparent via-violet-500 to-transparent opacity-60" />
           {label}
-          <span className="via-violet h-px w-8 bg-gradient-to-r from-transparent to-transparent opacity-60" />
+          <span className="h-px w-8 bg-gradient-to-r from-transparent via-violet-500 to-transparent opacity-60" />
         </motion.p>
       )}
 

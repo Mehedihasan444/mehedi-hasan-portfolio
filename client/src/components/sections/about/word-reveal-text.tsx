@@ -1,49 +1,63 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 
-export function WordRevealText({ children }: { children: string }) {
+interface WordRevealTextProps {
+  children: string;
+  className?: string;
+}
+
+function isReducedMotion(): boolean {
+  return (
+    typeof window !== "undefined" &&
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
+
+export function WordRevealText({ children, className }: WordRevealTextProps) {
   const pRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     const p = pRef.current;
     if (!p) return;
-
-    const text = p.textContent || "";
-    p.innerHTML = "";
-    text.split(" ").forEach((word, i) => {
-      const span = document.createElement("span");
-      span.textContent = word;
-      span.style.display = "inline-block";
-      span.style.opacity = "0";
-      span.style.transform = "translateY(18px)";
-      p.appendChild(span);
-      if (i < text.split(" ").length - 1) {
-        p.appendChild(document.createTextNode("\u00A0"));
-      }
-    });
+    // Reduced-motion: leave the declaratively-rendered words fully visible.
+    if (isReducedMotion()) return;
 
     const ctx = gsap.context(() => {
-      gsap.to(p.querySelectorAll("span"), {
-        opacity: 1,
-        y: 0,
-        stagger: 0.025,
-        duration: 0.55,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: p,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
+      gsap.fromTo(
+        p.querySelectorAll("[data-word]"),
+        { opacity: 0, y: 18 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.025,
+          duration: 0.55,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: p,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
         },
-      });
+      );
     }, p);
     return () => ctx.revert();
-  }, []);
+  }, [children]);
+
+  const words = children.split(" ");
 
   return (
-    <p ref={pRef} className="reveal-text leading-relaxed">
-      {children}
+    <p ref={pRef} className={`reveal-text leading-relaxed ${className ?? ""}`}>
+      {words.map((word, i) => (
+        <Fragment key={`${word}-${i}`}>
+          <span data-word className="inline-block will-change-transform">
+            {word}
+          </span>
+          {i < words.length - 1 ? " " : null}
+        </Fragment>
+      ))}
     </p>
   );
 }

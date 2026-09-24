@@ -32,19 +32,25 @@ export default function AdminMessagesPage() {
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<ContactMessage | null>(null);
 
-  const load = async () => {
+  const load = async (isCancelled?: () => boolean) => {
     try {
       const data = await api.get<ContactMessage[]>("/contact");
+      if (isCancelled?.()) return;
       setMessages(data);
     } catch {
+      if (isCancelled?.()) return;
       toast.error("Failed to load");
     } finally {
-      setLoading(false);
+      if (!isCancelled?.()) setLoading(false);
     }
   };
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    load();
+    let cancelled = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- initial data load
+    load(() => cancelled);
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const handleDelete = async (item: ContactMessage) => {
@@ -52,25 +58,36 @@ export default function AdminMessagesPage() {
     try {
       await api.delete(`/contact/${item.id}`);
       toast.success("Deleted");
-      load();
+      await load();
     } catch {
-      toast.error("Failed");
+      toast.error("Failed to delete");
     }
   };
 
   const handleMarkRead = async (item: ContactMessage) => {
+    const next = !item.read;
+    setMessages((prev) => prev.map((m) => (m.id === item.id ? { ...m, read: next } : m)));
+    setSelected((prev) => (prev && prev.id === item.id ? { ...prev, read: next } : prev));
     try {
-      await api.put(`/contact/${item.id}`, { read: !item.read });
-      load();
+      await api.put(`/contact/${item.id}`, { read: next });
+      toast.success(next ? "Marked as read" : "Marked as unread");
     } catch {
-      toast.error("Failed");
+      setMessages((prev) => prev.map((m) => (m.id === item.id ? { ...m, read: item.read } : m)));
+      setSelected((prev) => (prev && prev.id === item.id ? { ...prev, read: item.read } : prev));
+      toast.error("Failed to update message");
     }
   };
 
   return (
     <div>
       <AdminPageHeader title="Messages" description="Contact form submissions" />
-      <DataTable columns={columns} data={messages} loading={loading} onDelete={handleDelete} />
+      <DataTable
+        columns={columns}
+        data={messages}
+        loading={loading}
+        onDelete={handleDelete}
+        onRowClick={setSelected}
+      />
 
       <AdminFormModal open={!!selected} onClose={() => setSelected(null)} title="Message Details">
         {selected && (
@@ -85,9 +102,9 @@ export default function AdminMessagesPage() {
             <div className="flex gap-2">
               <button
                 onClick={() => {
-                  handleMarkRead(selected);
-                  setSelected(null);
+                  void handleMarkRead(selected);
                 }}
+                aria-label={selected.read ? "Mark as unread" : "Mark as read"}
                 className="from-emerald to-teal rounded-lg bg-gradient-to-r px-4 py-2 text-sm text-white"
               >
                 Mark as {selected.read ? "Unread" : "Read"}

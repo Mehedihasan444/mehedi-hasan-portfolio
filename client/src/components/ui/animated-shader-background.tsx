@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 export function AuroraShaderBackground({ className }: { className?: string }) {
@@ -109,7 +109,8 @@ export function AuroraShaderBackground({ className }: { className?: string }) {
       const elapsed = now - lastFrame;
       if (elapsed >= TICK_RATE) {
         lastFrame = now - (elapsed % TICK_RATE);
-        material.uniforms.iTime.value += elapsed / 1000;
+        const t = material.uniforms.iTime;
+        if (t) t.value += elapsed / 1000;
         renderer.render(scene, camera);
       }
       frameId = requestAnimationFrame(animate);
@@ -120,7 +121,8 @@ export function AuroraShaderBackground({ className }: { className?: string }) {
       const nw = window.innerWidth;
       const nh = window.innerHeight;
       renderer.setSize(nw, nh);
-      material.uniforms.iResolution.value.set(nw, nh);
+      const res = material.uniforms.iResolution;
+      if (res) res.value.set(nw, nh);
     };
     window.addEventListener("resize", handleResize);
 

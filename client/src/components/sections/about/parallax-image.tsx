@@ -21,8 +21,7 @@ export function ParallaxImage() {
             fill
             className="object-cover"
             sizes="(max-width: 640px) 320px, 384px"
-            priority
-            fetchPriority="high"
+            loading="lazy"
           />
         </div>
       </div>

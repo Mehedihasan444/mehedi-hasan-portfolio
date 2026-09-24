@@ -5,47 +5,66 @@ import { api } from "@/lib/api";
 import { AdminPageHeader } from "@/components/admin/data-table";
 import { toast } from "sonner";
 
+type SettingRow = { id: string; key: string; value: string };
+
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<Record<string, string>>({});
+  const [ids, setIds] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
 
-  const load = async () => {
-    try {
-      const data = await api.get<Record<string, string>[]>("/site-settings");
-      const map: Record<string, string> = {};
-      data.forEach((s: Record<string, string>) => {
-        map[s.key] = s.value;
-      });
-      setSettings(map);
-    } catch {
-      toast.error("Failed to load settings");
-    } finally {
-      setLoading(false);
-    }
-  };
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    load();
+    let cancelled = false;
+    const load = async () => {
+      try {
+        const data = await api.get<SettingRow[]>("/site-settings?limit=100");
+        if (cancelled) return;
+        const map: Record<string, string> = {};
+        const idMap: Record<string, string> = {};
+        for (const s of data) {
+          map[s.key] = s.value;
+          idMap[s.key] = s.id;
+        }
+        setSettings(map);
+        setIds(idMap);
+      } catch {
+        if (!cancelled) toast.error("Failed to load settings");
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+    void load();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const handleSave = async () => {
+    setSaving(true);
     try {
-      for (const [key, value] of Object.entries(settings)) {
-        const existing = await api.get<Record<string, string>[]>("/site-settings");
-        const found = existing.find((s: Record<string, string>) => s.key === key);
-        if (found) {
-          await api.put(`/site-settings/${found.id}`, { value });
-        }
-      }
+      await Promise.all(
+        Object.entries(settings).map(async ([key, value]) => {
+          const id = ids[key];
+          if (id) {
+            await api.put(`/site-settings/${id}`, { value });
+          }
+        }),
+      );
       toast.success("Settings saved");
     } catch {
       toast.error("Failed to save");
+    } finally {
+      setSaving(false);
     }
   };
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-20">
+      <div
+        className="flex items-center justify-center py-20"
+        role="status"
+        aria-label="Loading settings"
+      >
         <div className="border-emerald h-8 w-8 animate-spin rounded-full border-2 border-t-transparent" />
       </div>
     );
@@ -73,11 +92,15 @@ export default function AdminSettingsPage() {
       <div className="space-y-4">
         {fields.map((key) => (
           <div key={key}>
-            <label className="text-muted-foreground mb-1 block text-xs font-medium uppercase tracking-wider">
+            <label
+              htmlFor={`setting-${key}`}
+              className="text-muted-foreground mb-1 block text-xs font-medium uppercase tracking-wider"
+            >
               {key.replace(/_/g, " ")}
             </label>
             {key === "about_me" ? (
               <textarea
+                id={`setting-${key}`}
                 value={settings[key] || ""}
                 onChange={(e) => setSettings({ ...settings, [key]: e.target.value })}
                 className="focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
@@ -85,6 +108,7 @@ export default function AdminSettingsPage() {
               />
             ) : (
               <input
+                id={`setting-${key}`}
                 value={settings[key] || ""}
                 onChange={(e) => setSettings({ ...settings, [key]: e.target.value })}
                 className="focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
@@ -94,9 +118,10 @@ export default function AdminSettingsPage() {
         ))}
         <button
           onClick={handleSave}
-          className="from-emerald to-teal rounded-lg bg-gradient-to-r px-6 py-2 text-sm font-medium text-white transition-all hover:shadow-lg hover:shadow-teal-500/25"
+          disabled={saving}
+          className="from-emerald to-teal rounded-lg bg-gradient-to-r px-6 py-2 text-sm font-medium text-white transition-all hover:shadow-lg hover:shadow-teal-500/25 disabled:opacity-50"
         >
-          Save Settings
+          {saving ? "Saving..." : "Save Settings"}
         </button>
       </div>
     </div>

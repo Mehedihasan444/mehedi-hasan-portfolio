@@ -24,7 +24,7 @@ interface MetricProps {
 
 export function AnimatedMetric({ value, label, icon, gradient, index }: MetricProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const Icon = iconMap[icon];
+  const Icon = iconMap[icon] ?? Zap;
 
   useEffect(() => {
     const ctx = gsap.context(() => {

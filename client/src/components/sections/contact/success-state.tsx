@@ -11,6 +11,7 @@ export function SuccessState({ onReset }: { onReset: () => void }) {
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       className="flex flex-col items-center justify-center gap-5 py-16 text-center"
+      role="status"
     >
       <motion.div
         initial={{ scale: 0 }}
@@ -28,7 +29,8 @@ export function SuccessState({ onReset }: { onReset: () => void }) {
       </div>
       <button
         onClick={onReset}
-        className="text-emerald text-sm underline-offset-4 transition-colors hover:underline"
+        type="button"
+        className="text-emerald inline-flex min-h-11 min-w-11 items-center justify-center px-4 py-2 text-sm underline-offset-4 transition-colors hover:underline"
       >
         Send another message
       </button>

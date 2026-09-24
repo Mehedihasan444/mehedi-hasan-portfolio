@@ -1,6 +1,11 @@
+// Single source of truth for the GitHub section's offline sample snapshot.
+// Do not duplicate these arrays inline in github-stats / language-breakdown —
+// import from here. Values are static placeholders until live GitHub API wiring lands.
 import { Star, GitFork, GitPullRequest, Users } from "lucide-react";
 
-export const languages = [
+export type GHLang = { name: string; percentage: number; color: string };
+
+export const languages: GHLang[] = [
   { name: "TypeScript", percentage: 45, color: "#3178c6" },
   { name: "JavaScript", percentage: 25, color: "#f7df1e" },
   { name: "HTML/CSS", percentage: 15, color: "#f16529" },

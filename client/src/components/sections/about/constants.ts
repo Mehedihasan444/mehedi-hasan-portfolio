@@ -1,9 +1,8 @@
-export const stats = [
-  { end: 1, suffix: "+", label: "Years Experience" },
-  { end: 10, suffix: "+", label: "Projects Completed" },
-  { end: 18, suffix: "+", label: "Technologies" },
-  { end: 5, suffix: "+", label: "Open Source" },
-];
+import { aboutStats } from "@/lib/stats";
+
+// Single source of truth lives in src/lib/stats.ts — re-exported here
+// so existing `import { stats } from "./about/constants"` keeps working.
+export const stats = aboutStats;
 
 export const values = [
   {

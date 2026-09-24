@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Menu, X, Code2, Briefcase, MessageCircle } from "lucide-react";
+import { Menu, X, Github, Linkedin, Twitter } from "lucide-react";
 
 const navLinks = [
   { href: "#hero", label: "Home" },
@@ -17,13 +17,13 @@ const navLinks = [
 ];
 
 const socialLinks = [
-  { href: "https://github.com/Mehedihasan444", icon: Code2, label: "GitHub" },
+  { href: "https://github.com/Mehedihasan444", icon: Github, label: "GitHub" },
   {
     href: "https://linkedin.com/in/mehedi-hasan-893500301",
-    icon: Briefcase,
+    icon: Linkedin,
     label: "LinkedIn",
   },
-  { href: "https://twitter.com/MEHEDIH60833052", icon: MessageCircle, label: "Twitter" },
+  { href: "https://x.com/MEHEDIH60833052", icon: Twitter, label: "Twitter" },
 ];
 
 export function Navbar() {
@@ -134,6 +134,7 @@ export function Navbar() {
                 <button
                   key={link.href}
                   onClick={() => scrollTo(link.href)}
+                  aria-current={isActive ? "true" : undefined}
                   className={cn(
                     "relative rounded-lg px-3.5 py-2 text-sm font-medium transition-all duration-300",
                     isActive ? "text-violet-soft" : "text-muted-foreground hover:text-foreground",
@@ -196,7 +197,10 @@ export function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
-            className="bg-[#050810]/98 fixed inset-0 z-40 flex flex-col backdrop-blur-xl lg:hidden"
+            className="bg-[#050810]/98 fixed inset-0 z-[60] flex flex-col backdrop-blur-xl lg:hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile menu"
           >
             {/* Close button area */}
             <div className="flex items-center justify-between px-6 py-4">

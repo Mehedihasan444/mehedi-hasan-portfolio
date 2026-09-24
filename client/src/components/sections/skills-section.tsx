@@ -2,24 +2,32 @@ import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { SectionOverlay, AmbientGlow } from "@/components/ui/section-overlay";
 import { getSkills } from "@/lib/api-public";
 import { MarqueeRow } from "./skills/marquee-row";
+import { techRow1, techRow2, skillCategories } from "./skills/constants";
 
 export async function SkillsSection() {
   const skills = await getSkills();
   const sorted = [...skills].sort((a, b) => a.order - b.order);
 
-  const categories = sorted.reduce(
-    (acc, skill) => {
-      const cat = skill.category || "Other";
-      if (!acc[cat]) acc[cat] = [];
-      acc[cat].push(skill.name);
-      return acc;
-    },
-    {} as Record<string, string[]>,
-  );
+  const useFallback = sorted.length === 0;
 
-  const mid = Math.ceil(sorted.length / 2);
-  const row1 = sorted.slice(0, mid).map((s) => s.name);
-  const row2 = sorted.slice(mid).map((s) => s.name);
+  const categories: Record<string, string[]> = useFallback
+    ? Object.fromEntries(skillCategories.map((c) => [c.name, c.skills]))
+    : sorted.reduce(
+        (acc, skill) => {
+          const cat = skill.category || "Other";
+          if (!acc[cat]) acc[cat] = [];
+          acc[cat]?.push(skill.name);
+          return acc;
+        },
+        {} as Record<string, string[]>,
+      );
+
+  const names = useFallback
+    ? [...techRow1.map((t) => t.name), ...techRow2.map((t) => t.name)]
+    : sorted.map((s) => s.name);
+  const mid = Math.ceil(names.length / 2);
+  const row1 = useFallback ? techRow1.map((t) => t.name) : names.slice(0, mid);
+  const row2 = useFallback ? techRow2.map((t) => t.name) : names.slice(mid);
 
   return (
     <section id="skills" className="relative overflow-hidden px-6 py-32">
@@ -44,8 +52,8 @@ export async function SkillsSection() {
         {row1.length > 0 && (
           <ScrollReveal delay={0.2}>
             <div className="mt-20 space-y-3">
-              <MarqueeRow items={row1} />
-              <MarqueeRow items={row2} />
+              <MarqueeRow items={row1} label="Primary technologies" />
+              {row2.length > 0 && <MarqueeRow items={row2} label="Additional technologies" />}
             </div>
           </ScrollReveal>
         )}

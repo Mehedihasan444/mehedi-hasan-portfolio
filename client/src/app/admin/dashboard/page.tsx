@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { api } from "@/lib/api";
 import { toast } from "sonner";
 
@@ -30,8 +31,10 @@ export default function AdminDashboardPage() {
   });
   const [loading, setLoading] = useState(true);
   const [toggles, setToggles] = useState<Record<string, boolean>>({});
+  const [settingIds, setSettingIds] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState<string | null>(null);
   useEffect(() => {
+    let cancelled = false;
     async function load() {
       try {
         const [projects, skills, experiences, messages, settings] = await Promise.all([
@@ -41,6 +44,7 @@ export default function AdminDashboardPage() {
           api.get<unknown[]>("/contact"),
           api.get<{ id: string; key: string; value: string }[]>("/site-settings"),
         ]);
+        if (cancelled) return;
         setStats({
           projects: projects.length,
           skills: skills.length,
@@ -48,36 +52,50 @@ export default function AdminDashboardPage() {
           messages: messages.length,
         });
         const map: Record<string, boolean> = {};
+        const idMap: Record<string, string> = {};
         for (const s of settings) {
           if (s.key.startsWith("section_")) {
             map[s.key] = s.value === "true";
+            idMap[s.key] = s.id;
           }
         }
         for (const key of sectionOrder) {
           if (map[key] === undefined) map[key] = true;
         }
         setToggles(map);
+        setSettingIds(idMap);
       } catch {
-        toast.error("Failed to load dashboard data");
+        if (!cancelled) toast.error("Failed to load dashboard data");
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     }
     load();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const toggle = async (key: string) => {
-    const next = !toggles[key];
+    const current = toggles[key] ?? true;
+    const next = !current;
     setToggles((prev) => ({ ...prev, [key]: next }));
     setSaving(key);
     try {
-      const all = await api.get<{ id: string; key: string; value: string }[]>("/site-settings");
-      const existing = all.find((s) => s.key === key);
-      if (existing) {
-        await api.put(`/site-settings/${existing.id}`, { value: String(next) });
+      const existingId = settingIds[key];
+      if (existingId) {
+        await api.put(`/site-settings/${existingId}`, { value: String(next) });
       } else {
-        await api.post("/site-settings", { key, value: String(next) });
+        const created = await api.post<{ id?: string } | null>("/site-settings", {
+          key,
+          value: String(next),
+        });
+        const newId = created?.id;
+        if (newId) {
+          setSettingIds((prev) => ({ ...prev, [key]: newId }));
+        }
       }
+      toast.success("Section updated");
     } catch {
       setToggles((prev) => ({ ...prev, [key]: !next }));
       toast.error("Failed to update section");
@@ -108,14 +126,14 @@ export default function AdminDashboardPage() {
 
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {cards.map((card) => (
-          <a
+          <Link
             key={card.label}
             href={card.href}
             className="glass glass-hover rounded-xl p-6 transition-all"
           >
             <p className="text-muted-foreground text-sm">{card.label}</p>
             <p className="mt-2 text-3xl font-bold text-white">{card.value}</p>
-          </a>
+          </Link>
         ))}
       </div>
 
@@ -125,27 +143,33 @@ export default function AdminDashboardPage() {
       </p>
 
       <div className="mt-6 space-y-1">
-        {sectionOrder.map((key) => (
-          <div
-            key={key}
-            className="flex items-center justify-between rounded-lg border border-white/5 px-5 py-4 transition-colors hover:bg-white/[0.02]"
-          >
-            <span className="text-sm font-medium text-white">{sectionLabels[key]}</span>
-            <button
-              onClick={() => toggle(key)}
-              disabled={saving === key}
-              className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors focus:outline-none ${
-                toggles[key] ? "bg-emerald-500" : "bg-white/10"
-              }`}
+        {sectionOrder.map((key) => {
+          const label = sectionLabels[key] ?? key;
+          const isOn = toggles[key] ?? true;
+          return (
+            <div
+              key={key}
+              className="flex items-center justify-between rounded-lg border border-white/5 px-5 py-4 transition-colors hover:bg-white/[0.02]"
             >
-              <span
-                className={`pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transition-transform ${
-                  toggles[key] ? "translate-x-5" : "translate-x-0"
+              <span className="text-sm font-medium text-white">{label}</span>
+              <button
+                onClick={() => toggle(key)}
+                disabled={saving === key}
+                aria-label={`Toggle ${label} section`}
+                aria-pressed={isOn}
+                className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors focus:outline-none ${
+                  isOn ? "bg-emerald-500" : "bg-white/10"
                 }`}
-              />
-            </button>
-          </div>
-        ))}
+              >
+                <span
+                  className={`pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transition-transform ${
+                    isOn ? "translate-x-5" : "translate-x-0"
+                  }`}
+                />
+              </button>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

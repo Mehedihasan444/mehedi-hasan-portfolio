@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 interface AnimatedBadgeProps {
   children: React.ReactNode;
   className?: string;
-  dotColor?: string;
   variant?: "available" | "info" | "new" | "hot";
   animate?: boolean;
 }

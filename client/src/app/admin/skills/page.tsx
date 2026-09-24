@@ -29,19 +29,25 @@ export default function AdminSkillsPage() {
     icon: "",
   });
 
-  const load = async () => {
+  const load = async (isCancelled?: () => boolean) => {
     try {
       const data = await api.get<Skill[]>("/skills");
+      if (isCancelled?.()) return;
       setSkills(data);
     } catch {
+      if (isCancelled?.()) return;
       toast.error("Failed to load skills");
     } finally {
-      setLoading(false);
+      if (!isCancelled?.()) setLoading(false);
     }
   };
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    load();
+    let cancelled = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- initial data load
+    load(() => cancelled);
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const openCreate = () => {
@@ -73,7 +79,7 @@ export default function AdminSkillsPage() {
         toast.success("Skill created");
       }
       setModalOpen(false);
-      load();
+      await load();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Failed to save");
     }
@@ -84,7 +90,7 @@ export default function AdminSkillsPage() {
     try {
       await api.delete(`/skills/${item.id}`);
       toast.success("Skill deleted");
-      load();
+      await load();
     } catch {
       toast.error("Failed to delete");
     }

@@ -1,30 +1,33 @@
 "use client";
 
+import { useId } from "react";
 import { motion } from "framer-motion";
 
 export function ScrollIndicator({ onClick }: { onClick: () => void }) {
+  const gradientId = useId().replace(/:/g, "");
+
   return (
     <motion.button
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      initial={{ opacity: 0, x: "-50%" }}
+      animate={{ opacity: 1, x: "-50%" }}
       transition={{ delay: 2, duration: 0.8 }}
       onClick={onClick}
       aria-label="Scroll to About section"
-      className="group absolute bottom-10 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3"
+      className="group absolute bottom-10 left-1/2 z-10 flex flex-col items-center gap-3"
     >
       <div className="relative h-12 w-12">
         <svg
           className="text-emerald/30 h-full w-full -rotate-90"
           viewBox="0 0 48 48"
           fill="none"
-          aria-hidden
+          aria-hidden="true"
         >
           <circle cx="24" cy="24" r="20" stroke="currentColor" strokeWidth="1.5" />
           <motion.circle
             cx="24"
             cy="24"
             r="20"
-            stroke="url(#scroll-grad)"
+            stroke={`url(#${gradientId})`}
             strokeWidth="1.5"
             strokeDasharray="125.6"
             strokeDashoffset="125.6"
@@ -32,7 +35,7 @@ export function ScrollIndicator({ onClick }: { onClick: () => void }) {
             transition={{ delay: 2.2, duration: 1.2, ease: "easeInOut" }}
           />
           <defs>
-            <linearGradient id="scroll-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#34d399" />
               <stop offset="100%" stopColor="#06b6d4" />
             </linearGradient>
@@ -48,7 +51,7 @@ export function ScrollIndicator({ onClick }: { onClick: () => void }) {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            aria-hidden
+            aria-hidden="true"
           >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>

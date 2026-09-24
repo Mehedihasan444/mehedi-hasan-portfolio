@@ -18,7 +18,7 @@ interface ValueItem {
 }
 
 export function ValueCard({ item }: { item: ValueItem }) {
-  const Icon = iconMap[item.icon];
+  const Icon = iconMap[item.icon] ?? Code2;
   return (
     <div className="group h-full">
       <div className="glass glass-hover group relative rounded-xl p-6 transition-all duration-500">

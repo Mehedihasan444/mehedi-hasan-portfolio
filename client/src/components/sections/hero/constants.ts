@@ -1,9 +1,8 @@
-export const stats = [
-  { value: "1+", label: "Years Exp." },
-  { value: "10+", label: "Projects" },
-  { value: "18+", label: "Technologies" },
-  { value: "Open", label: "to Work" },
-];
+import { heroStats } from "@/lib/stats";
+
+// Single source of truth lives in src/lib/stats.ts — re-exported here
+// so existing `import { stats } from "./constants"` keeps working.
+export const stats = heroStats;
 
 export const roles = [
   "Full Stack Developer",

@@ -6,6 +6,8 @@ import { DataTable, AdminPageHeader, AdminFormModal } from "@/components/admin/d
 import { toast } from "sonner";
 import type { BlogPost } from "@/lib/api-public";
 
+const SLUG_REGEX = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
 const columns = [
   { key: "title", label: "Title" },
   {
@@ -34,19 +36,25 @@ export default function AdminBlogPage() {
     published: false,
   });
 
-  const load = async () => {
+  const load = async (isCancelled?: () => boolean) => {
     try {
       const data = await api.get<BlogPost[]>("/blog");
+      if (isCancelled?.()) return;
       setItems(data);
     } catch {
+      if (isCancelled?.()) return;
       toast.error("Failed to load");
     } finally {
-      setLoading(false);
+      if (!isCancelled?.()) setLoading(false);
     }
   };
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    load();
+    let cancelled = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- initial data load
+    load(() => cancelled);
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const openCreate = () => {
@@ -56,17 +64,17 @@ export default function AdminBlogPage() {
   };
 
   function parseJsonField(value: unknown): string {
-    if (!value) return "";
-    if (Array.isArray(value)) return value.join(", ");
-    if (typeof value === "string") {
-      try {
-        const parsed = JSON.parse(value);
-        return Array.isArray(parsed) ? parsed.join(", ") : value;
-      } catch {
-        return value;
-      }
+    if (value === null || value === undefined) return "";
+    if (Array.isArray(value)) return value.map(String).join(", ");
+    if (typeof value !== "string") return "";
+    if (value.trim() === "") return "";
+    try {
+      const parsed: unknown = JSON.parse(value);
+      if (Array.isArray(parsed)) return parsed.map(String).join(", ");
+      return value;
+    } catch {
+      return value;
     }
-    return String(value);
   }
 
   const openEdit = (item: BlogPost) => {
@@ -84,9 +92,15 @@ export default function AdminBlogPage() {
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
+    const slug = form.slug.trim().toLowerCase();
+    if (!SLUG_REGEX.test(slug)) {
+      toast.error("Slug must be lowercase letters, numbers, and hyphens (e.g. my-post)");
+      return;
+    }
     try {
       const payload = {
         ...form,
+        slug,
         tags: JSON.stringify(
           form.tags
             .split(",")
@@ -102,7 +116,7 @@ export default function AdminBlogPage() {
         toast.success("Created");
       }
       setModalOpen(false);
-      load();
+      await load();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Failed");
     }
@@ -113,7 +127,7 @@ export default function AdminBlogPage() {
     try {
       await api.delete(`/blog/${item.id}`);
       toast.success("Deleted");
-      load();
+      await load();
     } catch {
       toast.error("Failed");
     }

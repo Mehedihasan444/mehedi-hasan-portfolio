@@ -64,12 +64,15 @@ export function ContactForm() {
       return;
     }
     setSending(true);
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
 
     try {
       const res = await fetch(`${API_BASE}/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
+        signal: controller.signal,
       });
 
       if (res.ok) {
@@ -83,6 +86,7 @@ export function ContactForm() {
     } catch {
       toast.error("Network error. Please check your connection and try again.");
     } finally {
+      clearTimeout(timeout);
       setSending(false);
     }
   };
@@ -111,6 +115,8 @@ export function ContactForm() {
             id="name"
             type="text"
             required
+            autoComplete="name"
+            aria-invalid={formData.name.trim().length > 0 && formData.name.trim().length < 2}
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder="Your name"
@@ -128,6 +134,7 @@ export function ContactForm() {
             id="email"
             type="email"
             required
+            autoComplete="email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             placeholder="your@email.com"
@@ -172,23 +179,29 @@ export function ContactForm() {
         />
       </motion.div>
 
-      {/* Honeypot — hidden from users, bots fill it */}
-      <input
-        type="text"
-        name="website"
-        value={formData.website}
-        onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-        tabIndex={-1}
-        autoComplete="off"
+      {/* Honeypot — offscreen, not display:none so bots still fill it */}
+      <div
         aria-hidden="true"
-        className="hidden"
-      />
+        className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden"
+      >
+        <label htmlFor="contact-website">Website</label>
+        <input
+          id="contact-website"
+          type="text"
+          name="website"
+          value={formData.website}
+          onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
 
       <MagneticButton>
         <motion.div custom={4} variants={inputVariants}>
           <button
             type="submit"
             disabled={sending}
+            aria-busy={sending}
             className="from-emerald to-teal hover:shadow-emerald/25 group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r px-8 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-lg disabled:scale-100 disabled:opacity-50"
           >
             {sending ? (

@@ -1,4 +1,4 @@
-import { BadgeCheck, ExternalLink, CalendarDays } from "lucide-react";
+import { BadgeCheck, ExternalLink, CalendarDays, GraduationCap } from "lucide-react";
 import type { Certification } from "@/lib/api-public";
 
 export function CertCard({ cert }: { cert: Certification }) {
@@ -10,8 +10,8 @@ export function CertCard({ cert }: { cert: Certification }) {
         <div className="from-emerald/5 via-teal/5 absolute inset-0 rounded-xl bg-gradient-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
         <div className="relative z-10 flex h-full flex-col">
           <div className="flex items-start justify-between">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 text-2xl transition-transform duration-300 group-hover:scale-110">
-              🎓
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 transition-transform duration-300 group-hover:scale-110">
+              <GraduationCap className="text-emerald h-6 w-6" aria-hidden="true" />
             </div>
             {cert.url && (
               <a
@@ -19,7 +19,7 @@ export function CertCard({ cert }: { cert: Certification }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Verify ${cert.title} credential`}
-                className="text-muted-foreground hover:border-emerald/40 hover:text-emerald flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 transition-all duration-300"
+                className="text-muted-foreground hover:border-emerald/40 hover:text-emerald flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 transition-all duration-300"
               >
                 <ExternalLink size={14} />
               </a>
@@ -42,10 +42,12 @@ export function CertCard({ cert }: { cert: Certification }) {
             )}
           </div>
 
-          <div className="text-emerald mt-4 flex items-center gap-1.5 text-xs">
-            <BadgeCheck size={14} />
-            <span>Verified Certificate</span>
-          </div>
+          {cert.url ? (
+            <div className="text-emerald mt-4 flex items-center gap-1.5 text-xs">
+              <BadgeCheck size={14} aria-hidden="true" />
+              <span>Verified Certificate</span>
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

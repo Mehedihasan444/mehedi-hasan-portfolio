@@ -28,19 +28,25 @@ export default function AdminTestimonialsPage() {
     order: 0,
   });
 
-  const load = async () => {
+  const load = async (isCancelled?: () => boolean) => {
     try {
       const data = await api.get<Testimonial[]>("/testimonials");
+      if (isCancelled?.()) return;
       setItems(data);
     } catch {
+      if (isCancelled?.()) return;
       toast.error("Failed to load");
     } finally {
-      setLoading(false);
+      if (!isCancelled?.()) setLoading(false);
     }
   };
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    load();
+    let cancelled = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- initial data load
+    load(() => cancelled);
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const openCreate = () => {
@@ -74,7 +80,7 @@ export default function AdminTestimonialsPage() {
         toast.success("Created");
       }
       setModalOpen(false);
-      load();
+      await load();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Failed");
     }
@@ -85,7 +91,7 @@ export default function AdminTestimonialsPage() {
     try {
       await api.delete(`/testimonials/${item.id}`);
       toast.success("Deleted");
-      load();
+      await load();
     } catch {
       toast.error("Failed");
     }

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import type { CardStackItem } from "@/components/ui/card-stack";
 import { Quote } from "lucide-react";
 import type { Testimonial } from "@/lib/api-public";
@@ -38,15 +39,36 @@ function StarRating({ count }: { count: number }) {
   );
 }
 
-const testimonialMap = new Map<string, Testimonial>();
+// Module-scope lazy cache — populated via getTestimonial() / initTestimonials(),
+// never via a setState-style call during render (no render side-effect).
+let cachedItems: Testimonial[] | null = null;
+let cachedMap: Map<string, Testimonial> | null = null;
 
-export function setTestimonials(items: Testimonial[]) {
-  testimonialMap.clear();
-  items.forEach((t) => testimonialMap.set(t.id, t));
+function getMap(items?: Testimonial[]): Map<string, Testimonial> {
+  if (items && items !== cachedItems) {
+    cachedItems = items;
+    cachedMap = new Map(items.map((t) => [t.id, t]));
+  }
+  if (!cachedMap) cachedMap = new Map();
+  return cachedMap;
+}
+
+/** Idempotent initializer — safe to call from useMemo/useEffect, not during render. */
+export function initTestimonials(items: Testimonial[]) {
+  getMap(items);
+}
+
+function getTestimonial(id: string | number): Testimonial | undefined {
+  return getMap().get(String(id));
+}
+
+function isAvatarUrl(avatar: string | null): avatar is string {
+  if (!avatar) return false;
+  return /^(https?:\/\/|\/)/i.test(avatar.trim());
 }
 
 export function renderTestimonialCard(item: CardStackItem, { active }: { active: boolean }) {
-  const t = testimonialMap.get(item.id as string);
+  const t = getTestimonial(item.id);
   if (!t) return null;
 
   const gradient = gradients[Math.abs(hashCode(t.id)) % gradients.length];
@@ -78,11 +100,22 @@ export function renderTestimonialCard(item: CardStackItem, { active }: { active:
         </blockquote>
 
         <div className="mt-auto flex items-center gap-3 border-t border-white/[0.07] pt-4">
-          <div
-            className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br ${gradient} text-xs font-bold text-white shadow-lg`}
-          >
-            {t.avatar || getInitials(t.name)}
-          </div>
+          {isAvatarUrl(t.avatar) ? (
+            <Image
+              src={t.avatar}
+              alt={`${t.name} avatar`}
+              width={36}
+              height={36}
+              className="h-9 w-9 flex-shrink-0 rounded-full object-cover shadow-lg"
+            />
+          ) : (
+            <div
+              className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br ${gradient} text-xs font-bold text-white shadow-lg`}
+              aria-hidden={Boolean(t.avatar)}
+            >
+              {t.avatar || getInitials(t.name)}
+            </div>
+          )}
           <div className="min-w-0">
             <p className="truncate text-sm font-semibold text-white">{t.name}</p>
             <p className="text-muted-foreground truncate text-xs">

@@ -290,14 +290,20 @@ export function CardStack<T extends CardStackItem>({
                 <button
                   key={it.id}
                   onClick={() => setActive(idx)}
-                  className={cn(
-                    "h-2 rounded-full transition-all",
-                    on
-                      ? "from-emerald to-teal w-7 bg-gradient-to-r"
-                      : "w-2 bg-white/20 hover:bg-white/40",
-                  )}
+                  // 44px hit area with the visual dot centered inside (visuals unchanged).
+                  className={cn("flex min-h-11 min-w-11 items-center justify-center")}
                   aria-label={`Go to ${it.title}`}
-                />
+                >
+                  <span
+                    aria-hidden="true"
+                    className={cn(
+                      "block h-2 rounded-full transition-all",
+                      on
+                        ? "from-emerald to-teal w-7 bg-gradient-to-r"
+                        : "w-2 bg-white/20 hover:bg-white/40",
+                    )}
+                  />
+                </button>
               );
             })}
           </div>

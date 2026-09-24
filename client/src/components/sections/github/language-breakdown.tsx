@@ -3,16 +3,10 @@
 import { useRef, useEffect } from "react";
 import { gsap } from "@/lib/gsap";
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
+// Single source: shared offline sample snapshot (see ./constants.ts).
+import { languages, type GHLang } from "./constants";
 
-const languages = [
-  { name: "TypeScript", percentage: 45, color: "#3178c6" },
-  { name: "JavaScript", percentage: 25, color: "#f7df1e" },
-  { name: "HTML/CSS", percentage: 15, color: "#f16529" },
-  { name: "Python", percentage: 10, color: "#3776ab" },
-  { name: "Other", percentage: 5, color: "#6b7280" },
-];
-
-function Bar({ lang, index }: { lang: (typeof languages)[0]; index: number }) {
+function Bar({ lang, index }: { lang: GHLang; index: number }) {
   const barRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -67,6 +61,9 @@ export function LanguageBreakdown() {
         <div className="from-emerald/5 via-teal/5 absolute inset-0 rounded-xl bg-gradient-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
         <div className="relative z-10">
           <h3 className="font-medium text-white">Language Breakdown</h3>
+          <p className="mt-1 text-xs text-white/40">
+            Sample snapshot — offline placeholder, not live GitHub data
+          </p>
           <div className="mt-6 flex items-end gap-2" style={{ height: 120 }}>
             {languages.map((lang, i) => (
               <Bar key={lang.name} lang={lang} index={i} />

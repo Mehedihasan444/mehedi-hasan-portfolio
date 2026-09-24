@@ -1,30 +1,31 @@
 "use client";
 
-import { motion } from "framer-motion";
+interface SplitCharsProps {
+  text: string;
+  className?: string;
+}
 
-export function SplitChars({ text, className }: { text: string; className?: string }) {
+/**
+ * Renders each character as a plain span for the scroll-out animation.
+ * Requires the parent heading to carry an `aria-label` with the full text,
+ * since every char here is `aria-hidden="true"`.
+ */
+export function SplitChars({ text, className }: SplitCharsProps) {
   return (
     <>
       {text.split("").map((char, i) => (
-        <motion.span
-          key={i}
-          className={`scroll-char ${className || ""}`}
+        <span
+          key={`${char}-${i}`}
+          className={`scroll-char ${className ?? ""}`}
           aria-hidden="true"
-          initial={{ opacity: 1, y: 0, rotateX: 0 }}
-          animate={{ opacity: 1, y: 0, rotateX: 0 }}
-          transition={{
-            duration: 0.7,
-            delay: 0.3 + i * 0.03,
-            ease: [0.21, 1.02, 0.73, 1],
-          }}
           style={{
             display: "inline-block",
             whiteSpace: char === " " ? "pre" : "normal",
             backfaceVisibility: "hidden",
           }}
         >
-          {char === " " ? "\u00A0" : char}
-        </motion.span>
+          {char === " " ? " " : char}
+        </span>
       ))}
     </>
   );

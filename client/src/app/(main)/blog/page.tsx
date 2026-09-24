@@ -5,17 +5,23 @@ import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { ArrowLeftIcon } from "@/components/ui/icons";
 
 export const metadata: Metadata = {
-  title: "Blog | Mehedi Hasan",
+  title: "Blog",
   description: "Thoughts, tutorials, and insights about web development and software engineering.",
 };
 
 export default async function BlogPage() {
-  const posts = await getBlogPosts();
-  const published = posts.filter((p) => p.published);
+  let published: FormattedBlogPost[] = [];
+  let loadError = false;
+  try {
+    const posts = await getBlogPosts();
+    published = posts.filter((p) => p.published);
+  } catch {
+    loadError = true;
+  }
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#050810] px-6 pb-24 pt-32">
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div className="from-emerald/5 via-teal/5 absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-gradient-to-b to-transparent blur-[120px]" />
       </div>
 
@@ -41,10 +47,14 @@ export default async function BlogPage() {
         </ScrollReveal>
 
         <div className="mt-16 space-y-8">
-          {published.map((post) => (
-            <BlogCard key={post.slug} post={post} />
-          ))}
-          {published.length === 0 && (
+          {loadError ? (
+            <p className="py-20 text-center text-sm text-red-400" role="alert">
+              Couldn&apos;t load posts. Please try again later.
+            </p>
+          ) : (
+            published.map((post) => <BlogCard key={post.slug} post={post} />)
+          )}
+          {!loadError && published.length === 0 && (
             <p className="text-muted-foreground py-20 text-center text-sm">No posts yet.</p>
           )}
         </div>
@@ -76,6 +86,7 @@ function BlogCard({ post }: { post: FormattedBlogPost }) {
         <div className="text-muted-foreground group-hover:text-emerald mt-4 flex items-center gap-1 text-sm transition-colors">
           <span>Read more</span>
           <svg
+            aria-hidden="true"
             className="h-3 w-3 transition-transform group-hover:translate-x-1"
             fill="none"
             viewBox="0 0 24 24"

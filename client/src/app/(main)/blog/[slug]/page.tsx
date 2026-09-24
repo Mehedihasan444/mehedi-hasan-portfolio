@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getBlogPostBySlug } from "@/lib/api-public";
+import { getBlogPostBySlug, getBlogPosts } from "@/lib/api-public";
+import { SITE_URL } from "@/lib/constants";
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { ArrowLeftIcon } from "@/components/ui/icons";
 import { BlogContent } from "./blog-content";
@@ -10,18 +11,38 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+export async function generateStaticParams() {
+  try {
+    const posts = await getBlogPosts();
+    return posts
+      .filter((p) => p.published)
+      .slice(0, 20)
+      .map((p) => ({ slug: p.slug }));
+  } catch {
+    return [];
+  }
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getBlogPostBySlug(slug);
+  const clean = decodeURIComponent(slug || "").trim();
+  if (!clean) return { title: "Post Not Found", robots: { index: false } };
+  const post = await getBlogPostBySlug(clean);
 
-  if (!post) return { title: "Post Not Found" };
+  if (!post) return { title: "Post Not Found", robots: { index: false } };
 
+  const url = `${SITE_URL}/blog/${post.slug}`;
   return {
-    title: `${post.title} | Mehedi Hasan`,
+    title: post.title,
     description: post.excerpt || post.title,
+    alternates: { canonical: url },
     openGraph: {
+      type: "article",
+      url,
       title: post.title,
       description: post.excerpt || post.title,
+      publishedTime: post.createdAt,
+      modifiedTime: post.updatedAt,
       images: post.image ? [{ url: post.image }] : [{ url: "/og-image.png" }],
     },
     twitter: {
@@ -35,13 +56,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = await getBlogPostBySlug(slug);
+  const clean = decodeURIComponent(slug || "").trim();
+  if (!clean) notFound();
+  const post = await getBlogPostBySlug(clean);
 
   if (!post) notFound();
 
   return (
     <main className="relative min-h-screen bg-[#050810] px-6 pb-24 pt-32">
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div className="from-emerald/5 via-teal/5 absolute left-1/4 top-0 h-[400px] w-[400px] rounded-full bg-gradient-to-b to-transparent blur-[120px]" />
       </div>
 
@@ -66,11 +89,13 @@ export default async function BlogPostPage({ params }: Props) {
             {post.title}
           </h1>
           <p className="text-muted-foreground mt-2 text-sm">
-            {new Date(post.createdAt).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
+            <time dateTime={post.createdAt}>
+              {new Date(post.createdAt).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </time>
           </p>
         </ScrollReveal>
 

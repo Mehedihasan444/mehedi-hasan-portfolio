@@ -33,7 +33,10 @@ export const TextHoverEffect = ({ text, className }: { text: string; className?:
       }}
       onMouseMove={move}
       className={merge("cursor-pointer select-none uppercase", className)}
+      role="img"
+      aria-label={text}
     >
+      <title>{text}</title>
       <defs>
         <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stopColor="#34d399" />

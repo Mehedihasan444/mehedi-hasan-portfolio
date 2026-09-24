@@ -11,6 +11,7 @@ interface DataTableProps<T> {
   data: T[];
   onEdit?: (item: T) => void;
   onDelete?: (item: T) => void;
+  onRowClick?: (item: T) => void;
   loading?: boolean;
 }
 
@@ -20,6 +21,7 @@ export function DataTable<T extends Record<string, any>>({
   data,
   onEdit,
   onDelete,
+  onRowClick,
   loading,
 }: DataTableProps<T>) {
   if (loading) {
@@ -34,7 +36,10 @@ export function DataTable<T extends Record<string, any>>({
 
   if (data.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center rounded-xl border border-white/5 py-16">
+      <div
+        role="status"
+        className="flex flex-col items-center justify-center rounded-xl border border-white/5 py-16"
+      >
         <p className="text-muted-foreground text-sm">No items yet</p>
       </div>
     );
@@ -61,37 +66,64 @@ export function DataTable<T extends Record<string, any>>({
           </tr>
         </thead>
         <tbody className="divide-y divide-white/5">
-          {data.map((item, i) => (
-            <tr key={item.id || i} className="transition-colors hover:bg-white/5">
-              {columns.map((col) => (
-                <td key={col.key} className="px-4 py-3 text-white">
-                  {col.render ? col.render(item) : item[col.key]}
-                </td>
-              ))}
-              {(onEdit || onDelete) && (
-                <td className="px-4 py-3 text-right">
-                  <div className="flex items-center justify-end gap-2">
-                    {onEdit && (
-                      <button
-                        onClick={() => onEdit(item)}
-                        className="text-emerald hover:bg-emerald/10 rounded px-3 py-1 text-xs transition-colors"
-                      >
-                        Edit
-                      </button>
-                    )}
-                    {onDelete && (
-                      <button
-                        onClick={() => onDelete(item)}
-                        className="rounded px-3 py-1 text-xs text-red-400 transition-colors hover:bg-red-400/10"
-                      >
-                        Delete
-                      </button>
-                    )}
-                  </div>
-                </td>
-              )}
-            </tr>
-          ))}
+          {data.map((item, i) => {
+            const rowLabel = `Row ${i + 1}`;
+            const clickable = typeof onRowClick === "function";
+            return (
+              <tr
+                key={item.id || i}
+                onClick={clickable ? () => onRowClick(item) : undefined}
+                onKeyDown={
+                  clickable
+                    ? (e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          onRowClick(item);
+                        }
+                      }
+                    : undefined
+                }
+                tabIndex={clickable ? 0 : undefined}
+                className={`transition-colors hover:bg-white/5 ${clickable ? "cursor-pointer" : ""}`}
+              >
+                {columns.map((col) => (
+                  <td key={col.key} className="px-4 py-3 text-white">
+                    {col.render ? col.render(item) : ((item[col.key] ?? "—") as React.ReactNode)}
+                  </td>
+                ))}
+                {(onEdit || onDelete) && (
+                  <td className="px-4 py-3 text-right">
+                    <div className="flex items-center justify-end gap-2">
+                      {onEdit && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onEdit(item);
+                          }}
+                          aria-label={`Edit ${rowLabel}`}
+                          className="text-emerald hover:bg-emerald/10 rounded px-3 py-1 text-xs transition-colors"
+                        >
+                          Edit
+                        </button>
+                      )}
+                      {onDelete && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onDelete(item);
+                          }}
+                          aria-label={`Delete ${rowLabel}`}
+                          className="rounded px-3 py-1 text-xs text-red-400 transition-colors hover:bg-red-400/10"
+                        >
+                          Delete
+                        </button>
+                      )}
+                    </div>
+                  </td>
+                )}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
@@ -139,6 +171,7 @@ export function AdminFormModal({
           <h2 className="text-lg font-semibold text-white">{title}</h2>
           <button
             onClick={onClose}
+            aria-label="Close dialog"
             className="text-muted-foreground transition-colors hover:text-white"
           >
             ✕

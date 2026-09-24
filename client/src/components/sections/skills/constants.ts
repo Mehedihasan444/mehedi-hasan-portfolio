@@ -1,3 +1,7 @@
+// Fallback content for the skills section when the API returns no rows.
+// skills-section.tsx prefers live API data and only uses these when the
+// API list is empty, so the section never renders blank.
+
 export const techRow1 = [
   { name: "React", color: "#61dafb" },
   { name: "Next.js", color: "#ffffff" },

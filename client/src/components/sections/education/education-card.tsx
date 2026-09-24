@@ -1,14 +1,10 @@
 import { GraduationCap, CalendarDays, MapPin, BookOpen } from "lucide-react";
+import { formatPeriod } from "@/lib/date";
 import type { FormattedEducation } from "@/lib/api-public";
-
-function formatPeriod(startDate: string, endDate: string | null): string {
-  const start = new Date(startDate).getFullYear();
-  const end = endDate ? new Date(endDate).getFullYear() : "Present";
-  return `${start} – ${end}`;
-}
 
 export function EducationCard({ edu }: { edu: FormattedEducation }) {
   const current = !edu.endDate;
+  const description = edu.description?.trim() ? edu.description.trim() : null;
 
   return (
     <div className="glass group relative rounded-2xl p-8 transition-all duration-500 hover:border-white/20">
@@ -56,7 +52,7 @@ export function EducationCard({ edu }: { edu: FormattedEducation }) {
           )}
         </div>
 
-        <p className="text-muted-foreground mt-5 leading-relaxed">{edu.description}</p>
+        {description && <p className="text-muted-foreground mt-5 leading-relaxed">{description}</p>}
 
         {edu.tags.length > 0 && (
           <div className="mt-5 flex flex-wrap gap-2">

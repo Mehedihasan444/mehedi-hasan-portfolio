@@ -58,8 +58,8 @@ export function HeroSection() {
 
   return (
     <>
-      <div className="fixed inset-0 z-0" aria-hidden>
-        <GlobeBackground />
+      <div className="fixed inset-0 z-0" aria-hidden="true">
+        {bgLevel !== "minimal" && <GlobeBackground />}
         {bgLevel === "full" && (
           <GlitterWrapBackground
             particleCount={90}
@@ -76,7 +76,7 @@ export function HeroSection() {
             background:
               "radial-gradient(ellipse 100% 80% at 50% 50%, rgba(5,8,16,0.8) 0%, rgba(5,8,16,0.55) 50%, rgba(5,8,16,0.9) 100%)",
           }}
-          aria-hidden
+          aria-hidden="true"
         />
       </div>
 

@@ -18,19 +18,25 @@ export default function AdminAchievementsPage() {
   const [editing, setEditing] = useState<Achievement | null>(null);
   const [form, setForm] = useState({ title: "", description: "", icon: "" });
 
-  const load = async () => {
+  const load = async (isCancelled?: () => boolean) => {
     try {
       const data = await api.get<Achievement[]>("/achievements");
+      if (isCancelled?.()) return;
       setItems(data);
     } catch {
+      if (isCancelled?.()) return;
       toast.error("Failed to load");
     } finally {
-      setLoading(false);
+      if (!isCancelled?.()) setLoading(false);
     }
   };
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    load();
+    let cancelled = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- initial data load
+    load(() => cancelled);
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const openCreate = () => {
@@ -56,7 +62,7 @@ export default function AdminAchievementsPage() {
         toast.success("Created");
       }
       setModalOpen(false);
-      load();
+      await load();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Failed");
     }
@@ -67,7 +73,7 @@ export default function AdminAchievementsPage() {
     try {
       await api.delete(`/achievements/${item.id}`);
       toast.success("Deleted");
-      load();
+      await load();
     } catch {
       toast.error("Failed");
     }

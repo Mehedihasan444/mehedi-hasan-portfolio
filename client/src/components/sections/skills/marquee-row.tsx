@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const COLORS = [
   "#61dafb",
   "#3178c6",
@@ -19,12 +21,12 @@ const COLORS = [
 function hashColor(name: string): string {
   let hash = 0;
   for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    hash = (name.charCodeAt(i) ?? 0) + ((hash << 5) - hash);
   }
-  return COLORS[Math.abs(hash) % COLORS.length];
+  return COLORS[Math.abs(hash) % COLORS.length] ?? "#059669";
 }
 
-function TechPill({ name, color }: { name: string; color: string }) {
+const TechPill = memo(function TechPill({ name, color }: { name: string; color: string }) {
   return (
     <span className="inline-flex cursor-default items-center gap-2 whitespace-nowrap rounded-full border border-white/[0.08] bg-white/[0.04] px-4 py-2 text-sm font-medium text-white/70 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:text-white">
       <span
@@ -34,16 +36,30 @@ function TechPill({ name, color }: { name: string; color: string }) {
       {name}
     </span>
   );
+});
+
+interface MarqueeRowProps {
+  items: string[];
+  label?: string;
 }
 
-export function MarqueeRow({ items }: { items: string[] }) {
+export function MarqueeRow({ items, label = "Technologies" }: MarqueeRowProps) {
+  if (items.length === 0) return null;
+  const doubled = [...items, ...items];
+
   return (
     <div className="marquee-container overflow-hidden py-2">
+      {/* Visual duplicated track is decorative — screen readers use the list below. */}
       <div className="marquee-track flex gap-3" aria-hidden="true">
-        {[...items, ...items].map((name, i) => (
-          <TechPill key={i} name={name} color={hashColor(name)} />
+        {doubled.map((name, i) => (
+          <TechPill key={`${name}-${i}`} name={name} color={hashColor(name)} />
         ))}
       </div>
+      <ul className="sr-only">
+        <li>
+          {label}: {items.join(", ")}
+        </li>
+      </ul>
     </div>
   );
 }
