@@ -19,10 +19,12 @@ export interface Project {
   updatedAt: string;
 }
 
-function parseJsonArray(value: string): string[] {
+function parseJsonArray(value: unknown): string[] {
+  if (Array.isArray(value)) return value.filter((v): v is string => typeof v === "string");
+  if (typeof value !== "string") return [];
   try {
-    const parsed = JSON.parse(value);
-    return Array.isArray(parsed) ? parsed : [];
+    const parsed: unknown = JSON.parse(value);
+    return Array.isArray(parsed) ? parsed.filter((v): v is string => typeof v === "string") : [];
   } catch {
     return value
       ? value
@@ -31,6 +33,14 @@ function parseJsonArray(value: string): string[] {
           .filter(Boolean)
       : [];
   }
+}
+
+function isRecord(v: unknown): v is Record<string, unknown> {
+  return !!v && typeof v === "object" && !Array.isArray(v);
+}
+
+function asArray<T>(v: unknown): T[] {
+  return Array.isArray(v) ? (v as T[]) : [];
 }
 
 export function formatProject(project: Project) {
@@ -44,13 +54,16 @@ export function formatProject(project: Project) {
 export type FormattedProject = ReturnType<typeof formatProject>;
 
 export const getProjectBySlug = cache(async (slug: string): Promise<FormattedProject | null> => {
+  const clean = slug.trim();
+  if (!clean) return null;
   try {
-    const res = await fetch(`${API_BASE}/projects/slug/${slug}`, {
+    const res = await fetch(`${API_BASE}/projects/slug/${encodeURIComponent(clean)}`, {
       next: { revalidate: 60 },
     });
     if (!res.ok) return null;
-    const data = await res.json();
-    return formatProject(data.data);
+    const data: unknown = await res.json();
+    if (!isRecord(data) || !isRecord(data.data)) return null;
+    return formatProject(data.data as unknown as Project);
   } catch {
     return null;
   }
@@ -85,28 +98,33 @@ export const getBlogPosts = cache(async (): Promise<FormattedBlogPost[]> => {
       next: { revalidate: 60 },
     });
     if (!res.ok) return [];
-    const data = await res.json();
-    return (data.data as BlogPost[]).map(formatBlogPost);
+    const data: unknown = await res.json();
+    if (!isRecord(data)) return [];
+    return asArray<BlogPost>(data.data).map(formatBlogPost);
   } catch {
     return [];
   }
 });
 
 export const getBlogPostBySlug = cache(async (slug: string): Promise<FormattedBlogPost | null> => {
+  const clean = slug.trim();
+  if (!clean) return null;
   try {
-    // Try dedicated endpoint first (avoids fetching all posts)
-    const res = await fetch(`${API_BASE}/blog/slug/${slug}`, {
+    const res = await fetch(`${API_BASE}/blog/slug/${encodeURIComponent(clean)}`, {
       next: { revalidate: 60 },
     });
     if (res.ok) {
-      const data = await res.json();
-      return formatBlogPost(data.data as BlogPost);
+      const data: unknown = await res.json();
+      if (isRecord(data) && isRecord(data.data)) {
+        return formatBlogPost(data.data as unknown as BlogPost);
+      }
     }
-  } catch {}
-  // Fallback to full list scan
+  } catch {
+    /* fall through to list scan */
+  }
   try {
     const all = await getBlogPosts();
-    return all.find((p) => p.slug === slug) ?? null;
+    return all.find((p) => p.slug === clean) ?? null;
   } catch {
     return null;
   }
@@ -157,8 +175,9 @@ export const getEducation = cache(async (): Promise<FormattedEducation[]> => {
       next: { revalidate: 60 },
     });
     if (!res.ok) return [];
-    const data = await res.json();
-    return (data.data as Education[]).map((edu) => ({
+    const data: unknown = await res.json();
+    if (!isRecord(data)) return [];
+    return asArray<Education>(data.data).map((edu) => ({
       ...edu,
       tags: parseJsonArray(edu.tags),
     }));
@@ -197,83 +216,89 @@ export interface Achievement {
   icon: string | null;
 }
 
-export async function getTestimonials(): Promise<Testimonial[]> {
+export const getTestimonials = cache(async (): Promise<Testimonial[]> => {
   try {
     const res = await fetch(`${API_BASE}/testimonials`, {
       next: { revalidate: 60 },
     });
     if (!res.ok) return [];
-    const data = await res.json();
-    return data.data as Testimonial[];
+    const data: unknown = await res.json();
+    if (!isRecord(data)) return [];
+    return asArray<Testimonial>(data.data);
   } catch {
     return [];
   }
-}
+});
 
-export async function getAchievements(): Promise<Achievement[]> {
+export const getAchievements = cache(async (): Promise<Achievement[]> => {
   try {
     const res = await fetch(`${API_BASE}/achievements`, {
       next: { revalidate: 60 },
     });
     if (!res.ok) return [];
-    const data = await res.json();
-    return data.data as Achievement[];
+    const data: unknown = await res.json();
+    if (!isRecord(data)) return [];
+    return asArray<Achievement>(data.data);
   } catch {
     return [];
   }
-}
+});
 
-export async function getCertifications(): Promise<Certification[]> {
+export const getCertifications = cache(async (): Promise<Certification[]> => {
   try {
     const res = await fetch(`${API_BASE}/certifications`, {
       next: { revalidate: 60 },
     });
     if (!res.ok) return [];
-    const data = await res.json();
-    return data.data as Certification[];
+    const data: unknown = await res.json();
+    if (!isRecord(data)) return [];
+    return asArray<Certification>(data.data);
   } catch {
     return [];
   }
-}
+});
 
-export async function getExperiences(): Promise<FormattedExperience[]> {
+export const getExperiences = cache(async (): Promise<FormattedExperience[]> => {
   try {
     const res = await fetch(`${API_BASE}/experiences`, {
       next: { revalidate: 60 },
     });
     if (!res.ok) return [];
-    const data = await res.json();
-    return (data.data as Experience[]).map((exp) => ({
+    const data: unknown = await res.json();
+    if (!isRecord(data)) return [];
+    return asArray<Experience>(data.data).map((exp) => ({
       ...exp,
       tags: parseJsonArray(exp.tags),
     }));
   } catch {
     return [];
   }
-}
+});
 
-export async function getSkills(): Promise<Skill[]> {
+export const getSkills = cache(async (): Promise<Skill[]> => {
   try {
     const res = await fetch(`${API_BASE}/skills`, {
       next: { revalidate: 60 },
     });
     if (!res.ok) return [];
-    const data = await res.json();
-    return data.data as Skill[];
+    const data: unknown = await res.json();
+    if (!isRecord(data)) return [];
+    return asArray<Skill>(data.data);
   } catch {
     return [];
   }
-}
+});
 
-export async function getProjects(): Promise<FormattedProject[]> {
+export const getProjects = cache(async (): Promise<FormattedProject[]> => {
   try {
     const res = await fetch(`${API_BASE}/projects`, {
       next: { revalidate: 60 },
     });
     if (!res.ok) return [];
-    const data = await res.json();
-    return (data.data as Project[]).map(formatProject);
+    const data: unknown = await res.json();
+    if (!isRecord(data)) return [];
+    return asArray<Project>(data.data).map(formatProject);
   } catch {
     return [];
   }
-}
+});

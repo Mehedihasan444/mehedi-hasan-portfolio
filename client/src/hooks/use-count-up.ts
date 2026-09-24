@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import { useInView } from "framer-motion";
 
 interface UseCountUpOptions {
@@ -15,7 +15,6 @@ interface UseCountUpOptions {
 
 export function useCountUp<T extends HTMLElement>(options: UseCountUpOptions) {
   const ref = useRef<T>(null);
-  const [count, setCount] = useState(options.start ?? 0);
   const {
     end,
     start = 0,
@@ -26,7 +25,14 @@ export function useCountUp<T extends HTMLElement>(options: UseCountUpOptions) {
     disableScrollTrigger = false,
   } = options;
 
-  const isInView = useInView(ref as React.RefObject<Element>, {
+  const safeEnd = Number.isFinite(end) ? end : 0;
+  const safeStart = Number.isFinite(start) ? start : 0;
+  const safeDuration = duration > 0 ? duration : 0.01;
+  const safeDecimals = Math.min(Math.max(Math.floor(decimals), 0), 10);
+
+  const [count, setCount] = useState(safeStart);
+
+  const isInView = useInView(ref as RefObject<Element>, {
     once: true,
     margin: "-50px",
   });
@@ -35,23 +41,43 @@ export function useCountUp<T extends HTMLElement>(options: UseCountUpOptions) {
 
   useEffect(() => {
     if (!shouldAnimate) return;
+    if (typeof window === "undefined") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- SSR fallback to final value
+      setCount(safeEnd);
+      return;
+    }
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+      setCount(safeEnd);
+      return;
+    }
 
     const startTime = performance.now();
-    const range = end - start;
+    const range = safeEnd - safeStart;
+    let id = 0;
+    let cancelled = false;
 
     const raf = (now: number) => {
+      if (cancelled) return;
       const elapsed = (now - startTime) / 1000;
-      const t = Math.min(elapsed / duration, 1);
+      const t = Math.min(elapsed / safeDuration, 1);
       const ease = 1 - Math.pow(1 - t, 3);
-      setCount(start + range * ease);
-      if (t < 1) requestAnimationFrame(raf);
+      setCount(safeStart + range * ease);
+      if (t < 1) id = requestAnimationFrame(raf);
     };
 
-    const id = requestAnimationFrame(raf);
-    return () => cancelAnimationFrame(id);
-  }, [shouldAnimate, end, start, duration]);
+    id = requestAnimationFrame(raf);
+    return () => {
+      cancelled = true;
+      cancelAnimationFrame(id);
+    };
+  }, [shouldAnimate, safeEnd, safeStart, safeDuration]);
 
-  const display = `${prefix}${count.toFixed(decimals)}${suffix}`;
+  let display: string;
+  try {
+    display = `${prefix}${count.toFixed(safeDecimals)}${suffix}`;
+  } catch {
+    display = `${prefix}${safeEnd}${suffix}`;
+  }
 
   return { ref, count, display };
 }

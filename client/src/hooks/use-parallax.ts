@@ -15,7 +15,8 @@ export function useParallax<T extends HTMLElement>(options: UseParallaxOptions =
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || typeof window === "undefined") return;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
 
     const ctx = gsap.context(() => {
       const prop = direction === "vertical" ? "y" : "x";

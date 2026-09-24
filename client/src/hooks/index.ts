@@ -4,3 +4,4 @@ export { useTextReveal } from "./use-text-reveal";
 export { useParallax } from "./use-parallax";
 export { useCountUp } from "./use-count-up";
 export { useScrollDrivenTimeline } from "./use-scroll-driven-timeline";
+export { useGlobeScroll } from "./use-globe-scroll";

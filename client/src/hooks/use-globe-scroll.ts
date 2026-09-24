@@ -12,21 +12,25 @@ interface GlobeScrollState {
   isNearTop: boolean;
 }
 
+const INITIAL: GlobeScrollState = {
+  progress: 0,
+  rotationSpeed: 1,
+  cameraDistance: 0,
+  cameraTilt: 0,
+  parallaxX: 0,
+  parallaxY: 0,
+  isNearTop: true,
+};
+
 export function useGlobeScroll() {
-  const [state, setState] = useState<GlobeScrollState>({
-    progress: 0,
-    rotationSpeed: 1,
-    cameraDistance: 0,
-    cameraTilt: 0,
-    parallaxX: 0,
-    parallaxY: 0,
-    isNearTop: true,
-  });
+  const [state, setState] = useState<GlobeScrollState>(INITIAL);
 
   const rafId = useRef(0);
   const prevScrollY = useRef(0);
+  const prevState = useRef<GlobeScrollState>(INITIAL);
 
   const update = useCallback(() => {
+    if (typeof window === "undefined" || typeof document === "undefined") return;
     if (rafId.current) cancelAnimationFrame(rafId.current);
     rafId.current = requestAnimationFrame(() => {
       const sy = window.scrollY;
@@ -35,19 +39,17 @@ export function useGlobeScroll() {
       const progress = Math.min(1, Math.max(0, rawProgress));
 
       const isNearTop = sy < window.innerHeight * 0.6;
-      const localProgress = Math.min(1, sy / window.innerHeight);
+      const localProgress = Math.min(1, sy / Math.max(window.innerHeight, 1));
 
       const rotationSpeed = 1 - localProgress * 0.7;
       const cameraDistance = localProgress * 1.5;
       const cameraTilt = localProgress * 0.3;
       const parallaxY = progress * 0.15;
-
-      const direction = sy > prevScrollY.current ? 1 : -1;
-      const parallaxX = direction * 0.02;
+      const parallaxX = Math.abs(sy - prevScrollY.current) < 2 ? prevState.current.parallaxX : 0.02;
 
       prevScrollY.current = sy;
 
-      setState({
+      const next: GlobeScrollState = {
         progress,
         rotationSpeed,
         cameraDistance,
@@ -55,7 +57,17 @@ export function useGlobeScroll() {
         parallaxX,
         parallaxY,
         isNearTop,
-      });
+      };
+      const p = prevState.current;
+      if (
+        Math.abs(next.progress - p.progress) < 0.002 &&
+        next.isNearTop === p.isNearTop &&
+        Math.abs(next.cameraDistance - p.cameraDistance) < 0.01
+      ) {
+        return;
+      }
+      prevState.current = next;
+      setState(next);
     });
   }, []);
 

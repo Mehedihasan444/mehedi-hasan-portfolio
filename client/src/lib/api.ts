@@ -2,49 +2,111 @@ import { API_BASE } from "./constants";
 
 class ApiClient {
   private token: string | null = null;
+  private initialized = false;
 
-  constructor() {
-    if (typeof window !== "undefined") {
-      this.token = localStorage.getItem("admin_token");
+  private ensureToken() {
+    if (!this.initialized && typeof window !== "undefined") {
+      this.initialized = true;
+      try {
+        this.token = localStorage.getItem("admin_token");
+      } catch {
+        this.token = null;
+      }
+    }
+    if (typeof window !== "undefined" && !this.token) {
+      try {
+        const t = localStorage.getItem("admin_token");
+        if (t && t !== this.token) this.token = t;
+      } catch {
+        /* ignore */
+      }
     }
   }
 
   setToken(token: string | null) {
     this.token = token;
-    if (token) {
-      localStorage.setItem("admin_token", token);
-    } else {
-      localStorage.removeItem("admin_token");
+    this.initialized = true;
+    if (typeof window === "undefined") return;
+    try {
+      if (token) {
+        localStorage.setItem("admin_token", token);
+      } else {
+        localStorage.removeItem("admin_token");
+      }
+    } catch {
+      /* storage unavailable */
     }
   }
 
   private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
-    const headers: Record<string, string> = {
-      ...(options.headers as Record<string, string>),
-    };
-
+    this.ensureToken();
+    const headers = new Headers(options.headers);
     const isFormData = options.body instanceof FormData;
 
-    if (!isFormData) {
-      headers["Content-Type"] = "application/json";
+    if (!isFormData && !headers.has("Content-Type")) {
+      headers.set("Content-Type", "application/json");
     }
 
     if (this.token) {
-      headers.Authorization = `Bearer ${this.token}`;
+      headers.set("Authorization", `Bearer ${this.token}`);
     }
 
-    const res = await fetch(`${API_BASE}${endpoint}`, {
-      ...options,
-      headers,
-    });
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
 
-    const data = await res.json();
+    let res: Response;
+    try {
+      res = await fetch(`${API_BASE}${endpoint}`, {
+        ...options,
+        headers,
+        signal: controller.signal,
+        credentials: "include",
+      });
+    } catch (e) {
+      throw new Error(
+        e instanceof Error && e.name === "AbortError" ? "Request timed out" : "Network error",
+      );
+    } finally {
+      clearTimeout(timeout);
+    }
+
+    const contentType = res.headers.get("content-type") || "";
+    let data: unknown = null;
+    if (contentType.includes("application/json")) {
+      try {
+        data = await res.json();
+      } catch {
+        data = null;
+      }
+    } else {
+      const text = await res.text().catch(() => "");
+      data = text ? { message: text.slice(0, 500) } : null;
+    }
 
     if (!res.ok) {
-      throw new Error(data.message || "Request failed");
+      if (res.status === 401 && typeof window !== "undefined") {
+        this.setToken(null);
+        if (
+          window.location.pathname.startsWith("/admin") &&
+          window.location.pathname !== "/admin/login"
+        ) {
+          window.location.href = "/admin/login";
+        }
+      }
+      const msg =
+        data &&
+        typeof data === "object" &&
+        "message" in data &&
+        typeof (data as { message: unknown }).message === "string"
+          ? (data as { message: string }).message
+          : "Request failed";
+      throw new Error(msg);
     }
 
-    return data.data ?? data;
+    if (data && typeof data === "object" && "data" in data) {
+      return (data as { data: T }).data ?? (data as T);
+    }
+    return data as T;
   }
 
   async get<T>(endpoint: string) {
@@ -81,11 +143,17 @@ class ApiClient {
       email,
       password,
     });
+    if (!data || !data.token) throw new Error("Login failed: no token");
     this.setToken(data.token);
     return data;
   }
 
-  logout() {
+  async logout() {
+    try {
+      await this.post("/auth/logout", {});
+    } catch {
+      /* ignore */
+    }
     this.setToken(null);
   }
 }

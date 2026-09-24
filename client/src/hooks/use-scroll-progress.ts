@@ -8,8 +8,10 @@ interface ScrollProgress {
   direction: "up" | "down";
 }
 
-// Singleton store: hero-scene instantiated 4× useScrollProgress -> 4 identical listeners
-let sharedState: ScrollProgress = { progress: 0, scrollY: 0, direction: "down" };
+const INITIAL: ScrollProgress = { progress: 0, scrollY: 0, direction: "down" };
+const SERVER_SNAPSHOT: ScrollProgress = { progress: 0, scrollY: 0, direction: "down" };
+
+let sharedState: ScrollProgress = INITIAL;
 let prevY = 0;
 let rafId = 0;
 const listeners = new Set<() => void>();
@@ -17,13 +19,15 @@ let initialized = false;
 
 function subscribe(cb: () => void) {
   listeners.add(cb);
-  return () => listeners.delete(cb);
+  return () => {
+    listeners.delete(cb);
+  };
 }
 function getSnapshot(): ScrollProgress {
   return sharedState;
 }
 function getServerSnapshot(): ScrollProgress {
-  return sharedState;
+  return SERVER_SNAPSHOT;
 }
 function emit() {
   listeners.forEach((cb) => cb());
@@ -31,7 +35,8 @@ function emit() {
 function onScroll() {
   if (rafId) cancelAnimationFrame(rafId);
   rafId = requestAnimationFrame(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || typeof document === "undefined") return;
+    if (document.hidden) return;
     const scrollY = window.scrollY;
     const max = document.documentElement.scrollHeight - window.innerHeight;
     const progress = max > 0 ? scrollY / max : 0;
@@ -49,6 +54,7 @@ function ensureInit() {
   initialized = true;
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
 }
 
 export function useScrollProgress(): ScrollProgress {

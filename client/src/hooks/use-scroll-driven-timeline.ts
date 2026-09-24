@@ -1,10 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap } from "@/lib/gsap";
 
 interface TimelineStep {
   target: string | Element;
@@ -27,6 +24,7 @@ export function useScrollDrivenTimeline<T extends HTMLElement>(
   options: UseScrollDrivenTimelineOptions = {},
 ) {
   const ref = useRef<T>(null);
+  const stepsRef = useRef(steps);
   const {
     start = "top top",
     end = "bottom top",
@@ -35,15 +33,21 @@ export function useScrollDrivenTimeline<T extends HTMLElement>(
     markers = false,
     toggleActions,
   } = options;
+  const trigger = options.trigger;
+
+  useEffect(() => {
+    stepsRef.current = steps;
+  }, [steps]);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || typeof window === "undefined") return;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: options.trigger || el,
+          trigger: trigger || el,
           start,
           end,
           scrub,
@@ -54,13 +58,13 @@ export function useScrollDrivenTimeline<T extends HTMLElement>(
         defaults: { ease: "none" },
       });
 
-      steps.forEach((step) => {
+      stepsRef.current.forEach((step) => {
         tl.to(step.target, step.vars, step.position);
       });
     }, el);
 
     return () => ctx.revert();
-  }, [steps, start, end, scrub, pin, markers, toggleActions, options.trigger]);
+  }, [start, end, scrub, pin, markers, toggleActions, trigger]);
 
   return ref;
 }

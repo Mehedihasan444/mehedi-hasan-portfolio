@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 
 interface UseTextRevealOptions {
-  type?: "chars" | "words" | "lines";
+  type?: "chars" | "words";
   stagger?: number;
   duration?: number;
   y?: number;
@@ -25,60 +25,55 @@ export function useTextReveal<T extends HTMLElement>(options: UseTextRevealOptio
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || typeof window === "undefined") return;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+    if (el.dataset.textRevealed === "true") return;
 
+    const originalHTML = el.innerHTML;
     const text = el.textContent || "";
+    if (!text.trim()) return;
+
+    el.dataset.textRevealed = "true";
     el.textContent = "";
 
     const fragments: HTMLSpanElement[] = [];
-    let split: string[];
-
-    switch (type) {
-      case "chars":
-        split = text.split("");
-        break;
-      case "lines":
-        split = text.split(" ");
-        break;
-      default:
-        split = text.split(" ");
-    }
+    const split = type === "chars" ? text.split("") : text.split(" ");
 
     split.forEach((part) => {
       const span = document.createElement("span");
       span.textContent = part + (type === "chars" ? "" : " ");
       span.style.display = "inline-block";
-      span.style.opacity = "0";
-      span.style.transform = `translateY(${y}px)`;
       el.appendChild(span);
       fragments.push(span);
     });
 
+    gsap.set(fragments, { opacity: 0, y });
+
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        defaults: { ease: "power3.out", duration },
+      gsap.to(fragments, {
+        opacity: 1,
+        y: 0,
+        stagger,
+        duration,
+        ease: "power3.out",
+        overwrite: true,
         ...(scrollTrigger
           ? {
               scrollTrigger: {
                 trigger: el,
                 start,
-                toggleActions: "play none none reverse",
+                toggleActions: "play none none none",
+                once: true,
               },
             }
           : {}),
-      });
-
-      tl.to(fragments, {
-        opacity: 1,
-        y: 0,
-        stagger,
-        duration,
       });
     }, el);
 
     return () => {
       ctx.revert();
-      el.textContent = text;
+      el.innerHTML = originalHTML;
+      delete el.dataset.textRevealed;
     };
   }, [type, stagger, duration, y, scrollTrigger, start]);
 
