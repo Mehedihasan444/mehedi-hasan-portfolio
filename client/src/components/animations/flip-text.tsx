@@ -32,8 +32,8 @@ export function FlipText({
     return () => clearInterval(timer);
   }, [next, interval]);
 
-  const currentWord = words[currentIndex];
-  const nextWord = words[(currentIndex + 1) % words.length];
+  const currentWord = words[currentIndex] ?? "";
+  const nextWord = words[(currentIndex + 1) % Math.max(words.length, 1)] ?? "";
 
   return (
     <span className={`relative inline-block ${className}`}>

@@ -1,10 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap } from "@/lib/gsap";
 
 interface ProgressiveBlurProps {
   direction?: "top" | "bottom" | "left" | "right";
@@ -27,6 +24,18 @@ export function ProgressiveBlur({
     const el = containerRef.current;
     if (!el) return;
 
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      // Skip animation: show final state.
+      el.style.opacity = "1";
+      el.style.filter = "blur(0px)";
+      return;
+    }
+
+    const fallback = setTimeout(() => {
+      el.style.opacity = "1";
+      el.style.filter = "blur(0px)";
+    }, 3000);
+
     const ctx = gsap.context(() => {
       gsap.fromTo(
         el,
@@ -41,11 +50,15 @@ export function ProgressiveBlur({
             end: "top 40%",
             scrub: 1,
           },
+          onComplete: () => clearTimeout(fallback),
         },
       );
     }, el);
 
-    return () => ctx.revert();
+    return () => {
+      clearTimeout(fallback);
+      ctx.revert();
+    };
   }, [blurAmount]);
 
   const maskDirection = {

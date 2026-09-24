@@ -22,6 +22,16 @@ export function ScrollProgress() {
   const { scrollYProgress } = useScroll();
   const scaleY = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
   const [activeSection, setActiveSection] = useState("hero");
+  const [reducedMotion, setReducedMotion] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mount/external-system sync
+    setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -45,12 +55,14 @@ export function ScrollProgress() {
 
   return (
     <>
-      <div className="fixed bottom-0 left-0 top-0 z-50 hidden w-px md:block">
-        <motion.div
-          className="from-emerald via-teal w-full origin-top bg-gradient-to-b to-transparent"
-          style={{ scaleY }}
-        />
-      </div>
+      {!reducedMotion && (
+        <div className="fixed bottom-0 left-0 top-0 z-50 hidden w-px md:block" aria-hidden>
+          <motion.div
+            className="from-emerald via-teal w-full origin-top bg-gradient-to-b to-transparent"
+            style={{ scaleY }}
+          />
+        </div>
+      )}
 
       <div className="fixed bottom-24 left-4 z-50 hidden flex-col items-center gap-2 md:flex">
         {sections.map((s) => (

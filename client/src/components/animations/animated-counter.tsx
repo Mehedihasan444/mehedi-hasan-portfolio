@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, useInView, useSpring, useTransform } from "framer-motion";
-import { useEffect } from "react";
 
 interface AnimatedCounterProps {
   end: number;
@@ -25,6 +24,11 @@ export function AnimatedCounter({
 }: AnimatedCounterProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [reducedMotion, setReducedMotion] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
 
   const springValue = useSpring(0, {
     stiffness: 80,
@@ -37,10 +41,20 @@ export function AnimatedCounter({
   });
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mount/external-system sync
+    setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
+
+  useEffect(() => {
+    if (reducedMotion) {
+      // Skip animation: show final state immediately.
+      springValue.set(end);
+      return;
+    }
     if (isInView) {
       springValue.set(end);
     }
-  }, [isInView, end, springValue]);
+  }, [isInView, end, springValue, reducedMotion]);
 
   return (
     <div ref={ref} className={className}>

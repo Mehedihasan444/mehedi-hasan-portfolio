@@ -27,14 +27,20 @@ export function TextReveal({
   once = true,
 }: TextRevealProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const container = containerRef.current;
-    const el = textRef.current;
-    if (!container || !el) return;
+    if (!container) return;
 
     const text = children;
+    // Render visible text first so content is readable if GSAP fails.
+    container.textContent = text;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      // Skip animation: show final state.
+      return;
+    }
+
     const wrapper = document.createElement("span");
     wrapper.style.display = "inline";
     wrapper.textContent = text;
@@ -64,7 +70,17 @@ export function TextReveal({
       });
     }
 
+    if (fragments.length === 0) return;
+
     gsap.set(fragments, { opacity: 0, y, willChange: "transform, opacity" });
+
+    // Fallback: never leave text invisible if ScrollTrigger/GSAP fails.
+    const fallback = setTimeout(() => {
+      for (const f of fragments) {
+        f.style.opacity = "1";
+        f.style.transform = "none";
+      }
+    }, 3000);
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
@@ -82,10 +98,12 @@ export function TextReveal({
         stagger,
         duration,
         ease: "power3.out",
+        onComplete: () => clearTimeout(fallback),
       });
     }, container);
 
     return () => {
+      clearTimeout(fallback);
       ctx.revert();
       container.textContent = text;
     };
@@ -96,7 +114,7 @@ export function TextReveal({
   }
 
   return (
-    <Tag ref={textRef as unknown as never} className={className}>
+    <Tag className={className}>
       <div ref={containerRef} className="inline" aria-label={children} />
     </Tag>
   );

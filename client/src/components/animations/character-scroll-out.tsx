@@ -20,8 +20,18 @@ export function CharacterScrollOut({
     const container = containerRef.current;
     if (!container) return;
 
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      // Skip animation: leave text fully visible (final state).
+      return;
+    }
+
     const chars = container.querySelectorAll<HTMLElement>(".scroll-char");
     if (chars.length === 0) return;
+
+    // Initial state is visible in CSS; explicitly set it via GSAP and
+    // animate from it, so a GSAP/ScrollTrigger failure can never leave
+    // text invisible. Cleanup reverts to the visible state.
+    gsap.set(chars, { opacity: 1, y: 0 });
 
     const ctx = gsap.context(() => {
       gsap.to(chars, {
@@ -40,7 +50,9 @@ export function CharacterScrollOut({
       });
     }, container);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+    };
   }, []);
 
   return (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 
 interface Particle {
   x: number;
@@ -13,16 +13,27 @@ interface Particle {
   maxLife: number;
 }
 
+const MAX_PARTICLES = 120;
+const MOUSE_THROTTLE_MS = 32;
+
 export function ParticleBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
   const particlesRef = useRef<Particle[]>([]);
   const rafId = useRef<number>(0);
+  const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pendingMouseRef = useRef<{ x: number; y: number } | null>(null);
+  const mouseRafRef = useRef<number>(0);
+  const lastMouseSpawnRef = useRef(0);
 
-  const prefersReduced =
-    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const [disabled, setDisabled] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      (window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+        window.matchMedia("(pointer: coarse)").matches),
+  );
 
-  const spawnParticle = useCallback((x: number, y: number) => {
+  const spawnParticle = useCallback((x: number, y: number): Particle => {
     const angle = Math.random() * Math.PI * 2;
     const speed = 0.3 + Math.random() * 0.5;
     const maxLife = 60 + Math.random() * 60;
@@ -39,17 +50,17 @@ export function ParticleBackground() {
   }, []);
 
   useEffect(() => {
-    if (prefersReduced) return;
-    if (window.matchMedia("(pointer: coarse)").matches) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const coarse = window.matchMedia("(pointer: coarse)").matches;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mount/external-system sync
+    setDisabled(reduced || coarse);
+    if (reduced || coarse) return;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
-
-    const MAX_PARTICLES = 120;
-    let lastMouseSpawn = 0;
 
     const onResize = () => {
       canvas.width = window.innerWidth;
@@ -58,19 +69,31 @@ export function ParticleBackground() {
     onResize();
     window.addEventListener("resize", onResize);
 
-    const onMouse = (e: MouseEvent) => {
+    const flushMouse = () => {
+      mouseRafRef.current = 0;
+      const pending = pendingMouseRef.current;
+      pendingMouseRef.current = null;
+      if (!pending) return;
       const now = performance.now();
-      if (now - lastMouseSpawn < 32) return; // ~30fps cap
-      lastMouseSpawn = now;
-      mouseRef.current = { x: e.clientX, y: e.clientY };
+      if (now - lastMouseSpawnRef.current < MOUSE_THROTTLE_MS) return;
+      lastMouseSpawnRef.current = now;
+      mouseRef.current = pending;
       if (particlesRef.current.length >= MAX_PARTICLES) return;
-      for (let i = 0; i < 1; i++) {
-        particlesRef.current.push(
-          spawnParticle(
-            e.clientX + (Math.random() - 0.5) * 20,
-            e.clientY + (Math.random() - 0.5) * 20,
-          ),
-        );
+      particlesRef.current.push(
+        spawnParticle(
+          pending.x + (Math.random() - 0.5) * 20,
+          pending.y + (Math.random() - 0.5) * 20,
+        ),
+      );
+      if (particlesRef.current.length > MAX_PARTICLES) {
+        particlesRef.current.splice(0, particlesRef.current.length - MAX_PARTICLES);
+      }
+    };
+
+    const onMouse = (e: MouseEvent) => {
+      pendingMouseRef.current = { x: e.clientX, y: e.clientY };
+      if (!mouseRafRef.current) {
+        mouseRafRef.current = requestAnimationFrame(flushMouse);
       }
     };
     window.addEventListener("mousemove", onMouse, { passive: true });
@@ -86,9 +109,29 @@ export function ParticleBackground() {
       }
     }, 700);
 
-    const animate = () => {
-      if (document.hidden) {
+    const scheduleResume = () => {
+      if (resumeTimeoutRef.current) return;
+      resumeTimeoutRef.current = setTimeout(() => {
+        resumeTimeoutRef.current = null;
+        if (!document.hidden) {
+          rafId.current = requestAnimationFrame(animate);
+        } else {
+          scheduleResume();
+        }
+      }, 500);
+    };
+
+    const handleVisibility = () => {
+      if (!document.hidden && !rafId.current) {
         rafId.current = requestAnimationFrame(animate);
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    const animate = () => {
+      rafId.current = 0;
+      if (document.hidden) {
+        scheduleResume();
         return;
       }
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -111,17 +154,23 @@ export function ParticleBackground() {
       rafId.current = requestAnimationFrame(animate);
     };
 
-    animate();
+    rafId.current = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener("resize", onResize);
       window.removeEventListener("mousemove", onMouse);
+      document.removeEventListener("visibilitychange", handleVisibility);
       clearInterval(ambientInterval);
-      cancelAnimationFrame(rafId.current);
+      if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+      resumeTimeoutRef.current = null;
+      if (mouseRafRef.current) cancelAnimationFrame(mouseRafRef.current);
+      mouseRafRef.current = 0;
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+      rafId.current = 0;
     };
-  }, [prefersReduced, spawnParticle]);
+  }, [spawnParticle]);
 
-  if (prefersReduced) return null;
+  if (disabled) return null;
 
   return <canvas ref={canvasRef} className="pointer-events-none fixed inset-0 z-0" aria-hidden />;
 }

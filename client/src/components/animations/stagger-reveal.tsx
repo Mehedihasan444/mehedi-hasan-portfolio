@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -32,6 +33,17 @@ export function StaggerReveal({
   duration = 0.65,
   once = true,
 }: StaggerRevealProps) {
+  const [reducedMotion, setReducedMotion] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mount/external-system sync
+    setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
+
   const initial = distance
     ? direction === "up"
       ? { y: distance, opacity: 0 }
@@ -43,6 +55,11 @@ export function StaggerReveal({
             ? { x: -distance, opacity: 0 }
             : { opacity: 0 }
     : { ...directionMap[direction], opacity: 0 };
+
+  if (reducedMotion) {
+    // Skip animation: show final state immediately.
+    return <div className={cn(className)}>{children}</div>;
+  }
 
   return (
     <motion.div

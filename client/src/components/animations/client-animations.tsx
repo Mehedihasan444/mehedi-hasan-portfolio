@@ -25,9 +25,20 @@ const FluidMorphBackground = dynamic(
 
 export function ClientAnimations() {
   const [interacted, setInteracted] = useState(false);
+  const [isCoarse, setIsCoarse] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches,
+  );
+  const [reducedMotion, setReducedMotion] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
   const trackerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mount/external-system sync
+    setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    setIsCoarse(window.matchMedia("(pointer: coarse)").matches);
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const tracker = trackerRef.current;
     if (!tracker) return;
@@ -40,33 +51,41 @@ export function ClientAnimations() {
       }
     };
 
+    let idleId = 0;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+    let started = false;
+
     // Defer listeners to idle to avoid blocking initial paint
     const start = () => {
-      document.addEventListener("mousemove", onInteraction, { once: true });
+      started = true;
+      document.addEventListener("mousemove", onInteraction, { once: true, passive: true });
       document.addEventListener("keydown", onInteraction, { once: true });
       window.addEventListener("scroll", onScrollVisible, { once: true, passive: true });
       // touch alone no longer triggers heavy canvas on mobile
     };
     if ("requestIdleCallback" in window) {
-      const id = requestIdleCallback(start, { timeout: 1500 });
-      return () => cancelIdleCallback(id);
+      idleId = window.requestIdleCallback(start, { timeout: 1500 });
+    } else {
+      timeoutId = setTimeout(start, 600);
     }
-    const id = setTimeout(start, 600);
     return () => {
-      clearTimeout(id);
-      document.removeEventListener("mousemove", onInteraction);
-      document.removeEventListener("keydown", onInteraction);
-      window.removeEventListener("scroll", onScrollVisible);
+      if (idleId) window.cancelIdleCallback(idleId);
+      if (timeoutId) clearTimeout(timeoutId);
+      if (started) {
+        document.removeEventListener("mousemove", onInteraction);
+        document.removeEventListener("keydown", onInteraction);
+        window.removeEventListener("scroll", onScrollVisible);
+      }
     };
   }, []);
 
-  // Only mount heavy canvases on fine pointer devices; mobile gets lightweight scroll indicator only
-  const isCoarse = typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
+  // Only mount heavy canvases on fine pointer devices; mobile gets lightweight scroll indicator only.
+  // Reduced-motion users get the lightweight indicator only (no heavy canvases).
 
   return (
     <>
       <div ref={trackerRef} aria-hidden />
-      {interacted && !isCoarse && (
+      {interacted && !isCoarse && !reducedMotion && (
         <>
           <CustomCursor />
           <ParticleBackground />

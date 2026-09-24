@@ -1,22 +1,34 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface CardStackScrollProps {
-  children: React.ReactNode[];
+  children: ReactNode[];
   className?: string;
 }
 
 export function CardStackScroll({ children, className = "" }: CardStackScrollProps) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [reducedMotion, setReducedMotion] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
   const total = children.length;
 
-  // Auto-play interval
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mount/external-system sync
+    setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
+
+  // Auto-play interval (disabled for reduced-motion, paused when tab hidden)
   useEffect(() => {
     if (total <= 1) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const interval = setInterval(() => {
+      if (document.hidden) return;
       setActiveIndex((prev) => (prev + 1) % total);
     }, 5000);
     return () => clearInterval(interval);
@@ -31,6 +43,8 @@ export function CardStackScroll({ children, className = "" }: CardStackScrollPro
   };
 
   if (total === 0) return null;
+
+  const anim = reducedMotion ? { y: 0, scale: 1, opacity: 1, rotate: 0 } : undefined;
 
   return (
     <div className={`flex flex-col items-center justify-center ${className}`}>
@@ -55,29 +69,43 @@ export function CardStackScroll({ children, className = "" }: CardStackScrollPro
                   zIndex: total - depth,
                   transformOrigin: "center bottom",
                 }}
-                animate={{
-                  y: depth * 16,
-                  scale: 1 - depth * 0.05,
-                  opacity: depth === 0 ? 1 : 0.6,
-                  rotate: isTop ? 0 : i % 2 === 0 ? 2 : -2,
-                }}
-                initial={{
-                  y: 40,
-                  scale: 0.9,
-                  opacity: 0,
-                }}
-                exit={{
-                  x: -150,
-                  opacity: 0,
-                  scale: 0.9,
-                  rotate: -8,
-                  transition: { duration: 0.4 },
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 25,
-                }}
+                animate={
+                  anim ?? {
+                    y: depth * 16,
+                    scale: 1 - depth * 0.05,
+                    opacity: depth === 0 ? 1 : 0.6,
+                    rotate: isTop ? 0 : i % 2 === 0 ? 2 : -2,
+                  }
+                }
+                initial={
+                  reducedMotion
+                    ? { y: 0, scale: 1, opacity: 1 }
+                    : {
+                        y: 40,
+                        scale: 0.9,
+                        opacity: 0,
+                      }
+                }
+                exit={
+                  reducedMotion
+                    ? { opacity: 0, transition: { duration: 0.01 } }
+                    : {
+                        x: -150,
+                        opacity: 0,
+                        scale: 0.9,
+                        rotate: -8,
+                        transition: { duration: 0.4 },
+                      }
+                }
+                transition={
+                  reducedMotion
+                    ? { duration: 0 }
+                    : {
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 25,
+                      }
+                }
                 onClick={isTop ? handleNext : undefined}
                 className={`absolute w-full cursor-pointer select-none`}
               >

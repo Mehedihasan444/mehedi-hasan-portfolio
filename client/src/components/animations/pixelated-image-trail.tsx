@@ -17,6 +17,8 @@ interface PixelatedImageTrailProps {
   className?: string;
 }
 
+const MAX_TRAIL_POINTS = 12;
+
 export function PixelatedImageTrail({
   imageSrc = "",
   pixelSize = 8,
@@ -28,6 +30,9 @@ export function PixelatedImageTrail({
   const mouseRef = useRef({ x: -100, y: -100 });
   const imgRef = useRef<HTMLImageElement | null>(null);
   const frameRef = useRef<number>(0);
+  const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pendingMouseRef = useRef<{ x: number; y: number } | null>(null);
+  const mouseRafRef = useRef<number>(0);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -37,6 +42,8 @@ export function PixelatedImageTrail({
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    const cappedTrailLength = Math.min(Math.max(Math.floor(trailLength), 0), MAX_TRAIL_POINTS);
 
     const img = new Image();
     img.crossOrigin = "anonymous";
@@ -51,13 +58,35 @@ export function PixelatedImageTrail({
     window.addEventListener("resize", resize);
 
     const onMouse = (e: MouseEvent) => {
-      mouseRef.current = { x: e.clientX, y: e.clientY };
+      // rAF batching: coalesce bursts of mousemove into one update per frame.
+      pendingMouseRef.current = { x: e.clientX, y: e.clientY };
+      if (!mouseRafRef.current) {
+        mouseRafRef.current = requestAnimationFrame(() => {
+          mouseRafRef.current = 0;
+          const pending = pendingMouseRef.current;
+          pendingMouseRef.current = null;
+          if (pending) mouseRef.current = pending;
+        });
+      }
     };
-    window.addEventListener("mousemove", onMouse);
+    window.addEventListener("mousemove", onMouse, { passive: true });
+
+    const scheduleResume = () => {
+      if (resumeTimeoutRef.current) return;
+      resumeTimeoutRef.current = setTimeout(() => {
+        resumeTimeoutRef.current = null;
+        if (!document.hidden) {
+          frameRef.current = requestAnimationFrame(animate);
+        } else {
+          scheduleResume();
+        }
+      }, 500);
+    };
 
     const animate = () => {
+      frameRef.current = 0;
       if (document.hidden) {
-        frameRef.current = requestAnimationFrame(animate);
+        scheduleResume();
         return;
       }
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -72,8 +101,8 @@ export function PixelatedImageTrail({
         life: 1,
       });
 
-      if (trailsRef.current.length > trailLength) {
-        trailsRef.current = trailsRef.current.slice(-trailLength);
+      if (trailsRef.current.length > cappedTrailLength) {
+        trailsRef.current = trailsRef.current.slice(-cappedTrailLength);
       }
 
       trailsRef.current.forEach((point, i) => {
@@ -115,9 +144,15 @@ export function PixelatedImageTrail({
     frameRef.current = requestAnimationFrame(animate);
 
     return () => {
-      cancelAnimationFrame(frameRef.current);
+      if (frameRef.current) cancelAnimationFrame(frameRef.current);
+      frameRef.current = 0;
+      if (mouseRafRef.current) cancelAnimationFrame(mouseRafRef.current);
+      mouseRafRef.current = 0;
+      if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+      resumeTimeoutRef.current = null;
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", onMouse);
+      imgRef.current = null;
     };
   }, [imageSrc, pixelSize, trailLength]);
 
@@ -126,6 +161,7 @@ export function PixelatedImageTrail({
       ref={canvasRef}
       className={`pointer-events-none fixed inset-0 z-[100] ${className}`}
       style={{ mixBlendMode: "screen" }}
+      aria-hidden
     />
   );
 }

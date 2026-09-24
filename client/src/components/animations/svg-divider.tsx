@@ -14,12 +14,24 @@ export function SvgDivider({ className = "" }: SvgDividerProps) {
     const path = pathRef.current;
     if (!path) return;
 
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      // Skip animation: show final state (fully drawn stroke).
+      path.style.strokeDasharray = "none";
+      path.style.strokeDashoffset = "0";
+      return;
+    }
+
     const length = path.getTotalLength();
 
     gsap.set(path, {
       strokeDasharray: length,
       strokeDashoffset: length,
     });
+
+    // Fallback: never leave the divider invisible if GSAP fails.
+    const fallback = setTimeout(() => {
+      path.style.strokeDashoffset = "0";
+    }, 3000);
 
     const ctx = gsap.context(() => {
       gsap.to(path, {
@@ -31,10 +43,14 @@ export function SvgDivider({ className = "" }: SvgDividerProps) {
           start: "top 90%",
           toggleActions: "play none none reverse",
         },
+        onComplete: () => clearTimeout(fallback),
       });
     }, path);
 
-    return () => ctx.revert();
+    return () => {
+      clearTimeout(fallback);
+      ctx.revert();
+    };
   }, []);
 
   return (

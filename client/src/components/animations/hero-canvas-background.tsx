@@ -202,6 +202,7 @@ export function HeroCanvasBackground() {
       const particles = particlesRef.current;
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
+        if (!p) continue;
         p.x += p.vx + (mx - 0.5) * 0.1;
         p.y += p.vy + (my - 0.5) * 0.1 - scroll * 0.2;
         p.life -= 1 / p.maxLife;

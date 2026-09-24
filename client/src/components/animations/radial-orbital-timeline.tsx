@@ -1,10 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap } from "@/lib/gsap";
 
 interface TimelineItem {
   period: string;
@@ -57,14 +54,14 @@ function TimelineDot({ isCurrent, index }: { isCurrent?: boolean; index: number 
       <div
         className={`border-emerald bg-background shadow-emerald/20 relative z-10 h-4 w-4 rounded-full border-2 shadow-lg ${
           isCurrent
-            ? "animate-glow ring-emerald/30 ring-offset-background ring-2 ring-offset-2"
+            ? "animate-glow ring-emerald/30 ring-offset-background ring-2 ring-offset-2 motion-reduce:animate-none"
             : ""
         }`}
       >
         <div className="from-emerald to-teal absolute inset-0.5 rounded-full bg-gradient-to-br" />
       </div>
       <div
-        className="from-emerald/30 to-teal/30 absolute h-8 w-8 rounded-full bg-gradient-to-br blur-sm"
+        className="from-emerald/30 to-teal/30 absolute h-8 w-8 rounded-full bg-gradient-to-br blur-sm motion-reduce:hidden"
         style={{
           animation: `orbitPulse ${2 + index * 0.5}s ease-in-out infinite alternate`,
         }}
@@ -79,6 +76,27 @@ export function RadialOrbitalTimeline({ items, className = "" }: RadialOrbitalTi
   const cardRowsRef = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
+    const rows = cardRowsRef.current.filter(Boolean);
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      // Skip animation: show final state (full line, visible cards).
+      if (lineRef.current) lineRef.current.style.transform = "scaleY(1)";
+      for (const row of rows) {
+        row.style.opacity = "1";
+        row.style.transform = "none";
+      }
+      return;
+    }
+
+    // Fallback: never leave cards/line invisible if GSAP fails.
+    const fallback = setTimeout(() => {
+      if (lineRef.current) lineRef.current.style.transform = "scaleY(1)";
+      for (const row of cardRowsRef.current.filter(Boolean)) {
+        row.style.opacity = "1";
+        row.style.transform = "none";
+      }
+    }, 3000);
+
     const ctx = gsap.context(() => {
       if (lineRef.current) {
         gsap.fromTo(
@@ -99,6 +117,7 @@ export function RadialOrbitalTimeline({ items, className = "" }: RadialOrbitalTi
       }
 
       cardRowsRef.current.forEach((row) => {
+        if (!row) return;
         gsap.fromTo(
           row,
           { opacity: 0, y: 40, scale: 0.95 },
@@ -113,12 +132,16 @@ export function RadialOrbitalTimeline({ items, className = "" }: RadialOrbitalTi
               start: "top 80%",
               toggleActions: "play none none none",
             },
+            onComplete: () => clearTimeout(fallback),
           },
         );
       });
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => {
+      clearTimeout(fallback);
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -189,6 +212,15 @@ export function RadialOrbitalTimeline({ items, className = "" }: RadialOrbitalTi
           100% {
             transform: scale(1.5);
             opacity: 0.2;
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          @keyframes orbitPulse {
+            0%,
+            100% {
+              transform: scale(1);
+              opacity: 0.5;
+            }
           }
         }
       `}</style>

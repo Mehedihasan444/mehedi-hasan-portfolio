@@ -78,7 +78,7 @@ function GlitterWrapCanvas({
         const alpha = s.a * twinkle;
 
         ctx.globalAlpha = alpha;
-        ctx.fillStyle = s.c;
+        ctx.fillStyle = s.c ?? "#34d399";
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fill();

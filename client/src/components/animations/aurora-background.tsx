@@ -10,51 +10,102 @@ interface AuroraBackgroundProps {
   opacity?: number;
 }
 
+const DEFAULT_AURORA_COLORS = [
+  "rgba(5, 150, 105, 0.35)",
+  "rgba(6, 182, 212, 0.25)",
+  "rgba(4, 120, 87, 0.3)",
+  "rgba(52, 211, 153, 0.2)",
+  "rgba(6, 182, 212, 0.15)",
+];
+
 export function AuroraBackground({
   className,
-  colors = [
-    "rgba(5, 150, 105, 0.35)",
-    "rgba(6, 182, 212, 0.25)",
-    "rgba(4, 120, 87, 0.3)",
-    "rgba(52, 211, 153, 0.2)",
-    "rgba(6, 182, 212, 0.15)",
-  ],
+  colors = DEFAULT_AURORA_COLORS,
   blur = 80,
   opacity = 0.7,
 }: AuroraBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animRef = useRef<number>(0);
+  const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const timeRef = useRef(0);
+  const colorsRef = useRef(colors);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    colorsRef.current = colors;
+  });
+
+  useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    const palette = colorsRef.current;
+
+    const paintStaticFrame = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      palette.forEach((color, i) => {
+        const x = canvas.width * ((i + 1) / (palette.length + 1));
+        const y = canvas.height / 2;
+        const r = 250;
+        const grad = ctx.createRadialGradient(x, y, 0, x, y, r);
+        grad.addColorStop(0, color);
+        grad.addColorStop(1, "transparent");
+        ctx.save();
+        ctx.globalAlpha = opacity;
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      });
+    };
+
     const resize = () => {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        paintStaticFrame();
+      }
     };
 
     resize();
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
-    const orbs = colors.map((color, i) => ({
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      paintStaticFrame();
+      return () => {
+        ro.disconnect();
+      };
+    }
+
+    const orbs = palette.map((color, i) => ({
       color,
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       r: Math.random() * 300 + 200,
       vx: (Math.random() - 0.5) * 0.4,
       vy: (Math.random() - 0.5) * 0.4,
-      phase: (i / colors.length) * Math.PI * 2,
+      phase: (i / Math.max(palette.length, 1)) * Math.PI * 2,
     }));
 
+    const scheduleResume = () => {
+      if (resumeTimeoutRef.current) return;
+      resumeTimeoutRef.current = setTimeout(() => {
+        resumeTimeoutRef.current = null;
+        if (!document.hidden) {
+          animRef.current = requestAnimationFrame(draw);
+        } else {
+          scheduleResume();
+        }
+      }, 500);
+    };
+
     const draw = () => {
+      animRef.current = 0;
       if (document.hidden) {
-        animRef.current = requestAnimationFrame(draw);
+        scheduleResume();
         return;
       }
       timeRef.current += 0.003;
@@ -89,10 +140,13 @@ export function AuroraBackground({
     animRef.current = requestAnimationFrame(draw);
 
     return () => {
-      cancelAnimationFrame(animRef.current);
+      if (animRef.current) cancelAnimationFrame(animRef.current);
+      animRef.current = 0;
+      if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+      resumeTimeoutRef.current = null;
       ro.disconnect();
     };
-  }, [blur, colors, opacity]);
+  }, [blur, opacity]);
 
   return (
     <canvas

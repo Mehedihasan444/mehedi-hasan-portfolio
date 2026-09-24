@@ -21,10 +21,11 @@ function latLngToPosition(lat: number, lng: number, r = RADIUS) {
 }
 
 function isOnLand(lng: number, lat: number, pixels: Uint8ClampedArray, w: number, h: number) {
-  const x = Math.round(((lng + 180) / 360) * w) % w;
+  const rawX = Math.round(((lng + 180) / 360) * w) % w;
+  const x = ((rawX % w) + w) % w;
   const y = Math.round(((90 - lat) / 180) * h);
   const clampedY = Math.max(0, Math.min(h - 1, y));
-  return pixels[(clampedY * w + x) * 4] > 128;
+  return (pixels[(clampedY * w + x) * 4] ?? 0) > 128;
 }
 
 function GridLines() {
@@ -131,6 +132,7 @@ function LandDots() {
         const mesh = new THREE.InstancedMesh(geometry, material, dotCoords.length);
         const matrix = new THREE.Matrix4();
         dotCoords.forEach(([lng, lat], i) => {
+          if (lng === undefined || lat === undefined) return;
           const pos = latLngToPosition(lat, lng);
           matrix.setPosition(pos);
           mesh.setMatrixAt(i, matrix);
@@ -155,6 +157,7 @@ function LandDots() {
       if (group) {
         while (group.children.length > 0) {
           const child = group.children[0];
+          if (!child) break;
           group.remove(child);
           if (child instanceof THREE.Mesh) {
             child.geometry.dispose();
