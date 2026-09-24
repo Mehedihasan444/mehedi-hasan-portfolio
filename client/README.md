@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mehedi Hasan — Portfolio Client
+
+Next.js 16 (App Router, `cacheComponents`) + React 19 + Tailwind CSS 4. Part of the
+`mehedi-portfolio` pnpm monorepo — run commands from the repo root.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp client/.env.example client/.env.local   # set NEXT_PUBLIC_API_URL / NEXT_PUBLIC_SITE_URL
+pnpm dev                                    # turbo dev (client + server)
+# or client only:
+pnpm --filter client dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). Public pages live in
+`client/src/app/(main)/` (`page.tsx`, `projects/`, `blog/`, `contact/`); the admin
+panel lives in `client/src/app/admin/` (token-gated, see repo `AGENTS.md`).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Commands (repo root)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm build        # turbo build (client .next + server dist)
+pnpm lint         # turbo lint (eslint, zero-warning gate)
+pnpm typecheck    # turbo typecheck (tsc --noEmit)
+pnpm format       # prettier --write
+```
+
+Production check: `pnpm --filter client build && PORT=3003 pnpm --filter client start`,
+then `curl -s -o /dev/null -w "%{http_code}\n" http://localhost:3003/`.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Repo guide: `AGENTS.md` (architecture + performance rules)
+- Product: `docs/PRODUCT.md` · Design: `docs/DESIGN.md`
+- [Next.js docs](https://nextjs.org/docs)

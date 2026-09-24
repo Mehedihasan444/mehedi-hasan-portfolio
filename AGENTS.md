@@ -16,7 +16,7 @@ mehedi-portfolio/                 # pnpm monorepo (turborepo)
 │   ├── next.config.ts           # cacheComponents, optimizePackageImports, images AVIF/WebP
 │   └── docs/PERFORMANCE_AUDIT_2026-08.md
 ├── server/                      # Backend (API at NEXT_PUBLIC_API_URL, default http://localhost:4000/api/v1)
-├── docs/                        # Root docs: DESIGN.md, PRODUCT.md (this audit also creates them)
+├── docs/                        # Root docs: DESIGN.md, PRODUCT.md + dated audits
 ├── package.json                 # turbo dev/build/lint/typecheck/format
 ├── pnpm-workspace.yaml          # packages: [client, server, packages/*]
 ├── turbo.json, .prettierrc, commitlint.config.js, .husky/
@@ -41,7 +41,7 @@ pnpm --filter client analyze      # ANALYZE=true next build (bundle-analyzer)
 PORT=3003 pnpm --filter client start  # production start (verify before PR)
 ```
 
-Build is green when: `next build` compiles, TypeScript passes, and lint pre-existing 113 problems is not increased. Do not block on pre-existing `react-hooks/set-state-in-effect` warnings in `hero-section.tsx` / `card-stack.tsx` — they are known.
+Build is green when: `next build` compiles, TypeScript passes, and `eslint .` reports 0 errors and 0 warnings (`--max-warnings=0`). Targeted `eslint-disable` comments mark the intentional exceptions (mount-gated setState, three.js uniform mutation) — do not add new ones without justification.
 
 ## Architecture Rules
 

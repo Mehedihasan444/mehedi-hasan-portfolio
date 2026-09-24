@@ -13,20 +13,20 @@
 
 Canonical URL `https://mehedi-hasan.dev` (`SITE_URL`). 12 sections toggled via `src/lib/sections.ts` / `DEFAULT_SECTIONS` (default all `true`; `site-settings` key `section_<name> = "true"`).
 
-| #   | Route / Anchor    | Section component                                                            | Data source                              |
-| --- | ----------------- | ---------------------------------------------------------------------------- | ---------------------------------------- |
-| 1   | `/#hero`          | `hero-section.tsx` (Globe + Glitter + Aurora fixed `z-0`)                    | static (`hero/constants.ts` roles/stats) |
-| 2   | `/#about`         | `about-section.tsx` (`ParallaxImage` LCP, `ValueCard`, `WordRevealText`)     | static                                   |
-| 3   | `/#skills`        | `skills-section.tsx` (`marquee-row`, `proficiency-bar`)                      | `GET /skills`                            |
-| 4   | `/#experience`    | `experience-section.tsx` (`timeline-card`, `timeline-line`)                  | `GET /experiences`                       |
-| 5   | `/#projects`      | `projects-section.tsx` (`FeaturedCard` LCP + 2 `SmallCard`)                  | `GET /projects`                          |
-| 6   | `#education`      | `education-section.tsx`                                                      | `GET /education`                         |
-| 7   | `#certifications` | `certifications-section.tsx` (`cert-card`)                                   | `GET /certifications`                    |
-| 8   | `#achievements`   | `achievements-section.tsx`                                                   | `GET /achievements`                      |
-| 9   | `#github`         | `github-section.tsx` (`contribution-heatmap`, `language-breakdown`)          | static + GitHub API (optional)           |
-| 10  | `#testimonials`   | `testimonials-section.tsx`                                                   | `GET /testimonials`                      |
-| 11  | `#blog`           | `blog-preview-section.tsx` (3 cards) → `/blog` + `/blog/[slug]`              | `GET /blog` via `React.cache`            |
-| 12  | `/#contact`       | `contact-section.tsx` (`contact-form` → `POST /messages`, `contact-sidebar`) | `POST /messages`                         |
+| #   | Route / Anchor    | Section component                                                                                            | Data source                              |
+| --- | ----------------- | ------------------------------------------------------------------------------------------------------------ | ---------------------------------------- |
+| 1   | `/#hero`          | `hero-section.tsx` (Globe + Glitter + Aurora fixed `z-0`)                                                    | static (`hero/constants.ts` roles/stats) |
+| 2   | `/#about`         | `about-section.tsx` (`ParallaxImage` lazy below-fold, `ValueCard`, `WordRevealText`)                         | static                                   |
+| 3   | `/#skills`        | `skills-section.tsx` (`marquee-row`; API-first with static fallback)                                         | `GET /skills` (paginated)                |
+| 4   | `/#experience`    | `experience-section.tsx` (`timeline-card`, `timeline-line`)                                                  | `GET /experiences`                       |
+| 5   | `/#projects`      | `projects-section.tsx` + `projects/work-track.tsx` (pinned horizontal scroll, numbered work boxes, CTA card) | `GET /projects` (paginated)              |
+| 6   | `#education`      | `education-section.tsx`                                                                                      | `GET /education`                         |
+| 7   | `#certifications` | `certifications-section.tsx` (`cert-card`)                                                                   | `GET /certifications`                    |
+| 8   | `#achievements`   | `achievements-section.tsx`                                                                                   | `GET /achievements`                      |
+| 9   | `#github`         | `github-section.tsx` (`contribution-heatmap`, `language-breakdown`)                                          | static + GitHub API (optional)           |
+| 10  | `#testimonials`   | `testimonials-section.tsx`                                                                                   | `GET /testimonials`                      |
+| 11  | `#blog`           | `blog-preview-section.tsx` (3 cards) → `/blog` + `/blog/[slug]`                                              | `GET /blog` via `React.cache`            |
+| 12  | `/#contact`       | `contact-section.tsx` (`contact-form` → `POST /contact`, `contact-sidebar`)                                  | `POST /contact` (5/15m + honeypot)       |
 
 Plus routes:
 
@@ -59,20 +59,20 @@ Plus routes:
 ## 4. User Journeys
 
 1. **Hire:** lands hero → typewriter roles → `View My Work` (#projects) or `Download CV` (`/resume.pdf`) → contact form (success state + sonner toast) → `sonner` bottom-right.
-2. **Browse projects:** scroll to FeaturedCard (LCP, hover scale 1.05) → `/projects/[slug]` detail (clipPath reveal, gallery lazy images) → back via `/#projects`.
-3. **Evaluate skills:** marquee 30s infinite, proficiency bars GSAP scrub, grouped Frontend/Language/Backend/Database/Tools.
+2. **Browse projects:** pinned horizontal scroll through numbered work boxes (info + image + tools) → `/projects/[slug]` detail (clipPath reveal, gallery lazy images) → end CTA card → `/projects`.
+3. **Evaluate skills:** marquee 30s infinite, grouped Frontend/Language/Backend/Database/Tools (static fallback when API empty).
 4. **Read blog:** `/blog` grid → `/blog/[slug]` with `BlogContent` (GSAP per-line reveal, fallback scan).
 
 ## 5. Content & Admin
 
-Admin is SPA at `/admin/*` (protected `layout.tsx`). CRUD for every entity above via `server/` API. No public writes except contact `POST /messages`. Public pages are `cacheComponents` static + ISR; admin pages are `force-dynamic` (implied).
+Admin is SPA at `/admin/*` (protected `layout.tsx`, token-gated). Auth sets an httpOnly `SameSite=strict` cookie (+ Bearer fallback); `POST /auth/register` is blocked in production unless `ALLOW_PUBLIC_REGISTER=true`, and all write routes + contact/message reads require the `admin` role. List endpoints are paginated (`?page&limit`, max 100). No public writes except contact `POST /contact`. Public pages are `cacheComponents` static + ISR; admin pages are client-rendered.
 
 ## 6. SEO
 
 - Metadata in `src/app/layout.tsx`: `SITE_TITLE`, `SITE_DESCRIPTION`, `keywords` (Full Stack / Next.js / TypeScript / Bangladesh), `metadataBase`, `canonical`, `openGraph` + `twitter` with `og-image.png` (1200×630 27 KB, `public/og-image.png`), `robots` + `googleBot max-image-preview large`, icons `/favicon.ico`, `/apple-touch-icon.png`.
 - Person `JSON-LD` `Schema.org/Person` (jobTitle Full Stack, Dhaka, alumni Daffodil International University).
 - `sitemap.ts` dynamic, `robots.ts` index/follow.
-- Images use `next/image` `fill`+`sizes` (avoids CLS); LCP prioritized with `fetchPriority="high"`.
+- Images use `next/image` `fill`+`sizes` (avoids CLS); only the hero portrait is LCP-prioritized — all section/grid images are `loading="lazy"`.
 
 ## 7. Integrations
 
