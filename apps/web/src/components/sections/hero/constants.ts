@@ -4,12 +4,14 @@ import { heroStats } from "@/lib/stats";
 // so existing `import { stats } from "./constants"` keeps working.
 export const stats = heroStats;
 
+// Rotating titles in the hero. `roles[0]` is also the screen-reader text,
+// so keep the first entry as the single most accurate description.
 export const roles = [
-  "Full Stack Developer",
+  "Full Stack MERN Developer",
   "React & Next.js Engineer",
+  "TypeScript Developer",
   "Backend Developer",
   "Open Source Contributor",
-  "UI/UX Enthusiast",
 ];
 
 export const terminalLines = [

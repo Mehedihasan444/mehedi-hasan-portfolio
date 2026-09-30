@@ -1,14 +1,14 @@
 // Server Component — no hooks needed.
-// NOTE: Offline sample snapshot. The rest of the site reads live data via
-// getProjects/getBlogPosts/etc. from the API, but there is no GitHub API
-// wiring yet, so these figures are a static placeholder until live data lands.
+// Figures come from ./constants.ts, which is a snapshot of the GitHub REST API
+// taken on 2026-09-30 (see that file for the per-field sources). They are not
+// fetched live, so they only change when the snapshot is refreshed.
 import { ghStats } from "./constants";
 
 export function GitHubStats() {
   return (
     <div>
       <p className="mb-4 mt-12 text-center text-xs text-white/40">
-        Sample snapshot — offline placeholder, not live GitHub data
+        GitHub data as of September 2026
       </p>
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
         {ghStats.map(({ icon: Icon, label, value }) => (

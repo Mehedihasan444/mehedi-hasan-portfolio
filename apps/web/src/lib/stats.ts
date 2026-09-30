@@ -1,17 +1,20 @@
 /**
  * Single source of truth for headline stats.
  *
- * about/hero/achievements previously duplicated the same numbers
- * (1+ years, 10+ projects, 18+ technologies, 5 open-source).
- * Update the numbers here — section constants re-export from this file
- * so visuals stay identical while edits happen in one place.
+ * Verified against the live GitHub profile (github.com/Mehedihasan444)
+ * on 2026-09-30. Update the numbers here — section constants re-export from
+ * this file so visuals stay identical while edits happen in one place.
  */
 
 export const siteStats = {
-  yearsExperience: 1,
-  projectsCompleted: 10,
+  // Stated by the site owner.
+  yearsExperience: 2,
+  // Counted from the GitHub API: 80 non-fork public repos.
+  projectsCompleted: 80,
+  // Matches the 18 rows published through /skills.
   technologies: 18,
-  openSource: 5,
+  // 80 own repos minus the 3 that are forks of other projects.
+  openSource: 77,
 } as const;
 
 export const aboutStats = [
@@ -35,12 +38,14 @@ export const achievementMetrics = [
     icon: "Zap",
     gradient: "from-emerald to-teal",
   },
-  { value: "100+", label: "Problems Solved", icon: "Code2", gradient: "from-teal to-cyan" },
+  // GitHub search API: 125 pull requests authored as of 2026-09-30.
+  { value: "125+", label: "Pull Requests", icon: "Code2", gradient: "from-teal to-cyan" },
   {
     value: `${siteStats.openSource}+`,
     label: "Open Source Repos",
     icon: "GitBranch",
     gradient: "from-cyan to-emerald",
   },
-  { value: "1K+", label: "Cups of Coffee", icon: "Coffee", gradient: "from-amber to-rose" },
+  // Account created 2022-04-07, so 4+ years of public commit history.
+  { value: "4+", label: "Years on GitHub", icon: "Coffee", gradient: "from-amber to-rose" },
 ];

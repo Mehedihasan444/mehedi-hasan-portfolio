@@ -3,7 +3,7 @@
 import { useRef, useEffect } from "react";
 import { gsap } from "@/lib/gsap";
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
-// Single source: shared offline sample snapshot (see ./constants.ts).
+// Real GitHub figures, snapshot from the REST API on 2026-09-30 (see ./constants.ts).
 import { languages, type GHLang } from "./constants";
 
 function Bar({ lang, index }: { lang: GHLang; index: number }) {
@@ -62,7 +62,7 @@ export function LanguageBreakdown() {
         <div className="relative z-10">
           <h3 className="font-medium text-white">Language Breakdown</h3>
           <p className="mt-1 text-xs text-white/40">
-            Sample snapshot — offline placeholder, not live GitHub data
+            Share of public repositories by primary language
           </p>
           <div className="mt-6 flex items-end gap-2" style={{ height: 120 }}>
             {languages.map((lang, i) => (
