@@ -1,5 +1,3 @@
-"use client";
-
 import { Code2, Lightbulb, Microscope, Puzzle, type LucideIcon } from "lucide-react";
 
 const iconMap: Record<string, LucideIcon> = {

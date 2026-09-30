@@ -1,5 +1,3 @@
-"use client";
-
 import type { ReactNode } from "react";
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { socialLinks, contactInfo, availabilityTags, type ContactInfoItem } from "./constants";

@@ -1,5 +1,3 @@
-"use client";
-
 import { Trophy, GitBranch, BookOpen, Zap, Code2, Coffee, type LucideIcon } from "lucide-react";
 
 const iconMap: Record<string, LucideIcon> = {
