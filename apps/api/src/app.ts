@@ -48,10 +48,18 @@ app.use("/api/v1", apiRoutes);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-if (process.env.NODE_ENV !== "test") {
+// On a long-running host (local dev, Docker, a VM) bind a port and serve.
+// On Vercel the function is invoked per request and must export the app
+// instead - calling listen() there keeps the invocation alive until it times
+// out and the request fails. VERCEL is set automatically on their platform.
+const isServerless = process.env.VERCEL === "1" || Boolean(process.env.AWS_LAMBDA_FUNCTION_NAME);
+
+if (process.env.NODE_ENV !== "test" && !isServerless) {
   app.listen(env.PORT, () => {
     logger.info(`Server running on port ${env.PORT} in ${env.NODE_ENV} mode`);
   });
+} else if (isServerless) {
+  logger.info("Serverless mode: exporting app without binding a port");
 }
 
 export default app;
