@@ -83,8 +83,8 @@ Admin is SPA at `/admin/*` (protected `layout.tsx`, token-gated). Auth sets an h
 
 ## 8. Deployment
 
-- **Client:** `pnpm --filter client build` (Turbopack, 11 workers, `cacheComponents: true`, `optimizePackageImports` for `framer-motion`/`lucide`/`three`/`gsap`), `PORT=3003 npx next start` — verify `curl -I /` 200, `og-image.png` 200.
-- **Server:** `server/` (separate workspace) at `NEXT_PUBLIC_API_URL`. Env `PORT`, `API_BASE` not committed.
+- **Web:** `apps/web` (Next.js, Turbopack, 11 workers, `cacheComponents: true`, `optimizePackageImports` for `framer-motion`/`lucide`/`three`/`gsap`), `PORT=3003 npx next start` — verify `curl -I /` 200, `og-image.png` 200.
+- **API:** `apps/api` (separate workspace) at `NEXT_PUBLIC_API_URL`. Env `PORT`, `API_BASE` not committed.
 - **Commit style:** Conventional via `commitlint` + `husky` `prepare`.
 - **Monorepo:** `turbo` `dev` (persistent), `build`, `lint`, `typecheck`, `prettier-plugin-tailwindcss`.
 

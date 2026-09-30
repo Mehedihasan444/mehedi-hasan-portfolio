@@ -6,39 +6,47 @@ This file guides AI agents and human contributors working in this repository. Re
 
 ```
 mehedi-portfolio/                 # pnpm monorepo (turborepo)
-├── client/                      # Next.js 16.2.10 (App Router, React 19, Tailwind 4)
-│   ├── src/app/                 # (main) public pages + /admin + layout, loading, error, sitemap, robots
-│   ├── src/components/          # 3d/, animations/, layout/, sections/, ui/
-│   ├── src/hooks/               # use-scroll-progress (singleton), use-parallax, use-globe-scroll, etc.
-│   ├── src/lib/                 # api-public.ts (React.cache), constants, sections, gsap, utils
-│   ├── src/providers/           # Providers, SmoothScrollProvider (Lenis), PageTransition
-│   ├── public/                  # mehedi_hasan.webp (LCP), projects/*.webp, og-image.png (1200×630)
-│   ├── next.config.ts           # cacheComponents, optimizePackageImports, images AVIF/WebP
-│   └── docs/PERFORMANCE_AUDIT_2026-08.md
-├── server/                      # Backend (API at NEXT_PUBLIC_API_URL, default http://localhost:4000/api/v1)
+├── apps/
+│   ├── web/                      # Next.js 16.2.10 (App Router, React 19, Tailwind 4)
+│   │   ├── src/app/             # (main) public pages + /admin + layout, loading, error, sitemap, robots
+│   │   ├── src/components/      # 3d/, animations/, layout/, sections/, ui/
+│   │   ├── src/hooks/           # use-scroll-progress (singleton), use-parallax, use-globe-scroll, etc.
+│   │   ├── src/lib/             # api-public.ts (React.cache), constants, sections, gsap, utils
+│   │   ├── src/providers/       # Providers, SmoothScrollProvider (Lenis), PageTransition
+│   │   ├── public/              # mehedi_hasan.webp (LCP), projects/*.webp, og-image.png (1200×630)
+│   │   ├── next.config.ts       # cacheComponents, optimizePackageImports, images AVIF/WebP
+│   │   └── docs/PERFORMANCE_AUDIT_2026-08.md
+│   └── api/                     # Backend (API at NEXT_PUBLIC_API_URL, default http://localhost:4000/api/v1)
+├── packages/                    # Reserved for shared libs (currently empty)
 ├── docs/                        # Root docs: DESIGN.md, PRODUCT.md + dated audits
 ├── package.json                 # turbo dev/build/lint/typecheck/format
-├── pnpm-workspace.yaml          # packages: [client, server, packages/*]
+├── pnpm-workspace.yaml          # packages: [apps/*, packages/*]
 ├── turbo.json, .prettierrc, commitlint.config.js, .husky/
 └── AGENTS.md                    # ← you are here
 ```
+
+Workspace package names are `web` and `api` (not `client`/`server`) — the directory
+and the package name are intentionally aligned. Filter with `--filter web` / `--filter api`.
 
 **Package manager:** `pnpm@9.15.0` (enforced via `packageManager` field). Node `>=20`.
 
 ## Commands (run from repo root unless noted)
 
 ```bash
-pnpm dev              # turbo dev — runs client+server in parallel (persistent, no cache)
+pnpm dev              # turbo dev — runs web+api in parallel (persistent, no cache)
 pnpm build            # turbo build — builds all workspaces (.next/**, dist/**)
-pnpm lint             # turbo lint (client: eslint)
-pnpm typecheck        # turbo typecheck (client: tsc --noEmit)
+pnpm lint             # turbo lint (web: eslint)
+pnpm typecheck        # turbo typecheck (web: tsc --noEmit)
 pnpm format           # prettier --write "**/*.{ts,tsx,js,json,css,md}"
 pnpm format:check     # prettier --check
-# Client-only (when you need Next specifics):
-pnpm --filter client dev
-pnpm --filter client build        # Turbopack, 11 workers, ISR 60s
-pnpm --filter client analyze      # ANALYZE=true next build (bundle-analyzer)
-PORT=3003 pnpm --filter client start  # production start (verify before PR)
+# Web-only (when you need Next specifics):
+pnpm --filter web dev
+pnpm --filter web build        # Turbopack, 11 workers, ISR 60s
+pnpm --filter web analyze      # ANALYZE=true next build (bundle-analyzer)
+PORT=3003 pnpm --filter web start  # production start (verify before PR)
+# API-only:
+pnpm --filter api dev
+pnpm --filter api prisma:generate
 ```
 
 Build is green when: `next build` compiles, TypeScript passes, and `eslint .` reports 0 errors and 0 warnings (`--max-warnings=0`). Targeted `eslint-disable` comments mark the intentional exceptions (mount-gated setState, three.js uniform mutation) — do not add new ones without justification.
@@ -85,7 +93,7 @@ Every animation/canvas must guard for low-end devices. Copy the patterns in `cli
 
 ## Do / Don't
 
-- **Do** verify with `pnpm --filter client typecheck && pnpm --filter client build` and `PORT=3003 npx next start` curl checks (`/` 150 KB, `/og-image.png` 200 OK) before PR.
+- **Do** verify with `pnpm --filter web typecheck && pnpm --filter web build` and `PORT=3003 npx next start` curl checks (`/` 150 KB, `/og-image.png` 200 OK) before PR.
 - **Do** respect `pointer: coarse` — test heavy effects on touch emulation.
 - **Don't** add `unoptimized` to `next/image`, new PNG assets, or new font weights without audit.
 - **Don't** create `pages/` or duplicate `getBlogPostBySlug` over-fetch (use `React.cache`).
