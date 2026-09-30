@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getProjectBySlug, getProjects } from "@/lib/api-public";
+import { getProjectBySlug, getProjects, toStaticParams } from "@/lib/api-public";
 import { SITE_URL } from "@/lib/constants";
 import { ProjectDetailClient } from "./project-detail-client";
 import { notFound } from "next/navigation";
@@ -11,15 +11,12 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  try {
-    const projects = await getProjects();
-    return projects
-      .filter((p) => p.status === "published")
-      .slice(0, 20)
-      .map((p) => ({ slug: p.slug }));
-  } catch {
-    return [];
-  }
+  const projects = await getProjects();
+  return toStaticParams(
+    projects.filter((p) => p.status === "published").slice(0, 20),
+    "slug",
+    "projects",
+  );
 }
 
 function isSafeHttpUrl(u: string | null | undefined): u is string {

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getBlogPostBySlug, getBlogPosts } from "@/lib/api-public";
+import { getBlogPostBySlug, getBlogPosts, toStaticParams } from "@/lib/api-public";
 import { SITE_URL } from "@/lib/constants";
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { ArrowLeftIcon } from "@/components/ui/icons";
@@ -12,15 +12,8 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  try {
-    const posts = await getBlogPosts();
-    return posts
-      .filter((p) => p.published)
-      .slice(0, 20)
-      .map((p) => ({ slug: p.slug }));
-  } catch {
-    return [];
-  }
+  const posts = await getBlogPosts();
+  return toStaticParams(posts.filter((p) => p.published).slice(0, 20), "slug", "blog posts");
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

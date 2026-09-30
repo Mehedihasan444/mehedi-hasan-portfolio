@@ -1,6 +1,44 @@
 import { cache } from "react";
 import { API_BASE } from "./constants";
 
+/**
+ * Slug returned by generateStaticParams when the API has nothing to give at
+ * build time.
+ *
+ * Cache Components requires generateStaticParams to return at least one param
+ * so it can validate that a route prerenders a non-empty static shell; an empty
+ * array fails the build. That is a problem here because the web app fetches
+ * from a separate API that is usually not running while the web app builds
+ * (Vercel, CI, or a plain `pnpm --filter web build`).
+ *
+ * Emitting this placeholder keeps the build green. It resolves to notFound() in
+ * the page, so it produces no real route, and because dynamicParams defaults to
+ * true every genuine slug is still rendered on first request and then cached by
+ * ISR. See https://nextjs.org/docs/messages/empty-generate-static-params
+ */
+export const BUILD_PLACEHOLDER_SLUG = "__build_placeholder__";
+
+/**
+ * Turns a fetched collection into generateStaticParams output.
+ *
+ * Returns real params when there is data, and the placeholder otherwise. Set
+ * `source` to the collection name so an empty result warns loudly at build time
+ * - an empty API response is otherwise indistinguishable from "no content yet".
+ */
+export function toStaticParams<T extends Record<string, unknown>>(
+  items: T[],
+  key: keyof T & string,
+  source: string,
+): Record<string, unknown>[] {
+  if (items.length > 0) return items.map((item) => ({ [key]: item[key] }));
+  console.warn(
+    `[build] ${source}: no rows available while prerendering. Emitting the placeholder slug, ` +
+      `so these routes will render on first request instead of at build time. ` +
+      `Check that the API is reachable at ${API_BASE}.`,
+  );
+  return [{ [key]: BUILD_PLACEHOLDER_SLUG }];
+}
+
 export interface Project {
   id: string;
   title: string;
