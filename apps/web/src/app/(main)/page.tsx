@@ -11,7 +11,6 @@ import { AchievementsSection } from "@/components/sections/achievements-section"
 import { GitHubSection } from "@/components/sections/github-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import { BlogPreviewSection } from "@/components/sections/blog-preview-section";
-import { OrbitSection } from "@/components/sections/orbit-section";
 import { ContactSection } from "@/components/sections/contact-section";
 import { SectionErrorBoundary } from "@/components/layout/section-error-boundary";
 import { getSectionVisibility } from "@/lib/sections";
@@ -62,13 +61,6 @@ export default async function Home() {
           <AboutSection />
         </Section>
       )}
-      {s.about && s.orbit && <ProgressiveBlur height="15vh" />}
-      {s.orbit && (
-        <Section label="orbit" height="100vh">
-          <OrbitSection />
-        </Section>
-      )}
-      {s.orbit && s.skills && <ProgressiveBlur height="15vh" />}
       {s.skills && (
         <Section label="skills" height="60vh">
           <SkillsSection />
