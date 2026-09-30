@@ -12,3 +12,6 @@ turbo.log
 coverage/
 package-lock.json
 .playwright-mcp
+
+# Local sqlite is no longer used - DATABASE_URL points at postgres
+apps/api/prisma/dev.db
