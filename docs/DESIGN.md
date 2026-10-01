@@ -1,6 +1,6 @@
 # Design System — Mehedi Portfolio
 
-> Source of truth: `client/src/app/globals.css` (Tailwind 4 + `tw-animate-css`) and `client/src/app/layout.tsx` (fonts). Keep this doc in sync with those files.
+> Source of truth: `apps/web/src/app/globals.css` (Tailwind 4 + `tw-animate-css`) and `apps/web/src/app/layout.tsx` (fonts). Keep this doc in sync with those files.
 
 ## 1. Brand & Mood
 

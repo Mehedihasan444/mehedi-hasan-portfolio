@@ -10,14 +10,13 @@ mehedi-portfolio/                 # pnpm monorepo (turborepo)
 │   ├── web/                      # Next.js 16.2.10 (App Router, React 19, Tailwind 4)
 │   │   ├── src/app/             # (main) public pages + /admin + layout, loading, error, sitemap, robots
 │   │   ├── src/components/      # 3d/, animations/, layout/, sections/, ui/
-│   │   ├── src/hooks/           # use-scroll-progress (singleton), use-parallax, use-globe-scroll, etc.
+│   │   ├── src/hooks/           # use-parallax, use-globe-scroll, etc.
 │   │   ├── src/lib/             # api-public.ts (React.cache), constants, sections, gsap, utils
 │   │   ├── src/providers/       # Providers, SmoothScrollProvider (Lenis), PageTransition
 │   │   ├── public/              # mehedi_hasan.webp (LCP), projects/*.webp, og-image.png (1200×630)
 │   │   ├── next.config.ts       # cacheComponents, optimizePackageImports, images AVIF/WebP
 │   │   └── docs/PERFORMANCE_AUDIT_2026-08.md
 │   └── api/                     # Backend (API at NEXT_PUBLIC_API_URL, default http://localhost:4000/api/v1)
-├── packages/                    # Reserved for shared libs (currently empty)
 ├── docs/                        # Root docs: DESIGN.md, PRODUCT.md + dated audits
 ├── package.json                 # turbo dev/build/lint/typecheck/format
 ├── pnpm-workspace.yaml          # packages: [apps/*, packages/*]
@@ -64,13 +63,13 @@ Build is green when: `next build` compiles, TypeScript passes, and `eslint .` re
 
 ### Performance (non-negotiable)
 
-Every animation/canvas must guard for low-end devices. Copy the patterns in `client/docs/PERFORMANCE_AUDIT_2026-08.md` C-01..C-17:
+Every animation/canvas must guard for low-end devices. Copy the patterns in `apps/web/docs/PERFORMANCE_AUDIT_2026-08.md` C-01..C-17:
 
 - **Early return** on `window.matchMedia("(prefers-reduced-motion: reduce)").matches` and `"(pointer: coarse)"` (touch).
 - **Pause rAF loops** when `document.hidden` (add `visibilitychange` handling, see `smooth-scroll-provider.tsx`).
 - **Throttle** `mousemove` (32ms or rAF batching) and **cap** particle counts (`MAX_PARTICLES 120`, glitter 90).
 - **Idle-defer** heavy work via `requestIdleCallback` (fallback `setTimeout 500ms`), see `client-animations.tsx`, `globe-scene.tsx`.
-- **Singleton scroll:** Never instantiate `useScrollProgress` more than once per tree. The hook is now a `useSyncExternalStore` singleton — do not revert to per-component listeners.
+- **Singleton scroll:** Never attach more than one scroll-progress subscriber per tree — reuse the existing `useScroll`/`useSyncExternalStore` source instead of per-component listeners.
 - **Lenis:** Disabled on `pointer: coarse` and reduced-motion. Never re-enable on touch without profiling.
 - **CSS:** `body { background-attachment: fixed }` switches to `scroll` on `max-width:768px` via media query — do not remove.
 
@@ -104,6 +103,6 @@ Every animation/canvas must guard for low-end devices. Copy the patterns in `cli
 
 - `docs/DESIGN.md` — color, typography, spacing, glass/gradient system.
 - `docs/PRODUCT.md` — product vision, sections, data model, SEO, deployment.
-- `client/docs/PERFORMANCE_AUDIT_2026-08.md` — full production audit (Verdict: PRODUCTION READY WITH MINOR OPTIMIZATIONS, 2026-08-28).
+- `apps/web/docs/PERFORMANCE_AUDIT_2026-08.md` — full production audit (Verdict: PRODUCTION READY WITH MINOR OPTIMIZATIONS, 2026-08-28).
 
 When you modify behavior, update the corresponding doc. Keep `AGENTS.md` concise — it is the entrypoint agents read first.

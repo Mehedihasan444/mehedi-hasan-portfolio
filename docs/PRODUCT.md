@@ -6,7 +6,7 @@
 
 - **One-liner:** Crafting elegant, scalable web applications at the intersection of design and engineering.
 - **Audience:** remote hiring managers, CTOs, startup founders; peer developers; potential collaborators.
-- **Differentiator:** premium glass/aurora aesthetics with production-grade performance (see `client/docs/PERFORMANCE_AUDIT_2026-08.md` — Verdict: PRODUCTION READY WITH MINOR OPTIMIZATIONS).
+- **Differentiator:** premium glass/aurora aesthetics with production-grade performance (see `apps/web/docs/PERFORMANCE_AUDIT_2026-08.md` — Verdict: PRODUCTION READY WITH MINOR OPTIMIZATIONS).
 - **Voice:** concise, technical, achievement-driven. Hero roles rotate via `Typewriter speed 55 deleteSpeed 30`.
 
 ## 2. Site Map & Sections
