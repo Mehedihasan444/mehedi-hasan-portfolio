@@ -57,19 +57,34 @@ export interface Project {
   updatedAt: string;
 }
 
+// Trims, drops empties, and removes duplicates (case-insensitive, first
+// occurrence wins) — user-entered comma lists like "Zod, React, Zod" must not
+// produce duplicate React keys downstream.
+function dedupeStrings(values: string[]): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const raw of values) {
+    const v = raw.trim();
+    if (!v) continue;
+    const key = v.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(v);
+  }
+  return out;
+}
+
 function parseJsonArray(value: unknown): string[] {
-  if (Array.isArray(value)) return value.filter((v): v is string => typeof v === "string");
+  if (Array.isArray(value))
+    return dedupeStrings(value.filter((v): v is string => typeof v === "string"));
   if (typeof value !== "string") return [];
   try {
     const parsed: unknown = JSON.parse(value);
-    return Array.isArray(parsed) ? parsed.filter((v): v is string => typeof v === "string") : [];
-  } catch {
-    return value
-      ? value
-          .split(",")
-          .map((s) => s.trim())
-          .filter(Boolean)
+    return Array.isArray(parsed)
+      ? dedupeStrings(parsed.filter((v): v is string => typeof v === "string"))
       : [];
+  } catch {
+    return value ? dedupeStrings(value.split(",")) : [];
   }
 }
 

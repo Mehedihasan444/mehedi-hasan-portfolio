@@ -8,6 +8,21 @@ import type { Project } from "@/lib/api-public";
 
 const SLUG_REGEX = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
+// "Zod, React, Zod" → ["Zod", "React"] so saved arrays never carry duplicates.
+function uniqueCsv(value: string): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const raw of value.split(",")) {
+    const v = raw.trim();
+    if (!v) continue;
+    const key = v.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(v);
+  }
+  return out;
+}
+
 const columns = [
   { key: "title", label: "Title" },
   { key: "status", label: "Status" },
@@ -176,18 +191,8 @@ export default function AdminProjectsPage() {
       const payload = {
         ...form,
         slug,
-        techStack: JSON.stringify(
-          form.techStack
-            .split(",")
-            .map((s: string) => s.trim())
-            .filter(Boolean),
-        ),
-        images: JSON.stringify(
-          form.images
-            .split(",")
-            .map((s: string) => s.trim())
-            .filter(Boolean),
-        ),
+        techStack: JSON.stringify(uniqueCsv(form.techStack)),
+        images: JSON.stringify(uniqueCsv(form.images)),
       };
 
       if (editing) {

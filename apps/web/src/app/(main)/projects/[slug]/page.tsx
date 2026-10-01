@@ -75,18 +75,42 @@ export default async function ProjectDetailPage({ params }: Props) {
     githubUrl: isSafeHttpUrl(project.githubUrl) ? project.githubUrl : null,
   };
 
+  // Prev / next among published projects, ordered by `order`.
+  let prev: { title: string; slug: string; image: string | null } | null = null;
+  let next: { title: string; slug: string; image: string | null } | null = null;
+  try {
+    const all = (await getProjects())
+      .filter((p) => p.status === "published")
+      .sort((a, b) => a.order - b.order);
+    const idx = all.findIndex((p) => p.slug === safeProject.slug);
+    if (idx >= 0) {
+      const p = all[idx - 1];
+      const n = all[idx + 1];
+      if (p) prev = { title: p.title, slug: p.slug, image: p.image };
+      if (n) next = { title: n.title, slug: n.slug, image: n.image };
+    }
+  } catch {
+    /* prev/next is progressive enhancement — page renders without it */
+  }
+
   return (
     <div className="min-h-screen">
-      <div className="mx-auto max-w-7xl px-6 pt-24">
-        <Link
-          href="/projects"
-          className="text-muted-foreground hover:text-emerald mb-8 inline-flex items-center gap-2 text-sm transition-colors"
-        >
-          <ArrowLeftIcon className="h-4 w-4" />
-          Back to Projects
-        </Link>
+      <div className="mx-auto max-w-6xl px-6 pt-24">
+        <nav aria-label="Breadcrumb" className="mb-2 flex items-center gap-2 text-sm">
+          <Link
+            href="/projects"
+            className="text-muted-foreground hover:text-emerald inline-flex items-center gap-2 text-sm transition-colors"
+          >
+            <ArrowLeftIcon className="h-4 w-4" />
+            Back to Projects
+          </Link>
+          <span aria-hidden="true" className="text-white/20">
+            /
+          </span>
+          <span className="max-w-55 truncate text-white/60">{safeProject.title}</span>
+        </nav>
       </div>
-      <ProjectDetailClient project={safeProject} />
+      <ProjectDetailClient project={safeProject} prev={prev} next={next} />
     </div>
   );
 }

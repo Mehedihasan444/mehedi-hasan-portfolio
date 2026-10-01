@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Single-loader component: mounted once at the app root. There is exactly one
@@ -35,7 +36,6 @@ export function LoadingScreen() {
 
     let p = 0;
     let exitTimer: ReturnType<typeof setTimeout> | undefined;
-    let hideTimer: ReturnType<typeof setTimeout> | undefined;
     const interval = setInterval(() => {
       p += Math.random() * 22 + 8;
       if (p >= 100) {
@@ -43,7 +43,6 @@ export function LoadingScreen() {
         setProgress(100);
         clearInterval(interval);
         exitTimer = setTimeout(() => setPhase("exit"), 300);
-        hideTimer = setTimeout(() => setVisible(false), 900);
       } else {
         setProgress(Math.round(p));
       }
@@ -52,8 +51,16 @@ export function LoadingScreen() {
     return () => {
       clearInterval(interval);
       if (exitTimer) clearTimeout(exitTimer);
-      if (hideTimer) clearTimeout(hideTimer);
     };
+  }, [phase]);
+
+  // Hide in its own effect: the timer must not live in the "bar" effect's
+  // cleanup, or the phase change to "exit" cancels it and the screen sticks at 100%.
+  useEffect(() => {
+    if (phase !== "exit") return;
+
+    const hideTimer = setTimeout(() => setVisible(false), 600);
+    return () => clearTimeout(hideTimer);
   }, [phase]);
 
   return (
@@ -95,8 +102,15 @@ export function LoadingScreen() {
             className="relative mb-12 flex h-20 w-20 items-center justify-center"
           >
             <div className="from-violet to-cyan animate-pulse-slow absolute inset-0 rounded-2xl bg-gradient-to-br opacity-20 blur-xl" />
-            <div className="border-violet/30 from-violet/20 to-cyan/10 relative flex h-full w-full items-center justify-center rounded-2xl border bg-gradient-to-br">
-              <span className="font-heading text-gradient text-2xl font-bold">MH</span>
+            <div className="border-violet/30 from-violet/20 to-cyan/10 relative h-full w-full overflow-hidden rounded-2xl border bg-gradient-to-br">
+              <Image
+                src="/mehedi_hasan.webp"
+                alt="Mehedi Hasan"
+                fill
+                sizes="80px"
+                priority
+                className="object-cover"
+              />
             </div>
             {/* Orbiting dot — tailwind animate-spin wrapper (no custom keyframes). */}
             <div className="absolute inset-0 animate-spin" style={{ animationDuration: "2s" }}>

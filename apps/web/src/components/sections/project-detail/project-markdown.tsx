@@ -125,7 +125,13 @@ function renderLine(line: string, i: number) {
   );
 }
 
-export function ProjectMarkdown({ content }: { content: string }) {
+export function ProjectMarkdown({
+  content,
+  compact = false,
+}: {
+  content: string;
+  compact?: boolean;
+}) {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -154,13 +160,18 @@ export function ProjectMarkdown({ content }: { content: string }) {
   }, []);
 
   return (
-    <section className="relative px-6 py-24">
+    <section className={`relative ${compact ? "py-10" : "px-6 py-24"}`}>
       <div className="pointer-events-none absolute inset-0">
         <div className="from-emerald/5 via-teal/5 absolute left-1/4 top-1/3 h-96 w-96 -translate-x-1/2 rounded-full bg-gradient-to-br to-transparent blur-[120px]" />
       </div>
       <div className="mx-auto max-w-4xl">
         <ScrollReveal>
-          <h2 className="text-gradient mb-12 text-2xl font-bold">About This Project</h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/40">
+            Overview
+          </p>
+          <h2 className="text-gradient mb-8 mt-1 text-2xl font-bold sm:text-3xl">
+            About This Project
+          </h2>
         </ScrollReveal>
         <div ref={contentRef} className="prose prose-invert prose-emerald max-w-none space-y-6">
           {content.split("\n").map((line, i) => renderLine(line, i))}

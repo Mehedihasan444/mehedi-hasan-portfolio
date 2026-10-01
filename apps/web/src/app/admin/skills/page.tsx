@@ -134,13 +134,14 @@ export default function AdminSkillsPage() {
           <select
             value={form.category}
             onChange={(e) => setForm({ ...form, category: e.target.value })}
+            style={{ colorScheme: "dark" }}
             className="focus:border-emerald/50 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-white focus:outline-none"
           >
-            <option>Frontend</option>
-            <option>Backend</option>
-            <option>Database</option>
-            <option>Language</option>
-            <option>Tools</option>
+            <option className="bg-[#0b1120] text-white">Frontend</option>
+            <option className="bg-[#0b1120] text-white">Backend</option>
+            <option className="bg-[#0b1120] text-white">Database</option>
+            <option className="bg-[#0b1120] text-white">Language</option>
+            <option className="bg-[#0b1120] text-white">Tools</option>
           </select>
           <div>
             <label className="text-muted-foreground text-sm">
