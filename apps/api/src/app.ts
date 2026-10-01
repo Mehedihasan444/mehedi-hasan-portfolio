@@ -39,6 +39,17 @@ const limiter = rateLimit({
 });
 app.use("/api/", limiter);
 
+app.get("/", (_req, res) => {
+  res.json({
+    status: "ok",
+    service: "mehedi-portfolio-api",
+    environment: env.NODE_ENV,
+    uptime: Math.round(process.uptime()),
+    timestamp: new Date().toISOString(),
+    endpoints: { health: "/api/v1/health", api: "/api/v1" },
+  });
+});
+
 app.get("/api/v1/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
