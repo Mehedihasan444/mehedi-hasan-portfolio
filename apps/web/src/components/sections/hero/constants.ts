@@ -7,7 +7,7 @@ export const stats = heroStats;
 // Rotating titles in the hero. `roles[0]` is also the screen-reader text,
 // so keep the first entry as the single most accurate description.
 export const roles = [
-  "Full Stack MERN Developer",
+  "Full Stack Developer",
   "React & Next.js Engineer",
   "TypeScript Developer",
   "Backend Developer",

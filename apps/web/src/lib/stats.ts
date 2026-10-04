@@ -8,9 +8,9 @@
 
 export const siteStats = {
   // Stated by the site owner.
-  yearsExperience: 2,
+  yearsExperience: 1,
   // Counted from the GitHub API: 80 non-fork public repos.
-  projectsCompleted: 80,
+  projectsCompleted: 30,
   // Matches the 18 rows published through /skills.
   technologies: 18,
   // 80 own repos minus the 3 that are forks of other projects.
