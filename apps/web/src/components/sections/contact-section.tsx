@@ -10,7 +10,7 @@ export function ContactSection() {
       <AmbientGlow position="left" color="from-teal/5" size="h-64 w-64" />
       <SectionOverlay variant="default" />
 
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto w-full min-w-0 max-w-7xl">
         <ScrollReveal>
           <div className="text-center">
             <p className="text-muted-foreground mb-4 text-sm font-medium uppercase tracking-[0.3em]">
@@ -26,8 +26,8 @@ export function ContactSection() {
           </div>
         </ScrollReveal>
 
-        <div className="mt-16 grid gap-12 lg:grid-cols-5">
-          <div className="lg:col-span-3">
+        <div className="mt-16 grid min-w-0 gap-12 lg:grid-cols-5">
+          <div className="min-w-0 lg:col-span-3">
             <ContactForm />
           </div>
           <ContactSidebar />

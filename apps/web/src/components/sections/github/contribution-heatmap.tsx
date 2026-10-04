@@ -56,7 +56,7 @@ export function ContributionHeatmap() {
   const last = activityByMonth[activityByMonth.length - 1]?.month ?? "";
 
   return (
-    <div className="overflow-x-auto pb-2">
+    <div className="min-w-0 max-w-full overflow-x-auto pb-2">
       <p className="mb-3 text-xs text-white/40">
         Repositories last pushed, {first} – {last}
       </p>

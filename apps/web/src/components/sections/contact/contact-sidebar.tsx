@@ -38,12 +38,15 @@ function ContactInfoCard() {
               <div className="bg-emerald/10 mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg">
                 <Icon className="text-emerald h-4 w-4" aria-hidden="true" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <span className="block text-[10px] font-medium uppercase tracking-wider text-white/50">
                   {label}
                 </span>
                 {href ? (
-                  <a href={href} className="hover:text-emerald mt-0.5 block transition-colors">
+                  <a
+                    href={href}
+                    className="hover:text-emerald mt-0.5 block min-w-0 break-all transition-colors"
+                  >
                     {value}
                   </a>
                 ) : (

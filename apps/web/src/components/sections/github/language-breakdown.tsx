@@ -32,7 +32,10 @@ function Bar({ lang, index }: { lang: GHLang; index: number }) {
   }, [index]);
 
   return (
-    <div className="flex flex-1 flex-col items-center gap-2" style={{ transformOrigin: "bottom" }}>
+    <div
+      className="flex min-w-0 flex-1 flex-col items-center gap-2"
+      style={{ transformOrigin: "bottom" }}
+    >
       <span className="text-[10px] text-white/50">{lang.percentage}%</span>
       <div
         ref={barRef}
@@ -47,7 +50,7 @@ function Bar({ lang, index }: { lang: GHLang; index: number }) {
         }}
         title={lang.name}
       />
-      <span className="text-muted-foreground text-center text-[9px] leading-tight">
+      <span className="text-muted-foreground max-w-full truncate text-center text-[9px] leading-tight">
         {lang.name}
       </span>
     </div>
@@ -56,15 +59,15 @@ function Bar({ lang, index }: { lang: GHLang; index: number }) {
 
 export function LanguageBreakdown() {
   return (
-    <ScrollReveal direction="left" delay={0.2}>
-      <div className="glass group relative rounded-xl p-6 transition-all duration-500 hover:border-white/20">
+    <ScrollReveal direction="left" delay={0.2} className="min-w-0">
+      <div className="glass group relative min-w-0 overflow-hidden rounded-xl p-4 transition-all duration-500 hover:border-white/20 sm:p-6">
         <div className="from-emerald/5 via-teal/5 absolute inset-0 rounded-xl bg-gradient-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-        <div className="relative z-10">
+        <div className="relative z-10 min-w-0">
           <h3 className="font-medium text-white">Language Breakdown</h3>
           <p className="mt-1 text-xs text-white/40">
             Share of public repositories by primary language
           </p>
-          <div className="mt-6 flex items-end gap-2" style={{ height: 120 }}>
+          <div className="mt-6 flex min-w-0 items-end gap-1 sm:gap-2" style={{ height: 120 }}>
             {languages.map((lang, i) => (
               <Bar key={lang.name} lang={lang} index={i} />
             ))}

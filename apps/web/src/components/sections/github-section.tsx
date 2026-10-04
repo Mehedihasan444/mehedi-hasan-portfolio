@@ -12,7 +12,7 @@ export function GitHubSection() {
       <AmbientGlow position="right" color="from-emerald/5" size="h-80 w-80" />
       <SectionOverlay variant="default" />
 
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto w-full min-w-0 max-w-7xl">
         <ScrollReveal>
           <div className="text-center">
             <p className="text-muted-foreground mb-4 text-sm font-medium uppercase tracking-[0.3em]">
@@ -31,16 +31,16 @@ export function GitHubSection() {
           <GitHubStats />
         </ScrollReveal>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-2">
+        <div className="mt-8 grid min-w-0 gap-6 lg:grid-cols-2">
           <LanguageBreakdown />
 
-          <ScrollReveal direction="right" delay={0.3}>
-            <div className="glass group relative rounded-xl p-6 transition-all duration-500 hover:border-white/20">
+          <ScrollReveal direction="right" delay={0.3} className="min-w-0">
+            <div className="glass group relative min-w-0 overflow-hidden rounded-xl p-4 transition-all duration-500 hover:border-white/20 sm:p-6">
               <div className="from-teal/5 via-emerald/5 absolute inset-0 rounded-xl bg-gradient-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              <div className="relative z-10">
-                <div className="mb-4 flex items-center justify-between">
-                  <h3 className="font-medium text-white">Contribution Activity</h3>
-                  <span className="text-muted-foreground text-xs">Last 6 months</span>
+              <div className="relative z-10 min-w-0">
+                <div className="mb-4 flex min-w-0 items-center justify-between gap-2">
+                  <h3 className="min-w-0 truncate font-medium text-white">Contribution Activity</h3>
+                  <span className="text-muted-foreground shrink-0 text-xs">Last 6 months</span>
                 </div>
                 <ContributionHeatmap />
                 <div className="text-muted-foreground mt-4 flex items-center gap-2 text-xs">

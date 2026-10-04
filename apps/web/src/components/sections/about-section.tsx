@@ -65,17 +65,17 @@ export function AboutSection() {
         />
       </div>
 
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto w-full min-w-0 max-w-7xl">
         <ScrollReveal>
           <p className="text-muted-foreground mb-4 text-sm font-medium uppercase tracking-[0.3em]">
             About Me
           </p>
         </ScrollReveal>
 
-        <div className="grid gap-16 lg:grid-cols-2">
-          <div>
+        <div className="grid min-w-0 gap-12 sm:gap-16 lg:grid-cols-2">
+          <div className="min-w-0">
             <ScrollReveal direction="left" delay={0.2}>
-              <h2 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+              <h2 className="text-balance break-words text-3xl font-bold leading-tight tracking-tight sm:text-5xl">
                 Turning complex problems into{" "}
                 <span className="text-gradient">elegant solutions</span>
               </h2>

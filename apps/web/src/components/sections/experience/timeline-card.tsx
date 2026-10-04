@@ -63,12 +63,12 @@ export function TimelineCard({ exp, index }: { exp: FormattedExperience; index: 
   return (
     <div
       ref={cardRef}
-      className={`relative mb-12 pl-16 md:w-1/2 md:pl-0 ${
+      className={`relative mb-12 min-w-0 pl-12 sm:pl-16 md:w-1/2 md:pl-0 ${
         index % 2 === 0 ? "md:pr-16 md:text-right" : "md:ml-auto md:pl-16"
       }`}
     >
       <div
-        className={`timeline-dot absolute left-8 top-4 ${
+        className={`timeline-dot absolute left-5 top-4 sm:left-8 ${
           index % 2 === 0 ? "md:left-auto md:right-[-7px]" : "md:left-[-7px] md:right-auto"
         }`}
       >

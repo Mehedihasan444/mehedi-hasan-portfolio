@@ -8,7 +8,7 @@ export async function ExperienceSection() {
 
   return (
     <section id="experience" className="relative overflow-hidden px-6 py-32">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto w-full min-w-0 max-w-7xl">
         <ScrollReveal>
           <div className="text-center">
             <p className="text-muted-foreground mb-4 text-sm font-medium uppercase tracking-[0.3em]">
@@ -23,8 +23,8 @@ export async function ExperienceSection() {
           </div>
         </ScrollReveal>
 
-        <div className="relative mt-20">
-          <div className="absolute left-8 top-0 h-full w-[18px] translate-x-[-2px] md:left-1/2 md:-translate-x-1/2">
+        <div className="relative mt-20 min-w-0">
+          <div className="absolute left-5 top-0 h-full w-[18px] translate-x-[-2px] sm:left-8 md:left-1/2 md:-translate-x-1/2">
             <TimelineLine />
           </div>
 

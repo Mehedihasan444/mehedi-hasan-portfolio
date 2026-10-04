@@ -88,16 +88,16 @@ export function HeroSection() {
       >
         <motion.div
           style={{ y: contentY, opacity: contentOpacity, scale: contentScale }}
-          className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pt-24"
+          className="relative z-10 flex w-full min-w-0 flex-1 flex-col items-center justify-center px-4 pt-24 sm:px-6"
         >
           <HeroContent />
         </motion.div>
 
         <CharacterScrollOut
           ariaLabel="Hi, I'm Mehedi Hasan"
-          className="relative z-10 w-full px-6 pb-12 md:px-10"
+          className="relative z-10 w-full min-w-0 px-4 pb-12 sm:px-6 md:px-10"
         >
-          <h1 className="font-heading text-center text-5xl font-bold uppercase leading-[1.08] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
+          <h1 className="font-heading text-balance break-words text-center text-4xl font-bold uppercase leading-[1.08] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
             <SplitChars text="Hi, I'm " />
             <SplitChars
               text="Mehedi Hasan"
