@@ -142,6 +142,7 @@ export default function AdminSkillsPage() {
             <option className="bg-[#0b1120] text-white">Database</option>
             <option className="bg-[#0b1120] text-white">Language</option>
             <option className="bg-[#0b1120] text-white">Tools</option>
+            <option className="bg-[#0b1120] text-white">AI Engineering</option>
           </select>
           <div>
             <label className="text-muted-foreground text-sm">
