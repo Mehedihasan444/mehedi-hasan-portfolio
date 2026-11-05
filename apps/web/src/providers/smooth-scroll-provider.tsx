@@ -21,6 +21,22 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
 
     lenis.on("scroll", ScrollTrigger.update);
 
+    // Lenis measures its scroll limit from <html>, which is `h-full` (fixed
+    // to the viewport height), so its internal ResizeObserver never sees
+    // content growth from streamed Suspense sections or lazy images. The
+    // limit then freezes at the initial page height and every wheel past it
+    // gets clamped back — the page feels stuck below Education. <body> does
+    // grow, so observe it and remeasure both Lenis and ScrollTrigger.
+    let resizeTimer: ReturnType<typeof setTimeout> | null = null;
+    const bodyRo = new ResizeObserver(() => {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        lenis.resize();
+        ScrollTrigger.refresh();
+      }, 150);
+    });
+    bodyRo.observe(document.body);
+
     let rafId = 0;
     let running = true;
 
@@ -34,6 +50,8 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
     return () => {
       running = false;
       cancelAnimationFrame(rafId);
+      if (resizeTimer) clearTimeout(resizeTimer);
+      bodyRo.disconnect();
       lenis.destroy();
     };
   }, []);

@@ -342,6 +342,28 @@ export const getSkills = cache(async (): Promise<Skill[]> => {
   }
 });
 
+export interface GuestbookEntry {
+  id: string;
+  name: string;
+  message: string;
+  approved: boolean;
+  createdAt: string;
+}
+
+export const getGuestbookEntries = cache(async (): Promise<GuestbookEntry[]> => {
+  try {
+    const res = await fetch(`${API_BASE}/guestbook`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return [];
+    const data: unknown = await res.json();
+    if (!isRecord(data)) return [];
+    return asArray<GuestbookEntry>(data.data);
+  } catch {
+    return [];
+  }
+});
+
 export const getProjects = cache(async (): Promise<FormattedProject[]> => {
   try {
     const res = await fetch(`${API_BASE}/projects`, {
@@ -351,6 +373,54 @@ export const getProjects = cache(async (): Promise<FormattedProject[]> => {
     const data: unknown = await res.json();
     if (!isRecord(data)) return [];
     return asArray<Project>(data.data).map(formatProject);
+  } catch {
+    return [];
+  }
+});
+
+export interface CompetitiveProfile {
+  id: string;
+  platform: string;
+  handle: string;
+  url: string | null;
+  stat: string;
+  detail: string | null;
+  badge: string | null;
+  order: number;
+  createdAt: string;
+}
+
+export interface CompetitiveStat {
+  id: string;
+  value: string;
+  label: string;
+  order: number;
+  createdAt: string;
+}
+
+export const getCompetitiveProfiles = cache(async (): Promise<CompetitiveProfile[]> => {
+  try {
+    const res = await fetch(`${API_BASE}/competitive-profiles`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return [];
+    const data: unknown = await res.json();
+    if (!isRecord(data)) return [];
+    return asArray<CompetitiveProfile>(data.data);
+  } catch {
+    return [];
+  }
+});
+
+export const getCompetitiveStats = cache(async (): Promise<CompetitiveStat[]> => {
+  try {
+    const res = await fetch(`${API_BASE}/competitive-stats`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return [];
+    const data: unknown = await res.json();
+    if (!isRecord(data)) return [];
+    return asArray<CompetitiveStat>(data.data);
   } catch {
     return [];
   }

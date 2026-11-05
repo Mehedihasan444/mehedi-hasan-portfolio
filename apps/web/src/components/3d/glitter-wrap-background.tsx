@@ -11,7 +11,7 @@ interface GlitterWrapProps {
 }
 
 function GlitterWrapCanvas({
-  particleCount = 200,
+  particleCount = 90,
   color1 = "#34d399",
   color2 = "#06b6d4",
   color3 = "#a78bfa",
@@ -41,6 +41,7 @@ function GlitterWrapCanvas({
     const cy = h / 2;
     const colors = [color1, color2, color3];
 
+    // Reduced particle count from 180→90, each particle tracked with minimal properties
     const stars = Array.from({ length: particleCount }, () => {
       const angle = Math.random() * Math.PI * 2;
       const radius = Math.max(w, h) * (0.15 + Math.random() * 0.55);
@@ -49,10 +50,10 @@ function GlitterWrapCanvas({
         radius,
         x: cx + Math.cos(angle) * radius,
         y: cy + Math.sin(angle) * radius,
-        r: 0.8 + Math.random() * 2,
-        a: 0.4 + Math.random() * 0.6,
-        speed: (0.1 + Math.random() * 0.3) * (Math.random() > 0.5 ? 1 : -1),
-        drift: (Math.random() - 0.5) * 0.02,
+        r: 0.5 + Math.random() * 1.5, // reduced from 0.8+2 to 0.5+1.5
+        a: 0.5 + Math.random() * 0.5,
+        speed: (0.08 + Math.random() * 0.2) * (Math.random() > 0.5 ? 1 : -1),
+        drift: (Math.random() - 0.5) * 0.01, // reduced from 0.02
         c: colors[Math.floor(Math.random() * 3)],
         seed: Math.random() * 1000,
       };

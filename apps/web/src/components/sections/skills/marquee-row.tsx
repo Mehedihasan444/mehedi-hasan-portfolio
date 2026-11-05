@@ -41,16 +41,21 @@ const TechPill = memo(function TechPill({ name, color }: { name: string; color: 
 interface MarqueeRowProps {
   items: string[];
   label?: string;
+  direction?: "left" | "right";
 }
 
-export function MarqueeRow({ items, label = "Technologies" }: MarqueeRowProps) {
+export function MarqueeRow({ items, label = "Technologies", direction = "left" }: MarqueeRowProps) {
   if (items.length === 0) return null;
   const doubled = [...items, ...items];
+  const trackCls =
+    direction === "right"
+      ? "marquee-track marquee-track-reverse flex gap-3"
+      : "marquee-track flex gap-3";
 
   return (
     <div className="marquee-container overflow-hidden py-2">
       {/* Visual duplicated track is decorative — screen readers use the list below. */}
-      <div className="marquee-track flex gap-3" aria-hidden="true">
+      <div className={trackCls} aria-hidden="true">
         {doubled.map((name, i) => (
           <TechPill key={`${name}-${i}`} name={name} color={hashColor(name)} />
         ))}

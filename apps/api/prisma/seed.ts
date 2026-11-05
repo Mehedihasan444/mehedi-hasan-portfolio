@@ -73,8 +73,10 @@ async function main() {
     "section_certifications",
     "section_achievements",
     "section_github",
+    "section_competitive-programming",
     "section_testimonials",
     "section_blog",
+    "section_guestbook",
     "section_contact",
   ];
 
@@ -128,6 +130,68 @@ async function main() {
         type: "full-time",
       },
     });
+  }
+
+  const competitiveProfiles = [
+    {
+      platform: "LeetCode",
+      handle: "@Mehedihasan444",
+      url: "https://leetcode.com/u/Mehedihasan444/",
+      stat: "500+ solved",
+      detail: "Data structures & algorithms practice",
+      badge: "Knight badge",
+      order: 1,
+    },
+    {
+      platform: "Codeforces",
+      handle: "@Mehedihasan444",
+      url: "https://codeforces.com/profile/Mehedihasan444",
+      stat: "Specialist · 1400+",
+      detail: "Rated contests & problem sets",
+      badge: "Specialist",
+      order: 2,
+    },
+    {
+      platform: "CodeChef",
+      handle: "@mehedihasan444",
+      url: "https://www.codechef.com/users/mehedihasan444",
+      stat: "3★ · 1600+",
+      detail: "Long challenges & cook-offs",
+      badge: "3 Star",
+      order: 3,
+    },
+    {
+      platform: "HackerRank",
+      handle: "@Mehedihasan444",
+      url: "https://www.hackerrank.com/profile/Mehedihasan444",
+      stat: "5★ Problem Solving",
+      detail: "Gold badges in DSA tracks",
+      badge: "Gold",
+      order: 4,
+    },
+  ];
+
+  for (const profile of competitiveProfiles) {
+    const existing = await prisma.competitiveProfile.findFirst({
+      where: { platform: profile.platform },
+    });
+    if (!existing) {
+      await prisma.competitiveProfile.create({ data: profile });
+    }
+  }
+
+  const competitiveStats = [
+    { value: "800+", label: "Problems Solved", order: 1 },
+    { value: "120+", label: "Contests Joined", order: 2 },
+    { value: "4", label: "Active Platforms", order: 3 },
+    { value: "3+", label: "Years of Practice", order: 4 },
+  ];
+
+  for (const stat of competitiveStats) {
+    const existing = await prisma.competitiveStat.findFirst({ where: { label: stat.label } });
+    if (!existing) {
+      await prisma.competitiveStat.create({ data: stat });
+    }
   }
 
   const projects = [

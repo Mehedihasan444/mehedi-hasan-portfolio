@@ -3,6 +3,7 @@ import { prisma } from "../config/database";
 import { createCrudRoutes } from "../utils/crud-factory";
 import authRoutes from "./auth/auth.routes";
 import contactRoutes from "./contact/contact.routes";
+import guestbookRoutes from "./guestbook/guestbook.routes";
 import projectRoutes from "./projects/projects.routes";
 import uploadRoutes from "./upload/upload.routes";
 
@@ -17,9 +18,15 @@ router.use("/experiences", createCrudRoutes(prisma.experience, { publicRead: tru
 router.use("/blog", createCrudRoutes(prisma.blogPost, { publicRead: true }));
 router.use("/testimonials", createCrudRoutes(prisma.testimonial, { publicRead: true }));
 router.use("/contact", contactRoutes);
+router.use("/guestbook", guestbookRoutes);
 router.use("/education", createCrudRoutes(prisma.education, { publicRead: true }));
 router.use("/certifications", createCrudRoutes(prisma.certification, { publicRead: true }));
 router.use("/achievements", createCrudRoutes(prisma.achievement, { publicRead: true }));
+router.use(
+  "/competitive-profiles",
+  createCrudRoutes(prisma.competitiveProfile, { publicRead: true }),
+);
+router.use("/competitive-stats", createCrudRoutes(prisma.competitiveStat, { publicRead: true }));
 router.use("/contributions", createCrudRoutes(prisma.openSourceContribution, { publicRead: true }));
 router.use("/research", createCrudRoutes(prisma.research, { publicRead: true }));
 router.use("/site-settings", createCrudRoutes(prisma.siteSetting, { publicRead: true }));

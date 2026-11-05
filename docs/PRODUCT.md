@@ -11,29 +11,31 @@
 
 ## 2. Site Map & Sections
 
-Canonical URL `https://mehedi-hasan.dev` (`SITE_URL`). 12 sections toggled via `src/lib/sections.ts` / `DEFAULT_SECTIONS` (default all `true`; `site-settings` key `section_<name> = "true"`).
+Canonical URL `https://mehedi-hasan.dev` (`SITE_URL`). 14 sections toggled via `src/lib/sections.ts` / `DEFAULT_SECTIONS` (default all `true`; `site-settings` key `section_<name> = "true"`).
 
-| #   | Route / Anchor    | Section component                                                                                            | Data source                              |
-| --- | ----------------- | ------------------------------------------------------------------------------------------------------------ | ---------------------------------------- |
-| 1   | `/#hero`          | `hero-section.tsx` (Globe + Glitter + Aurora fixed `z-0`)                                                    | static (`hero/constants.ts` roles/stats) |
-| 2   | `/#about`         | `about-section.tsx` (`ParallaxImage` lazy below-fold, `ValueCard`, `WordRevealText`)                         | static                                   |
-| 3   | `/#skills`        | `skills-section.tsx` (`marquee-row`; API-first with static fallback)                                         | `GET /skills` (paginated)                |
-| 4   | `/#experience`    | `experience-section.tsx` (`timeline-card`, `timeline-line`)                                                  | `GET /experiences`                       |
-| 5   | `/#projects`      | `projects-section.tsx` + `projects/work-track.tsx` (pinned horizontal scroll, numbered work boxes, CTA card) | `GET /projects` (paginated)              |
-| 6   | `#education`      | `education-section.tsx`                                                                                      | `GET /education`                         |
-| 7   | `#certifications` | `certifications-section.tsx` (`cert-card`)                                                                   | `GET /certifications`                    |
-| 8   | `#achievements`   | `achievements-section.tsx`                                                                                   | `GET /achievements`                      |
-| 9   | `#github`         | `github-section.tsx` (`contribution-heatmap`, `language-breakdown`)                                          | static + GitHub API (optional)           |
-| 10  | `#testimonials`   | `testimonials-section.tsx`                                                                                   | `GET /testimonials`                      |
-| 11  | `#blog`           | `blog-preview-section.tsx` (3 cards) → `/blog` + `/blog/[slug]`                                              | `GET /blog` via `React.cache`            |
-| 12  | `/#contact`       | `contact-section.tsx` (`contact-form` → `POST /contact`, `contact-sidebar`)                                  | `POST /contact` (5/15m + honeypot)       |
+| #   | Route / Anchor             | Section component                                                                                            | Data source                                                                                  |
+| --- | -------------------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| 1   | `/#hero`                   | `hero-section.tsx` (Globe + Glitter + Aurora fixed `z-0`)                                                    | static (`hero/constants.ts` roles/stats)                                                     |
+| 2   | `/#about`                  | `about-section.tsx` (`ParallaxImage` lazy below-fold, `ValueCard`, `WordRevealText`)                         | static                                                                                       |
+| 3   | `/#skills`                 | `skills-section.tsx` (`marquee-row`; API-first with static fallback)                                         | `GET /skills` (paginated)                                                                    |
+| 4   | `/#experience`             | `experience-section.tsx` (`timeline-card`, `timeline-line`)                                                  | `GET /experiences`                                                                           |
+| 5   | `/#projects`               | `projects-section.tsx` + `projects/work-track.tsx` (pinned horizontal scroll, numbered work boxes, CTA card) | `GET /projects` (paginated)                                                                  |
+| 6   | `#education`               | `education-section.tsx`                                                                                      | `GET /education`                                                                             |
+| 7   | `#certifications`          | `certifications-section.tsx` (`cert-card`)                                                                   | `GET /certifications`                                                                        |
+| 8   | `#achievements`            | `achievements-section.tsx`                                                                                   | `GET /achievements`                                                                          |
+| 9   | `#github`                  | `github-section.tsx` (`contribution-heatmap`, `language-breakdown`)                                          | static + GitHub API (optional)                                                               |
+| 10  | `#competitive-programming` | `competitive-programming-section.tsx` (stat strip + platform cards, API-first with static fallback)          | `GET /competitive-profiles`, `GET /competitive-stats` via `React.cache`                      |
+| 11  | `#testimonials`            | `testimonials-section.tsx`                                                                                   | `GET /testimonials`                                                                          |
+| 12  | `#blog`                    | `blog-preview-section.tsx` (3 cards) → `/blog` + `/blog/[slug]`                                              | `GET /blog` via `React.cache`                                                                |
+| 13  | `#guestbook`               | `guestbook-section.tsx` (`guestbook-client` form → `POST /guestbook`, wall via `GET /guestbook`)             | `GET /guestbook` (approved only, ISR 60s) + `POST /guestbook` (5/15m + honeypot, unapproved) |
+| 14  | `/#contact`                | `contact-section.tsx` (`contact-form` → `POST /contact`, `contact-sidebar`)                                  | `POST /contact` (5/15m + honeypot)                                                           |
 
 Plus routes:
 
 - `/projects` (grid) + `/projects/[slug]` (`generateMetadata` + `ProjectDetailClient` with `gallery-grid` + `lightbox` + `project-markdown`)
 - `/blog` + `/blog/[slug]` (`blog-content.tsx` line-split markdown, `fallback` to full-list scan)
 - `/contact` (standalone contact page)
-- `/admin/*` — auth `layout.tsx` + CRUD pages (`achievements`, `blog`, `certifications`, `dashboard`, `education`, `experiences`, `messages`, `projects`, `settings`, `skills`, `testimonials`) — not part of public performance audit.
+- `/admin/*` — auth `layout.tsx` + CRUD pages (`achievements`, `blog`, `certifications`, `competitive-programming` (profiles + headline stats), `dashboard`, `education`, `experiences`, `guestbook` (approve/delete moderation), `messages`, `projects`, `settings`, `skills`, `testimonials`) — not part of public performance audit.
 - `robots.ts`, `sitemap.ts` (dynamic), `not-found.tsx`, `error.tsx`, `loading.tsx`.
 
 `src/app/(main)/page.tsx` composes all sections, each wrapped `Suspense fallback <SectionFallback>` with `ProgressiveBlur` 15–20vh dividers. `layout.tsx` wraps with `Providers` (next-themes dark), `SmoothScrollProvider` (Lenis, fine-pointer only), `LoadingScreen` (sessionStorage once, 900ms), `Navbar`/`Footer`, `PageTransition` (opacity 0.25s).
@@ -42,17 +44,20 @@ Plus routes:
 
 **Base:** `NEXT_PUBLIC_API_URL` (`http://localhost:4000/api/v1` fallback) — constant `API_BASE`. All public reads are `fetch(..., { next: { revalidate: 60 } })` (ISR 60s) and `React.cache` deduped (see `src/lib/api-public.ts:1`).
 
-| Entity        | Key fields                                                                                                                     | Endpoint                                        |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------- |
-| Project       | `title, slug, description, content, techStack (JSON array), liveUrl, githubUrl, image, images (JSON), featured, order, status` | `GET /projects`, `GET /projects/slug/:slug`     |
-| Skill         | `name, category, icon, proficiency, order`                                                                                     | `GET /skills`                                   |
-| Experience    | `company, role, description, startDate, endDate, location, type, current, tags`                                                | `GET /experiences`                              |
-| Education     | `institution, degree, field, description, startDate, endDate, location, gpa, tags`                                             | `GET /education`                                |
-| Certification | `title, issuer, url, date, description, image`                                                                                 | `GET /certifications`                           |
-| Testimonial   | `name, role, company, content, avatar, rating, featured, order`                                                                | `GET /testimonials`                             |
-| Achievement   | `title, description, date, icon`                                                                                               | `GET /achievements`                             |
-| BlogPost      | `title, slug, content, excerpt, tags (JSON), image, published, featured`                                                       | `GET /blog`, `GET /blog/slug/:slug` (preferred) |
-| SiteSettings  | `key=section_<name>, value="true"/"false"`                                                                                     | `GET /site-settings`                            |
+| Entity             | Key fields                                                                                                                     | Endpoint                                                                           |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| Project            | `title, slug, description, content, techStack (JSON array), liveUrl, githubUrl, image, images (JSON), featured, order, status` | `GET /projects`, `GET /projects/slug/:slug`                                        |
+| Skill              | `name, category, icon, proficiency, order`                                                                                     | `GET /skills`                                                                      |
+| Experience         | `company, role, description, startDate, endDate, location, type, current, tags`                                                | `GET /experiences`                                                                 |
+| Education          | `institution, degree, field, description, startDate, endDate, location, gpa, tags`                                             | `GET /education`                                                                   |
+| Certification      | `title, issuer, url, date, description, image`                                                                                 | `GET /certifications`                                                              |
+| Testimonial        | `name, role, company, content, avatar, rating, featured, order`                                                                | `GET /testimonials`                                                                |
+| Achievement        | `title, description, date, icon`                                                                                               | `GET /achievements`                                                                |
+| BlogPost           | `title, slug, content, excerpt, tags (JSON), image, published, featured`                                                       | `GET /blog`, `GET /blog/slug/:slug` (preferred)                                    |
+| GuestbookEntry     | `name, message, approved (default false), createdAt`                                                                           | `GET /guestbook` (approved only, public), `POST /guestbook` (public, rate-limited) |
+| CompetitiveProfile | `platform, handle, url, stat, detail, badge, order`                                                                            | `GET /competitive-profiles` (public) via generic CRUD                              |
+| CompetitiveStat    | `value, label, order`                                                                                                          | `GET /competitive-stats` (public) via generic CRUD                                 |
+| SiteSettings       | `key=section_<name>, value="true"/"false"`                                                                                     | `GET /site-settings`                                                               |
 
 `parseJsonArray` handles JSON-encoded `techStack/tags/images` strings. `formatProject`/`formatBlogPost` normalize.
 
@@ -65,7 +70,7 @@ Plus routes:
 
 ## 5. Content & Admin
 
-Admin is SPA at `/admin/*` (protected `layout.tsx`, token-gated). Auth sets an httpOnly `SameSite=strict` cookie (+ Bearer fallback); `POST /auth/register` is blocked in production unless `ALLOW_PUBLIC_REGISTER=true`, and all write routes + contact/message reads require the `admin` role. List endpoints are paginated (`?page&limit`, max 100). No public writes except contact `POST /contact`. Public pages are `cacheComponents` static + ISR; admin pages are client-rendered.
+Admin is SPA at `/admin/*` (protected `layout.tsx`, token-gated). Auth sets an httpOnly `SameSite=strict` cookie (+ Bearer fallback); `POST /auth/register` is blocked in production unless `ALLOW_PUBLIC_REGISTER=true`, and all write routes + contact/message/guestbook reads require the `admin` role. List endpoints are paginated (`?page&limit`, max 100). Public writes: contact `POST /contact` and guestbook `POST /guestbook` (both 5/15m + honeypot; guestbook entries land `approved: false` until moderated via `GET /guestbook/all` + `PUT /guestbook/:id`). Public pages are `cacheComponents` static + ISR; admin pages are client-rendered.
 
 ## 6. SEO
 

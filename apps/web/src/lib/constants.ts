@@ -43,8 +43,10 @@ export const DEFAULT_SECTIONS = [
   "certifications",
   "achievements",
   "github",
+  "competitive-programming",
   "testimonials",
   "blog",
+  "guestbook",
   "contact",
 ] as const;
 

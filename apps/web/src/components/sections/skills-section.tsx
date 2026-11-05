@@ -52,8 +52,10 @@ export async function SkillsSection() {
         {row1.length > 0 && (
           <ScrollReveal delay={0.2}>
             <div className="mt-20 space-y-3">
-              <MarqueeRow items={row1} label="Primary technologies" />
-              {row2.length > 0 && <MarqueeRow items={row2} label="Additional technologies" />}
+              <MarqueeRow items={row1} label="Primary technologies" direction="left" />
+              {row2.length > 0 && (
+                <MarqueeRow items={row2} label="Additional technologies" direction="right" />
+              )}
             </div>
           </ScrollReveal>
         )}

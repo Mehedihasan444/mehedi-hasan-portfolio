@@ -14,8 +14,10 @@ const sidebarLinks = [
   { label: "Certifications", href: "/admin/certifications" },
   { label: "Testimonials", href: "/admin/testimonials" },
   { label: "Achievements", href: "/admin/achievements" },
+  { label: "Competitive", href: "/admin/competitive-programming" },
   { label: "Blog", href: "/admin/blog" },
   { label: "Messages", href: "/admin/messages" },
+  { label: "Guestbook", href: "/admin/guestbook" },
   { label: "Settings", href: "/admin/settings" },
 ];
 

@@ -15,8 +15,10 @@ const sectionLabels: Record<string, string> = {
   section_certifications: "Certifications",
   section_achievements: "Achievements",
   section_github: "GitHub",
+  "section_competitive-programming": "Competitive Programming",
   section_testimonials: "Testimonials",
   section_blog: "Blog",
+  section_guestbook: "Guestbook",
   section_contact: "Contact",
 };
 

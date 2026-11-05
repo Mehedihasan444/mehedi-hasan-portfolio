@@ -37,8 +37,8 @@ export function AuroraShaderBackground({ className }: { className?: string }) {
         uniform float iTime;
         uniform vec2 iResolution;
 
-        #define NUM_OCTAVES 3
-        #define ITERATIONS 15.0
+        #define NUM_OCTAVES 2   // Reduced from 3
+        #define ITERATIONS 8.0  // Reduced from 15
 
         float rand(vec2 n) {
           return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);
@@ -68,29 +68,29 @@ export function AuroraShaderBackground({ className }: { className?: string }) {
         }
 
         void main() {
-          vec2 shake = vec2(sin(iTime * 1.2) * 0.005, cos(iTime * 2.1) * 0.005);
+          vec2 shake = vec2(sin(iTime * 0.6) * 0.005, cos(iTime * 1.2) * 0.005);
           vec2 p = ((gl_FragCoord.xy + shake * iResolution.xy) - iResolution.xy * 0.5) / iResolution.y * mat2(6.0, -4.0, 4.0, 6.0);
           vec2 v;
           vec4 o = vec4(0.0);
 
-          float f = 2.0 + fbm(p + vec2(iTime * 5.0, 0.0)) * 0.5;
+          float f = 2.0 + fbm(p + vec2(iTime * 2.0, 0.0)) * 0.3;
 
           for (float i = 0.0; i < ITERATIONS; i++) {
-            v = p + cos(i * i + (iTime + p.x * 0.08) * 0.025 + i * vec2(13.0, 11.0)) * 3.5 + vec2(sin(iTime * 3.0 + i) * 0.003, cos(iTime * 3.5 - i) * 0.003);
-            float tailNoise = fbm(v + vec2(iTime * 0.5, i)) * 0.3 * (1.0 - (i / ITERATIONS));
+            v = p + cos(i * i + (iTime + p.x * 0.08) * 0.025 + i * vec2(13.0, 11.0)) * 3.5 + vec2(sin(iTime * 2.0 + i) * 0.003, cos(iTime * 2.5 - i) * 0.003);
+            float tailNoise = fbm(v + vec2(iTime * 0.3, i)) * 0.2 * (1.0 - (i / ITERATIONS));
             vec4 auroraColors = vec4(
-              0.05 + 0.25 * sin(i * 0.2 + iTime * 0.4),
-              0.4 + 0.5 * cos(i * 0.3 + iTime * 0.5),
+              0.05 + 0.25 * sin(i * 0.2 + iTime * 0.3),
+              0.4 + 0.5 * cos(i * 0.3 + iTime * 0.4),
               0.4 + 0.35 * sin(i * 0.4 + iTime * 0.3),
               1.0
             );
-            vec4 currentContribution = auroraColors * exp(sin(i * i + iTime * 0.8)) / length(max(v, vec2(v.x * f * 0.015, v.y * 1.5)));
+            vec4 currentContribution = auroraColors * exp(sin(i * i + iTime * 0.6)) / length(max(v, vec2(v.x * f * 0.015, v.y * 1.5)));
             float thinnessFactor = smoothstep(0.0, 1.0, i / ITERATIONS) * 0.6;
-            o += currentContribution * (1.0 + tailNoise * 0.8) * thinnessFactor;
+            o += currentContribution * (1.0 + tailNoise * 0.6) * thinnessFactor;
           }
 
-          o = tanh(pow(o / 100.0, vec4(1.6)));
-          gl_FragColor = o * 1.5;
+          o = tanh(pow(o / 100.0, vec4(1.4)));
+          gl_FragColor = o * 1.3;
         }
       `,
     });
@@ -102,7 +102,7 @@ export function AuroraShaderBackground({ className }: { className?: string }) {
     let frameId: number;
     let running = true;
     let lastFrame = performance.now();
-    const TICK_RATE = 1000 / 18;
+    const TICK_RATE = 1000 / 30; // Reduced from 60fps to 30fps
 
     const animate = (now: number) => {
       if (!running) return;

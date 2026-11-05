@@ -62,30 +62,38 @@ export function CustomCursor() {
       cursorRef.current?.classList.remove("mix-blend-difference");
     };
 
-    const observer = new MutationObserver(() => {
-      document
-        .querySelectorAll("a, button, input, textarea, select, [data-cursor='pointer']")
-        .forEach((el) => {
-          if ((el as HTMLElement).dataset.cursorBound) return;
-          (el as HTMLElement).dataset.cursorBound = "true";
-          el.addEventListener("mouseenter", onEnter);
-          el.addEventListener("mouseleave", onLeave);
-        });
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
+    // Event delegation: no per-element listeners, no DOM mutation (dataset),
+    // so React hydration never sees extra attributes like `data-cursor-bound`.
+    const isInteractive = (target: EventTarget | null) =>
+      (target as HTMLElement | null)?.closest?.(
+        "a, button, input, textarea, select, [data-cursor='pointer']",
+      ) ?? null;
 
-    document.querySelectorAll("a, button, input, textarea, select").forEach((el) => {
-      (el as HTMLElement).dataset.cursorBound = "true";
-      el.addEventListener("mouseenter", onEnter);
-      el.addEventListener("mouseleave", onLeave);
-    });
+    const onOver = (e: MouseEvent) => {
+      const to = isInteractive(e.target);
+      if (!to) return;
+      // Mimic mouseenter: ignore moves within the same interactive ancestor
+      if (to === isInteractive(e.relatedTarget)) return;
+      onEnter();
+    };
+    const onOut = (e: MouseEvent) => {
+      const from = isInteractive(e.target);
+      if (!from) return;
+      // Mimic mouseleave: ignore moves within the same interactive ancestor
+      if (from === isInteractive(e.relatedTarget)) return;
+      onLeave();
+    };
+
+    document.addEventListener("mouseover", onOver, { passive: true });
+    document.addEventListener("mouseout", onOut, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mousedown", onDown);
       window.removeEventListener("mouseup", onUp);
+      document.removeEventListener("mouseover", onOver);
+      document.removeEventListener("mouseout", onOut);
       if (raf) cancelAnimationFrame(raf);
-      observer.disconnect();
     };
   }, [enabled, mouseX, mouseY]);
 

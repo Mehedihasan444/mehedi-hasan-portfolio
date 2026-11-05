@@ -8,20 +8,20 @@
 
 export const siteStats = {
   // Stated by the site owner.
-  yearsExperience: 1,
+  yearsExperience: 2,
   // Counted from the GitHub API: 80 non-fork public repos.
   projectsCompleted: 30,
   // Matches the 18 rows published through /skills.
   technologies: 18,
   // 80 own repos minus the 3 that are forks of other projects.
-  openSource: 77,
+  // openSource: 77,
 } as const;
 
 export const aboutStats = [
   { end: siteStats.yearsExperience, suffix: "+", label: "Years Experience" },
   { end: siteStats.projectsCompleted, suffix: "+", label: "Projects Completed" },
   { end: siteStats.technologies, suffix: "+", label: "Technologies" },
-  { end: siteStats.openSource, suffix: "+", label: "Open Source" },
+  // { end: siteStats.openSource, suffix: "+", label: "Open Source" },
 ];
 
 export const heroStats = [
@@ -40,12 +40,12 @@ export const achievementMetrics = [
   },
   // GitHub search API: 125 pull requests authored as of 2026-09-30.
   { value: "125+", label: "Pull Requests", icon: "Code2", gradient: "from-teal to-cyan" },
-  {
-    value: `${siteStats.openSource}+`,
-    label: "Open Source Repos",
-    icon: "GitBranch",
-    gradient: "from-cyan to-emerald",
-  },
+  // {
+  //   value: `${siteStats.openSource}+`,
+  //   label: "Open Source Repos",
+  //   icon: "GitBranch",
+  //   gradient: "from-cyan to-emerald",
+  // },
   // Account created 2022-04-07, so 4+ years of public commit history.
   { value: "4+", label: "Years on GitHub", icon: "Coffee", gradient: "from-amber to-rose" },
 ];

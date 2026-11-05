@@ -121,6 +121,34 @@ model ContactMessage {
   createdAt DateTime @default(now())
 }
 
+model GuestbookEntry {
+  id        String   @id @default(cuid())
+  name      String
+  message   String
+  approved  Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model CompetitiveProfile {
+  id        String   @id @default(cuid())
+  platform  String
+  handle    String   @default("")
+  url       String?
+  stat      String   @default("")
+  detail    String?
+  badge     String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model CompetitiveStat {
+  id        String   @id @default(cuid())
+  value     String
+  label     String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
 model OpenSourceContribution {
   id           String   @id @default(cuid())
   repoName     String

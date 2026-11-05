@@ -20,11 +20,11 @@ interface FluidMorphBackgroundProps {
   baseHue?: number;
 }
 
-const MAX_BLOBS = 12;
+const MAX_BLOBS = 4; // Reduced from 12 to 4
 
 export function FluidMorphBackground({
   className = "",
-  blobCount = 5,
+  blobCount = 3,
   baseHue = 160,
 }: FluidMorphBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -52,11 +52,11 @@ export function FluidMorphBackground({
       Array.from({ length: count }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        radius: 100 + Math.random() * 200,
-        targetRadius: 100 + Math.random() * 200,
-        hue: baseHue + (Math.random() - 0.5) * 40,
+        vx: (Math.random() - 0.5) * 0.3, // reduced speed
+        vy: (Math.random() - 0.5) * 0.3,
+        radius: 80 + Math.random() * 150, // reduced radius
+        targetRadius: 80 + Math.random() * 150,
+        hue: baseHue + (Math.random() - 0.5) * 30,
         saturation: 50 + Math.random() * 30,
         lightness: 40 + Math.random() * 20,
       }));
@@ -67,11 +67,11 @@ export function FluidMorphBackground({
       const gradient = ctx.createRadialGradient(blob.x, blob.y, 0, blob.x, blob.y, blob.radius);
       gradient.addColorStop(
         0,
-        `oklch(${blob.lightness / 100} ${blob.saturation / 100} ${blob.hue} / 0.15)`,
+        `oklch(${blob.lightness / 100} ${blob.saturation / 100} ${blob.hue} / 0.12)`,
       );
       gradient.addColorStop(
         0.5,
-        `oklch(${blob.lightness / 100} ${blob.saturation / 100} ${blob.hue + 15} / 0.08)`,
+        `oklch(${blob.lightness / 100} ${blob.saturation / 100} ${blob.hue + 15} / 0.06)`,
       );
       gradient.addColorStop(1, "transparent");
       ctx.fillStyle = gradient;
@@ -114,13 +114,13 @@ export function FluidMorphBackground({
       const blobs = blobsRef.current;
 
       for (const blob of blobs) {
-        blob.x += blob.vx + Math.sin(timeRef.current + blob.radius) * 0.3;
-        blob.y += blob.vy + Math.cos(timeRef.current + blob.radius) * 0.3;
+        blob.x += blob.vx + Math.sin(timeRef.current + blob.radius) * 0.2;
+        blob.y += blob.vy + Math.cos(timeRef.current + blob.radius) * 0.2;
         blob.targetRadius =
-          100 +
-          Math.sin(timeRef.current * 0.5 + blob.hue) * 80 +
-          Math.cos(timeRef.current * 0.3 + blob.x) * 40;
-        blob.radius += (blob.targetRadius - blob.radius) * 0.02;
+          80 +
+          Math.sin(timeRef.current * 0.5 + blob.hue) * 60 +
+          Math.cos(timeRef.current * 0.3 + blob.x) * 30;
+        blob.radius += (blob.targetRadius - blob.radius) * 0.015;
 
         if (blob.x < -blob.radius) blob.x = canvas.width + blob.radius;
         if (blob.x > canvas.width + blob.radius) blob.x = -blob.radius;

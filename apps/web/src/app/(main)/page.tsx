@@ -9,8 +9,10 @@ import { EducationSection } from "@/components/sections/education-section";
 import { CertificationsSection } from "@/components/sections/certifications-section";
 import { AchievementsSection } from "@/components/sections/achievements-section";
 import { GitHubSection } from "@/components/sections/github-section";
+import { CompetitiveProgrammingSection } from "@/components/sections/competitive-programming-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import { BlogPreviewSection } from "@/components/sections/blog-preview-section";
+import { GuestbookSection } from "@/components/sections/guestbook-section";
 import { ContactSection } from "@/components/sections/contact-section";
 import { SectionErrorBoundary } from "@/components/layout/section-error-boundary";
 import { getSectionVisibility } from "@/lib/sections";
@@ -97,6 +99,11 @@ export default async function Home() {
           <GitHubSection />
         </Section>
       )}
+      {s["competitive-programming"] && (
+        <Section label="competitive-programming" height="60vh">
+          <CompetitiveProgrammingSection />
+        </Section>
+      )}
       {s.testimonials && (
         <Section label="testimonials" height="60vh">
           <TestimonialsSection />
@@ -105,6 +112,11 @@ export default async function Home() {
       {s.blog && (
         <Section label="blog" height="60vh">
           <BlogPreviewSection />
+        </Section>
+      )}
+      {s.guestbook && (
+        <Section label="guestbook" height="60vh">
+          <GuestbookSection />
         </Section>
       )}
       {s.contact && (
