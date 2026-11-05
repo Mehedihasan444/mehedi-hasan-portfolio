@@ -3,7 +3,13 @@
 import { useId } from "react";
 import { motion } from "framer-motion";
 
-export function ScrollIndicator({ onClick }: { onClick: () => void }) {
+export function ScrollIndicator({
+  onClick,
+  className,
+}: {
+  onClick: () => void;
+  className?: string;
+}) {
   const gradientId = useId().replace(/:/g, "");
 
   return (
@@ -13,7 +19,7 @@ export function ScrollIndicator({ onClick }: { onClick: () => void }) {
       transition={{ delay: 2, duration: 0.8 }}
       onClick={onClick}
       aria-label="Scroll to About section"
-      className="group absolute bottom-10 left-1/2 z-10 flex flex-col items-center gap-3"
+      className={`group absolute bottom-10 left-1/2 z-10 flex flex-col items-center gap-3 ${className ?? ""}`}
     >
       <div className="relative h-12 w-12">
         <svg

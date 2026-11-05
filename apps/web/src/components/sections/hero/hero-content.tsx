@@ -103,13 +103,13 @@ export function HeroContent() {
 
         <MagneticButton strength={0.2}>
           <a
-            href="/resume.pdf"
+            href="/mehedi_hasan_resume.pdf"
             download="Mehedi-Hasan-Resume.pdf"
             aria-label="Download CV as PDF"
             className="text-foreground/80 hover:border-violet/30 hover:bg-violet/5 hover:text-foreground group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-5 py-2.5 text-sm font-semibold backdrop-blur-sm transition-all duration-300 sm:px-7 sm:py-3"
           >
             <Download size={15} className="text-violet-soft" />
-            Download Resume
+            Download Resume/CV
           </a>
         </MagneticButton>
       </motion.div>

@@ -9,7 +9,6 @@ import { EducationSection } from "@/components/sections/education-section";
 import { CertificationsSection } from "@/components/sections/certifications-section";
 import { AchievementsSection } from "@/components/sections/achievements-section";
 import { GitHubSection } from "@/components/sections/github-section";
-import { CompetitiveProgrammingSection } from "@/components/sections/competitive-programming-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import { BlogPreviewSection } from "@/components/sections/blog-preview-section";
 import { GuestbookSection } from "@/components/sections/guestbook-section";
@@ -99,11 +98,11 @@ export default async function Home() {
           <GitHubSection />
         </Section>
       )}
-      {s["competitive-programming"] && (
+      {/* {s["competitive-programming"] && (
         <Section label="competitive-programming" height="60vh">
           <CompetitiveProgrammingSection />
         </Section>
-      )}
+      )} */}
       {s.testimonials && (
         <Section label="testimonials" height="60vh">
           <TestimonialsSection />

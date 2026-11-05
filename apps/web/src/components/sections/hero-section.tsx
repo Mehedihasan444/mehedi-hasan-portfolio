@@ -97,16 +97,18 @@ export function HeroSection() {
           ariaLabel="Hi, I'm Mehedi Hasan"
           className="relative z-10 w-full min-w-0 px-4 pb-12 sm:px-6 md:px-10"
         >
-          <h1 className="font-heading text-balance break-words text-center text-4xl font-bold uppercase leading-[1.08] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
+          <h1 className="font-heading break-normal text-center text-4xl font-bold uppercase leading-[1.08] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
             <SplitChars text="Hi, I'm " />
-            <SplitChars
-              text="Mehedi Hasan"
-              className="from-violet-soft via-violet to-cyan bg-gradient-to-r bg-clip-text text-transparent"
-            />
+            <span className="inline-block whitespace-nowrap">
+              <SplitChars
+                text="Mehedi Hasan"
+                className="from-violet-soft via-violet to-cyan bg-gradient-to-r bg-clip-text text-transparent"
+              />
+            </span>
           </h1>
         </CharacterScrollOut>
 
-        <ScrollIndicator onClick={scrollToAbout} />
+        <ScrollIndicator onClick={scrollToAbout} className="hidden sm:block" />
       </section>
     </>
   );
