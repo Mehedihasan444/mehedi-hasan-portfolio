@@ -21,7 +21,7 @@ export async function EducationSection() {
         </ScrollReveal>
 
         <div className="mx-auto mt-16 max-w-4xl">
-          <StaggerReveal staggerDelay={0.2}>
+          <StaggerReveal staggerDelay={0.2} className="space-y-6">
             {education.map((edu) => (
               <RevealItem key={edu.id} direction="up" distance={40}>
                 <EducationCard edu={edu} />

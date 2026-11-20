@@ -1,8 +1,6 @@
 import { getAchievements } from "@/lib/api-public";
 import { ScrollReveal, StaggerReveal, RevealItem } from "@/components/animations/scroll-reveal";
 import { SectionOverlay, AmbientGlow } from "@/components/ui/section-overlay";
-import { metrics } from "./achievements/constants";
-import { AnimatedMetric } from "./achievements/animated-metric";
 import { AchievementCard } from "./achievements/achievement-card";
 
 export async function AchievementsSection() {
@@ -28,12 +26,6 @@ export async function AchievementsSection() {
             </h2>
           </div>
         </ScrollReveal>
-
-        <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-4">
-          {metrics.map((m, i) => (
-            <AnimatedMetric key={m.label} {...m} index={i} />
-          ))}
-        </div>
 
         <StaggerReveal staggerDelay={0.12}>
           <div className="mx-auto mt-14 grid max-w-4xl gap-5 sm:grid-cols-2">

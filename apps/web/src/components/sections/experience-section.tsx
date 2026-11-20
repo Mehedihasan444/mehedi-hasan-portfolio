@@ -2,9 +2,12 @@ import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { getExperiences } from "@/lib/api-public";
 import { TimelineLine } from "./experience/timeline-line";
 import { TimelineCard } from "./experience/timeline-card";
+import { ExperienceCard } from "./experience/experience-card";
 
 export async function ExperienceSection() {
   const experiences = await getExperiences();
+
+  const singleCard = experiences.length === 1;
 
   return (
     <section id="experience" className="relative overflow-hidden px-6 py-32">
@@ -24,13 +27,19 @@ export async function ExperienceSection() {
         </ScrollReveal>
 
         <div className="relative mt-20 min-w-0">
-          <div className="absolute left-5 top-0 h-full w-[18px] translate-x-[-2px] sm:left-8 md:left-1/2 md:-translate-x-1/2">
-            <TimelineLine />
-          </div>
+          {singleCard ? (
+            <ExperienceCard exp={experiences[0]!} />
+          ) : (
+            <>
+              <div className="absolute left-5 top-0 h-full w-[18px] translate-x-[-2px] sm:left-8 md:left-1/2 md:-translate-x-1/2">
+                <TimelineLine />
+              </div>
 
-          {experiences.map((exp, i) => (
-            <TimelineCard key={exp.id} exp={exp} index={i} />
-          ))}
+              {experiences.map((exp, i) => (
+                <TimelineCard key={exp.id} exp={exp} index={i} />
+              ))}
+            </>
+          )}
         </div>
       </div>
     </section>
