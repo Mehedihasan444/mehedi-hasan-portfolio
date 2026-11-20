@@ -35,8 +35,12 @@ export function HeroSection() {
 
   useEffect(() => {
     const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const lowPerf =
-      navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency <= 4;
+    // Only truly low-end devices skip the 3D layer. 4 logical cores is the common
+    // desktop/laptop baseline and renders the globe fine — gating at <= 4 removed the
+    // globe on most machines.
+    const cores = navigator.hardwareConcurrency;
+    const memory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
+    const lowPerf = (cores !== undefined && cores <= 2) || (memory !== undefined && memory <= 2);
     if (mql.matches || lowPerf) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setBgLevel(lowPerf ? "minimal" : "reduced");
@@ -73,8 +77,10 @@ export function HeroSection() {
         <div
           className="pointer-events-none absolute inset-0"
           style={{
+            // Vignette only: the old 0.8 centre alpha buried the globe under near-page-colour
+            // paint, so even a correctly rendered globe read as "not showing".
             background:
-              "radial-gradient(ellipse 100% 80% at 50% 50%, rgba(5,8,16,0.8) 0%, rgba(5,8,16,0.55) 50%, rgba(5,8,16,0.9) 100%)",
+              "radial-gradient(ellipse 100% 80% at 50% 50%, rgba(5,8,16,0.55) 0%, rgba(5,8,16,0.62) 55%, rgba(5,8,16,0.92) 100%)",
           }}
           aria-hidden="true"
         />

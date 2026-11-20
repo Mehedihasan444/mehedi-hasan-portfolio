@@ -84,7 +84,7 @@ Admin is SPA at `/admin/*` (protected `layout.tsx`, token-gated). Auth sets an h
 - **Analytics:** not yet wired (placeholder for GA/plausible via `next/script` `strategy="afterInteractive"`). Do not add blocking scripts.
 - **Fonts:** `next/font/google` `Inter`/`Space Grotesk`/`JetBrains Mono` 8 woff2 `display: swap`.
 - **Email:** `EMAIL mehedihasan67705251@gmail.com`, `PHONE +8801767705251`, socials `github`/`linkedin`/`twitter` (see `constants.ts`).
-- **Maps/3D:** optional `d3-geo` for globe land dots (idle+abort+cache, see performance audit).
+- **Maps/3D:** globe land dots are precomputed into `apps/web/public/globe-land-dots.json` by `pnpm --filter web generate:globe-dots` (d3-geo + sharp, build-time only — never shipped to the client).
 
 ## 8. Deployment
 

@@ -28,8 +28,8 @@ export function Footer() {
               <span className="text-gradient">MH</span>
             </Link>
             <p className="text-muted-foreground mt-4 max-w-xs text-sm leading-relaxed">
-              Full Stack Developer passionate about creating exceptional web experiences with modern
-              technologies and best practices. Always learning, always building.
+              Full-Stack Engineer who builds, secures and deploys production-ready web applications
+              with React, Next.js, TypeScript and Node.js. Always learning, always building.
             </p>
           </div>
 

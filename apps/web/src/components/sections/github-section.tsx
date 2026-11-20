@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { GithubIcon } from "@/components/ui/icons";
 import { SectionOverlay, AmbientGlow } from "@/components/ui/section-overlay";
-import { GitHubStats } from "./github/github-stats";
 import { LanguageBreakdown } from "./github/language-breakdown";
 import { ContributionHeatmap } from "./github/contribution-heatmap";
 
@@ -25,10 +24,6 @@ export function GitHubSection() {
               My open source contributions and coding activity across various projects
             </p>
           </div>
-        </ScrollReveal>
-
-        <ScrollReveal delay={0.1}>
-          <GitHubStats />
         </ScrollReveal>
 
         <div className="mt-8 grid min-w-0 gap-6 lg:grid-cols-2">

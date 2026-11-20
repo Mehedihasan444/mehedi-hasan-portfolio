@@ -11,9 +11,9 @@ function requiredEnv(name: string, fallback?: string): string {
 export const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api/v1";
 
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://mehedi-hasan.dev";
-export const SITE_TITLE = "Mehedi Hasan — Full Stack Developer & Software Engineer";
+export const SITE_TITLE = "Mehedi Hasan — Full-Stack Engineer";
 export const SITE_DESCRIPTION =
-  "Full Stack Developer & Software Engineer based in Dhaka, Bangladesh. Specializing in React, Next.js, Node.js, TypeScript, and modern web technologies. Building scalable, high-performance applications.";
+  "Full-Stack Engineer based in Ashulia, Dhaka, Bangladesh. Building, securing and deploying production-ready web applications with React, Next.js, TypeScript, Node.js and Express.js — database design, REST APIs, authentication, payments and deployment infrastructure.";
 
 export const EMAIL = "mehedihasan67705251@gmail.com";
 export const PHONE = "+8801767705251";

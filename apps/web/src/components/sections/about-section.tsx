@@ -83,15 +83,15 @@ export function AboutSection() {
 
             <div className="text-muted-foreground mt-8 space-y-4 leading-relaxed">
               <WordRevealText>
-                With over 1+ years of experience in full-stack development, I&apos;m dedicated to
-                creating elegant solutions to complex problems. My journey in technology is driven
-                by a passion for innovation and a commitment to excellence in every project I
-                undertake.
+                Full-Stack Engineer and CSE graduate experienced in building, securing and deploying
+                production-ready web applications. Skilled in React, Next.js, TypeScript, Node.js
+                and Express.js, with practical experience in database design, REST API development,
+                authentication, payment integration and deployment infrastructure.
               </WordRevealText>
               <WordRevealText>
-                I specialize in building scalable web applications using React, Next.js, Node.js,
-                and TypeScript. Every project is an opportunity to push boundaries, learn new
-                things, and deliver exceptional results that make a real impact.
+                Focused on building scalable and maintainable software — from database models and
+                APIs to authentication, payments and CI/CD. Every project is an opportunity to push
+                boundaries, learn new things, and deliver results that make a real impact.
               </WordRevealText>
             </div>
 

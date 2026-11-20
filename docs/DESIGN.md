@@ -79,7 +79,8 @@ Tokens in `@theme inline`: `--animate-fade-in 0.5s`, `--animate-float 6s ease-in
 ## 7. 3D & Canvas
 
 - **Stack:** `three`, `@react-three/fiber`, `@react-three/drei`. All canvases `ssr:false`, `dpr [1,1.5]`, `powerPreference: "high-performance"`, `antialias true, alpha true`.
-- **Hero stack (fixed `z-0` behind `z-10` content):** `GlobeBackground` (`Canvas` + `GlobeScene` with `LandDots`/`MarkerDots`/`GlowRing`), optional `GlitterWrapBackground` (90 particles on `full`), optional `AuroraShaderBackground` (GLSL 15 iterations, 18 fps tick, gated on coarse/reduced-motion), then radial `50% 50%` scrim `rgba(5,8,16,0.8→0.9)` for text contrast.
+- **Hero stack (fixed `z-0` behind `z-10` content):** `GlobeBackground` (`Canvas` + `GlobeScene` with `LandDots`/`MarkerDots`/`GlowRing`), optional `GlitterWrapBackground` (90 particles on `full`), optional `AuroraShaderBackground` (GLSL 15 iterations, 18 fps tick, gated on coarse/reduced-motion), then radial `50% 50%` scrim `rgba(5,8,16,0.55→0.92)` for text contrast (a 0.8 centre alpha made the globe invisible).
+- **Globe land dots:** precomputed at build time into `public/globe-land-dots.json` (`pnpm --filter web generate:globe-dots`, flat `lng*10,lat*10` pairs, ~15.7k dots / 39 KB gzip) — no runtime geojson fetch, no `d3-geo` in the client bundle, one `InstancedMesh` allocation.
 - **Hero parallax:** `contentY [0,80]`, `opacity [1,0.6]`, `scale [1,0.97]` via `framer-motion useTransform`.
 
 ## 8. Components

@@ -12,16 +12,30 @@ interface GlobeBackgroundProps {
   className?: string;
 }
 
+function hasWebGLSupport(): boolean {
+  try {
+    const canvas = document.createElement("canvas");
+    return Boolean(canvas.getContext("webgl2") ?? canvas.getContext("webgl"));
+  } catch {
+    return false;
+  }
+}
+
 function GlobeCanvas({ className }: GlobeBackgroundProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
   const [paused, setPaused] = useState(false);
+  // WebGL contexts can be dropped by the driver on memory pressure. Without a remount the
+  // canvas stays blank for the rest of the session ("the globe disappeared"), so rebuild once.
+  const [canvasKey, setCanvasKey] = useState(0);
+  const recoveredRef = useRef(false);
 
   useEffect(() => {
     // Rule 1: render nothing (no WebGL) for reduced-motion or touch devices.
     if (
       window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-      window.matchMedia("(pointer: coarse)").matches
+      window.matchMedia("(pointer: coarse)").matches ||
+      !hasWebGLSupport()
     ) {
       return;
     }
@@ -30,8 +44,8 @@ function GlobeCanvas({ className }: GlobeBackgroundProps) {
     document.addEventListener("visibilitychange", onVisibility);
 
     // Rule 4: gate heavy WebGL boot behind idle (requestIdleCallback, fallback setTimeout 500ms).
-    // The remote geojson fetch itself lives in globe-scene.tsx <LandDots/>, which already has
-    // try/catch + `cache: "force-cache"` + idle defer + AbortController + geometry/material disposal.
+    // Land dots come from the precomputed `/globe-land-dots.json` asset in globe-scene.tsx
+    // <LandDots/>, which retries on failure and caches the decoded positions at module scope.
     let cancelled = false;
     let idleId = 0;
     let timeoutId = 0;
@@ -67,6 +81,7 @@ function GlobeCanvas({ className }: GlobeBackgroundProps) {
       aria-hidden
     >
       <Canvas
+        key={canvasKey}
         camera={{ position: [0, 0, 4.5], fov: 45 }}
         dpr={[1, 1.5]}
         frameloop={paused ? "never" : "always"}
@@ -76,6 +91,18 @@ function GlobeCanvas({ className }: GlobeBackgroundProps) {
           powerPreference: "high-performance",
         }}
         style={{ background: "transparent" }}
+        onCreated={({ gl }) => {
+          gl.domElement.addEventListener(
+            "webglcontextlost",
+            (event) => {
+              event.preventDefault();
+              if (recoveredRef.current) return;
+              recoveredRef.current = true;
+              setCanvasKey((key) => key + 1);
+            },
+            { once: true },
+          );
+        }}
       >
         <Scene3D />
       </Canvas>

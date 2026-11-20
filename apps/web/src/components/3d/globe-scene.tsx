@@ -7,8 +7,13 @@ import { useGlobeScroll } from "@/hooks/use-globe-scroll";
 
 const RADIUS = 1.1;
 const SEGMENTS = 64;
-const DOT_SIZE = 0.03;
+const DOT_SIZE = 0.019;
+/** Dots sit a hair outside the sphere so they never z-fight with its surface. */
+const DOT_RADIUS = RADIUS * 1.002;
 const MARKER_SIZE = 0.05;
+/** Precomputed by `scripts/generate-globe-land-dots.mjs` (flat lng*10,lat*10 pairs). */
+const LAND_DOTS_URL = "/globe-land-dots.json";
+const LAND_DOTS_ATTEMPTS = 3;
 
 function latLngToPosition(lat: number, lng: number, r = RADIUS) {
   const latRad = lat * (Math.PI / 180);
@@ -20,12 +25,48 @@ function latLngToPosition(lat: number, lng: number, r = RADIUS) {
   );
 }
 
-function isOnLand(lng: number, lat: number, pixels: Uint8ClampedArray, w: number, h: number) {
-  const rawX = Math.round(((lng + 180) / 360) * w) % w;
-  const x = ((rawX % w) + w) % w;
-  const y = Math.round(((90 - lat) / 180) * h);
-  const clampedY = Math.max(0, Math.min(h - 1, y));
-  return (pixels[(clampedY * w + x) * 4] ?? 0) > 128;
+/**
+ * Dot positions are static, so decode them once per page load and reuse them when the
+ * hero remounts (client-side navigation). Module scope survives component unmounts.
+ */
+let landDotPositions: Float32Array | null = null;
+
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+async function loadLandDotPositions(): Promise<Float32Array> {
+  if (landDotPositions) return landDotPositions;
+
+  let lastError: unknown;
+  for (let attempt = 0; attempt < LAND_DOTS_ATTEMPTS; attempt++) {
+    try {
+      // No explicit cache mode: let the HTTP cache (ETag revalidation) govern it, so a
+      // regenerated asset is picked up instead of being force-cached forever.
+      const res = await fetch(LAND_DOTS_URL);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const flat: number[] = await res.json();
+
+      const positions = new Float32Array((flat.length / 2) * 3);
+      for (let i = 0, j = 0; i < flat.length; i += 2, j += 3) {
+        const lng = flat[i]! / 10;
+        const lat = flat[i + 1]! / 10;
+        const latRad = lat * (Math.PI / 180);
+        const lngRad = lng * (Math.PI / 180);
+        positions[j] = Math.cos(latRad) * Math.sin(lngRad) * DOT_RADIUS;
+        positions[j + 1] = Math.sin(latRad) * DOT_RADIUS;
+        positions[j + 2] = Math.cos(latRad) * Math.cos(lngRad) * DOT_RADIUS;
+      }
+
+      landDotPositions = positions;
+      return positions;
+    } catch (error) {
+      lastError = error;
+      if (attempt < LAND_DOTS_ATTEMPTS - 1) await delay(400 * 2 ** attempt);
+    }
+  }
+
+  // Never let a transient failure leave the globe as an invisible sphere: log it and let
+  // the caller retry on the next mount (the module cache stays empty on purpose).
+  throw lastError instanceof Error ? lastError : new Error("Failed to load globe land dots");
 }
 
 function GridLines() {
@@ -71,89 +112,64 @@ function LandDots() {
 
   useEffect(() => {
     const group = groupRef.current;
+    if (!group) return;
     let cancelled = false;
-    const controller = new AbortController();
 
     const load = async () => {
+      let positions: Float32Array;
       try {
-        const res = await fetch(
-          "https://raw.githubusercontent.com/martynafford/natural-earth-geojson/refs/heads/master/50m/physical/ne_50m_land.json",
-          { signal: controller.signal, cache: "force-cache" },
-        );
-        if (!res.ok) return;
-        if (cancelled || document.hidden) return;
-        const geo: { features: unknown[] } = await res.json();
-
-        const w = 1024,
-          h = 512;
-        const canvas = document.createElement("canvas");
-        canvas.width = w;
-        canvas.height = h;
-        const ctx = canvas.getContext("2d")!;
-        ctx.fillStyle = "#000";
-        ctx.fillRect(0, 0, w, h);
-        ctx.fillStyle = "#fff";
-
-        const { geoPath, geoEquirectangular } = await import("d3-geo");
-        const projection = geoEquirectangular().fitSize([w, h], {
-          type: "Sphere",
-        });
-        const path = geoPath().projection(projection).context(ctx);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        geo.features.forEach((f: any) => path(f));
-        ctx.fill();
-
-        const imgData = ctx.getImageData(0, 0, w, h);
-        const pixels = imgData.data;
-
-        if (cancelled) return;
-
-        const dotCoords: number[][] = [];
-        const step = 0.12;
-        for (let lat = -90; lat <= 90; lat += step) {
-          const cosLat = Math.cos(Math.abs(lat) * (Math.PI / 180));
-          const lngStep = cosLat > 0.01 ? step / Math.max(0.3, cosLat) : 360;
-          for (let lng = -180; lng < 180; lng += lngStep) {
-            if (isOnLand(lng, lat, pixels, w, h)) {
-              dotCoords.push([lng, lat]);
-            }
-          }
-        }
-
-        if (cancelled || !group) return;
-
-        const geometry = new THREE.SphereGeometry(DOT_SIZE, 4, 4);
-        const material = new THREE.MeshBasicMaterial({
-          color: "#34d399",
-          transparent: true,
-          opacity: 0.7,
-        });
-
-        const mesh = new THREE.InstancedMesh(geometry, material, dotCoords.length);
-        const matrix = new THREE.Matrix4();
-        dotCoords.forEach(([lng, lat], i) => {
-          if (lng === undefined || lat === undefined) return;
-          const pos = latLngToPosition(lat, lng);
-          matrix.setPosition(pos);
-          mesh.setMatrixAt(i, matrix);
-        });
-        mesh.instanceMatrix.needsUpdate = true;
-        group.add(mesh);
-      } catch {
-        // silently fail
+        positions = await loadLandDotPositions();
+      } catch (error) {
+        console.warn("[globe] land dots unavailable:", error);
+        return;
       }
+      if (cancelled) return;
+
+      const count = positions.length / 3;
+      const geometry = new THREE.SphereGeometry(DOT_SIZE, 6, 4);
+      const material = new THREE.MeshBasicMaterial({
+        color: "#34d399",
+        transparent: true,
+        opacity: 0.8,
+        depthWrite: false,
+      });
+
+      const mesh = new THREE.InstancedMesh(geometry, material, count);
+      const matrix = new THREE.Matrix4();
+      for (let i = 0; i < count; i++) {
+        matrix.makeTranslation(positions[i * 3]!, positions[i * 3 + 1]!, positions[i * 3 + 2]!);
+        mesh.setMatrixAt(i, matrix);
+      }
+      mesh.instanceMatrix.needsUpdate = true;
+      group.add(mesh);
     };
 
-    // Defer heavy parsing to idle period
+    // Defer the decode + instance build to an idle period so it never competes with the hero,
+    // but never depend on idle alone: Chrome starves requestIdleCallback in background tabs,
+    // which used to leave the globe without land dots until the next reload.
+    let started = false;
+    const start = () => {
+      if (started) return;
+      started = true;
+      void load();
+    };
+
     const hasRIC = typeof window.requestIdleCallback === "function";
     const idle: number = hasRIC
-      ? window.requestIdleCallback(() => load(), { timeout: 2000 })
-      : (setTimeout(load, 500) as unknown as number);
+      ? window.requestIdleCallback(start, { timeout: 2000 })
+      : (setTimeout(start, 500) as unknown as number);
+    const fallback = window.setTimeout(start, 1500);
+    const onVisible = () => {
+      if (!document.hidden) start();
+    };
+    document.addEventListener("visibilitychange", onVisible);
+
     return () => {
       cancelled = true;
-      controller.abort();
       if (hasRIC) cancelIdleCallback(idle);
       else clearTimeout(idle);
+      clearTimeout(fallback);
+      document.removeEventListener("visibilitychange", onVisible);
       if (group) {
         while (group.children.length > 0) {
           const child = group.children[0];

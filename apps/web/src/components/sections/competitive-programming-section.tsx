@@ -57,8 +57,8 @@ export async function CompetitiveProgrammingSection() {
               Competitive <span className="text-gradient">Programming</span>
             </h2>
             <p className="text-muted-foreground mx-auto mt-4 max-w-2xl">
-              Sharpening data structures, algorithms, and speed through rated contests and daily
-              problem solving
+              Sharpening data structures, algorithms and problem-solving speed through university
+              contests and online judges
             </p>
           </div>
         </ScrollReveal>
