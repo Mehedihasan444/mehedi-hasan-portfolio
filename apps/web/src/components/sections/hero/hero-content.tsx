@@ -61,7 +61,7 @@ export function HeroContent() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.1, duration: 0.6 }}
-        className="text-muted-foreground mx-auto mt-6 w-full min-w-0 max-w-2xl text-balance break-words text-base leading-relaxed sm:text-lg"
+        className="text-foreground/85 mx-auto mt-6 w-full min-w-0 max-w-2xl text-balance break-words text-base leading-relaxed sm:text-lg"
       >
         I build, secure and deploy production-ready web applications with React, Next.js,
         TypeScript, Node.js and Express.js — from database design and APIs to authentication,

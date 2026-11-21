@@ -63,7 +63,9 @@ export function HeroSection() {
   return (
     <>
       <div className="fixed inset-0 z-0" aria-hidden="true">
-        {bgLevel !== "minimal" && <GlobeBackground />}
+        {bgLevel !== "minimal" && (
+          <GlobeBackground className="opacity-60 transition-opacity duration-700" />
+        )}
         {bgLevel === "full" && (
           <GlitterWrapBackground
             particleCount={90}
@@ -77,10 +79,9 @@ export function HeroSection() {
         <div
           className="pointer-events-none absolute inset-0"
           style={{
-            // Vignette only: the old 0.8 centre alpha buried the globe under near-page-colour
-            // paint, so even a correctly rendered globe read as "not showing".
+            // Vignette gradient balances background 3D depth with hero foreground readability.
             background:
-              "radial-gradient(ellipse 100% 80% at 50% 50%, rgba(5,8,16,0.55) 0%, rgba(5,8,16,0.62) 55%, rgba(5,8,16,0.92) 100%)",
+              "radial-gradient(ellipse 100% 80% at 50% 50%, rgba(5,8,16,0.62) 0%, rgba(5,8,16,0.72) 55%, rgba(5,8,16,0.92) 100%)",
           }}
           aria-hidden="true"
         />

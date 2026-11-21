@@ -102,7 +102,7 @@ function GridLines() {
 
   return (
     <lineSegments geometry={geometry}>
-      <lineBasicMaterial color="#059669" transparent opacity={0.12} />
+      <lineBasicMaterial color="#059669" transparent opacity={0.08} />
     </lineSegments>
   );
 }
@@ -130,7 +130,7 @@ function LandDots() {
       const material = new THREE.MeshBasicMaterial({
         color: "#34d399",
         transparent: true,
-        opacity: 0.8,
+        opacity: 0.45,
         depthWrite: false,
       });
 
@@ -217,7 +217,7 @@ function MarkerDots() {
   return markers.map((m, i) => (
     <mesh key={i} position={latLngToPosition(m.lat, m.lng)}>
       <sphereGeometry args={[MARKER_SIZE, 8, 8]} />
-      <meshBasicMaterial color="#06b6d4" transparent opacity={0.9} />
+      <meshBasicMaterial color="#06b6d4" transparent opacity={0.7} />
     </mesh>
   ));
 }
@@ -237,7 +237,7 @@ function GlowRing() {
       <meshBasicMaterial
         color="#059669"
         transparent
-        opacity={0.08}
+        opacity={0.06}
         side={THREE.DoubleSide}
         depthWrite={false}
       />
